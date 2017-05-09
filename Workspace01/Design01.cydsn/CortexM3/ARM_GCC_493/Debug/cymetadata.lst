@@ -1,0 +1,4503 @@
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"cymetadata.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.global	cy_metadata
+  19              		.global	cy_meta_flashprotect
+  20              		.global	cy_meta_wonvl
+  21              		.global	cy_meta_custnvl
+  22              		.global	cy_meta_configecc
+  23              		.section	.cyconfigecc,"a",%progbits
+  24              		.align	2
+  25              		.type	cy_meta_configecc, %object
+  26              		.size	cy_meta_configecc, 3788
+  27              	cy_meta_configecc:
+  28 0000 05       		.byte	5
+  29 0001 52       		.byte	82
+  30 0002 00       		.byte	0
+  31 0003 40       		.byte	64
+  32 0004 0C       		.byte	12
+  33 0005 64       		.byte	100
+  34 0006 00       		.byte	0
+  35 0007 40       		.byte	64
+  36 0008 03       		.byte	3
+  37 0009 65       		.byte	101
+  38 000a 00       		.byte	0
+  39 000b 40       		.byte	64
+  40 000c 18       		.byte	24
+  41 000d 00       		.byte	0
+  42 000e 01       		.byte	1
+  43 000f 40       		.byte	64
+  44 0010 38       		.byte	56
+  45 0011 01       		.byte	1
+  46 0012 01       		.byte	1
+  47 0013 40       		.byte	64
+  48 0014 66       		.byte	102
+  49 0015 02       		.byte	2
+  50 0016 01       		.byte	1
+  51 0017 40       		.byte	64
+  52 0018 4D       		.byte	77
+  53 0019 03       		.byte	3
+  54 001a 01       		.byte	1
+  55 001b 40       		.byte	64
+  56 001c 5D       		.byte	93
+  57 001d 04       		.byte	4
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 2
+
+
+  58 001e 01       		.byte	1
+  59 001f 40       		.byte	64
+  60 0020 3F       		.byte	63
+  61 0021 05       		.byte	5
+  62 0022 01       		.byte	1
+  63 0023 40       		.byte	64
+  64 0024 6B       		.byte	107
+  65 0025 06       		.byte	6
+  66 0026 01       		.byte	1
+  67 0027 40       		.byte	64
+  68 0028 41       		.byte	65
+  69 0029 07       		.byte	7
+  70 002a 01       		.byte	1
+  71 002b 40       		.byte	64
+  72 002c 3F       		.byte	63
+  73 002d 08       		.byte	8
+  74 002e 01       		.byte	1
+  75 002f 40       		.byte	64
+  76 0030 3A       		.byte	58
+  77 0031 09       		.byte	9
+  78 0032 01       		.byte	1
+  79 0033 40       		.byte	64
+  80 0034 56       		.byte	86
+  81 0035 0A       		.byte	10
+  82 0036 01       		.byte	1
+  83 0037 40       		.byte	64
+  84 0038 42       		.byte	66
+  85 0039 0B       		.byte	11
+  86 003a 01       		.byte	1
+  87 003b 40       		.byte	64
+  88 003c 53       		.byte	83
+  89 003d 0C       		.byte	12
+  90 003e 01       		.byte	1
+  91 003f 40       		.byte	64
+  92 0040 42       		.byte	66
+  93 0041 0D       		.byte	13
+  94 0042 01       		.byte	1
+  95 0043 40       		.byte	64
+  96 0044 44       		.byte	68
+  97 0045 0E       		.byte	14
+  98 0046 01       		.byte	1
+  99 0047 40       		.byte	64
+ 100 0048 2B       		.byte	43
+ 101 0049 0F       		.byte	15
+ 102 004a 01       		.byte	1
+ 103 004b 40       		.byte	64
+ 104 004c 09       		.byte	9
+ 105 004d 15       		.byte	21
+ 106 004e 01       		.byte	1
+ 107 004f 40       		.byte	64
+ 108 0050 6A       		.byte	106
+ 109 0051 16       		.byte	22
+ 110 0052 01       		.byte	1
+ 111 0053 40       		.byte	64
+ 112 0054 45       		.byte	69
+ 113 0055 17       		.byte	23
+ 114 0056 01       		.byte	1
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 3
+
+
+ 115 0057 40       		.byte	64
+ 116 0058 64       		.byte	100
+ 117 0059 18       		.byte	24
+ 118 005a 01       		.byte	1
+ 119 005b 40       		.byte	64
+ 120 005c 44       		.byte	68
+ 121 005d 19       		.byte	25
+ 122 005e 01       		.byte	1
+ 123 005f 40       		.byte	64
+ 124 0060 54       		.byte	84
+ 125 0061 1A       		.byte	26
+ 126 0062 01       		.byte	1
+ 127 0063 40       		.byte	64
+ 128 0064 4C       		.byte	76
+ 129 0065 1B       		.byte	27
+ 130 0066 01       		.byte	1
+ 131 0067 40       		.byte	64
+ 132 0068 04       		.byte	4
+ 133 0069 40       		.byte	64
+ 134 006a 01       		.byte	1
+ 135 006b 40       		.byte	64
+ 136 006c 05       		.byte	5
+ 137 006d 41       		.byte	65
+ 138 006e 01       		.byte	1
+ 139 006f 40       		.byte	64
+ 140 0070 02       		.byte	2
+ 141 0071 42       		.byte	66
+ 142 0072 01       		.byte	1
+ 143 0073 40       		.byte	64
+ 144 0074 04       		.byte	4
+ 145 0075 43       		.byte	67
+ 146 0076 01       		.byte	1
+ 147 0077 40       		.byte	64
+ 148 0078 09       		.byte	9
+ 149 0079 44       		.byte	68
+ 150 007a 01       		.byte	1
+ 151 007b 40       		.byte	64
+ 152 007c 0A       		.byte	10
+ 153 007d 45       		.byte	69
+ 154 007e 01       		.byte	1
+ 155 007f 40       		.byte	64
+ 156 0080 03       		.byte	3
+ 157 0081 46       		.byte	70
+ 158 0082 01       		.byte	1
+ 159 0083 40       		.byte	64
+ 160 0084 03       		.byte	3
+ 161 0085 47       		.byte	71
+ 162 0086 01       		.byte	1
+ 163 0087 40       		.byte	64
+ 164 0088 04       		.byte	4
+ 165 0089 48       		.byte	72
+ 166 008a 01       		.byte	1
+ 167 008b 40       		.byte	64
+ 168 008c 03       		.byte	3
+ 169 008d 49       		.byte	73
+ 170 008e 01       		.byte	1
+ 171 008f 40       		.byte	64
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 4
+
+
+ 172 0090 08       		.byte	8
+ 173 0091 4C       		.byte	76
+ 174 0092 01       		.byte	1
+ 175 0093 40       		.byte	64
+ 176 0094 0A       		.byte	10
+ 177 0095 4D       		.byte	77
+ 178 0096 01       		.byte	1
+ 179 0097 40       		.byte	64
+ 180 0098 08       		.byte	8
+ 181 0099 50       		.byte	80
+ 182 009a 01       		.byte	1
+ 183 009b 40       		.byte	64
+ 184 009c 01       		.byte	1
+ 185 009d 51       		.byte	81
+ 186 009e 01       		.byte	1
+ 187 009f 40       		.byte	64
+ 188 00a0 0C       		.byte	12
+ 189 00a1 40       		.byte	64
+ 190 00a2 14       		.byte	20
+ 191 00a3 04       		.byte	4
+ 192 00a4 2C       		.byte	44
+ 193 00a5 10       		.byte	16
+ 194 00a6 30       		.byte	48
+ 195 00a7 81       		.byte	-127
+ 196 00a8 34       		.byte	52
+ 197 00a9 42       		.byte	66
+ 198 00aa 80       		.byte	-128
+ 199 00ab 72       		.byte	114
+ 200 00ac 82       		.byte	-126
+ 201 00ad 0F       		.byte	15
+ 202 00ae 83       		.byte	-125
+ 203 00af 38       		.byte	56
+ 204 00b0 84       		.byte	-124
+ 205 00b1 0F       		.byte	15
+ 206 00b2 86       		.byte	-122
+ 207 00b3 0F       		.byte	15
+ 208 00b4 87       		.byte	-121
+ 209 00b5 0F       		.byte	15
+ 210 00b6 88       		.byte	-120
+ 211 00b7 72       		.byte	114
+ 212 00b8 89       		.byte	-119
+ 213 00b9 3C       		.byte	60
+ 214 00ba 8A       		.byte	-118
+ 215 00bb 38       		.byte	56
+ 216 00bc 8B       		.byte	-117
+ 217 00bd 0F       		.byte	15
+ 218 00be 8C       		.byte	-116
+ 219 00bf 72       		.byte	114
+ 220 00c0 8E       		.byte	-114
+ 221 00c1 72       		.byte	114
+ 222 00c2 88       		.byte	-120
+ 223 00c3 38       		.byte	56
+ 224 00c4 8A       		.byte	-118
+ 225 00c5 72       		.byte	114
+ 226 00c6 8B       		.byte	-117
+ 227 00c7 38       		.byte	56
+ 228 00c8 98       		.byte	-104
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 5
+
+
+ 229 00c9 01       		.byte	1
+ 230 00ca A8       		.byte	-88
+ 231 00cb 01       		.byte	1
+ 232 00cc AC       		.byte	-84
+ 233 00cd 01       		.byte	1
+ 234 00ce B2       		.byte	-78
+ 235 00cf 01       		.byte	1
+ 236 00d0 BA       		.byte	-70
+ 237 00d1 20       		.byte	32
+ 238 00d2 C0       		.byte	-64
+ 239 00d3 02       		.byte	2
+ 240 00d4 C5       		.byte	-59
+ 241 00d5 40       		.byte	64
+ 242 00d6 C9       		.byte	-55
+ 243 00d7 FF       		.byte	-1
+ 244 00d8 CA       		.byte	-54
+ 245 00d9 07       		.byte	7
+ 246 00da CB       		.byte	-53
+ 247 00db FF       		.byte	-1
+ 248 00dc CC       		.byte	-52
+ 249 00dd 40       		.byte	64
+ 250 00de CD       		.byte	-51
+ 251 00df 20       		.byte	32
+ 252 00e0 CE       		.byte	-50
+ 253 00e1 F0       		.byte	-16
+ 254 00e2 CF       		.byte	-49
+ 255 00e3 05       		.byte	5
+ 256 00e4 D0       		.byte	-48
+ 257 00e5 08       		.byte	8
+ 258 00e6 D8       		.byte	-40
+ 259 00e7 04       		.byte	4
+ 260 00e8 DA       		.byte	-38
+ 261 00e9 04       		.byte	4
+ 262 00ea DC       		.byte	-36
+ 263 00eb 03       		.byte	3
+ 264 00ec DD       		.byte	-35
+ 265 00ed 04       		.byte	4
+ 266 00ee DF       		.byte	-33
+ 267 00ef 01       		.byte	1
+ 268 00f0 E0       		.byte	-32
+ 269 00f1 40       		.byte	64
+ 270 00f2 E1       		.byte	-31
+ 271 00f3 A8       		.byte	-88
+ 272 00f4 E2       		.byte	-30
+ 273 00f5 40       		.byte	64
+ 274 00f6 E3       		.byte	-29
+ 275 00f7 20       		.byte	32
+ 276 00f8 00       		.byte	0
+ 277 00f9 04       		.byte	4
+ 278 00fa 02       		.byte	2
+ 279 00fb 40       		.byte	64
+ 280 00fc 03       		.byte	3
+ 281 00fd 0A       		.byte	10
+ 282 00fe 08       		.byte	8
+ 283 00ff 40       		.byte	64
+ 284 0100 0A       		.byte	10
+ 285 0101 01       		.byte	1
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 6
+
+
+ 286 0102 0B       		.byte	11
+ 287 0103 84       		.byte	-124
+ 288 0104 0D       		.byte	13
+ 289 0105 10       		.byte	16
+ 290 0106 10       		.byte	16
+ 291 0107 80       		.byte	-128
+ 292 0108 13       		.byte	19
+ 293 0109 18       		.byte	24
+ 294 010a 15       		.byte	21
+ 295 010b 80       		.byte	-128
+ 296 010c 17       		.byte	23
+ 297 010d 20       		.byte	32
+ 298 010e 19       		.byte	25
+ 299 010f 01       		.byte	1
+ 300 0110 1A       		.byte	26
+ 301 0111 01       		.byte	1
+ 302 0112 1B       		.byte	27
+ 303 0113 10       		.byte	16
+ 304 0114 1C       		.byte	28
+ 305 0115 04       		.byte	4
+ 306 0116 1F       		.byte	31
+ 307 0117 28       		.byte	40
+ 308 0118 20       		.byte	32
+ 309 0119 02       		.byte	2
+ 310 011a 21       		.byte	33
+ 311 011b 04       		.byte	4
+ 312 011c 22       		.byte	34
+ 313 011d 89       		.byte	-119
+ 314 011e 23       		.byte	35
+ 315 011f 04       		.byte	4
+ 316 0120 28       		.byte	40
+ 317 0121 80       		.byte	-128
+ 318 0122 2B       		.byte	43
+ 319 0123 28       		.byte	40
+ 320 0124 30       		.byte	48
+ 321 0125 50       		.byte	80
+ 322 0126 32       		.byte	50
+ 323 0127 0A       		.byte	10
+ 324 0128 38       		.byte	56
+ 325 0129 28       		.byte	40
+ 326 012a 3A       		.byte	58
+ 327 012b 42       		.byte	66
+ 328 012c 40       		.byte	64
+ 329 012d 05       		.byte	5
+ 330 012e 43       		.byte	67
+ 331 012f 08       		.byte	8
+ 332 0130 44       		.byte	68
+ 333 0131 10       		.byte	16
+ 334 0132 45       		.byte	69
+ 335 0133 04       		.byte	4
+ 336 0134 46       		.byte	70
+ 337 0135 04       		.byte	4
+ 338 0136 48       		.byte	72
+ 339 0137 01       		.byte	1
+ 340 0138 4A       		.byte	74
+ 341 0139 08       		.byte	8
+ 342 013a 4D       		.byte	77
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 7
+
+
+ 343 013b 01       		.byte	1
+ 344 013c 51       		.byte	81
+ 345 013d 08       		.byte	8
+ 346 013e 53       		.byte	83
+ 347 013f 10       		.byte	16
+ 348 0140 56       		.byte	86
+ 349 0141 08       		.byte	8
+ 350 0142 59       		.byte	89
+ 351 0143 01       		.byte	1
+ 352 0144 69       		.byte	105
+ 353 0145 A0       		.byte	-96
+ 354 0146 6B       		.byte	107
+ 355 0147 20       		.byte	32
+ 356 0148 70       		.byte	112
+ 357 0149 94       		.byte	-108
+ 358 014a 72       		.byte	114
+ 359 014b 02       		.byte	2
+ 360 014c 73       		.byte	115
+ 361 014d 18       		.byte	24
+ 362 014e 86       		.byte	-122
+ 363 014f 02       		.byte	2
+ 364 0150 87       		.byte	-121
+ 365 0151 04       		.byte	4
+ 366 0152 89       		.byte	-119
+ 367 0153 10       		.byte	16
+ 368 0154 8F       		.byte	-113
+ 369 0155 20       		.byte	32
+ 370 0156 C0       		.byte	-64
+ 371 0157 0F       		.byte	15
+ 372 0158 C2       		.byte	-62
+ 373 0159 4B       		.byte	75
+ 374 015a C4       		.byte	-60
+ 375 015b CE       		.byte	-50
+ 376 015c CA       		.byte	-54
+ 377 015d 07       		.byte	7
+ 378 015e CC       		.byte	-52
+ 379 015f 0F       		.byte	15
+ 380 0160 CE       		.byte	-50
+ 381 0161 0F       		.byte	15
+ 382 0162 D0       		.byte	-48
+ 383 0163 2E       		.byte	46
+ 384 0164 D2       		.byte	-46
+ 385 0165 0C       		.byte	12
+ 386 0166 D6       		.byte	-42
+ 387 0167 01       		.byte	1
+ 388 0168 04       		.byte	4
+ 389 0169 73       		.byte	115
+ 390 016a 06       		.byte	6
+ 391 016b 0C       		.byte	12
+ 392 016c 07       		.byte	7
+ 393 016d 20       		.byte	32
+ 394 016e 08       		.byte	8
+ 395 016f 2A       		.byte	42
+ 396 0170 09       		.byte	9
+ 397 0171 70       		.byte	112
+ 398 0172 0A       		.byte	10
+ 399 0173 44       		.byte	68
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 8
+
+
+ 400 0174 0B       		.byte	11
+ 401 0175 0D       		.byte	13
+ 402 0176 0C       		.byte	12
+ 403 0177 03       		.byte	3
+ 404 0178 0E       		.byte	14
+ 405 0179 44       		.byte	68
+ 406 017a 13       		.byte	19
+ 407 017b 70       		.byte	112
+ 408 017c 15       		.byte	21
+ 409 017d 05       		.byte	5
+ 410 017e 17       		.byte	23
+ 411 017f 58       		.byte	88
+ 412 0180 1E       		.byte	30
+ 413 0181 08       		.byte	8
+ 414 0182 20       		.byte	32
+ 415 0183 73       		.byte	115
+ 416 0184 22       		.byte	34
+ 417 0185 04       		.byte	4
+ 418 0186 26       		.byte	38
+ 419 0187 55       		.byte	85
+ 420 0188 29       		.byte	41
+ 421 0189 02       		.byte	2
+ 422 018a 2B       		.byte	43
+ 423 018b 0C       		.byte	12
+ 424 018c 2D       		.byte	45
+ 425 018d 05       		.byte	5
+ 426 018e 2F       		.byte	47
+ 427 018f 38       		.byte	56
+ 428 0190 30       		.byte	48
+ 429 0191 40       		.byte	64
+ 430 0192 31       		.byte	49
+ 431 0193 03       		.byte	3
+ 432 0194 32       		.byte	50
+ 433 0195 0F       		.byte	15
+ 434 0196 34       		.byte	52
+ 435 0197 30       		.byte	48
+ 436 0198 35       		.byte	53
+ 437 0199 3C       		.byte	60
+ 438 019a 37       		.byte	55
+ 439 019b 68       		.byte	104
+ 440 019c 38       		.byte	56
+ 441 019d 20       		.byte	32
+ 442 019e 39       		.byte	57
+ 443 019f 02       		.byte	2
+ 444 01a0 3A       		.byte	58
+ 445 01a1 08       		.byte	8
+ 446 01a2 3B       		.byte	59
+ 447 01a3 A0       		.byte	-96
+ 448 01a4 3E       		.byte	62
+ 449 01a5 11       		.byte	17
+ 450 01a6 40       		.byte	64
+ 451 01a7 02       		.byte	2
+ 452 01a8 45       		.byte	69
+ 453 01a9 04       		.byte	4
+ 454 01aa 49       		.byte	73
+ 455 01ab FF       		.byte	-1
+ 456 01ac 4A       		.byte	74
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 9
+
+
+ 457 01ad 07       		.byte	7
+ 458 01ae 4B       		.byte	75
+ 459 01af FF       		.byte	-1
+ 460 01b0 4C       		.byte	76
+ 461 01b1 40       		.byte	64
+ 462 01b2 4D       		.byte	77
+ 463 01b3 20       		.byte	32
+ 464 01b4 4E       		.byte	78
+ 465 01b5 F0       		.byte	-16
+ 466 01b6 4F       		.byte	79
+ 467 01b7 05       		.byte	5
+ 468 01b8 50       		.byte	80
+ 469 01b9 08       		.byte	8
+ 470 01ba 54       		.byte	84
+ 471 01bb 01       		.byte	1
+ 472 01bc 58       		.byte	88
+ 473 01bd 04       		.byte	4
+ 474 01be 59       		.byte	89
+ 475 01bf 04       		.byte	4
+ 476 01c0 5A       		.byte	90
+ 477 01c1 04       		.byte	4
+ 478 01c2 5B       		.byte	91
+ 479 01c3 04       		.byte	4
+ 480 01c4 5C       		.byte	92
+ 481 01c5 33       		.byte	51
+ 482 01c6 5D       		.byte	93
+ 483 01c7 33       		.byte	51
+ 484 01c8 5F       		.byte	95
+ 485 01c9 01       		.byte	1
+ 486 01ca 60       		.byte	96
+ 487 01cb 40       		.byte	64
+ 488 01cc 61       		.byte	97
+ 489 01cd A8       		.byte	-88
+ 490 01ce 62       		.byte	98
+ 491 01cf 40       		.byte	64
+ 492 01d0 63       		.byte	99
+ 493 01d1 20       		.byte	32
+ 494 01d2 84       		.byte	-124
+ 495 01d3 01       		.byte	1
+ 496 01d4 8B       		.byte	-117
+ 497 01d5 80       		.byte	-128
+ 498 01d6 8D       		.byte	-115
+ 499 01d7 4F       		.byte	79
+ 500 01d8 8F       		.byte	-113
+ 501 01d9 30       		.byte	48
+ 502 01da 97       		.byte	-105
+ 503 01db 20       		.byte	32
+ 504 01dc 99       		.byte	-103
+ 505 01dd 0C       		.byte	12
+ 506 01de 9B       		.byte	-101
+ 507 01df 50       		.byte	80
+ 508 01e0 9E       		.byte	-98
+ 509 01e1 02       		.byte	2
+ 510 01e2 A3       		.byte	-93
+ 511 01e3 55       		.byte	85
+ 512 01e4 A6       		.byte	-90
+ 513 01e5 04       		.byte	4
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 10
+
+
+ 514 01e6 A7       		.byte	-89
+ 515 01e7 80       		.byte	-128
+ 516 01e8 A9       		.byte	-87
+ 517 01e9 4F       		.byte	79
+ 518 01ea AA       		.byte	-86
+ 519 01eb 02       		.byte	2
+ 520 01ec AB       		.byte	-85
+ 521 01ed 10       		.byte	16
+ 522 01ee AD       		.byte	-83
+ 523 01ef 2A       		.byte	42
+ 524 01f0 AF       		.byte	-81
+ 525 01f1 50       		.byte	80
+ 526 01f2 B1       		.byte	-79
+ 527 01f3 3C       		.byte	60
+ 528 01f4 B2       		.byte	-78
+ 529 01f5 01       		.byte	1
+ 530 01f6 B3       		.byte	-77
+ 531 01f7 03       		.byte	3
+ 532 01f8 B5       		.byte	-75
+ 533 01f9 80       		.byte	-128
+ 534 01fa B6       		.byte	-74
+ 535 01fb 06       		.byte	6
+ 536 01fc B7       		.byte	-73
+ 537 01fd 40       		.byte	64
+ 538 01fe B9       		.byte	-71
+ 539 01ff 08       		.byte	8
+ 540 0200 BB       		.byte	-69
+ 541 0201 02       		.byte	2
+ 542 0202 BE       		.byte	-66
+ 543 0203 44       		.byte	68
+ 544 0204 BF       		.byte	-65
+ 545 0205 54       		.byte	84
+ 546 0206 C0       		.byte	-64
+ 547 0207 03       		.byte	3
+ 548 0208 C6       		.byte	-58
+ 549 0209 40       		.byte	64
+ 550 020a C9       		.byte	-55
+ 551 020b FF       		.byte	-1
+ 552 020c CA       		.byte	-54
+ 553 020d 07       		.byte	7
+ 554 020e CB       		.byte	-53
+ 555 020f FF       		.byte	-1
+ 556 0210 CC       		.byte	-52
+ 557 0211 40       		.byte	64
+ 558 0212 CD       		.byte	-51
+ 559 0213 20       		.byte	32
+ 560 0214 CE       		.byte	-50
+ 561 0215 F0       		.byte	-16
+ 562 0216 CF       		.byte	-49
+ 563 0217 05       		.byte	5
+ 564 0218 D0       		.byte	-48
+ 565 0219 08       		.byte	8
+ 566 021a D4       		.byte	-44
+ 567 021b 18       		.byte	24
+ 568 021c D6       		.byte	-42
+ 569 021d 04       		.byte	4
+ 570 021e D8       		.byte	-40
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 11
+
+
+ 571 021f 04       		.byte	4
+ 572 0220 D9       		.byte	-39
+ 573 0221 04       		.byte	4
+ 574 0222 DA       		.byte	-38
+ 575 0223 04       		.byte	4
+ 576 0224 DB       		.byte	-37
+ 577 0225 04       		.byte	4
+ 578 0226 DC       		.byte	-36
+ 579 0227 20       		.byte	32
+ 580 0228 DD       		.byte	-35
+ 581 0229 32       		.byte	50
+ 582 022a DF       		.byte	-33
+ 583 022b 01       		.byte	1
+ 584 022c E0       		.byte	-32
+ 585 022d 40       		.byte	64
+ 586 022e E1       		.byte	-31
+ 587 022f A8       		.byte	-88
+ 588 0230 E2       		.byte	-30
+ 589 0231 40       		.byte	64
+ 590 0232 E3       		.byte	-29
+ 591 0233 20       		.byte	32
+ 592 0234 00       		.byte	0
+ 593 0235 08       		.byte	8
+ 594 0236 05       		.byte	5
+ 595 0237 04       		.byte	4
+ 596 0238 06       		.byte	6
+ 597 0239 02       		.byte	2
+ 598 023a 07       		.byte	7
+ 599 023b 18       		.byte	24
+ 600 023c 08       		.byte	8
+ 601 023d 80       		.byte	-128
+ 602 023e 0E       		.byte	14
+ 603 023f 02       		.byte	2
+ 604 0240 10       		.byte	16
+ 605 0241 04       		.byte	4
+ 606 0242 11       		.byte	17
+ 607 0243 08       		.byte	8
+ 608 0244 16       		.byte	22
+ 609 0245 A0       		.byte	-96
+ 610 0246 17       		.byte	23
+ 611 0247 01       		.byte	1
+ 612 0248 18       		.byte	24
+ 613 0249 01       		.byte	1
+ 614 024a 19       		.byte	25
+ 615 024b 08       		.byte	8
+ 616 024c 1D       		.byte	29
+ 617 024d 24       		.byte	36
+ 618 024e 1E       		.byte	30
+ 619 024f 40       		.byte	64
+ 620 0250 20       		.byte	32
+ 621 0251 50       		.byte	80
+ 622 0252 21       		.byte	33
+ 623 0253 80       		.byte	-128
+ 624 0254 23       		.byte	35
+ 625 0255 04       		.byte	4
+ 626 0256 25       		.byte	37
+ 627 0257 11       		.byte	17
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 12
+
+
+ 628 0258 26       		.byte	38
+ 629 0259 01       		.byte	1
+ 630 025a 27       		.byte	39
+ 631 025b 09       		.byte	9
+ 632 025c 29       		.byte	41
+ 633 025d 11       		.byte	17
+ 634 025e 2B       		.byte	43
+ 635 025f 11       		.byte	17
+ 636 0260 2E       		.byte	46
+ 637 0261 A0       		.byte	-96
+ 638 0262 30       		.byte	48
+ 639 0263 20       		.byte	32
+ 640 0264 33       		.byte	51
+ 641 0265 08       		.byte	8
+ 642 0266 35       		.byte	53
+ 643 0267 04       		.byte	4
+ 644 0268 36       		.byte	54
+ 645 0269 01       		.byte	1
+ 646 026a 38       		.byte	56
+ 647 026b 40       		.byte	64
+ 648 026c 3B       		.byte	59
+ 649 026d 20       		.byte	32
+ 650 026e 3D       		.byte	61
+ 651 026f 24       		.byte	36
+ 652 0270 40       		.byte	64
+ 653 0271 10       		.byte	16
+ 654 0272 45       		.byte	69
+ 655 0273 20       		.byte	32
+ 656 0274 49       		.byte	73
+ 657 0275 01       		.byte	1
+ 658 0276 4D       		.byte	77
+ 659 0277 04       		.byte	4
+ 660 0278 52       		.byte	82
+ 661 0279 10       		.byte	16
+ 662 027a 56       		.byte	86
+ 663 027b 20       		.byte	32
+ 664 027c 5A       		.byte	90
+ 665 027d 02       		.byte	2
+ 666 027e 5C       		.byte	92
+ 667 027f 20       		.byte	32
+ 668 0280 5D       		.byte	93
+ 669 0281 08       		.byte	8
+ 670 0282 5E       		.byte	94
+ 671 0283 40       		.byte	64
+ 672 0284 5F       		.byte	95
+ 673 0285 02       		.byte	2
+ 674 0286 60       		.byte	96
+ 675 0287 02       		.byte	2
+ 676 0288 61       		.byte	97
+ 677 0289 02       		.byte	2
+ 678 028a 63       		.byte	99
+ 679 028b 04       		.byte	4
+ 680 028c 81       		.byte	-127
+ 681 028d 02       		.byte	2
+ 682 028e 86       		.byte	-122
+ 683 028f 01       		.byte	1
+ 684 0290 8D       		.byte	-115
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 13
+
+
+ 685 0291 01       		.byte	1
+ 686 0292 8E       		.byte	-114
+ 687 0293 08       		.byte	8
+ 688 0294 91       		.byte	-111
+ 689 0295 01       		.byte	1
+ 690 0296 92       		.byte	-110
+ 691 0297 02       		.byte	2
+ 692 0298 93       		.byte	-109
+ 693 0299 20       		.byte	32
+ 694 029a 94       		.byte	-108
+ 695 029b 01       		.byte	1
+ 696 029c 98       		.byte	-104
+ 697 029d 84       		.byte	-124
+ 698 029e 9A       		.byte	-102
+ 699 029f 08       		.byte	8
+ 700 02a0 9E       		.byte	-98
+ 701 02a1 04       		.byte	4
+ 702 02a2 A1       		.byte	-95
+ 703 02a3 0C       		.byte	12
+ 704 02a4 A2       		.byte	-94
+ 705 02a5 80       		.byte	-128
+ 706 02a6 A3       		.byte	-93
+ 707 02a7 10       		.byte	16
+ 708 02a8 A7       		.byte	-89
+ 709 02a9 02       		.byte	2
+ 710 02aa A9       		.byte	-87
+ 711 02ab 04       		.byte	4
+ 712 02ac AC       		.byte	-84
+ 713 02ad 80       		.byte	-128
+ 714 02ae AD       		.byte	-83
+ 715 02af 04       		.byte	4
+ 716 02b0 AF       		.byte	-81
+ 717 02b1 40       		.byte	64
+ 718 02b2 B0       		.byte	-80
+ 719 02b3 04       		.byte	4
+ 720 02b4 B2       		.byte	-78
+ 721 02b5 40       		.byte	64
+ 722 02b6 C0       		.byte	-64
+ 723 02b7 E4       		.byte	-28
+ 724 02b8 C2       		.byte	-62
+ 725 02b9 81       		.byte	-127
+ 726 02ba C4       		.byte	-60
+ 727 02bb 36       		.byte	54
+ 728 02bc CA       		.byte	-54
+ 729 02bd 3F       		.byte	63
+ 730 02be CC       		.byte	-52
+ 731 02bf C6       		.byte	-58
+ 732 02c0 CE       		.byte	-50
+ 733 02c1 6C       		.byte	108
+ 734 02c2 D0       		.byte	-48
+ 735 02c3 22       		.byte	34
+ 736 02c4 D6       		.byte	-42
+ 737 02c5 F1       		.byte	-15
+ 738 02c6 D8       		.byte	-40
+ 739 02c7 0D       		.byte	13
+ 740 02c8 E0       		.byte	-32
+ 741 02c9 08       		.byte	8
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 14
+
+
+ 742 02ca EA       		.byte	-22
+ 743 02cb 04       		.byte	4
+ 744 02cc EE       		.byte	-18
+ 745 02cd 02       		.byte	2
+ 746 02ce 05       		.byte	5
+ 747 02cf 14       		.byte	20
+ 748 02d0 09       		.byte	9
+ 749 02d1 10       		.byte	16
+ 750 02d2 0A       		.byte	10
+ 751 02d3 1C       		.byte	28
+ 752 02d4 0C       		.byte	12
+ 753 02d5 1C       		.byte	28
+ 754 02d6 0E       		.byte	14
+ 755 02d7 23       		.byte	35
+ 756 02d8 0F       		.byte	15
+ 757 02d9 03       		.byte	3
+ 758 02da 10       		.byte	16
+ 759 02db 21       		.byte	33
+ 760 02dc 11       		.byte	17
+ 761 02dd 40       		.byte	64
+ 762 02de 12       		.byte	18
+ 763 02df 16       		.byte	22
+ 764 02e0 17       		.byte	23
+ 765 02e1 20       		.byte	32
+ 766 02e2 18       		.byte	24
+ 767 02e3 21       		.byte	33
+ 768 02e4 19       		.byte	25
+ 769 02e5 0C       		.byte	12
+ 770 02e6 1A       		.byte	26
+ 771 02e7 0E       		.byte	14
+ 772 02e8 1B       		.byte	27
+ 773 02e9 11       		.byte	17
+ 774 02ea 1F       		.byte	31
+ 775 02eb 20       		.byte	32
+ 776 02ec 21       		.byte	33
+ 777 02ed 10       		.byte	16
+ 778 02ee 23       		.byte	35
+ 779 02ef 0C       		.byte	12
+ 780 02f0 26       		.byte	38
+ 781 02f1 08       		.byte	8
+ 782 02f2 28       		.byte	40
+ 783 02f3 40       		.byte	64
+ 784 02f4 29       		.byte	41
+ 785 02f5 09       		.byte	9
+ 786 02f6 2A       		.byte	42
+ 787 02f7 03       		.byte	3
+ 788 02f8 2B       		.byte	43
+ 789 02f9 10       		.byte	16
+ 790 02fa 2C       		.byte	44
+ 791 02fb 80       		.byte	-128
+ 792 02fc 2D       		.byte	45
+ 793 02fd 1C       		.byte	28
+ 794 02fe 2F       		.byte	47
+ 795 02ff 02       		.byte	2
+ 796 0300 30       		.byte	48
+ 797 0301 0F       		.byte	15
+ 798 0302 31       		.byte	49
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 15
+
+
+ 799 0303 1F       		.byte	31
+ 800 0304 32       		.byte	50
+ 801 0305 60       		.byte	96
+ 802 0306 33       		.byte	51
+ 803 0307 40       		.byte	64
+ 804 0308 34       		.byte	52
+ 805 0309 1A       		.byte	26
+ 806 030a 35       		.byte	53
+ 807 030b 20       		.byte	32
+ 808 030c 36       		.byte	54
+ 809 030d 80       		.byte	-128
+ 810 030e 38       		.byte	56
+ 811 030f 08       		.byte	8
+ 812 0310 3A       		.byte	58
+ 813 0311 22       		.byte	34
+ 814 0312 3E       		.byte	62
+ 815 0313 40       		.byte	64
+ 816 0314 3F       		.byte	63
+ 817 0315 14       		.byte	20
+ 818 0316 40       		.byte	64
+ 819 0317 46       		.byte	70
+ 820 0318 41       		.byte	65
+ 821 0319 02       		.byte	2
+ 822 031a 45       		.byte	69
+ 823 031b EB       		.byte	-21
+ 824 031c 46       		.byte	70
+ 825 031d C0       		.byte	-64
+ 826 031e 48       		.byte	72
+ 827 031f 0B       		.byte	11
+ 828 0320 49       		.byte	73
+ 829 0321 FF       		.byte	-1
+ 830 0322 4A       		.byte	74
+ 831 0323 FF       		.byte	-1
+ 832 0324 4B       		.byte	75
+ 833 0325 FF       		.byte	-1
+ 834 0326 4E       		.byte	78
+ 835 0327 F0       		.byte	-16
+ 836 0328 4F       		.byte	79
+ 837 0329 44       		.byte	68
+ 838 032a 50       		.byte	80
+ 839 032b 0C       		.byte	12
+ 840 032c 54       		.byte	84
+ 841 032d 01       		.byte	1
+ 842 032e 58       		.byte	88
+ 843 032f 04       		.byte	4
+ 844 0330 59       		.byte	89
+ 845 0331 04       		.byte	4
+ 846 0332 5A       		.byte	90
+ 847 0333 04       		.byte	4
+ 848 0334 5B       		.byte	91
+ 849 0335 04       		.byte	4
+ 850 0336 5C       		.byte	92
+ 851 0337 22       		.byte	34
+ 852 0338 5D       		.byte	93
+ 853 0339 02       		.byte	2
+ 854 033a 5F       		.byte	95
+ 855 033b 01       		.byte	1
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 16
+
+
+ 856 033c 66       		.byte	102
+ 857 033d C0       		.byte	-64
+ 858 033e 6A       		.byte	106
+ 859 033f 40       		.byte	64
+ 860 0340 6B       		.byte	107
+ 861 0341 02       		.byte	2
+ 862 0342 81       		.byte	-127
+ 863 0343 09       		.byte	9
+ 864 0344 83       		.byte	-125
+ 865 0345 10       		.byte	16
+ 866 0346 85       		.byte	-123
+ 867 0347 10       		.byte	16
+ 868 0348 8C       		.byte	-116
+ 869 0349 01       		.byte	1
+ 870 034a 91       		.byte	-111
+ 871 034b 0C       		.byte	12
+ 872 034c 93       		.byte	-109
+ 873 034d 11       		.byte	17
+ 874 034e 95       		.byte	-107
+ 875 034f 1C       		.byte	28
+ 876 0350 97       		.byte	-105
+ 877 0351 02       		.byte	2
+ 878 0352 99       		.byte	-103
+ 879 0353 10       		.byte	16
+ 880 0354 9B       		.byte	-101
+ 881 0355 0C       		.byte	12
+ 882 0356 9F       		.byte	-97
+ 883 0357 03       		.byte	3
+ 884 0358 A5       		.byte	-91
+ 885 0359 14       		.byte	20
+ 886 035a B1       		.byte	-79
+ 887 035b 1F       		.byte	31
+ 888 035c B4       		.byte	-76
+ 889 035d 01       		.byte	1
+ 890 035e BE       		.byte	-66
+ 891 035f 10       		.byte	16
+ 892 0360 C0       		.byte	-64
+ 893 0361 23       		.byte	35
+ 894 0362 C1       		.byte	-63
+ 895 0363 04       		.byte	4
+ 896 0364 C6       		.byte	-58
+ 897 0365 B0       		.byte	-80
+ 898 0366 C7       		.byte	-57
+ 899 0367 CE       		.byte	-50
+ 900 0368 C8       		.byte	-56
+ 901 0369 38       		.byte	56
+ 902 036a C9       		.byte	-55
+ 903 036b FF       		.byte	-1
+ 904 036c CA       		.byte	-54
+ 905 036d FF       		.byte	-1
+ 906 036e CB       		.byte	-53
+ 907 036f FF       		.byte	-1
+ 908 0370 CE       		.byte	-50
+ 909 0371 F0       		.byte	-16
+ 910 0372 CF       		.byte	-49
+ 911 0373 44       		.byte	68
+ 912 0374 D0       		.byte	-48
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 17
+
+
+ 913 0375 0C       		.byte	12
+ 914 0376 D8       		.byte	-40
+ 915 0377 04       		.byte	4
+ 916 0378 D9       		.byte	-39
+ 917 0379 04       		.byte	4
+ 918 037a DA       		.byte	-38
+ 919 037b 04       		.byte	4
+ 920 037c DC       		.byte	-36
+ 921 037d 30       		.byte	48
+ 922 037e DD       		.byte	-35
+ 923 037f 03       		.byte	3
+ 924 0380 DF       		.byte	-33
+ 925 0381 01       		.byte	1
+ 926 0382 E6       		.byte	-26
+ 927 0383 C0       		.byte	-64
+ 928 0384 EA       		.byte	-22
+ 929 0385 40       		.byte	64
+ 930 0386 EB       		.byte	-21
+ 931 0387 02       		.byte	2
+ 932 0388 03       		.byte	3
+ 933 0389 0A       		.byte	10
+ 934 038a 04       		.byte	4
+ 935 038b 80       		.byte	-128
+ 936 038c 0A       		.byte	10
+ 937 038d 44       		.byte	68
+ 938 038e 12       		.byte	18
+ 939 038f 18       		.byte	24
+ 940 0390 13       		.byte	19
+ 941 0391 40       		.byte	64
+ 942 0392 19       		.byte	25
+ 943 0393 10       		.byte	16
+ 944 0394 1A       		.byte	26
+ 945 0395 05       		.byte	5
+ 946 0396 1B       		.byte	27
+ 947 0397 0B       		.byte	11
+ 948 0398 1E       		.byte	30
+ 949 0399 08       		.byte	8
+ 950 039a 22       		.byte	34
+ 951 039b 24       		.byte	36
+ 952 039c 23       		.byte	35
+ 953 039d 40       		.byte	64
+ 954 039e 27       		.byte	39
+ 955 039f 40       		.byte	64
+ 956 03a0 28       		.byte	40
+ 957 03a1 80       		.byte	-128
+ 958 03a2 2B       		.byte	43
+ 959 03a3 09       		.byte	9
+ 960 03a4 2F       		.byte	47
+ 961 03a5 20       		.byte	32
+ 962 03a6 31       		.byte	49
+ 963 03a7 19       		.byte	25
+ 964 03a8 32       		.byte	50
+ 965 03a9 80       		.byte	-128
+ 966 03aa 37       		.byte	55
+ 967 03ab 59       		.byte	89
+ 968 03ac 3A       		.byte	58
+ 969 03ad 10       		.byte	16
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 18
+
+
+ 970 03ae 3B       		.byte	59
+ 971 03af 44       		.byte	68
+ 972 03b0 3D       		.byte	61
+ 973 03b1 06       		.byte	6
+ 974 03b2 40       		.byte	64
+ 975 03b3 C0       		.byte	-64
+ 976 03b4 42       		.byte	66
+ 977 03b5 44       		.byte	68
+ 978 03b6 46       		.byte	70
+ 979 03b7 20       		.byte	32
+ 980 03b8 47       		.byte	71
+ 981 03b9 11       		.byte	17
+ 982 03ba 48       		.byte	72
+ 983 03bb 40       		.byte	64
+ 984 03bc 4A       		.byte	74
+ 985 03bd 08       		.byte	8
+ 986 03be 4B       		.byte	75
+ 987 03bf 04       		.byte	4
+ 988 03c0 50       		.byte	80
+ 989 03c1 20       		.byte	32
+ 990 03c2 54       		.byte	84
+ 991 03c3 04       		.byte	4
+ 992 03c4 56       		.byte	86
+ 993 03c5 02       		.byte	2
+ 994 03c6 57       		.byte	87
+ 995 03c7 20       		.byte	32
+ 996 03c8 59       		.byte	89
+ 997 03c9 21       		.byte	33
+ 998 03ca 5A       		.byte	90
+ 999 03cb 88       		.byte	-120
+ 1000 03cc 80       		.byte	-128
+ 1001 03cd 02       		.byte	2
+ 1002 03ce 82       		.byte	-126
+ 1003 03cf 20       		.byte	32
+ 1004 03d0 90       		.byte	-112
+ 1005 03d1 40       		.byte	64
+ 1006 03d2 91       		.byte	-111
+ 1007 03d3 05       		.byte	5
+ 1008 03d4 96       		.byte	-106
+ 1009 03d5 01       		.byte	1
+ 1010 03d6 9A       		.byte	-102
+ 1011 03d7 38       		.byte	56
+ 1012 03d8 9B       		.byte	-101
+ 1013 03d9 19       		.byte	25
+ 1014 03da 9C       		.byte	-100
+ 1015 03db 02       		.byte	2
+ 1016 03dc 9D       		.byte	-99
+ 1017 03dd 10       		.byte	16
+ 1018 03de 9E       		.byte	-98
+ 1019 03df 06       		.byte	6
+ 1020 03e0 A1       		.byte	-95
+ 1021 03e1 89       		.byte	-119
+ 1022 03e2 A2       		.byte	-94
+ 1023 03e3 88       		.byte	-120
+ 1024 03e4 A4       		.byte	-92
+ 1025 03e5 24       		.byte	36
+ 1026 03e6 A7       		.byte	-89
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 19
+
+
+ 1027 03e7 09       		.byte	9
+ 1028 03e8 AB       		.byte	-85
+ 1029 03e9 02       		.byte	2
+ 1030 03ea B0       		.byte	-80
+ 1031 03eb 04       		.byte	4
+ 1032 03ec B3       		.byte	-77
+ 1033 03ed 02       		.byte	2
+ 1034 03ee B4       		.byte	-76
+ 1035 03ef 20       		.byte	32
+ 1036 03f0 B6       		.byte	-74
+ 1037 03f1 02       		.byte	2
+ 1038 03f2 C0       		.byte	-64
+ 1039 03f3 83       		.byte	-125
+ 1040 03f4 C2       		.byte	-62
+ 1041 03f5 0A       		.byte	10
+ 1042 03f6 C4       		.byte	-60
+ 1043 03f7 07       		.byte	7
+ 1044 03f8 CA       		.byte	-54
+ 1045 03f9 4D       		.byte	77
+ 1046 03fa CC       		.byte	-52
+ 1047 03fb FF       		.byte	-1
+ 1048 03fc CE       		.byte	-50
+ 1049 03fd CE       		.byte	-50
+ 1050 03fe D0       		.byte	-48
+ 1051 03ff E5       		.byte	-27
+ 1052 0400 D2       		.byte	-46
+ 1053 0401 04       		.byte	4
+ 1054 0402 D6       		.byte	-42
+ 1055 0403 0F       		.byte	15
+ 1056 0404 EA       		.byte	-22
+ 1057 0405 04       		.byte	4
+ 1058 0406 01       		.byte	1
+ 1059 0407 A2       		.byte	-94
+ 1060 0408 02       		.byte	2
+ 1061 0409 02       		.byte	2
+ 1062 040a 03       		.byte	3
+ 1063 040b 15       		.byte	21
+ 1064 040c 04       		.byte	4
+ 1065 040d 38       		.byte	56
+ 1066 040e 05       		.byte	5
+ 1067 040f 08       		.byte	8
+ 1068 0410 06       		.byte	6
+ 1069 0411 43       		.byte	67
+ 1070 0412 07       		.byte	7
+ 1071 0413 51       		.byte	81
+ 1072 0414 0C       		.byte	12
+ 1073 0415 56       		.byte	86
+ 1074 0416 0E       		.byte	14
+ 1075 0417 21       		.byte	33
+ 1076 0418 13       		.byte	19
+ 1077 0419 22       		.byte	34
+ 1078 041a 14       		.byte	20
+ 1079 041b 38       		.byte	56
+ 1080 041c 15       		.byte	21
+ 1081 041d D4       		.byte	-44
+ 1082 041e 16       		.byte	22
+ 1083 041f 45       		.byte	69
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 20
+
+
+ 1084 0420 17       		.byte	23
+ 1085 0421 21       		.byte	33
+ 1086 0422 19       		.byte	25
+ 1087 0423 D4       		.byte	-44
+ 1088 0424 1B       		.byte	27
+ 1089 0425 23       		.byte	35
+ 1090 0426 1E       		.byte	30
+ 1091 0427 29       		.byte	41
+ 1092 0428 2A       		.byte	42
+ 1093 0429 46       		.byte	70
+ 1094 042a 30       		.byte	48
+ 1095 042b 63       		.byte	99
+ 1096 042c 31       		.byte	49
+ 1097 042d 31       		.byte	49
+ 1098 042e 32       		.byte	50
+ 1099 042f 18       		.byte	24
+ 1100 0430 33       		.byte	51
+ 1101 0431 C0       		.byte	-64
+ 1102 0432 34       		.byte	52
+ 1103 0433 07       		.byte	7
+ 1104 0434 35       		.byte	53
+ 1105 0435 03       		.byte	3
+ 1106 0436 37       		.byte	55
+ 1107 0437 0C       		.byte	12
+ 1108 0438 38       		.byte	56
+ 1109 0439 08       		.byte	8
+ 1110 043a 39       		.byte	57
+ 1111 043b 88       		.byte	-120
+ 1112 043c 3A       		.byte	58
+ 1113 043d 22       		.byte	34
+ 1114 043e 3B       		.byte	59
+ 1115 043f 22       		.byte	34
+ 1116 0440 3E       		.byte	62
+ 1117 0441 04       		.byte	4
+ 1118 0442 3F       		.byte	63
+ 1119 0443 04       		.byte	4
+ 1120 0444 40       		.byte	64
+ 1121 0445 03       		.byte	3
+ 1122 0446 46       		.byte	70
+ 1123 0447 04       		.byte	4
+ 1124 0448 49       		.byte	73
+ 1125 0449 FF       		.byte	-1
+ 1126 044a 4A       		.byte	74
+ 1127 044b 07       		.byte	7
+ 1128 044c 4B       		.byte	75
+ 1129 044d FF       		.byte	-1
+ 1130 044e 4C       		.byte	76
+ 1131 044f 40       		.byte	64
+ 1132 0450 4D       		.byte	77
+ 1133 0451 20       		.byte	32
+ 1134 0452 4E       		.byte	78
+ 1135 0453 F0       		.byte	-16
+ 1136 0454 4F       		.byte	79
+ 1137 0455 05       		.byte	5
+ 1138 0456 50       		.byte	80
+ 1139 0457 08       		.byte	8
+ 1140 0458 54       		.byte	84
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 21
+
+
+ 1141 0459 01       		.byte	1
+ 1142 045a 58       		.byte	88
+ 1143 045b 04       		.byte	4
+ 1144 045c 59       		.byte	89
+ 1145 045d 04       		.byte	4
+ 1146 045e 5A       		.byte	90
+ 1147 045f 04       		.byte	4
+ 1148 0460 5B       		.byte	91
+ 1149 0461 04       		.byte	4
+ 1150 0462 5C       		.byte	92
+ 1151 0463 41       		.byte	65
+ 1152 0464 5D       		.byte	93
+ 1153 0465 41       		.byte	65
+ 1154 0466 5F       		.byte	95
+ 1155 0467 01       		.byte	1
+ 1156 0468 60       		.byte	96
+ 1157 0469 40       		.byte	64
+ 1158 046a 61       		.byte	97
+ 1159 046b A8       		.byte	-88
+ 1160 046c 62       		.byte	98
+ 1161 046d 40       		.byte	64
+ 1162 046e 63       		.byte	99
+ 1163 046f 20       		.byte	32
+ 1164 0470 84       		.byte	-124
+ 1165 0471 13       		.byte	19
+ 1166 0472 85       		.byte	-123
+ 1167 0473 4C       		.byte	76
+ 1168 0474 86       		.byte	-122
+ 1169 0475 04       		.byte	4
+ 1170 0476 87       		.byte	-121
+ 1171 0477 11       		.byte	17
+ 1172 0478 8C       		.byte	-116
+ 1173 0479 0A       		.byte	10
+ 1174 047a 8D       		.byte	-115
+ 1175 047b 1C       		.byte	28
+ 1176 047c 8E       		.byte	-114
+ 1177 047d 14       		.byte	20
+ 1178 047e 8F       		.byte	-113
+ 1179 047f 42       		.byte	66
+ 1180 0480 94       		.byte	-108
+ 1181 0481 13       		.byte	19
+ 1182 0482 95       		.byte	-107
+ 1183 0483 14       		.byte	20
+ 1184 0484 96       		.byte	-106
+ 1185 0485 0C       		.byte	12
+ 1186 0486 99       		.byte	-103
+ 1187 0487 20       		.byte	32
+ 1188 0488 9B       		.byte	-101
+ 1189 0489 03       		.byte	3
+ 1190 048a 9D       		.byte	-99
+ 1191 048b 80       		.byte	-128
+ 1192 048c A2       		.byte	-94
+ 1193 048d 15       		.byte	21
+ 1194 048e A4       		.byte	-92
+ 1195 048f 03       		.byte	3
+ 1196 0490 A5       		.byte	-91
+ 1197 0491 50       		.byte	80
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 22
+
+
+ 1198 0492 A6       		.byte	-90
+ 1199 0493 14       		.byte	20
+ 1200 0494 A7       		.byte	-89
+ 1201 0495 0C       		.byte	12
+ 1202 0496 A9       		.byte	-87
+ 1203 0497 09       		.byte	9
+ 1204 0498 AA       		.byte	-86
+ 1205 0499 08       		.byte	8
+ 1206 049a AB       		.byte	-85
+ 1207 049b 10       		.byte	16
+ 1208 049c AD       		.byte	-83
+ 1209 049d 10       		.byte	16
+ 1210 049e B0       		.byte	-80
+ 1211 049f 10       		.byte	16
+ 1212 04a0 B2       		.byte	-78
+ 1213 04a1 0F       		.byte	15
+ 1214 04a2 B3       		.byte	-77
+ 1215 04a3 C0       		.byte	-64
+ 1216 04a4 B5       		.byte	-75
+ 1217 04a5 1F       		.byte	31
+ 1218 04a6 B7       		.byte	-73
+ 1219 04a7 20       		.byte	32
+ 1220 04a8 B9       		.byte	-71
+ 1221 04a9 08       		.byte	8
+ 1222 04aa BA       		.byte	-70
+ 1223 04ab 08       		.byte	8
+ 1224 04ac BE       		.byte	-66
+ 1225 04ad 01       		.byte	1
+ 1226 04ae BF       		.byte	-65
+ 1227 04af 40       		.byte	64
+ 1228 04b0 C0       		.byte	-64
+ 1229 04b1 31       		.byte	49
+ 1230 04b2 C1       		.byte	-63
+ 1231 04b3 02       		.byte	2
+ 1232 04b4 C5       		.byte	-59
+ 1233 04b5 EC       		.byte	-20
+ 1234 04b6 C7       		.byte	-57
+ 1235 04b7 0B       		.byte	11
+ 1236 04b8 C8       		.byte	-56
+ 1237 04b9 13       		.byte	19
+ 1238 04ba C9       		.byte	-55
+ 1239 04bb FF       		.byte	-1
+ 1240 04bc CA       		.byte	-54
+ 1241 04bd FF       		.byte	-1
+ 1242 04be CB       		.byte	-53
+ 1243 04bf FF       		.byte	-1
+ 1244 04c0 CE       		.byte	-50
+ 1245 04c1 F0       		.byte	-16
+ 1246 04c2 CF       		.byte	-49
+ 1247 04c3 44       		.byte	68
+ 1248 04c4 D0       		.byte	-48
+ 1249 04c5 0C       		.byte	12
+ 1250 04c6 D4       		.byte	-44
+ 1251 04c7 01       		.byte	1
+ 1252 04c8 D8       		.byte	-40
+ 1253 04c9 04       		.byte	4
+ 1254 04ca D9       		.byte	-39
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 23
+
+
+ 1255 04cb 04       		.byte	4
+ 1256 04cc DA       		.byte	-38
+ 1257 04cd 04       		.byte	4
+ 1258 04ce DB       		.byte	-37
+ 1259 04cf 04       		.byte	4
+ 1260 04d0 DC       		.byte	-36
+ 1261 04d1 11       		.byte	17
+ 1262 04d2 DD       		.byte	-35
+ 1263 04d3 11       		.byte	17
+ 1264 04d4 DF       		.byte	-33
+ 1265 04d5 01       		.byte	1
+ 1266 04d6 E6       		.byte	-26
+ 1267 04d7 C0       		.byte	-64
+ 1268 04d8 EA       		.byte	-22
+ 1269 04d9 40       		.byte	64
+ 1270 04da EB       		.byte	-21
+ 1271 04db 02       		.byte	2
+ 1272 04dc 00       		.byte	0
+ 1273 04dd 44       		.byte	68
+ 1274 04de 04       		.byte	4
+ 1275 04df 64       		.byte	100
+ 1276 04e0 06       		.byte	6
+ 1277 04e1 44       		.byte	68
+ 1278 04e2 0A       		.byte	10
+ 1279 04e3 10       		.byte	16
+ 1280 04e4 0E       		.byte	14
+ 1281 04e5 11       		.byte	17
+ 1282 04e6 0F       		.byte	15
+ 1283 04e7 02       		.byte	2
+ 1284 04e8 10       		.byte	16
+ 1285 04e9 B4       		.byte	-76
+ 1286 04ea 12       		.byte	18
+ 1287 04eb 08       		.byte	8
+ 1288 04ec 17       		.byte	23
+ 1289 04ed 20       		.byte	32
+ 1290 04ee 19       		.byte	25
+ 1291 04ef 04       		.byte	4
+ 1292 04f0 1A       		.byte	26
+ 1293 04f1 50       		.byte	80
+ 1294 04f2 1C       		.byte	28
+ 1295 04f3 44       		.byte	68
+ 1296 04f4 1D       		.byte	29
+ 1297 04f5 08       		.byte	8
+ 1298 04f6 21       		.byte	33
+ 1299 04f7 40       		.byte	64
+ 1300 04f8 22       		.byte	34
+ 1301 04f9 18       		.byte	24
+ 1302 04fa 23       		.byte	35
+ 1303 04fb 20       		.byte	32
+ 1304 04fc 24       		.byte	36
+ 1305 04fd 20       		.byte	32
+ 1306 04fe 25       		.byte	37
+ 1307 04ff 01       		.byte	1
+ 1308 0500 27       		.byte	39
+ 1309 0501 45       		.byte	69
+ 1310 0502 28       		.byte	40
+ 1311 0503 04       		.byte	4
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 24
+
+
+ 1312 0504 29       		.byte	41
+ 1313 0505 04       		.byte	4
+ 1314 0506 2A       		.byte	42
+ 1315 0507 40       		.byte	64
+ 1316 0508 30       		.byte	48
+ 1317 0509 88       		.byte	-120
+ 1318 050a 32       		.byte	50
+ 1319 050b 10       		.byte	16
+ 1320 050c 37       		.byte	55
+ 1321 050d 15       		.byte	21
+ 1322 050e 38       		.byte	56
+ 1323 050f 44       		.byte	68
+ 1324 0510 3D       		.byte	61
+ 1325 0511 02       		.byte	2
+ 1326 0512 3E       		.byte	62
+ 1327 0513 08       		.byte	8
+ 1328 0514 40       		.byte	64
+ 1329 0515 04       		.byte	4
+ 1330 0516 42       		.byte	66
+ 1331 0517 11       		.byte	17
+ 1332 0518 45       		.byte	69
+ 1333 0519 08       		.byte	8
+ 1334 051a 48       		.byte	72
+ 1335 051b 20       		.byte	32
+ 1336 051c 49       		.byte	73
+ 1337 051d 02       		.byte	2
+ 1338 051e 4A       		.byte	74
+ 1339 051f 80       		.byte	-128
+ 1340 0520 4C       		.byte	76
+ 1341 0521 80       		.byte	-128
+ 1342 0522 4F       		.byte	79
+ 1343 0523 02       		.byte	2
+ 1344 0524 50       		.byte	80
+ 1345 0525 08       		.byte	8
+ 1346 0526 56       		.byte	86
+ 1347 0527 40       		.byte	64
+ 1348 0528 58       		.byte	88
+ 1349 0529 10       		.byte	16
+ 1350 052a 59       		.byte	89
+ 1351 052b 02       		.byte	2
+ 1352 052c 5A       		.byte	90
+ 1353 052d 48       		.byte	72
+ 1354 052e 5E       		.byte	94
+ 1355 052f A8       		.byte	-88
+ 1356 0530 5F       		.byte	95
+ 1357 0531 01       		.byte	1
+ 1358 0532 8D       		.byte	-115
+ 1359 0533 40       		.byte	64
+ 1360 0534 91       		.byte	-111
+ 1361 0535 01       		.byte	1
+ 1362 0536 94       		.byte	-108
+ 1363 0537 80       		.byte	-128
+ 1364 0538 96       		.byte	-106
+ 1365 0539 80       		.byte	-128
+ 1366 053a 9A       		.byte	-102
+ 1367 053b 08       		.byte	8
+ 1368 053c 9D       		.byte	-99
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 25
+
+
+ 1369 053d 21       		.byte	33
+ 1370 053e 9E       		.byte	-98
+ 1371 053f 04       		.byte	4
+ 1372 0540 A2       		.byte	-94
+ 1373 0541 04       		.byte	4
+ 1374 0542 AC       		.byte	-84
+ 1375 0543 40       		.byte	64
+ 1376 0544 B0       		.byte	-80
+ 1377 0545 20       		.byte	32
+ 1378 0546 B1       		.byte	-79
+ 1379 0547 80       		.byte	-128
+ 1380 0548 B7       		.byte	-73
+ 1381 0549 40       		.byte	64
+ 1382 054a C0       		.byte	-64
+ 1383 054b B5       		.byte	-75
+ 1384 054c C2       		.byte	-62
+ 1385 054d A4       		.byte	-92
+ 1386 054e C4       		.byte	-60
+ 1387 054f 4E       		.byte	78
+ 1388 0550 CA       		.byte	-54
+ 1389 0551 0E       		.byte	14
+ 1390 0552 CC       		.byte	-52
+ 1391 0553 EE       		.byte	-18
+ 1392 0554 CE       		.byte	-50
+ 1393 0555 CA       		.byte	-54
+ 1394 0556 D0       		.byte	-48
+ 1395 0557 4E       		.byte	78
+ 1396 0558 D6       		.byte	-42
+ 1397 0559 FF       		.byte	-1
+ 1398 055a E6       		.byte	-26
+ 1399 055b 02       		.byte	2
+ 1400 055c E8       		.byte	-24
+ 1401 055d 02       		.byte	2
+ 1402 055e 00       		.byte	0
+ 1403 055f 02       		.byte	2
+ 1404 0560 01       		.byte	1
+ 1405 0561 10       		.byte	16
+ 1406 0562 04       		.byte	4
+ 1407 0563 4F       		.byte	79
+ 1408 0564 05       		.byte	5
+ 1409 0565 08       		.byte	8
+ 1410 0566 06       		.byte	6
+ 1411 0567 30       		.byte	48
+ 1412 0568 09       		.byte	9
+ 1413 0569 18       		.byte	24
+ 1414 056a 0C       		.byte	12
+ 1415 056b 01       		.byte	1
+ 1416 056c 0D       		.byte	13
+ 1417 056d 40       		.byte	64
+ 1418 056e 10       		.byte	16
+ 1419 056f 03       		.byte	3
+ 1420 0570 11       		.byte	17
+ 1421 0571 60       		.byte	96
+ 1422 0572 14       		.byte	20
+ 1423 0573 5C       		.byte	92
+ 1424 0574 15       		.byte	21
+ 1425 0575 FF       		.byte	-1
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 26
+
+
+ 1426 0576 16       		.byte	22
+ 1427 0577 23       		.byte	35
+ 1428 0578 18       		.byte	24
+ 1429 0579 7F       		.byte	127
+ 1430 057a 19       		.byte	25
+ 1431 057b 1C       		.byte	28
+ 1432 057c 1B       		.byte	27
+ 1433 057d E2       		.byte	-30
+ 1434 057e 1C       		.byte	28
+ 1435 057f 73       		.byte	115
+ 1436 0580 1D       		.byte	29
+ 1437 0581 E7       		.byte	-25
+ 1438 0582 1E       		.byte	30
+ 1439 0583 0C       		.byte	12
+ 1440 0584 1F       		.byte	31
+ 1441 0585 18       		.byte	24
+ 1442 0586 22       		.byte	34
+ 1443 0587 33       		.byte	51
+ 1444 0588 23       		.byte	35
+ 1445 0589 63       		.byte	99
+ 1446 058a 24       		.byte	36
+ 1447 058b 04       		.byte	4
+ 1448 058c 25       		.byte	37
+ 1449 058d 1C       		.byte	28
+ 1450 058e 27       		.byte	39
+ 1451 058f E1       		.byte	-31
+ 1452 0590 28       		.byte	40
+ 1453 0591 0C       		.byte	12
+ 1454 0592 29       		.byte	41
+ 1455 0593 24       		.byte	36
+ 1456 0594 2C       		.byte	44
+ 1457 0595 08       		.byte	8
+ 1458 0596 2F       		.byte	47
+ 1459 0597 04       		.byte	4
+ 1460 0598 30       		.byte	48
+ 1461 0599 1C       		.byte	28
+ 1462 059a 31       		.byte	49
+ 1463 059b 60       		.byte	96
+ 1464 059c 32       		.byte	50
+ 1465 059d 40       		.byte	64
+ 1466 059e 34       		.byte	52
+ 1467 059f 2C       		.byte	44
+ 1468 05a0 35       		.byte	53
+ 1469 05a1 1F       		.byte	31
+ 1470 05a2 36       		.byte	54
+ 1471 05a3 0F       		.byte	15
+ 1472 05a4 37       		.byte	55
+ 1473 05a5 80       		.byte	-128
+ 1474 05a6 39       		.byte	57
+ 1475 05a7 80       		.byte	-128
+ 1476 05a8 3A       		.byte	58
+ 1477 05a9 A0       		.byte	-96
+ 1478 05aa 3B       		.byte	59
+ 1479 05ab 28       		.byte	40
+ 1480 05ac 3E       		.byte	62
+ 1481 05ad 04       		.byte	4
+ 1482 05ae 56       		.byte	86
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 27
+
+
+ 1483 05af 02       		.byte	2
+ 1484 05b0 57       		.byte	87
+ 1485 05b1 11       		.byte	17
+ 1486 05b2 58       		.byte	88
+ 1487 05b3 04       		.byte	4
+ 1488 05b4 59       		.byte	89
+ 1489 05b5 04       		.byte	4
+ 1490 05b6 5B       		.byte	91
+ 1491 05b7 04       		.byte	4
+ 1492 05b8 5C       		.byte	92
+ 1493 05b9 11       		.byte	17
+ 1494 05ba 5D       		.byte	93
+ 1495 05bb 10       		.byte	16
+ 1496 05bc 5F       		.byte	95
+ 1497 05bd 01       		.byte	1
+ 1498 05be 86       		.byte	-122
+ 1499 05bf 02       		.byte	2
+ 1500 05c0 8E       		.byte	-114
+ 1501 05c1 01       		.byte	1
+ 1502 05c2 9E       		.byte	-98
+ 1503 05c3 02       		.byte	2
+ 1504 05c4 B0       		.byte	-80
+ 1505 05c5 01       		.byte	1
+ 1506 05c6 B4       		.byte	-76
+ 1507 05c7 02       		.byte	2
+ 1508 05c8 BB       		.byte	-69
+ 1509 05c9 80       		.byte	-128
+ 1510 05ca BE       		.byte	-66
+ 1511 05cb 10       		.byte	16
+ 1512 05cc D4       		.byte	-44
+ 1513 05cd 1C       		.byte	28
+ 1514 05ce D6       		.byte	-42
+ 1515 05cf 04       		.byte	4
+ 1516 05d0 D8       		.byte	-40
+ 1517 05d1 04       		.byte	4
+ 1518 05d2 D9       		.byte	-39
+ 1519 05d3 04       		.byte	4
+ 1520 05d4 DB       		.byte	-37
+ 1521 05d5 04       		.byte	4
+ 1522 05d6 DC       		.byte	-36
+ 1523 05d7 21       		.byte	33
+ 1524 05d8 DD       		.byte	-35
+ 1525 05d9 40       		.byte	64
+ 1526 05da DF       		.byte	-33
+ 1527 05db 01       		.byte	1
+ 1528 05dc 00       		.byte	0
+ 1529 05dd 08       		.byte	8
+ 1530 05de 03       		.byte	3
+ 1531 05df 01       		.byte	1
+ 1532 05e0 04       		.byte	4
+ 1533 05e1 04       		.byte	4
+ 1534 05e2 06       		.byte	6
+ 1535 05e3 80       		.byte	-128
+ 1536 05e4 07       		.byte	7
+ 1537 05e5 41       		.byte	65
+ 1538 05e6 09       		.byte	9
+ 1539 05e7 40       		.byte	64
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 28
+
+
+ 1540 05e8 0C       		.byte	12
+ 1541 05e9 40       		.byte	64
+ 1542 05ea 0D       		.byte	13
+ 1543 05eb 02       		.byte	2
+ 1544 05ec 0E       		.byte	14
+ 1545 05ed 29       		.byte	41
+ 1546 05ee 15       		.byte	21
+ 1547 05ef 01       		.byte	1
+ 1548 05f0 16       		.byte	22
+ 1549 05f1 01       		.byte	1
+ 1550 05f2 17       		.byte	23
+ 1551 05f3 28       		.byte	40
+ 1552 05f4 19       		.byte	25
+ 1553 05f5 20       		.byte	32
+ 1554 05f6 1A       		.byte	26
+ 1555 05f7 40       		.byte	64
+ 1556 05f8 1C       		.byte	28
+ 1557 05f9 14       		.byte	20
+ 1558 05fa 1D       		.byte	29
+ 1559 05fb 01       		.byte	1
+ 1560 05fc 1E       		.byte	30
+ 1561 05fd 01       		.byte	1
+ 1562 05fe 1F       		.byte	31
+ 1563 05ff 10       		.byte	16
+ 1564 0600 22       		.byte	34
+ 1565 0601 80       		.byte	-128
+ 1566 0602 25       		.byte	37
+ 1567 0603 40       		.byte	64
+ 1568 0604 26       		.byte	38
+ 1569 0605 1D       		.byte	29
+ 1570 0606 2C       		.byte	44
+ 1571 0607 08       		.byte	8
+ 1572 0608 2D       		.byte	45
+ 1573 0609 01       		.byte	1
+ 1574 060a 2E       		.byte	46
+ 1575 060b 40       		.byte	64
+ 1576 060c 2F       		.byte	47
+ 1577 060d 10       		.byte	16
+ 1578 060e 34       		.byte	52
+ 1579 060f 40       		.byte	64
+ 1580 0610 36       		.byte	54
+ 1581 0611 16       		.byte	22
+ 1582 0612 38       		.byte	56
+ 1583 0613 02       		.byte	2
+ 1584 0614 39       		.byte	57
+ 1585 0615 01       		.byte	1
+ 1586 0616 3E       		.byte	62
+ 1587 0617 AA       		.byte	-86
+ 1588 0618 5B       		.byte	91
+ 1589 0619 06       		.byte	6
+ 1590 061a 5C       		.byte	92
+ 1591 061b 10       		.byte	16
+ 1592 061c 61       		.byte	97
+ 1593 061d 50       		.byte	80
+ 1594 061e 63       		.byte	99
+ 1595 061f 40       		.byte	64
+ 1596 0620 6D       		.byte	109
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 29
+
+
+ 1597 0621 40       		.byte	64
+ 1598 0622 6E       		.byte	110
+ 1599 0623 14       		.byte	20
+ 1600 0624 76       		.byte	118
+ 1601 0625 2B       		.byte	43
+ 1602 0626 77       		.byte	119
+ 1603 0627 28       		.byte	40
+ 1604 0628 87       		.byte	-121
+ 1605 0629 40       		.byte	64
+ 1606 062a 97       		.byte	-105
+ 1607 062b 08       		.byte	8
+ 1608 062c 99       		.byte	-103
+ 1609 062d 50       		.byte	80
+ 1610 062e 9B       		.byte	-101
+ 1611 062f 06       		.byte	6
+ 1612 0630 A6       		.byte	-90
+ 1613 0631 80       		.byte	-128
+ 1614 0632 AD       		.byte	-83
+ 1615 0633 48       		.byte	72
+ 1616 0634 B2       		.byte	-78
+ 1617 0635 40       		.byte	64
+ 1618 0636 B3       		.byte	-77
+ 1619 0637 20       		.byte	32
+ 1620 0638 B4       		.byte	-76
+ 1621 0639 80       		.byte	-128
+ 1622 063a C0       		.byte	-64
+ 1623 063b B5       		.byte	-75
+ 1624 063c C2       		.byte	-62
+ 1625 063d F1       		.byte	-15
+ 1626 063e C4       		.byte	-60
+ 1627 063f F0       		.byte	-16
+ 1628 0640 CA       		.byte	-54
+ 1629 0641 F0       		.byte	-16
+ 1630 0642 CC       		.byte	-52
+ 1631 0643 F0       		.byte	-16
+ 1632 0644 CE       		.byte	-50
+ 1633 0645 F0       		.byte	-16
+ 1634 0646 D6       		.byte	-42
+ 1635 0647 23       		.byte	35
+ 1636 0648 D8       		.byte	-40
+ 1637 0649 0D       		.byte	13
+ 1638 064a E4       		.byte	-28
+ 1639 064b 10       		.byte	16
+ 1640 064c E8       		.byte	-24
+ 1641 064d 30       		.byte	48
+ 1642 064e EC       		.byte	-20
+ 1643 064f 20       		.byte	32
+ 1644 0650 02       		.byte	2
+ 1645 0651 02       		.byte	2
+ 1646 0652 06       		.byte	6
+ 1647 0653 02       		.byte	2
+ 1648 0654 0A       		.byte	10
+ 1649 0655 01       		.byte	1
+ 1650 0656 0B       		.byte	11
+ 1651 0657 01       		.byte	1
+ 1652 0658 12       		.byte	18
+ 1653 0659 01       		.byte	1
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 30
+
+
+ 1654 065a 17       		.byte	23
+ 1655 065b 02       		.byte	2
+ 1656 065c 1F       		.byte	31
+ 1657 065d 01       		.byte	1
+ 1658 065e 2B       		.byte	43
+ 1659 065f 02       		.byte	2
+ 1660 0660 34       		.byte	52
+ 1661 0661 01       		.byte	1
+ 1662 0662 35       		.byte	53
+ 1663 0663 01       		.byte	1
+ 1664 0664 36       		.byte	54
+ 1665 0665 02       		.byte	2
+ 1666 0666 37       		.byte	55
+ 1667 0667 02       		.byte	2
+ 1668 0668 3E       		.byte	62
+ 1669 0669 50       		.byte	80
+ 1670 066a 3F       		.byte	63
+ 1671 066b 50       		.byte	80
+ 1672 066c 40       		.byte	64
+ 1673 066d 25       		.byte	37
+ 1674 066e 41       		.byte	65
+ 1675 066f 04       		.byte	4
+ 1676 0670 42       		.byte	66
+ 1677 0671 03       		.byte	3
+ 1678 0672 44       		.byte	68
+ 1679 0673 01       		.byte	1
+ 1680 0674 46       		.byte	70
+ 1681 0675 E0       		.byte	-32
+ 1682 0676 47       		.byte	71
+ 1683 0677 0C       		.byte	12
+ 1684 0678 48       		.byte	72
+ 1685 0679 18       		.byte	24
+ 1686 067a 49       		.byte	73
+ 1687 067b FF       		.byte	-1
+ 1688 067c 4A       		.byte	74
+ 1689 067d FF       		.byte	-1
+ 1690 067e 4B       		.byte	75
+ 1691 067f FF       		.byte	-1
+ 1692 0680 4C       		.byte	76
+ 1693 0681 62       		.byte	98
+ 1694 0682 4D       		.byte	77
+ 1695 0683 A0       		.byte	-96
+ 1696 0684 4E       		.byte	78
+ 1697 0685 F0       		.byte	-16
+ 1698 0686 4F       		.byte	79
+ 1699 0687 41       		.byte	65
+ 1700 0688 50       		.byte	80
+ 1701 0689 0C       		.byte	12
+ 1702 068a 54       		.byte	84
+ 1703 068b 18       		.byte	24
+ 1704 068c 58       		.byte	88
+ 1705 068d 04       		.byte	4
+ 1706 068e 59       		.byte	89
+ 1707 068f 04       		.byte	4
+ 1708 0690 5A       		.byte	90
+ 1709 0691 04       		.byte	4
+ 1710 0692 5B       		.byte	91
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 31
+
+
+ 1711 0693 04       		.byte	4
+ 1712 0694 5D       		.byte	93
+ 1713 0695 22       		.byte	34
+ 1714 0696 5F       		.byte	95
+ 1715 0697 01       		.byte	1
+ 1716 0698 66       		.byte	102
+ 1717 0699 40       		.byte	64
+ 1718 069a 67       		.byte	103
+ 1719 069b 02       		.byte	2
+ 1720 069c 69       		.byte	105
+ 1721 069d 10       		.byte	16
+ 1722 069e 6A       		.byte	106
+ 1723 069f 30       		.byte	48
+ 1724 06a0 6B       		.byte	107
+ 1725 06a1 10       		.byte	16
+ 1726 06a2 6D       		.byte	109
+ 1727 06a3 10       		.byte	16
+ 1728 06a4 6E       		.byte	110
+ 1729 06a5 10       		.byte	16
+ 1730 06a6 6F       		.byte	111
+ 1731 06a7 12       		.byte	18
+ 1732 06a8 80       		.byte	-128
+ 1733 06a9 04       		.byte	4
+ 1734 06aa 82       		.byte	-126
+ 1735 06ab 12       		.byte	18
+ 1736 06ac 83       		.byte	-125
+ 1737 06ad 7F       		.byte	127
+ 1738 06ae 85       		.byte	-123
+ 1739 06af 04       		.byte	4
+ 1740 06b0 86       		.byte	-122
+ 1741 06b1 04       		.byte	4
+ 1742 06b2 87       		.byte	-121
+ 1743 06b3 22       		.byte	34
+ 1744 06b4 91       		.byte	-111
+ 1745 06b5 61       		.byte	97
+ 1746 06b6 93       		.byte	-109
+ 1747 06b7 1E       		.byte	30
+ 1748 06b8 94       		.byte	-108
+ 1749 06b9 08       		.byte	8
+ 1750 06ba 95       		.byte	-107
+ 1751 06bb 3F       		.byte	63
+ 1752 06bc 97       		.byte	-105
+ 1753 06bd 40       		.byte	64
+ 1754 06be 99       		.byte	-103
+ 1755 06bf 33       		.byte	51
+ 1756 06c0 9B       		.byte	-101
+ 1757 06c1 44       		.byte	68
+ 1758 06c2 9D       		.byte	-99
+ 1759 06c3 06       		.byte	6
+ 1760 06c4 9E       		.byte	-98
+ 1761 06c5 03       		.byte	3
+ 1762 06c6 9F       		.byte	-97
+ 1763 06c7 09       		.byte	9
+ 1764 06c8 A0       		.byte	-96
+ 1765 06c9 04       		.byte	4
+ 1766 06ca A2       		.byte	-94
+ 1767 06cb 11       		.byte	17
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 32
+
+
+ 1768 06cc A4       		.byte	-92
+ 1769 06cd 17       		.byte	23
+ 1770 06ce A8       		.byte	-88
+ 1771 06cf 17       		.byte	23
+ 1772 06d0 A9       		.byte	-87
+ 1773 06d1 7F       		.byte	127
+ 1774 06d2 AC       		.byte	-84
+ 1775 06d3 04       		.byte	4
+ 1776 06d4 AD       		.byte	-83
+ 1777 06d5 46       		.byte	70
+ 1778 06d6 AF       		.byte	-81
+ 1779 06d7 39       		.byte	57
+ 1780 06d8 B0       		.byte	-80
+ 1781 06d9 07       		.byte	7
+ 1782 06da B1       		.byte	-79
+ 1783 06db 07       		.byte	7
+ 1784 06dc B2       		.byte	-78
+ 1785 06dd 10       		.byte	16
+ 1786 06de B3       		.byte	-77
+ 1787 06df 60       		.byte	96
+ 1788 06e0 B4       		.byte	-76
+ 1789 06e1 08       		.byte	8
+ 1790 06e2 B5       		.byte	-75
+ 1791 06e3 08       		.byte	8
+ 1792 06e4 B7       		.byte	-73
+ 1793 06e5 10       		.byte	16
+ 1794 06e6 B8       		.byte	-72
+ 1795 06e7 08       		.byte	8
+ 1796 06e8 BA       		.byte	-70
+ 1797 06e9 02       		.byte	2
+ 1798 06ea BB       		.byte	-69
+ 1799 06eb 0A       		.byte	10
+ 1800 06ec BE       		.byte	-66
+ 1801 06ed 10       		.byte	16
+ 1802 06ee D4       		.byte	-44
+ 1803 06ef 01       		.byte	1
+ 1804 06f0 D8       		.byte	-40
+ 1805 06f1 04       		.byte	4
+ 1806 06f2 D9       		.byte	-39
+ 1807 06f3 04       		.byte	4
+ 1808 06f4 DB       		.byte	-37
+ 1809 06f5 04       		.byte	4
+ 1810 06f6 DC       		.byte	-36
+ 1811 06f7 44       		.byte	68
+ 1812 06f8 DD       		.byte	-35
+ 1813 06f9 20       		.byte	32
+ 1814 06fa DF       		.byte	-33
+ 1815 06fb 01       		.byte	1
+ 1816 06fc 00       		.byte	0
+ 1817 06fd 20       		.byte	32
+ 1818 06fe 02       		.byte	2
+ 1819 06ff 10       		.byte	16
+ 1820 0700 03       		.byte	3
+ 1821 0701 40       		.byte	64
+ 1822 0702 05       		.byte	5
+ 1823 0703 04       		.byte	4
+ 1824 0704 06       		.byte	6
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 33
+
+
+ 1825 0705 80       		.byte	-128
+ 1826 0706 09       		.byte	9
+ 1827 0707 01       		.byte	1
+ 1828 0708 0D       		.byte	13
+ 1829 0709 08       		.byte	8
+ 1830 070a 0E       		.byte	14
+ 1831 070b 03       		.byte	3
+ 1832 070c 14       		.byte	20
+ 1833 070d 05       		.byte	5
+ 1834 070e 17       		.byte	23
+ 1835 070f 09       		.byte	9
+ 1836 0710 19       		.byte	25
+ 1837 0711 50       		.byte	80
+ 1838 0712 1C       		.byte	28
+ 1839 0713 20       		.byte	32
+ 1840 0714 1E       		.byte	30
+ 1841 0715 04       		.byte	4
+ 1842 0716 1F       		.byte	31
+ 1843 0717 02       		.byte	2
+ 1844 0718 23       		.byte	35
+ 1845 0719 05       		.byte	5
+ 1846 071a 25       		.byte	37
+ 1847 071b 04       		.byte	4
+ 1848 071c 27       		.byte	39
+ 1849 071d 86       		.byte	-122
+ 1850 071e 2B       		.byte	43
+ 1851 071f 0C       		.byte	12
+ 1852 0720 2E       		.byte	46
+ 1853 0721 80       		.byte	-128
+ 1854 0722 2F       		.byte	47
+ 1855 0723 06       		.byte	6
+ 1856 0724 30       		.byte	48
+ 1857 0725 08       		.byte	8
+ 1858 0726 32       		.byte	50
+ 1859 0727 40       		.byte	64
+ 1860 0728 36       		.byte	54
+ 1861 0729 10       		.byte	16
+ 1862 072a 37       		.byte	55
+ 1863 072b 89       		.byte	-119
+ 1864 072c 3B       		.byte	59
+ 1865 072d 20       		.byte	32
+ 1866 072e 3D       		.byte	61
+ 1867 072f 08       		.byte	8
+ 1868 0730 3E       		.byte	62
+ 1869 0731 01       		.byte	1
+ 1870 0732 41       		.byte	65
+ 1871 0733 81       		.byte	-127
+ 1872 0734 43       		.byte	67
+ 1873 0735 28       		.byte	40
+ 1874 0736 44       		.byte	68
+ 1875 0737 02       		.byte	2
+ 1876 0738 45       		.byte	69
+ 1877 0739 40       		.byte	64
+ 1878 073a 4B       		.byte	75
+ 1879 073b 40       		.byte	64
+ 1880 073c 50       		.byte	80
+ 1881 073d 08       		.byte	8
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 34
+
+
+ 1882 073e 53       		.byte	83
+ 1883 073f 10       		.byte	16
+ 1884 0740 59       		.byte	89
+ 1885 0741 02       		.byte	2
+ 1886 0742 5C       		.byte	92
+ 1887 0743 02       		.byte	2
+ 1888 0744 5E       		.byte	94
+ 1889 0745 84       		.byte	-124
+ 1890 0746 5F       		.byte	95
+ 1891 0747 20       		.byte	32
+ 1892 0748 63       		.byte	99
+ 1893 0749 05       		.byte	5
+ 1894 074a 79       		.byte	121
+ 1895 074b 02       		.byte	2
+ 1896 074c 7A       		.byte	122
+ 1897 074d 80       		.byte	-128
+ 1898 074e 92       		.byte	-110
+ 1899 074f 80       		.byte	-128
+ 1900 0750 93       		.byte	-109
+ 1901 0751 40       		.byte	64
+ 1902 0752 97       		.byte	-105
+ 1903 0753 08       		.byte	8
+ 1904 0754 98       		.byte	-104
+ 1905 0755 05       		.byte	5
+ 1906 0756 99       		.byte	-103
+ 1907 0757 06       		.byte	6
+ 1908 0758 9A       		.byte	-102
+ 1909 0759 10       		.byte	16
+ 1910 075a 9B       		.byte	-101
+ 1911 075b 49       		.byte	73
+ 1912 075c 9C       		.byte	-100
+ 1913 075d 80       		.byte	-128
+ 1914 075e A1       		.byte	-95
+ 1915 075f 81       		.byte	-127
+ 1916 0760 A2       		.byte	-94
+ 1917 0761 11       		.byte	17
+ 1918 0762 A3       		.byte	-93
+ 1919 0763 24       		.byte	36
+ 1920 0764 A6       		.byte	-90
+ 1921 0765 80       		.byte	-128
+ 1922 0766 A7       		.byte	-89
+ 1923 0767 02       		.byte	2
+ 1924 0768 A8       		.byte	-88
+ 1925 0769 10       		.byte	16
+ 1926 076a B0       		.byte	-80
+ 1927 076b 01       		.byte	1
+ 1928 076c C0       		.byte	-64
+ 1929 076d 3E       		.byte	62
+ 1930 076e C2       		.byte	-62
+ 1931 076f A8       		.byte	-88
+ 1932 0770 C4       		.byte	-60
+ 1933 0771 F0       		.byte	-16
+ 1934 0772 CA       		.byte	-54
+ 1935 0773 34       		.byte	52
+ 1936 0774 CC       		.byte	-52
+ 1937 0775 FA       		.byte	-6
+ 1938 0776 CE       		.byte	-50
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 35
+
+
+ 1939 0777 C4       		.byte	-60
+ 1940 0778 D0       		.byte	-48
+ 1941 0779 0F       		.byte	15
+ 1942 077a D2       		.byte	-46
+ 1943 077b 08       		.byte	8
+ 1944 077c D6       		.byte	-42
+ 1945 077d F1       		.byte	-15
+ 1946 077e D8       		.byte	-40
+ 1947 077f 0C       		.byte	12
+ 1948 0780 01       		.byte	1
+ 1949 0781 04       		.byte	4
+ 1950 0782 05       		.byte	5
+ 1951 0783 02       		.byte	2
+ 1952 0784 08       		.byte	8
+ 1953 0785 14       		.byte	20
+ 1954 0786 09       		.byte	9
+ 1955 0787 06       		.byte	6
+ 1956 0788 0A       		.byte	10
+ 1957 0789 0A       		.byte	10
+ 1958 078a 0C       		.byte	12
+ 1959 078b 02       		.byte	2
+ 1960 078c 0E       		.byte	14
+ 1961 078d 05       		.byte	5
+ 1962 078e 0F       		.byte	15
+ 1963 078f 19       		.byte	25
+ 1964 0790 10       		.byte	16
+ 1965 0791 09       		.byte	9
+ 1966 0792 11       		.byte	17
+ 1967 0793 27       		.byte	39
+ 1968 0794 12       		.byte	18
+ 1969 0795 52       		.byte	82
+ 1970 0796 13       		.byte	19
+ 1971 0797 18       		.byte	24
+ 1972 0798 15       		.byte	21
+ 1973 0799 39       		.byte	57
+ 1974 079a 17       		.byte	23
+ 1975 079b 06       		.byte	6
+ 1976 079c 19       		.byte	25
+ 1977 079d 01       		.byte	1
+ 1978 079e 24       		.byte	36
+ 1979 079f 3F       		.byte	63
+ 1980 07a0 28       		.byte	40
+ 1981 07a1 3F       		.byte	63
+ 1982 07a2 29       		.byte	41
+ 1983 07a3 3F       		.byte	63
+ 1984 07a4 2C       		.byte	44
+ 1985 07a5 20       		.byte	32
+ 1986 07a6 2D       		.byte	45
+ 1987 07a7 36       		.byte	54
+ 1988 07a8 2F       		.byte	47
+ 1989 07a9 09       		.byte	9
+ 1990 07aa 30       		.byte	48
+ 1991 07ab 07       		.byte	7
+ 1992 07ac 31       		.byte	49
+ 1993 07ad 10       		.byte	16
+ 1994 07ae 32       		.byte	50
+ 1995 07af 40       		.byte	64
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 36
+
+
+ 1996 07b0 33       		.byte	51
+ 1997 07b1 07       		.byte	7
+ 1998 07b2 34       		.byte	52
+ 1999 07b3 18       		.byte	24
+ 2000 07b4 35       		.byte	53
+ 2001 07b5 20       		.byte	32
+ 2002 07b6 36       		.byte	54
+ 2003 07b7 20       		.byte	32
+ 2004 07b8 37       		.byte	55
+ 2005 07b9 0E       		.byte	14
+ 2006 07ba 3B       		.byte	59
+ 2007 07bb 88       		.byte	-120
+ 2008 07bc 3F       		.byte	63
+ 2009 07bd 10       		.byte	16
+ 2010 07be 40       		.byte	64
+ 2011 07bf 65       		.byte	101
+ 2012 07c0 41       		.byte	65
+ 2013 07c1 02       		.byte	2
+ 2014 07c2 42       		.byte	66
+ 2015 07c3 04       		.byte	4
+ 2016 07c4 44       		.byte	68
+ 2017 07c5 03       		.byte	3
+ 2018 07c6 46       		.byte	70
+ 2019 07c7 C0       		.byte	-64
+ 2020 07c8 47       		.byte	71
+ 2021 07c9 E0       		.byte	-32
+ 2022 07ca 48       		.byte	72
+ 2023 07cb 28       		.byte	40
+ 2024 07cc 49       		.byte	73
+ 2025 07cd FF       		.byte	-1
+ 2026 07ce 4A       		.byte	74
+ 2027 07cf FF       		.byte	-1
+ 2028 07d0 4B       		.byte	75
+ 2029 07d1 FF       		.byte	-1
+ 2030 07d2 4C       		.byte	76
+ 2031 07d3 62       		.byte	98
+ 2032 07d4 4D       		.byte	77
+ 2033 07d5 A0       		.byte	-96
+ 2034 07d6 4E       		.byte	78
+ 2035 07d7 F0       		.byte	-16
+ 2036 07d8 4F       		.byte	79
+ 2037 07d9 41       		.byte	65
+ 2038 07da 50       		.byte	80
+ 2039 07db 0C       		.byte	12
+ 2040 07dc 56       		.byte	86
+ 2041 07dd 02       		.byte	2
+ 2042 07de 57       		.byte	87
+ 2043 07df 12       		.byte	18
+ 2044 07e0 58       		.byte	88
+ 2045 07e1 04       		.byte	4
+ 2046 07e2 59       		.byte	89
+ 2047 07e3 04       		.byte	4
+ 2048 07e4 5A       		.byte	90
+ 2049 07e5 04       		.byte	4
+ 2050 07e6 5B       		.byte	91
+ 2051 07e7 04       		.byte	4
+ 2052 07e8 5C       		.byte	92
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 37
+
+
+ 2053 07e9 44       		.byte	68
+ 2054 07ea 5D       		.byte	93
+ 2055 07eb 44       		.byte	68
+ 2056 07ec 5F       		.byte	95
+ 2057 07ed 01       		.byte	1
+ 2058 07ee 66       		.byte	102
+ 2059 07ef 40       		.byte	64
+ 2060 07f0 67       		.byte	103
+ 2061 07f1 02       		.byte	2
+ 2062 07f2 69       		.byte	105
+ 2063 07f3 10       		.byte	16
+ 2064 07f4 6A       		.byte	106
+ 2065 07f5 30       		.byte	48
+ 2066 07f6 6B       		.byte	107
+ 2067 07f7 10       		.byte	16
+ 2068 07f8 6D       		.byte	109
+ 2069 07f9 10       		.byte	16
+ 2070 07fa 6E       		.byte	110
+ 2071 07fb 10       		.byte	16
+ 2072 07fc 6F       		.byte	111
+ 2073 07fd 12       		.byte	18
+ 2074 07fe 81       		.byte	-127
+ 2075 07ff 09       		.byte	9
+ 2076 0800 83       		.byte	-125
+ 2077 0801 32       		.byte	50
+ 2078 0802 85       		.byte	-123
+ 2079 0803 9F       		.byte	-97
+ 2080 0804 89       		.byte	-119
+ 2081 0805 9F       		.byte	-97
+ 2082 0806 8D       		.byte	-115
+ 2083 0807 80       		.byte	-128
+ 2084 0808 95       		.byte	-107
+ 2085 0809 14       		.byte	20
+ 2086 080a 97       		.byte	-105
+ 2087 080b 2A       		.byte	42
+ 2088 080c 99       		.byte	-103
+ 2089 080d 02       		.byte	2
+ 2090 080e 9B       		.byte	-101
+ 2091 080f 45       		.byte	69
+ 2092 0810 9E       		.byte	-98
+ 2093 0811 01       		.byte	1
+ 2094 0812 B1       		.byte	-79
+ 2095 0813 80       		.byte	-128
+ 2096 0814 B2       		.byte	-78
+ 2097 0815 01       		.byte	1
+ 2098 0816 B3       		.byte	-77
+ 2099 0817 18       		.byte	24
+ 2100 0818 B5       		.byte	-75
+ 2101 0819 07       		.byte	7
+ 2102 081a B7       		.byte	-73
+ 2103 081b 60       		.byte	96
+ 2104 081c BF       		.byte	-65
+ 2105 081d 40       		.byte	64
+ 2106 081e D8       		.byte	-40
+ 2107 081f 04       		.byte	4
+ 2108 0820 D9       		.byte	-39
+ 2109 0821 04       		.byte	4
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 38
+
+
+ 2110 0822 DC       		.byte	-36
+ 2111 0823 23       		.byte	35
+ 2112 0824 DF       		.byte	-33
+ 2113 0825 01       		.byte	1
+ 2114 0826 04       		.byte	4
+ 2115 0827 40       		.byte	64
+ 2116 0828 05       		.byte	5
+ 2117 0829 10       		.byte	16
+ 2118 082a 0A       		.byte	10
+ 2119 082b 01       		.byte	1
+ 2120 082c 0C       		.byte	12
+ 2121 082d 01       		.byte	1
+ 2122 082e 15       		.byte	21
+ 2123 082f 40       		.byte	64
+ 2124 0830 17       		.byte	23
+ 2125 0831 14       		.byte	20
+ 2126 0832 18       		.byte	24
+ 2127 0833 20       		.byte	32
+ 2128 0834 1C       		.byte	28
+ 2129 0835 40       		.byte	64
+ 2130 0836 1D       		.byte	29
+ 2131 0837 14       		.byte	20
+ 2132 0838 1E       		.byte	30
+ 2133 0839 42       		.byte	66
+ 2134 083a 21       		.byte	33
+ 2135 083b A0       		.byte	-96
+ 2136 083c 22       		.byte	34
+ 2137 083d 14       		.byte	20
+ 2138 083e 23       		.byte	35
+ 2139 083f 40       		.byte	64
+ 2140 0840 24       		.byte	36
+ 2141 0841 04       		.byte	4
+ 2142 0842 25       		.byte	37
+ 2143 0843 02       		.byte	2
+ 2144 0844 26       		.byte	38
+ 2145 0845 0C       		.byte	12
+ 2146 0846 27       		.byte	39
+ 2147 0847 41       		.byte	65
+ 2148 0848 2C       		.byte	44
+ 2149 0849 04       		.byte	4
+ 2150 084a 2F       		.byte	47
+ 2151 084b 06       		.byte	6
+ 2152 084c 31       		.byte	49
+ 2153 084d 20       		.byte	32
+ 2154 084e 32       		.byte	50
+ 2155 084f 04       		.byte	4
+ 2156 0850 36       		.byte	54
+ 2157 0851 14       		.byte	20
+ 2158 0852 37       		.byte	55
+ 2159 0853 09       		.byte	9
+ 2160 0854 39       		.byte	57
+ 2161 0855 9A       		.byte	-102
+ 2162 0856 3E       		.byte	62
+ 2163 0857 2A       		.byte	42
+ 2164 0858 3F       		.byte	63
+ 2165 0859 80       		.byte	-128
+ 2166 085a 44       		.byte	68
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 39
+
+
+ 2167 085b 04       		.byte	4
+ 2168 085c 45       		.byte	69
+ 2169 085d 0A       		.byte	10
+ 2170 085e 4A       		.byte	74
+ 2171 085f 03       		.byte	3
+ 2172 0860 4E       		.byte	78
+ 2173 0861 0A       		.byte	10
+ 2174 0862 4F       		.byte	79
+ 2175 0863 80       		.byte	-128
+ 2176 0864 55       		.byte	85
+ 2177 0865 01       		.byte	1
+ 2178 0866 56       		.byte	86
+ 2179 0867 10       		.byte	16
+ 2180 0868 5C       		.byte	92
+ 2181 0869 04       		.byte	4
+ 2182 086a 6D       		.byte	109
+ 2183 086b 40       		.byte	64
+ 2184 086c 6F       		.byte	111
+ 2185 086d 14       		.byte	20
+ 2186 086e 76       		.byte	118
+ 2187 086f 2A       		.byte	42
+ 2188 0870 91       		.byte	-111
+ 2189 0871 9A       		.byte	-102
+ 2190 0872 92       		.byte	-110
+ 2191 0873 81       		.byte	-127
+ 2192 0874 96       		.byte	-106
+ 2193 0875 68       		.byte	104
+ 2194 0876 97       		.byte	-105
+ 2195 0877 40       		.byte	64
+ 2196 0878 99       		.byte	-103
+ 2197 0879 02       		.byte	2
+ 2198 087a 9C       		.byte	-100
+ 2199 087b 81       		.byte	-127
+ 2200 087c 9D       		.byte	-99
+ 2201 087d 10       		.byte	16
+ 2202 087e A1       		.byte	-95
+ 2203 087f 08       		.byte	8
+ 2204 0880 A2       		.byte	-94
+ 2205 0881 10       		.byte	16
+ 2206 0882 A3       		.byte	-93
+ 2207 0883 24       		.byte	36
+ 2208 0884 A6       		.byte	-90
+ 2209 0885 80       		.byte	-128
+ 2210 0886 AB       		.byte	-85
+ 2211 0887 12       		.byte	18
+ 2212 0888 AC       		.byte	-84
+ 2213 0889 10       		.byte	16
+ 2214 088a AD       		.byte	-83
+ 2215 088b 80       		.byte	-128
+ 2216 088c B1       		.byte	-79
+ 2217 088d 21       		.byte	33
+ 2218 088e B2       		.byte	-78
+ 2219 088f 01       		.byte	1
+ 2220 0890 B6       		.byte	-74
+ 2221 0891 01       		.byte	1
+ 2222 0892 B7       		.byte	-73
+ 2223 0893 08       		.byte	8
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 40
+
+
+ 2224 0894 C0       		.byte	-64
+ 2225 0895 C0       		.byte	-64
+ 2226 0896 C2       		.byte	-62
+ 2227 0897 11       		.byte	17
+ 2228 0898 C4       		.byte	-60
+ 2229 0899 E0       		.byte	-32
+ 2230 089a CA       		.byte	-54
+ 2231 089b 30       		.byte	48
+ 2232 089c CC       		.byte	-52
+ 2233 089d E6       		.byte	-26
+ 2234 089e CE       		.byte	-50
+ 2235 089f FF       		.byte	-1
+ 2236 08a0 D0       		.byte	-48
+ 2237 08a1 E0       		.byte	-32
+ 2238 08a2 D2       		.byte	-46
+ 2239 08a3 30       		.byte	48
+ 2240 08a4 D6       		.byte	-42
+ 2241 08a5 40       		.byte	64
+ 2242 08a6 E0       		.byte	-32
+ 2243 08a7 08       		.byte	8
+ 2244 08a8 EE       		.byte	-18
+ 2245 08a9 80       		.byte	-128
+ 2246 08aa 00       		.byte	0
+ 2247 08ab FF       		.byte	-1
+ 2248 08ac 01       		.byte	1
+ 2249 08ad 10       		.byte	16
+ 2250 08ae 04       		.byte	4
+ 2251 08af F3       		.byte	-13
+ 2252 08b0 05       		.byte	5
+ 2253 08b1 18       		.byte	24
+ 2254 08b2 06       		.byte	6
+ 2255 08b3 0C       		.byte	12
+ 2256 08b4 08       		.byte	8
+ 2257 08b5 41       		.byte	65
+ 2258 08b6 09       		.byte	9
+ 2259 08b7 08       		.byte	8
+ 2260 08b8 0C       		.byte	12
+ 2261 08b9 1C       		.byte	28
+ 2262 08ba 0E       		.byte	14
+ 2263 08bb E3       		.byte	-29
+ 2264 08bc 0F       		.byte	15
+ 2265 08bd 03       		.byte	3
+ 2266 08be 12       		.byte	18
+ 2267 08bf F3       		.byte	-13
+ 2268 08c0 14       		.byte	20
+ 2269 08c1 C3       		.byte	-61
+ 2270 08c2 17       		.byte	23
+ 2271 08c3 04       		.byte	4
+ 2272 08c4 18       		.byte	24
+ 2273 08c5 82       		.byte	-126
+ 2274 08c6 19       		.byte	25
+ 2275 08c7 3C       		.byte	60
+ 2276 08c8 1B       		.byte	27
+ 2277 08c9 42       		.byte	66
+ 2278 08ca 1C       		.byte	28
+ 2279 08cb 0F       		.byte	15
+ 2280 08cc 1D       		.byte	29
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 41
+
+
+ 2281 08cd 7F       		.byte	127
+ 2282 08ce 1E       		.byte	30
+ 2283 08cf F0       		.byte	-16
+ 2284 08d0 20       		.byte	32
+ 2285 08d1 08       		.byte	8
+ 2286 08d2 24       		.byte	36
+ 2287 08d3 04       		.byte	4
+ 2288 08d4 25       		.byte	37
+ 2289 08d5 67       		.byte	103
+ 2290 08d6 27       		.byte	39
+ 2291 08d7 18       		.byte	24
+ 2292 08d8 28       		.byte	40
+ 2293 08d9 0C       		.byte	12
+ 2294 08da 29       		.byte	41
+ 2295 08db 04       		.byte	4
+ 2296 08dc 2B       		.byte	43
+ 2297 08dd 80       		.byte	-128
+ 2298 08de 2D       		.byte	45
+ 2299 08df 3C       		.byte	60
+ 2300 08e0 2F       		.byte	47
+ 2301 08e1 41       		.byte	65
+ 2302 08e2 30       		.byte	48
+ 2303 08e3 C0       		.byte	-64
+ 2304 08e4 31       		.byte	49
+ 2305 08e5 20       		.byte	32
+ 2306 08e6 32       		.byte	50
+ 2307 08e7 1C       		.byte	28
+ 2308 08e8 33       		.byte	51
+ 2309 08e9 80       		.byte	-128
+ 2310 08ea 34       		.byte	52
+ 2311 08eb 0F       		.byte	15
+ 2312 08ec 35       		.byte	53
+ 2313 08ed 1F       		.byte	31
+ 2314 08ee 36       		.byte	54
+ 2315 08ef 2C       		.byte	44
+ 2316 08f0 37       		.byte	55
+ 2317 08f1 40       		.byte	64
+ 2318 08f2 39       		.byte	57
+ 2319 08f3 80       		.byte	-128
+ 2320 08f4 3A       		.byte	58
+ 2321 08f5 A0       		.byte	-96
+ 2322 08f6 3B       		.byte	59
+ 2323 08f7 20       		.byte	32
+ 2324 08f8 3F       		.byte	63
+ 2325 08f9 01       		.byte	1
+ 2326 08fa 56       		.byte	86
+ 2327 08fb 02       		.byte	2
+ 2328 08fc 57       		.byte	87
+ 2329 08fd 10       		.byte	16
+ 2330 08fe 58       		.byte	88
+ 2331 08ff 04       		.byte	4
+ 2332 0900 59       		.byte	89
+ 2333 0901 04       		.byte	4
+ 2334 0902 5B       		.byte	91
+ 2335 0903 04       		.byte	4
+ 2336 0904 5C       		.byte	92
+ 2337 0905 22       		.byte	34
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 42
+
+
+ 2338 0906 5D       		.byte	93
+ 2339 0907 20       		.byte	32
+ 2340 0908 5F       		.byte	95
+ 2341 0909 01       		.byte	1
+ 2342 090a 8A       		.byte	-118
+ 2343 090b 20       		.byte	32
+ 2344 090c 92       		.byte	-110
+ 2345 090d 40       		.byte	64
+ 2346 090e 94       		.byte	-108
+ 2347 090f 1F       		.byte	31
+ 2348 0910 98       		.byte	-104
+ 2349 0911 1F       		.byte	31
+ 2350 0912 9C       		.byte	-100
+ 2351 0913 09       		.byte	9
+ 2352 0914 9E       		.byte	-98
+ 2353 0915 12       		.byte	18
+ 2354 0916 A0       		.byte	-96
+ 2355 0917 80       		.byte	-128
+ 2356 0918 A4       		.byte	-92
+ 2357 0919 14       		.byte	20
+ 2358 091a A6       		.byte	-90
+ 2359 091b 0A       		.byte	10
+ 2360 091c A8       		.byte	-88
+ 2361 091d 02       		.byte	2
+ 2362 091e AA       		.byte	-86
+ 2363 091f 05       		.byte	5
+ 2364 0920 AE       		.byte	-82
+ 2365 0921 20       		.byte	32
+ 2366 0922 B0       		.byte	-80
+ 2367 0923 07       		.byte	7
+ 2368 0924 B2       		.byte	-78
+ 2369 0925 60       		.byte	96
+ 2370 0926 B4       		.byte	-76
+ 2371 0927 80       		.byte	-128
+ 2372 0928 B6       		.byte	-74
+ 2373 0929 18       		.byte	24
+ 2374 092a BE       		.byte	-66
+ 2375 092b 14       		.byte	20
+ 2376 092c D8       		.byte	-40
+ 2377 092d 04       		.byte	4
+ 2378 092e DC       		.byte	-36
+ 2379 092f 03       		.byte	3
+ 2380 0930 DF       		.byte	-33
+ 2381 0931 01       		.byte	1
+ 2382 0932 01       		.byte	1
+ 2383 0933 20       		.byte	32
+ 2384 0934 02       		.byte	2
+ 2385 0935 81       		.byte	-127
+ 2386 0936 03       		.byte	3
+ 2387 0937 20       		.byte	32
+ 2388 0938 05       		.byte	5
+ 2389 0939 10       		.byte	16
+ 2390 093a 0A       		.byte	10
+ 2391 093b 2A       		.byte	42
+ 2392 093c 0B       		.byte	11
+ 2393 093d 40       		.byte	64
+ 2394 093e 0E       		.byte	14
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 43
+
+
+ 2395 093f 51       		.byte	81
+ 2396 0940 0F       		.byte	15
+ 2397 0941 04       		.byte	4
+ 2398 0942 10       		.byte	16
+ 2399 0943 A8       		.byte	-88
+ 2400 0944 14       		.byte	20
+ 2401 0945 91       		.byte	-111
+ 2402 0946 17       		.byte	23
+ 2403 0947 10       		.byte	16
+ 2404 0948 19       		.byte	25
+ 2405 0949 82       		.byte	-126
+ 2406 094a 1A       		.byte	26
+ 2407 094b 02       		.byte	2
+ 2408 094c 1B       		.byte	27
+ 2409 094d 34       		.byte	52
+ 2410 094e 1D       		.byte	29
+ 2411 094f 88       		.byte	-120
+ 2412 0950 1E       		.byte	30
+ 2413 0951 24       		.byte	36
+ 2414 0952 1F       		.byte	31
+ 2415 0953 02       		.byte	2
+ 2416 0954 21       		.byte	33
+ 2417 0955 20       		.byte	32
+ 2418 0956 22       		.byte	34
+ 2419 0957 48       		.byte	72
+ 2420 0958 23       		.byte	35
+ 2421 0959 88       		.byte	-120
+ 2422 095a 29       		.byte	41
+ 2423 095b A0       		.byte	-96
+ 2424 095c 2B       		.byte	43
+ 2425 095d 10       		.byte	16
+ 2426 095e 31       		.byte	49
+ 2427 095f 20       		.byte	32
+ 2428 0960 32       		.byte	50
+ 2429 0961 88       		.byte	-120
+ 2430 0962 38       		.byte	56
+ 2431 0963 28       		.byte	40
+ 2432 0964 3A       		.byte	58
+ 2433 0965 02       		.byte	2
+ 2434 0966 3B       		.byte	59
+ 2435 0967 40       		.byte	64
+ 2436 0968 5B       		.byte	91
+ 2437 0969 80       		.byte	-128
+ 2438 096a 69       		.byte	105
+ 2439 096b 98       		.byte	-104
+ 2440 096c 70       		.byte	112
+ 2441 096d BC       		.byte	-68
+ 2442 096e 72       		.byte	114
+ 2443 096f 02       		.byte	2
+ 2444 0970 86       		.byte	-122
+ 2445 0971 04       		.byte	4
+ 2446 0972 8B       		.byte	-117
+ 2447 0973 04       		.byte	4
+ 2448 0974 8E       		.byte	-114
+ 2449 0975 10       		.byte	16
+ 2450 0976 C0       		.byte	-64
+ 2451 0977 4F       		.byte	79
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 44
+
+
+ 2452 0978 C2       		.byte	-62
+ 2453 0979 FF       		.byte	-1
+ 2454 097a C4       		.byte	-60
+ 2455 097b FE       		.byte	-2
+ 2456 097c CA       		.byte	-54
+ 2457 097d 0E       		.byte	14
+ 2458 097e CC       		.byte	-52
+ 2459 097f 0E       		.byte	14
+ 2460 0980 CE       		.byte	-50
+ 2461 0981 0F       		.byte	15
+ 2462 0982 D6       		.byte	-42
+ 2463 0983 08       		.byte	8
+ 2464 0984 E0       		.byte	-32
+ 2465 0985 02       		.byte	2
+ 2466 0986 E4       		.byte	-28
+ 2467 0987 30       		.byte	48
+ 2468 0988 8B       		.byte	-117
+ 2469 0989 40       		.byte	64
+ 2470 098a 8C       		.byte	-116
+ 2471 098b 02       		.byte	2
+ 2472 098c 97       		.byte	-105
+ 2473 098d 40       		.byte	64
+ 2474 098e 9C       		.byte	-100
+ 2475 098f 02       		.byte	2
+ 2476 0990 AE       		.byte	-82
+ 2477 0991 12       		.byte	18
+ 2478 0992 B1       		.byte	-79
+ 2479 0993 02       		.byte	2
+ 2480 0994 B2       		.byte	-78
+ 2481 0995 01       		.byte	1
+ 2482 0996 B5       		.byte	-75
+ 2483 0997 10       		.byte	16
+ 2484 0998 E6       		.byte	-26
+ 2485 0999 02       		.byte	2
+ 2486 099a 00       		.byte	0
+ 2487 099b 71       		.byte	113
+ 2488 099c 01       		.byte	1
+ 2489 099d 03       		.byte	3
+ 2490 099e 02       		.byte	2
+ 2491 099f 08       		.byte	8
+ 2492 09a0 03       		.byte	3
+ 2493 09a1 24       		.byte	36
+ 2494 09a2 04       		.byte	4
+ 2495 09a3 43       		.byte	67
+ 2496 09a4 06       		.byte	6
+ 2497 09a5 30       		.byte	48
+ 2498 09a6 07       		.byte	7
+ 2499 09a7 25       		.byte	37
+ 2500 09a8 0C       		.byte	12
+ 2501 09a9 24       		.byte	36
+ 2502 09aa 0E       		.byte	14
+ 2503 09ab 41       		.byte	65
+ 2504 09ac 13       		.byte	19
+ 2505 09ad D8       		.byte	-40
+ 2506 09ae 14       		.byte	20
+ 2507 09af 50       		.byte	80
+ 2508 09b0 15       		.byte	21
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 45
+
+
+ 2509 09b1 A3       		.byte	-93
+ 2510 09b2 17       		.byte	23
+ 2511 09b3 4C       		.byte	76
+ 2512 09b4 18       		.byte	24
+ 2513 09b5 02       		.byte	2
+ 2514 09b6 19       		.byte	25
+ 2515 09b7 63       		.byte	99
+ 2516 09b8 1A       		.byte	26
+ 2517 09b9 01       		.byte	1
+ 2518 09ba 1B       		.byte	27
+ 2519 09bb 94       		.byte	-108
+ 2520 09bc 1C       		.byte	28
+ 2521 09bd 81       		.byte	-127
+ 2522 09be 1D       		.byte	29
+ 2523 09bf DA       		.byte	-38
+ 2524 09c0 1E       		.byte	30
+ 2525 09c1 0E       		.byte	14
+ 2526 09c2 1F       		.byte	31
+ 2527 09c3 24       		.byte	36
+ 2528 09c4 20       		.byte	32
+ 2529 09c5 40       		.byte	64
+ 2530 09c6 21       		.byte	33
+ 2531 09c7 40       		.byte	64
+ 2532 09c8 22       		.byte	34
+ 2533 09c9 03       		.byte	3
+ 2534 09ca 24       		.byte	36
+ 2535 09cb 30       		.byte	48
+ 2536 09cc 26       		.byte	38
+ 2537 09cd 47       		.byte	71
+ 2538 09ce 27       		.byte	39
+ 2539 09cf 80       		.byte	-128
+ 2540 09d0 2F       		.byte	47
+ 2541 09d1 08       		.byte	8
+ 2542 09d2 32       		.byte	50
+ 2543 09d3 80       		.byte	-128
+ 2544 09d4 33       		.byte	51
+ 2545 09d5 1F       		.byte	31
+ 2546 09d6 35       		.byte	53
+ 2547 09d7 C0       		.byte	-64
+ 2548 09d8 36       		.byte	54
+ 2549 09d9 7F       		.byte	127
+ 2550 09da 37       		.byte	55
+ 2551 09db 20       		.byte	32
+ 2552 09dc 3B       		.byte	59
+ 2553 09dd 28       		.byte	40
+ 2554 09de 3E       		.byte	62
+ 2555 09df 04       		.byte	4
+ 2556 09e0 3F       		.byte	63
+ 2557 09e1 40       		.byte	64
+ 2558 09e2 40       		.byte	64
+ 2559 09e3 62       		.byte	98
+ 2560 09e4 41       		.byte	65
+ 2561 09e5 03       		.byte	3
+ 2562 09e6 45       		.byte	69
+ 2563 09e7 E0       		.byte	-32
+ 2564 09e8 46       		.byte	70
+ 2565 09e9 B0       		.byte	-80
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 46
+
+
+ 2566 09ea 47       		.byte	71
+ 2567 09eb C0       		.byte	-64
+ 2568 09ec 48       		.byte	72
+ 2569 09ed 2A       		.byte	42
+ 2570 09ee 49       		.byte	73
+ 2571 09ef FF       		.byte	-1
+ 2572 09f0 4A       		.byte	74
+ 2573 09f1 FF       		.byte	-1
+ 2574 09f2 4B       		.byte	75
+ 2575 09f3 FF       		.byte	-1
+ 2576 09f4 4E       		.byte	78
+ 2577 09f5 F0       		.byte	-16
+ 2578 09f6 4F       		.byte	79
+ 2579 09f7 44       		.byte	68
+ 2580 09f8 50       		.byte	80
+ 2581 09f9 0C       		.byte	12
+ 2582 09fa 58       		.byte	88
+ 2583 09fb 04       		.byte	4
+ 2584 09fc 59       		.byte	89
+ 2585 09fd 04       		.byte	4
+ 2586 09fe 5A       		.byte	90
+ 2587 09ff 04       		.byte	4
+ 2588 0a00 5C       		.byte	92
+ 2589 0a01 44       		.byte	68
+ 2590 0a02 5D       		.byte	93
+ 2591 0a03 04       		.byte	4
+ 2592 0a04 5F       		.byte	95
+ 2593 0a05 01       		.byte	1
+ 2594 0a06 66       		.byte	102
+ 2595 0a07 C0       		.byte	-64
+ 2596 0a08 6A       		.byte	106
+ 2597 0a09 40       		.byte	64
+ 2598 0a0a 6B       		.byte	107
+ 2599 0a0b 02       		.byte	2
+ 2600 0a0c 84       		.byte	-124
+ 2601 0a0d 1C       		.byte	28
+ 2602 0a0e 85       		.byte	-123
+ 2603 0a0f 33       		.byte	51
+ 2604 0a10 86       		.byte	-122
+ 2605 0a11 03       		.byte	3
+ 2606 0a12 87       		.byte	-121
+ 2607 0a13 0C       		.byte	12
+ 2608 0a14 89       		.byte	-119
+ 2609 0a15 03       		.byte	3
+ 2610 0a16 8B       		.byte	-117
+ 2611 0a17 14       		.byte	20
+ 2612 0a18 8C       		.byte	-116
+ 2613 0a19 01       		.byte	1
+ 2614 0a1a 8E       		.byte	-114
+ 2615 0a1b 0E       		.byte	14
+ 2616 0a1c 92       		.byte	-110
+ 2617 0a1d 03       		.byte	3
+ 2618 0a1e 93       		.byte	-109
+ 2619 0a1f 08       		.byte	8
+ 2620 0a20 99       		.byte	-103
+ 2621 0a21 0A       		.byte	10
+ 2622 0a22 9B       		.byte	-101
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 47
+
+
+ 2623 0a23 34       		.byte	52
+ 2624 0a24 9D       		.byte	-99
+ 2625 0a25 80       		.byte	-128
+ 2626 0a26 9E       		.byte	-98
+ 2627 0a27 1C       		.byte	28
+ 2628 0a28 A1       		.byte	-95
+ 2629 0a29 33       		.byte	51
+ 2630 0a2a A3       		.byte	-93
+ 2631 0a2b 04       		.byte	4
+ 2632 0a2c A4       		.byte	-92
+ 2633 0a2d 01       		.byte	1
+ 2634 0a2e A6       		.byte	-90
+ 2635 0a2f 16       		.byte	22
+ 2636 0a30 AD       		.byte	-83
+ 2637 0a31 40       		.byte	64
+ 2638 0a32 AE       		.byte	-82
+ 2639 0a33 08       		.byte	8
+ 2640 0a34 AF       		.byte	-81
+ 2641 0a35 15       		.byte	21
+ 2642 0a36 B0       		.byte	-80
+ 2643 0a37 1A       		.byte	26
+ 2644 0a38 B1       		.byte	-79
+ 2645 0a39 60       		.byte	96
+ 2646 0a3a B3       		.byte	-77
+ 2647 0a3b 80       		.byte	-128
+ 2648 0a3c B4       		.byte	-76
+ 2649 0a3d 0F       		.byte	15
+ 2650 0a3e B5       		.byte	-75
+ 2651 0a3f 0F       		.byte	15
+ 2652 0a40 B7       		.byte	-73
+ 2653 0a41 10       		.byte	16
+ 2654 0a42 B9       		.byte	-71
+ 2655 0a43 02       		.byte	2
+ 2656 0a44 BA       		.byte	-70
+ 2657 0a45 22       		.byte	34
+ 2658 0a46 BB       		.byte	-69
+ 2659 0a47 20       		.byte	32
+ 2660 0a48 BF       		.byte	-65
+ 2661 0a49 44       		.byte	68
+ 2662 0a4a C0       		.byte	-64
+ 2663 0a4b 21       		.byte	33
+ 2664 0a4c C1       		.byte	-63
+ 2665 0a4d 04       		.byte	4
+ 2666 0a4e C5       		.byte	-59
+ 2667 0a4f E0       		.byte	-32
+ 2668 0a50 C6       		.byte	-58
+ 2669 0a51 CB       		.byte	-53
+ 2670 0a52 C8       		.byte	-56
+ 2671 0a53 0E       		.byte	14
+ 2672 0a54 C9       		.byte	-55
+ 2673 0a55 FF       		.byte	-1
+ 2674 0a56 CA       		.byte	-54
+ 2675 0a57 FF       		.byte	-1
+ 2676 0a58 CB       		.byte	-53
+ 2677 0a59 FF       		.byte	-1
+ 2678 0a5a CE       		.byte	-50
+ 2679 0a5b F0       		.byte	-16
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 48
+
+
+ 2680 0a5c CF       		.byte	-49
+ 2681 0a5d 44       		.byte	68
+ 2682 0a5e D0       		.byte	-48
+ 2683 0a5f 0C       		.byte	12
+ 2684 0a60 D8       		.byte	-40
+ 2685 0a61 04       		.byte	4
+ 2686 0a62 D9       		.byte	-39
+ 2687 0a63 04       		.byte	4
+ 2688 0a64 DA       		.byte	-38
+ 2689 0a65 04       		.byte	4
+ 2690 0a66 DF       		.byte	-33
+ 2691 0a67 01       		.byte	1
+ 2692 0a68 E6       		.byte	-26
+ 2693 0a69 C0       		.byte	-64
+ 2694 0a6a EA       		.byte	-22
+ 2695 0a6b 40       		.byte	64
+ 2696 0a6c EB       		.byte	-21
+ 2697 0a6d 02       		.byte	2
+ 2698 0a6e 00       		.byte	0
+ 2699 0a6f 44       		.byte	68
+ 2700 0a70 04       		.byte	4
+ 2701 0a71 20       		.byte	32
+ 2702 0a72 05       		.byte	5
+ 2703 0a73 20       		.byte	32
+ 2704 0a74 07       		.byte	7
+ 2705 0a75 51       		.byte	81
+ 2706 0a76 08       		.byte	8
+ 2707 0a77 02       		.byte	2
+ 2708 0a78 0A       		.byte	10
+ 2709 0a79 02       		.byte	2
+ 2710 0a7a 0D       		.byte	13
+ 2711 0a7b A0       		.byte	-96
+ 2712 0a7c 0E       		.byte	14
+ 2713 0a7d 04       		.byte	4
+ 2714 0a7e 0F       		.byte	15
+ 2715 0a7f 20       		.byte	32
+ 2716 0a80 12       		.byte	18
+ 2717 0a81 20       		.byte	32
+ 2718 0a82 13       		.byte	19
+ 2719 0a83 40       		.byte	64
+ 2720 0a84 15       		.byte	21
+ 2721 0a85 01       		.byte	1
+ 2722 0a86 16       		.byte	22
+ 2723 0a87 80       		.byte	-128
+ 2724 0a88 17       		.byte	23
+ 2725 0a89 04       		.byte	4
+ 2726 0a8a 18       		.byte	24
+ 2727 0a8b 44       		.byte	68
+ 2728 0a8c 19       		.byte	25
+ 2729 0a8d 12       		.byte	18
+ 2730 0a8e 1D       		.byte	29
+ 2731 0a8f 80       		.byte	-128
+ 2732 0a90 1E       		.byte	30
+ 2733 0a91 01       		.byte	1
+ 2734 0a92 1F       		.byte	31
+ 2735 0a93 04       		.byte	4
+ 2736 0a94 21       		.byte	33
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 49
+
+
+ 2737 0a95 10       		.byte	16
+ 2738 0a96 22       		.byte	34
+ 2739 0a97 65       		.byte	101
+ 2740 0a98 23       		.byte	35
+ 2741 0a99 04       		.byte	4
+ 2742 0a9a 25       		.byte	37
+ 2743 0a9b 20       		.byte	32
+ 2744 0a9c 26       		.byte	38
+ 2745 0a9d 48       		.byte	72
+ 2746 0a9e 27       		.byte	39
+ 2747 0a9f 10       		.byte	16
+ 2748 0aa0 28       		.byte	40
+ 2749 0aa1 02       		.byte	2
+ 2750 0aa2 29       		.byte	41
+ 2751 0aa3 02       		.byte	2
+ 2752 0aa4 2E       		.byte	46
+ 2753 0aa5 85       		.byte	-123
+ 2754 0aa6 31       		.byte	49
+ 2755 0aa7 10       		.byte	16
+ 2756 0aa8 32       		.byte	50
+ 2757 0aa9 81       		.byte	-127
+ 2758 0aaa 37       		.byte	55
+ 2759 0aab 55       		.byte	85
+ 2760 0aac 38       		.byte	56
+ 2761 0aad 20       		.byte	32
+ 2762 0aae 3B       		.byte	59
+ 2763 0aaf 04       		.byte	4
+ 2764 0ab0 3E       		.byte	62
+ 2765 0ab1 0A       		.byte	10
+ 2766 0ab2 40       		.byte	64
+ 2767 0ab3 42       		.byte	66
+ 2768 0ab4 41       		.byte	65
+ 2769 0ab5 10       		.byte	16
+ 2770 0ab6 46       		.byte	70
+ 2771 0ab7 08       		.byte	8
+ 2772 0ab8 47       		.byte	71
+ 2773 0ab9 04       		.byte	4
+ 2774 0aba 49       		.byte	73
+ 2775 0abb 01       		.byte	1
+ 2776 0abc 4C       		.byte	76
+ 2777 0abd 40       		.byte	64
+ 2778 0abe 4E       		.byte	78
+ 2779 0abf 08       		.byte	8
+ 2780 0ac0 4F       		.byte	79
+ 2781 0ac1 01       		.byte	1
+ 2782 0ac2 50       		.byte	80
+ 2783 0ac3 90       		.byte	-112
+ 2784 0ac4 56       		.byte	86
+ 2785 0ac5 02       		.byte	2
+ 2786 0ac6 57       		.byte	87
+ 2787 0ac7 10       		.byte	16
+ 2788 0ac8 84       		.byte	-124
+ 2789 0ac9 80       		.byte	-128
+ 2790 0aca 86       		.byte	-122
+ 2791 0acb 20       		.byte	32
+ 2792 0acc 8B       		.byte	-117
+ 2793 0acd 04       		.byte	4
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 50
+
+
+ 2794 0ace 91       		.byte	-111
+ 2795 0acf 01       		.byte	1
+ 2796 0ad0 94       		.byte	-108
+ 2797 0ad1 80       		.byte	-128
+ 2798 0ad2 96       		.byte	-106
+ 2799 0ad3 88       		.byte	-120
+ 2800 0ad4 97       		.byte	-105
+ 2801 0ad5 01       		.byte	1
+ 2802 0ad6 9A       		.byte	-102
+ 2803 0ad7 08       		.byte	8
+ 2804 0ad8 9B       		.byte	-101
+ 2805 0ad9 45       		.byte	69
+ 2806 0ada 9D       		.byte	-99
+ 2807 0adb 21       		.byte	33
+ 2808 0adc 9F       		.byte	-97
+ 2809 0add 10       		.byte	16
+ 2810 0ade A2       		.byte	-94
+ 2811 0adf 80       		.byte	-128
+ 2812 0ae0 A6       		.byte	-90
+ 2813 0ae1 50       		.byte	80
+ 2814 0ae2 C0       		.byte	-64
+ 2815 0ae3 B5       		.byte	-75
+ 2816 0ae4 C2       		.byte	-62
+ 2817 0ae5 E9       		.byte	-23
+ 2818 0ae6 C4       		.byte	-60
+ 2819 0ae7 35       		.byte	53
+ 2820 0ae8 CA       		.byte	-54
+ 2821 0ae9 D9       		.byte	-39
+ 2822 0aea CC       		.byte	-52
+ 2823 0aeb FD       		.byte	-3
+ 2824 0aec CE       		.byte	-50
+ 2825 0aed C6       		.byte	-58
+ 2826 0aee D0       		.byte	-48
+ 2827 0aef 6D       		.byte	109
+ 2828 0af0 D2       		.byte	-46
+ 2829 0af1 20       		.byte	32
+ 2830 0af2 E0       		.byte	-32
+ 2831 0af3 08       		.byte	8
+ 2832 0af4 E4       		.byte	-28
+ 2833 0af5 02       		.byte	2
+ 2834 0af6 E6       		.byte	-26
+ 2835 0af7 08       		.byte	8
+ 2836 0af8 02       		.byte	2
+ 2837 0af9 01       		.byte	1
+ 2838 0afa 05       		.byte	5
+ 2839 0afb 3F       		.byte	63
+ 2840 0afc 09       		.byte	9
+ 2841 0afd 3F       		.byte	63
+ 2842 0afe 0D       		.byte	13
+ 2843 0aff 20       		.byte	32
+ 2844 0b00 11       		.byte	17
+ 2845 0b01 08       		.byte	8
+ 2846 0b02 13       		.byte	19
+ 2847 0b03 94       		.byte	-108
+ 2848 0b04 19       		.byte	25
+ 2849 0b05 12       		.byte	18
+ 2850 0b06 1A       		.byte	26
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 51
+
+
+ 2851 0b07 01       		.byte	1
+ 2852 0b08 1B       		.byte	27
+ 2853 0b09 49       		.byte	73
+ 2854 0b0a 29       		.byte	41
+ 2855 0b0b 05       		.byte	5
+ 2856 0b0c 2B       		.byte	43
+ 2857 0b0d 4A       		.byte	74
+ 2858 0b0e 30       		.byte	48
+ 2859 0b0f 01       		.byte	1
+ 2860 0b10 31       		.byte	49
+ 2861 0b11 1C       		.byte	28
+ 2862 0b12 33       		.byte	51
+ 2863 0b13 C0       		.byte	-64
+ 2864 0b14 35       		.byte	53
+ 2865 0b15 03       		.byte	3
+ 2866 0b16 37       		.byte	55
+ 2867 0b17 20       		.byte	32
+ 2868 0b18 3A       		.byte	58
+ 2869 0b19 08       		.byte	8
+ 2870 0b1a 3E       		.byte	62
+ 2871 0b1b 01       		.byte	1
+ 2872 0b1c 3F       		.byte	63
+ 2873 0b1d 04       		.byte	4
+ 2874 0b1e 40       		.byte	64
+ 2875 0b1f 35       		.byte	53
+ 2876 0b20 41       		.byte	65
+ 2877 0b21 06       		.byte	6
+ 2878 0b22 42       		.byte	66
+ 2879 0b23 04       		.byte	4
+ 2880 0b24 44       		.byte	68
+ 2881 0b25 02       		.byte	2
+ 2882 0b26 45       		.byte	69
+ 2883 0b27 0C       		.byte	12
+ 2884 0b28 47       		.byte	71
+ 2885 0b29 0E       		.byte	14
+ 2886 0b2a 48       		.byte	72
+ 2887 0b2b 11       		.byte	17
+ 2888 0b2c 49       		.byte	73
+ 2889 0b2d FF       		.byte	-1
+ 2890 0b2e 4A       		.byte	74
+ 2891 0b2f FF       		.byte	-1
+ 2892 0b30 4B       		.byte	75
+ 2893 0b31 FF       		.byte	-1
+ 2894 0b32 4C       		.byte	76
+ 2895 0b33 62       		.byte	98
+ 2896 0b34 4D       		.byte	77
+ 2897 0b35 A0       		.byte	-96
+ 2898 0b36 4E       		.byte	78
+ 2899 0b37 F0       		.byte	-16
+ 2900 0b38 4F       		.byte	79
+ 2901 0b39 41       		.byte	65
+ 2902 0b3a 50       		.byte	80
+ 2903 0b3b 0C       		.byte	12
+ 2904 0b3c 54       		.byte	84
+ 2905 0b3d 18       		.byte	24
+ 2906 0b3e 56       		.byte	86
+ 2907 0b3f 04       		.byte	4
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 52
+
+
+ 2908 0b40 58       		.byte	88
+ 2909 0b41 04       		.byte	4
+ 2910 0b42 59       		.byte	89
+ 2911 0b43 04       		.byte	4
+ 2912 0b44 5A       		.byte	90
+ 2913 0b45 04       		.byte	4
+ 2914 0b46 5B       		.byte	91
+ 2915 0b47 04       		.byte	4
+ 2916 0b48 5C       		.byte	92
+ 2917 0b49 14       		.byte	20
+ 2918 0b4a 5D       		.byte	93
+ 2919 0b4b 11       		.byte	17
+ 2920 0b4c 5F       		.byte	95
+ 2921 0b4d 01       		.byte	1
+ 2922 0b4e 66       		.byte	102
+ 2923 0b4f 40       		.byte	64
+ 2924 0b50 67       		.byte	103
+ 2925 0b51 02       		.byte	2
+ 2926 0b52 69       		.byte	105
+ 2927 0b53 10       		.byte	16
+ 2928 0b54 6A       		.byte	106
+ 2929 0b55 30       		.byte	48
+ 2930 0b56 6B       		.byte	107
+ 2931 0b57 10       		.byte	16
+ 2932 0b58 6D       		.byte	109
+ 2933 0b59 10       		.byte	16
+ 2934 0b5a 6E       		.byte	110
+ 2935 0b5b 10       		.byte	16
+ 2936 0b5c 6F       		.byte	111
+ 2937 0b5d 12       		.byte	18
+ 2938 0b5e 87       		.byte	-121
+ 2939 0b5f 01       		.byte	1
+ 2940 0b60 8C       		.byte	-116
+ 2941 0b61 22       		.byte	34
+ 2942 0b62 8E       		.byte	-114
+ 2943 0b63 51       		.byte	81
+ 2944 0b64 90       		.byte	-112
+ 2945 0b65 44       		.byte	68
+ 2946 0b66 92       		.byte	-110
+ 2947 0b67 31       		.byte	49
+ 2948 0b68 93       		.byte	-109
+ 2949 0b69 02       		.byte	2
+ 2950 0b6a 98       		.byte	-104
+ 2951 0b6b 01       		.byte	1
+ 2952 0b6c 9A       		.byte	-102
+ 2953 0b6d 0E       		.byte	14
+ 2954 0b6e 9B       		.byte	-101
+ 2955 0b6f 02       		.byte	2
+ 2956 0b70 A3       		.byte	-93
+ 2957 0b71 01       		.byte	1
+ 2958 0b72 A4       		.byte	-92
+ 2959 0b73 E7       		.byte	-25
+ 2960 0b74 A8       		.byte	-88
+ 2961 0b75 E7       		.byte	-25
+ 2962 0b76 AC       		.byte	-84
+ 2963 0b77 80       		.byte	-128
+ 2964 0b78 B0       		.byte	-80
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 53
+
+
+ 2965 0b79 60       		.byte	96
+ 2966 0b7a B2       		.byte	-78
+ 2967 0b7b 80       		.byte	-128
+ 2968 0b7c B4       		.byte	-76
+ 2969 0b7d 07       		.byte	7
+ 2970 0b7e B5       		.byte	-75
+ 2971 0b7f 02       		.byte	2
+ 2972 0b80 B6       		.byte	-74
+ 2973 0b81 18       		.byte	24
+ 2974 0b82 B7       		.byte	-73
+ 2975 0b83 01       		.byte	1
+ 2976 0b84 BB       		.byte	-69
+ 2977 0b85 02       		.byte	2
+ 2978 0b86 BE       		.byte	-66
+ 2979 0b87 40       		.byte	64
+ 2980 0b88 BF       		.byte	-65
+ 2981 0b89 50       		.byte	80
+ 2982 0b8a C0       		.byte	-64
+ 2983 0b8b 63       		.byte	99
+ 2984 0b8c C1       		.byte	-63
+ 2985 0b8d 04       		.byte	4
+ 2986 0b8e C2       		.byte	-62
+ 2987 0b8f 05       		.byte	5
+ 2988 0b90 C4       		.byte	-60
+ 2989 0b91 01       		.byte	1
+ 2990 0b92 C5       		.byte	-59
+ 2991 0b93 0E       		.byte	14
+ 2992 0b94 C7       		.byte	-57
+ 2993 0b95 0C       		.byte	12
+ 2994 0b96 C8       		.byte	-56
+ 2995 0b97 11       		.byte	17
+ 2996 0b98 C9       		.byte	-55
+ 2997 0b99 FF       		.byte	-1
+ 2998 0b9a CA       		.byte	-54
+ 2999 0b9b FF       		.byte	-1
+ 3000 0b9c CB       		.byte	-53
+ 3001 0b9d FF       		.byte	-1
+ 3002 0b9e CC       		.byte	-52
+ 3003 0b9f 62       		.byte	98
+ 3004 0ba0 CD       		.byte	-51
+ 3005 0ba1 A0       		.byte	-96
+ 3006 0ba2 CE       		.byte	-50
+ 3007 0ba3 F0       		.byte	-16
+ 3008 0ba4 CF       		.byte	-49
+ 3009 0ba5 41       		.byte	65
+ 3010 0ba6 D0       		.byte	-48
+ 3011 0ba7 0C       		.byte	12
+ 3012 0ba8 D8       		.byte	-40
+ 3013 0ba9 04       		.byte	4
+ 3014 0baa D9       		.byte	-39
+ 3015 0bab 04       		.byte	4
+ 3016 0bac DA       		.byte	-38
+ 3017 0bad 04       		.byte	4
+ 3018 0bae DF       		.byte	-33
+ 3019 0baf 01       		.byte	1
+ 3020 0bb0 E6       		.byte	-26
+ 3021 0bb1 40       		.byte	64
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 54
+
+
+ 3022 0bb2 E7       		.byte	-25
+ 3023 0bb3 02       		.byte	2
+ 3024 0bb4 E9       		.byte	-23
+ 3025 0bb5 10       		.byte	16
+ 3026 0bb6 EA       		.byte	-22
+ 3027 0bb7 30       		.byte	48
+ 3028 0bb8 EB       		.byte	-21
+ 3029 0bb9 10       		.byte	16
+ 3030 0bba ED       		.byte	-19
+ 3031 0bbb 10       		.byte	16
+ 3032 0bbc EE       		.byte	-18
+ 3033 0bbd 10       		.byte	16
+ 3034 0bbe EF       		.byte	-17
+ 3035 0bbf 12       		.byte	18
+ 3036 0bc0 00       		.byte	0
+ 3037 0bc1 80       		.byte	-128
+ 3038 0bc2 05       		.byte	5
+ 3039 0bc3 01       		.byte	1
+ 3040 0bc4 06       		.byte	6
+ 3041 0bc5 80       		.byte	-128
+ 3042 0bc6 0A       		.byte	10
+ 3043 0bc7 48       		.byte	72
+ 3044 0bc8 0F       		.byte	15
+ 3045 0bc9 08       		.byte	8
+ 3046 0bca 10       		.byte	16
+ 3047 0bcb 02       		.byte	2
+ 3048 0bcc 11       		.byte	17
+ 3049 0bcd 14       		.byte	20
+ 3050 0bce 19       		.byte	25
+ 3051 0bcf 04       		.byte	4
+ 3052 0bd0 1A       		.byte	26
+ 3053 0bd1 48       		.byte	72
+ 3054 0bd2 1B       		.byte	27
+ 3055 0bd3 88       		.byte	-120
+ 3056 0bd4 1F       		.byte	31
+ 3057 0bd5 05       		.byte	5
+ 3058 0bd6 20       		.byte	32
+ 3059 0bd7 40       		.byte	64
+ 3060 0bd8 23       		.byte	35
+ 3061 0bd9 05       		.byte	5
+ 3062 0bda 24       		.byte	36
+ 3063 0bdb 02       		.byte	2
+ 3064 0bdc 25       		.byte	37
+ 3065 0bdd 02       		.byte	2
+ 3066 0bde 26       		.byte	38
+ 3067 0bdf 22       		.byte	34
+ 3068 0be0 27       		.byte	39
+ 3069 0be1 20       		.byte	32
+ 3070 0be2 2B       		.byte	43
+ 3071 0be3 40       		.byte	64
+ 3072 0be4 2C       		.byte	44
+ 3073 0be5 08       		.byte	8
+ 3074 0be6 30       		.byte	48
+ 3075 0be7 20       		.byte	32
+ 3076 0be8 32       		.byte	50
+ 3077 0be9 01       		.byte	1
+ 3078 0bea 36       		.byte	54
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 55
+
+
+ 3079 0beb 22       		.byte	34
+ 3080 0bec 38       		.byte	56
+ 3081 0bed 08       		.byte	8
+ 3082 0bee 3D       		.byte	61
+ 3083 0bef 40       		.byte	64
+ 3084 0bf0 3E       		.byte	62
+ 3085 0bf1 14       		.byte	20
+ 3086 0bf2 40       		.byte	64
+ 3087 0bf3 40       		.byte	64
+ 3088 0bf4 43       		.byte	67
+ 3089 0bf5 88       		.byte	-120
+ 3090 0bf6 46       		.byte	70
+ 3091 0bf7 A0       		.byte	-96
+ 3092 0bf8 47       		.byte	71
+ 3093 0bf9 20       		.byte	32
+ 3094 0bfa 48       		.byte	72
+ 3095 0bfb 20       		.byte	32
+ 3096 0bfc 49       		.byte	73
+ 3097 0bfd 10       		.byte	16
+ 3098 0bfe 4B       		.byte	75
+ 3099 0bff 40       		.byte	64
+ 3100 0c00 4C       		.byte	76
+ 3101 0c01 01       		.byte	1
+ 3102 0c02 4E       		.byte	78
+ 3103 0c03 08       		.byte	8
+ 3104 0c04 4F       		.byte	79
+ 3105 0c05 08       		.byte	8
+ 3106 0c06 50       		.byte	80
+ 3107 0c07 04       		.byte	4
+ 3108 0c08 54       		.byte	84
+ 3109 0c09 04       		.byte	4
+ 3110 0c0a 5E       		.byte	94
+ 3111 0c0b 02       		.byte	2
+ 3112 0c0c 63       		.byte	99
+ 3113 0c0d C0       		.byte	-64
+ 3114 0c0e 65       		.byte	101
+ 3115 0c0f 20       		.byte	32
+ 3116 0c10 66       		.byte	102
+ 3117 0c11 02       		.byte	2
+ 3118 0c12 67       		.byte	103
+ 3119 0c13 02       		.byte	2
+ 3120 0c14 85       		.byte	-123
+ 3121 0c15 01       		.byte	1
+ 3122 0c16 86       		.byte	-122
+ 3123 0c17 02       		.byte	2
+ 3124 0c18 87       		.byte	-121
+ 3125 0c19 08       		.byte	8
+ 3126 0c1a 8E       		.byte	-114
+ 3127 0c1b 20       		.byte	32
+ 3128 0c1c 8F       		.byte	-113
+ 3129 0c1d 40       		.byte	64
+ 3130 0c1e 91       		.byte	-111
+ 3131 0c1f 40       		.byte	64
+ 3132 0c20 92       		.byte	-110
+ 3133 0c21 15       		.byte	21
+ 3134 0c22 94       		.byte	-108
+ 3135 0c23 02       		.byte	2
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 56
+
+
+ 3136 0c24 97       		.byte	-105
+ 3137 0c25 08       		.byte	8
+ 3138 0c26 99       		.byte	-103
+ 3139 0c27 21       		.byte	33
+ 3140 0c28 9F       		.byte	-97
+ 3141 0c29 41       		.byte	65
+ 3142 0c2a A2       		.byte	-94
+ 3143 0c2b 09       		.byte	9
+ 3144 0c2c A4       		.byte	-92
+ 3145 0c2d 0C       		.byte	12
+ 3146 0c2e A5       		.byte	-91
+ 3147 0c2f 02       		.byte	2
+ 3148 0c30 A6       		.byte	-90
+ 3149 0c31 02       		.byte	2
+ 3150 0c32 C0       		.byte	-64
+ 3151 0c33 11       		.byte	17
+ 3152 0c34 C2       		.byte	-62
+ 3153 0c35 4A       		.byte	74
+ 3154 0c36 C4       		.byte	-60
+ 3155 0c37 07       		.byte	7
+ 3156 0c38 CA       		.byte	-54
+ 3157 0c39 21       		.byte	33
+ 3158 0c3a CC       		.byte	-52
+ 3159 0c3b A5       		.byte	-91
+ 3160 0c3c CE       		.byte	-50
+ 3161 0c3d 72       		.byte	114
+ 3162 0c3e D0       		.byte	-48
+ 3163 0c3f EB       		.byte	-21
+ 3164 0c40 D2       		.byte	-46
+ 3165 0c41 3C       		.byte	60
+ 3166 0c42 D6       		.byte	-42
+ 3167 0c43 80       		.byte	-128
+ 3168 0c44 D8       		.byte	-40
+ 3169 0c45 B0       		.byte	-80
+ 3170 0c46 E0       		.byte	-32
+ 3171 0c47 80       		.byte	-128
+ 3172 0c48 02       		.byte	2
+ 3173 0c49 F3       		.byte	-13
+ 3174 0c4a 04       		.byte	4
+ 3175 0c4b F3       		.byte	-13
+ 3176 0c4c 05       		.byte	5
+ 3177 0c4d 18       		.byte	24
+ 3178 0c4e 06       		.byte	6
+ 3179 0c4f 0C       		.byte	12
+ 3180 0c50 09       		.byte	9
+ 3181 0c51 08       		.byte	8
+ 3182 0c52 0C       		.byte	12
+ 3183 0c53 41       		.byte	65
+ 3184 0c54 0D       		.byte	13
+ 3185 0c55 7F       		.byte	127
+ 3186 0c56 10       		.byte	16
+ 3187 0c57 82       		.byte	-126
+ 3188 0c58 11       		.byte	17
+ 3189 0c59 04       		.byte	4
+ 3190 0c5a 13       		.byte	19
+ 3191 0c5b 80       		.byte	-128
+ 3192 0c5c 14       		.byte	20
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 57
+
+
+ 3193 0c5d 0F       		.byte	15
+ 3194 0c5e 15       		.byte	21
+ 3195 0c5f 3C       		.byte	60
+ 3196 0c60 16       		.byte	22
+ 3197 0c61 F0       		.byte	-16
+ 3198 0c62 17       		.byte	23
+ 3199 0c63 41       		.byte	65
+ 3200 0c64 18       		.byte	24
+ 3201 0c65 C3       		.byte	-61
+ 3202 0c66 1B       		.byte	27
+ 3203 0c67 04       		.byte	4
+ 3204 0c68 1C       		.byte	28
+ 3205 0c69 1C       		.byte	28
+ 3206 0c6a 1D       		.byte	29
+ 3207 0c6b 3C       		.byte	60
+ 3208 0c6c 1E       		.byte	30
+ 3209 0c6d E3       		.byte	-29
+ 3210 0c6e 1F       		.byte	31
+ 3211 0c6f 42       		.byte	66
+ 3212 0c70 20       		.byte	32
+ 3213 0c71 08       		.byte	8
+ 3214 0c72 21       		.byte	33
+ 3215 0c73 10       		.byte	16
+ 3216 0c74 24       		.byte	36
+ 3217 0c75 04       		.byte	4
+ 3218 0c76 27       		.byte	39
+ 3219 0c77 03       		.byte	3
+ 3220 0c78 28       		.byte	40
+ 3221 0c79 0C       		.byte	12
+ 3222 0c7a 29       		.byte	41
+ 3223 0c7b 67       		.byte	103
+ 3224 0c7c 2B       		.byte	43
+ 3225 0c7d 18       		.byte	24
+ 3226 0c7e 2C       		.byte	44
+ 3227 0c7f FF       		.byte	-1
+ 3228 0c80 30       		.byte	48
+ 3229 0c81 C0       		.byte	-64
+ 3230 0c82 31       		.byte	49
+ 3231 0c83 40       		.byte	64
+ 3232 0c84 32       		.byte	50
+ 3233 0c85 2C       		.byte	44
+ 3234 0c86 33       		.byte	51
+ 3235 0c87 20       		.byte	32
+ 3236 0c88 34       		.byte	52
+ 3237 0c89 0F       		.byte	15
+ 3238 0c8a 35       		.byte	53
+ 3239 0c8b 80       		.byte	-128
+ 3240 0c8c 36       		.byte	54
+ 3241 0c8d 1C       		.byte	28
+ 3242 0c8e 37       		.byte	55
+ 3243 0c8f 1F       		.byte	31
+ 3244 0c90 39       		.byte	57
+ 3245 0c91 02       		.byte	2
+ 3246 0c92 3A       		.byte	58
+ 3247 0c93 28       		.byte	40
+ 3248 0c94 3B       		.byte	59
+ 3249 0c95 80       		.byte	-128
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 58
+
+
+ 3250 0c96 3F       		.byte	63
+ 3251 0c97 04       		.byte	4
+ 3252 0c98 56       		.byte	86
+ 3253 0c99 02       		.byte	2
+ 3254 0c9a 57       		.byte	87
+ 3255 0c9b 11       		.byte	17
+ 3256 0c9c 58       		.byte	88
+ 3257 0c9d 04       		.byte	4
+ 3258 0c9e 59       		.byte	89
+ 3259 0c9f 04       		.byte	4
+ 3260 0ca0 5B       		.byte	91
+ 3261 0ca1 04       		.byte	4
+ 3262 0ca2 5F       		.byte	95
+ 3263 0ca3 01       		.byte	1
+ 3264 0ca4 86       		.byte	-122
+ 3265 0ca5 01       		.byte	1
+ 3266 0ca6 88       		.byte	-120
+ 3267 0ca7 A0       		.byte	-96
+ 3268 0ca8 8C       		.byte	-116
+ 3269 0ca9 80       		.byte	-128
+ 3270 0caa 90       		.byte	-112
+ 3271 0cab 83       		.byte	-125
+ 3272 0cac 92       		.byte	-110
+ 3273 0cad 60       		.byte	96
+ 3274 0cae 94       		.byte	-108
+ 3275 0caf 63       		.byte	99
+ 3276 0cb0 96       		.byte	-106
+ 3277 0cb1 88       		.byte	-120
+ 3278 0cb2 98       		.byte	-104
+ 3279 0cb3 04       		.byte	4
+ 3280 0cb4 9A       		.byte	-102
+ 3281 0cb5 18       		.byte	24
+ 3282 0cb6 A4       		.byte	-92
+ 3283 0cb7 E2       		.byte	-30
+ 3284 0cb8 A6       		.byte	-90
+ 3285 0cb9 10       		.byte	16
+ 3286 0cba A8       		.byte	-88
+ 3287 0cbb 48       		.byte	72
+ 3288 0cbc AA       		.byte	-86
+ 3289 0cbd 80       		.byte	-128
+ 3290 0cbe B2       		.byte	-78
+ 3291 0cbf 04       		.byte	4
+ 3292 0cc0 B4       		.byte	-76
+ 3293 0cc1 F8       		.byte	-8
+ 3294 0cc2 B6       		.byte	-74
+ 3295 0cc3 03       		.byte	3
+ 3296 0cc4 B8       		.byte	-72
+ 3297 0cc5 80       		.byte	-128
+ 3298 0cc6 BE       		.byte	-66
+ 3299 0cc7 44       		.byte	68
+ 3300 0cc8 C0       		.byte	-64
+ 3301 0cc9 01       		.byte	1
+ 3302 0cca C7       		.byte	-57
+ 3303 0ccb 04       		.byte	4
+ 3304 0ccc C9       		.byte	-55
+ 3305 0ccd FF       		.byte	-1
+ 3306 0cce CA       		.byte	-54
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 59
+
+
+ 3307 0ccf 07       		.byte	7
+ 3308 0cd0 CB       		.byte	-53
+ 3309 0cd1 FF       		.byte	-1
+ 3310 0cd2 CC       		.byte	-52
+ 3311 0cd3 40       		.byte	64
+ 3312 0cd4 CD       		.byte	-51
+ 3313 0cd5 20       		.byte	32
+ 3314 0cd6 CE       		.byte	-50
+ 3315 0cd7 F0       		.byte	-16
+ 3316 0cd8 CF       		.byte	-49
+ 3317 0cd9 05       		.byte	5
+ 3318 0cda D0       		.byte	-48
+ 3319 0cdb 08       		.byte	8
+ 3320 0cdc D4       		.byte	-44
+ 3321 0cdd 18       		.byte	24
+ 3322 0cde D6       		.byte	-42
+ 3323 0cdf 04       		.byte	4
+ 3324 0ce0 D8       		.byte	-40
+ 3325 0ce1 04       		.byte	4
+ 3326 0ce2 DA       		.byte	-38
+ 3327 0ce3 04       		.byte	4
+ 3328 0ce4 DB       		.byte	-37
+ 3329 0ce5 04       		.byte	4
+ 3330 0ce6 DF       		.byte	-33
+ 3331 0ce7 01       		.byte	1
+ 3332 0ce8 E0       		.byte	-32
+ 3333 0ce9 40       		.byte	64
+ 3334 0cea E1       		.byte	-31
+ 3335 0ceb A8       		.byte	-88
+ 3336 0cec E2       		.byte	-30
+ 3337 0ced 40       		.byte	64
+ 3338 0cee E3       		.byte	-29
+ 3339 0cef 20       		.byte	32
+ 3340 0cf0 00       		.byte	0
+ 3341 0cf1 84       		.byte	-124
+ 3342 0cf2 03       		.byte	3
+ 3343 0cf3 40       		.byte	64
+ 3344 0cf4 06       		.byte	6
+ 3345 0cf5 20       		.byte	32
+ 3346 0cf6 07       		.byte	7
+ 3347 0cf7 0A       		.byte	10
+ 3348 0cf8 08       		.byte	8
+ 3349 0cf9 40       		.byte	64
+ 3350 0cfa 0A       		.byte	10
+ 3351 0cfb 68       		.byte	104
+ 3352 0cfc 0D       		.byte	13
+ 3353 0cfd 01       		.byte	1
+ 3354 0cfe 0E       		.byte	14
+ 3355 0cff 24       		.byte	36
+ 3356 0d00 10       		.byte	16
+ 3357 0d01 A0       		.byte	-96
+ 3358 0d02 11       		.byte	17
+ 3359 0d03 40       		.byte	64
+ 3360 0d04 13       		.byte	19
+ 3361 0d05 10       		.byte	16
+ 3362 0d06 14       		.byte	20
+ 3363 0d07 20       		.byte	32
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 60
+
+
+ 3364 0d08 16       		.byte	22
+ 3365 0d09 08       		.byte	8
+ 3366 0d0a 18       		.byte	24
+ 3367 0d0b 04       		.byte	4
+ 3368 0d0c 19       		.byte	25
+ 3369 0d0d 12       		.byte	18
+ 3370 0d0e 1A       		.byte	26
+ 3371 0d0f 20       		.byte	32
+ 3372 0d10 1B       		.byte	27
+ 3373 0d11 48       		.byte	72
+ 3374 0d12 1D       		.byte	29
+ 3375 0d13 80       		.byte	-128
+ 3376 0d14 1E       		.byte	30
+ 3377 0d15 04       		.byte	4
+ 3378 0d16 1F       		.byte	31
+ 3379 0d17 04       		.byte	4
+ 3380 0d18 22       		.byte	34
+ 3381 0d19 61       		.byte	97
+ 3382 0d1a 23       		.byte	35
+ 3383 0d1b 20       		.byte	32
+ 3384 0d1c 29       		.byte	41
+ 3385 0d1d 14       		.byte	20
+ 3386 0d1e 2A       		.byte	42
+ 3387 0d1f 02       		.byte	2
+ 3388 0d20 30       		.byte	48
+ 3389 0d21 40       		.byte	64
+ 3390 0d22 32       		.byte	50
+ 3391 0d23 60       		.byte	96
+ 3392 0d24 33       		.byte	51
+ 3393 0d25 09       		.byte	9
+ 3394 0d26 38       		.byte	56
+ 3395 0d27 68       		.byte	104
+ 3396 0d28 39       		.byte	57
+ 3397 0d29 40       		.byte	64
+ 3398 0d2a 45       		.byte	69
+ 3399 0d2b 80       		.byte	-128
+ 3400 0d2c 54       		.byte	84
+ 3401 0d2d 04       		.byte	4
+ 3402 0d2e 56       		.byte	86
+ 3403 0d2f 20       		.byte	32
+ 3404 0d30 57       		.byte	87
+ 3405 0d31 10       		.byte	16
+ 3406 0d32 5B       		.byte	91
+ 3407 0d33 20       		.byte	32
+ 3408 0d34 5D       		.byte	93
+ 3409 0d35 02       		.byte	2
+ 3410 0d36 67       		.byte	103
+ 3411 0d37 45       		.byte	69
+ 3412 0d38 68       		.byte	104
+ 3413 0d39 02       		.byte	2
+ 3414 0d3a 69       		.byte	105
+ 3415 0d3b 14       		.byte	20
+ 3416 0d3c 70       		.byte	112
+ 3417 0d3d B4       		.byte	-76
+ 3418 0d3e 72       		.byte	114
+ 3419 0d3f 02       		.byte	2
+ 3420 0d40 73       		.byte	115
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 61
+
+
+ 3421 0d41 10       		.byte	16
+ 3422 0d42 81       		.byte	-127
+ 3423 0d43 04       		.byte	4
+ 3424 0d44 83       		.byte	-125
+ 3425 0d45 40       		.byte	64
+ 3426 0d46 87       		.byte	-121
+ 3427 0d47 40       		.byte	64
+ 3428 0d48 88       		.byte	-120
+ 3429 0d49 44       		.byte	68
+ 3430 0d4a 8B       		.byte	-117
+ 3431 0d4b 07       		.byte	7
+ 3432 0d4c 8F       		.byte	-113
+ 3433 0d4d 10       		.byte	16
+ 3434 0d4e 90       		.byte	-112
+ 3435 0d4f 40       		.byte	64
+ 3436 0d50 91       		.byte	-111
+ 3437 0d51 02       		.byte	2
+ 3438 0d52 92       		.byte	-110
+ 3439 0d53 48       		.byte	72
+ 3440 0d54 93       		.byte	-109
+ 3441 0d55 05       		.byte	5
+ 3442 0d56 95       		.byte	-107
+ 3443 0d57 14       		.byte	20
+ 3444 0d58 96       		.byte	-106
+ 3445 0d59 02       		.byte	2
+ 3446 0d5a 98       		.byte	-104
+ 3447 0d5b 20       		.byte	32
+ 3448 0d5c 99       		.byte	-103
+ 3449 0d5d 04       		.byte	4
+ 3450 0d5e 9A       		.byte	-102
+ 3451 0d5f 08       		.byte	8
+ 3452 0d60 9B       		.byte	-101
+ 3453 0d61 08       		.byte	8
+ 3454 0d62 9D       		.byte	-99
+ 3455 0d63 10       		.byte	16
+ 3456 0d64 A2       		.byte	-94
+ 3457 0d65 10       		.byte	16
+ 3458 0d66 A4       		.byte	-92
+ 3459 0d67 42       		.byte	66
+ 3460 0d68 A7       		.byte	-89
+ 3461 0d69 40       		.byte	64
+ 3462 0d6a B0       		.byte	-80
+ 3463 0d6b 08       		.byte	8
+ 3464 0d6c B2       		.byte	-78
+ 3465 0d6d 39       		.byte	57
+ 3466 0d6e B3       		.byte	-77
+ 3467 0d6f 01       		.byte	1
+ 3468 0d70 B4       		.byte	-76
+ 3469 0d71 20       		.byte	32
+ 3470 0d72 C0       		.byte	-64
+ 3471 0d73 ED       		.byte	-19
+ 3472 0d74 C2       		.byte	-62
+ 3473 0d75 7F       		.byte	127
+ 3474 0d76 C4       		.byte	-60
+ 3475 0d77 6F       		.byte	111
+ 3476 0d78 CA       		.byte	-54
+ 3477 0d79 07       		.byte	7
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 62
+
+
+ 3478 0d7a CC       		.byte	-52
+ 3479 0d7b 0F       		.byte	15
+ 3480 0d7c CE       		.byte	-50
+ 3481 0d7d 0E       		.byte	14
+ 3482 0d7e D0       		.byte	-48
+ 3483 0d7f 10       		.byte	16
+ 3484 0d80 D6       		.byte	-42
+ 3485 0d81 84       		.byte	-124
+ 3486 0d82 D8       		.byte	-40
+ 3487 0d83 B0       		.byte	-80
+ 3488 0d84 E2       		.byte	-30
+ 3489 0d85 30       		.byte	48
+ 3490 0d86 E8       		.byte	-24
+ 3491 0d87 E0       		.byte	-32
+ 3492 0d88 33       		.byte	51
+ 3493 0d89 88       		.byte	-120
+ 3494 0d8a 36       		.byte	54
+ 3495 0d8b 20       		.byte	32
+ 3496 0d8c 37       		.byte	55
+ 3497 0d8d 04       		.byte	4
+ 3498 0d8e CC       		.byte	-52
+ 3499 0d8f F0       		.byte	-16
+ 3500 0d90 83       		.byte	-125
+ 3501 0d91 04       		.byte	4
+ 3502 0d92 9F       		.byte	-97
+ 3503 0d93 04       		.byte	4
+ 3504 0d94 A6       		.byte	-90
+ 3505 0d95 20       		.byte	32
+ 3506 0d96 A7       		.byte	-89
+ 3507 0d97 88       		.byte	-120
+ 3508 0d98 E2       		.byte	-30
+ 3509 0d99 80       		.byte	-128
+ 3510 0d9a A6       		.byte	-90
+ 3511 0d9b 20       		.byte	32
+ 3512 0d9c A7       		.byte	-89
+ 3513 0d9d 88       		.byte	-120
+ 3514 0d9e 87       		.byte	-121
+ 3515 0d9f 08       		.byte	8
+ 3516 0da0 A6       		.byte	-90
+ 3517 0da1 20       		.byte	32
+ 3518 0da2 A7       		.byte	-89
+ 3519 0da3 88       		.byte	-120
+ 3520 0da4 E6       		.byte	-26
+ 3521 0da5 40       		.byte	64
+ 3522 0da6 06       		.byte	6
+ 3523 0da7 40       		.byte	64
+ 3524 0da8 08       		.byte	8
+ 3525 0da9 10       		.byte	16
+ 3526 0daa 56       		.byte	86
+ 3527 0dab 10       		.byte	16
+ 3528 0dac 5E       		.byte	94
+ 3529 0dad 01       		.byte	1
+ 3530 0dae 86       		.byte	-122
+ 3531 0daf 10       		.byte	16
+ 3532 0db0 C0       		.byte	-64
+ 3533 0db1 04       		.byte	4
+ 3534 0db2 C2       		.byte	-62
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 63
+
+
+ 3535 0db3 02       		.byte	2
+ 3536 0db4 D4       		.byte	-44
+ 3537 0db5 02       		.byte	2
+ 3538 0db6 D6       		.byte	-42
+ 3539 0db7 01       		.byte	1
+ 3540 0db8 00       		.byte	0
+ 3541 0db9 80       		.byte	-128
+ 3542 0dba 53       		.byte	83
+ 3543 0dbb 04       		.byte	4
+ 3544 0dbc 86       		.byte	-122
+ 3545 0dbd 01       		.byte	1
+ 3546 0dbe 96       		.byte	-106
+ 3547 0dbf 01       		.byte	1
+ 3548 0dc0 B0       		.byte	-80
+ 3549 0dc1 10       		.byte	16
+ 3550 0dc2 B2       		.byte	-78
+ 3551 0dc3 40       		.byte	64
+ 3552 0dc4 C0       		.byte	-64
+ 3553 0dc5 02       		.byte	2
+ 3554 0dc6 D4       		.byte	-44
+ 3555 0dc7 04       		.byte	4
+ 3556 0dc8 EA       		.byte	-22
+ 3557 0dc9 04       		.byte	4
+ 3558 0dca EE       		.byte	-18
+ 3559 0dcb 01       		.byte	1
+ 3560 0dcc 97       		.byte	-105
+ 3561 0dcd 08       		.byte	8
+ 3562 0dce B0       		.byte	-80
+ 3563 0dcf 40       		.byte	64
+ 3564 0dd0 EE       		.byte	-18
+ 3565 0dd1 04       		.byte	4
+ 3566 0dd2 8C       		.byte	-116
+ 3567 0dd3 01       		.byte	1
+ 3568 0dd4 97       		.byte	-105
+ 3569 0dd5 08       		.byte	8
+ 3570 0dd6 E4       		.byte	-28
+ 3571 0dd7 08       		.byte	8
+ 3572 0dd8 87       		.byte	-121
+ 3573 0dd9 80       		.byte	-128
+ 3574 0dda A6       		.byte	-90
+ 3575 0ddb 20       		.byte	32
+ 3576 0ddc A7       		.byte	-89
+ 3577 0ddd 80       		.byte	-128
+ 3578 0dde E6       		.byte	-26
+ 3579 0ddf 10       		.byte	16
+ 3580 0de0 86       		.byte	-122
+ 3581 0de1 20       		.byte	32
+ 3582 0de2 A6       		.byte	-90
+ 3583 0de3 20       		.byte	32
+ 3584 0de4 E6       		.byte	-26
+ 3585 0de5 40       		.byte	64
+ 3586 0de6 09       		.byte	9
+ 3587 0de7 40       		.byte	64
+ 3588 0de8 60       		.byte	96
+ 3589 0de9 01       		.byte	1
+ 3590 0dea 8B       		.byte	-117
+ 3591 0deb 04       		.byte	4
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 64
+
+
+ 3592 0dec 90       		.byte	-112
+ 3593 0ded 01       		.byte	1
+ 3594 0dee 97       		.byte	-105
+ 3595 0def 08       		.byte	8
+ 3596 0df0 C2       		.byte	-62
+ 3597 0df1 02       		.byte	2
+ 3598 0df2 D6       		.byte	-42
+ 3599 0df3 02       		.byte	2
+ 3600 0df4 E0       		.byte	-32
+ 3601 0df5 01       		.byte	1
+ 3602 0df6 08       		.byte	8
+ 3603 0df7 01       		.byte	1
+ 3604 0df8 63       		.byte	99
+ 3605 0df9 02       		.byte	2
+ 3606 0dfa 88       		.byte	-120
+ 3607 0dfb 01       		.byte	1
+ 3608 0dfc 8B       		.byte	-117
+ 3609 0dfd 01       		.byte	1
+ 3610 0dfe B1       		.byte	-79
+ 3611 0dff 40       		.byte	64
+ 3612 0e00 C2       		.byte	-62
+ 3613 0e01 08       		.byte	8
+ 3614 0e02 D6       		.byte	-42
+ 3615 0e03 02       		.byte	2
+ 3616 0e04 E0       		.byte	-32
+ 3617 0e05 01       		.byte	1
+ 3618 0e06 E6       		.byte	-26
+ 3619 0e07 04       		.byte	4
+ 3620 0e08 EE       		.byte	-18
+ 3621 0e09 04       		.byte	4
+ 3622 0e0a 00       		.byte	0
+ 3623 0e0b 1F       		.byte	31
+ 3624 0e0c 08       		.byte	8
+ 3625 0e0d 1C       		.byte	28
+ 3626 0e0e 0A       		.byte	10
+ 3627 0e0f 1F       		.byte	31
+ 3628 0e10 0C       		.byte	12
+ 3629 0e11 16       		.byte	22
+ 3630 0e12 0E       		.byte	14
+ 3631 0e13 1C       		.byte	28
+ 3632 0e14 10       		.byte	16
+ 3633 0e15 13       		.byte	19
+ 3634 0e16 1A       		.byte	26
+ 3635 0e17 11       		.byte	17
+ 3636 0e18 1C       		.byte	28
+ 3637 0e19 13       		.byte	19
+ 3638 0e1a 00       		.byte	0
+ 3639 0e1b FF       		.byte	-1
+ 3640 0e1c 04       		.byte	4
+ 3641 0e1d 08       		.byte	8
+ 3642 0e1e 00       		.byte	0
+ 3643 0e1f 00       		.byte	0
+ 3644 0e20 7F       		.byte	127
+ 3645 0e21 0C       		.byte	12
+ 3646 0e22 00       		.byte	0
+ 3647 0e23 00       		.byte	0
+ 3648 0e24 00       		.byte	0
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 65
+
+
+ 3649 0e25 04       		.byte	4
+ 3650 0e26 03       		.byte	3
+ 3651 0e27 00       		.byte	0
+ 3652 0e28 00       		.byte	0
+ 3653 0e29 41       		.byte	65
+ 3654 0e2a 04       		.byte	4
+ 3655 0e2b 00       		.byte	0
+ 3656 0e2c 67       		.byte	103
+ 3657 0e2d 0F       		.byte	15
+ 3658 0e2e 18       		.byte	24
+ 3659 0e2f F0       		.byte	-16
+ 3660 0e30 00       		.byte	0
+ 3661 0e31 F3       		.byte	-13
+ 3662 0e32 00       		.byte	0
+ 3663 0e33 0C       		.byte	12
+ 3664 0e34 3C       		.byte	60
+ 3665 0e35 C3       		.byte	-61
+ 3666 0e36 41       		.byte	65
+ 3667 0e37 00       		.byte	0
+ 3668 0e38 3C       		.byte	60
+ 3669 0e39 1C       		.byte	28
+ 3670 0e3a 42       		.byte	66
+ 3671 0e3b E3       		.byte	-29
+ 3672 0e3c 10       		.byte	16
+ 3673 0e3d 82       		.byte	-126
+ 3674 0e3e 00       		.byte	0
+ 3675 0e3f 00       		.byte	0
+ 3676 0e40 08       		.byte	8
+ 3677 0e41 FF       		.byte	-1
+ 3678 0e42 00       		.byte	0
+ 3679 0e43 00       		.byte	0
+ 3680 0e44 18       		.byte	24
+ 3681 0e45 00       		.byte	0
+ 3682 0e46 00       		.byte	0
+ 3683 0e47 F3       		.byte	-13
+ 3684 0e48 00       		.byte	0
+ 3685 0e49 00       		.byte	0
+ 3686 0e4a 00       		.byte	0
+ 3687 0e4b 00       		.byte	0
+ 3688 0e4c 20       		.byte	32
+ 3689 0e4d C0       		.byte	-64
+ 3690 0e4e 00       		.byte	0
+ 3691 0e4f 0F       		.byte	15
+ 3692 0e50 40       		.byte	64
+ 3693 0e51 2C       		.byte	44
+ 3694 0e52 1F       		.byte	31
+ 3695 0e53 1C       		.byte	28
+ 3696 0e54 20       		.byte	32
+ 3697 0e55 00       		.byte	0
+ 3698 0e56 80       		.byte	-128
+ 3699 0e57 28       		.byte	40
+ 3700 0e58 00       		.byte	0
+ 3701 0e59 00       		.byte	0
+ 3702 0e5a 01       		.byte	1
+ 3703 0e5b 00       		.byte	0
+ 3704 0e5c 63       		.byte	99
+ 3705 0e5d 02       		.byte	2
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 66
+
+
+ 3706 0e5e 05       		.byte	5
+ 3707 0e5f 00       		.byte	0
+ 3708 0e60 01       		.byte	1
+ 3709 0e61 00       		.byte	0
+ 3710 0e62 E0       		.byte	-32
+ 3711 0e63 0C       		.byte	12
+ 3712 0e64 18       		.byte	24
+ 3713 0e65 FF       		.byte	-1
+ 3714 0e66 FF       		.byte	-1
+ 3715 0e67 FF       		.byte	-1
+ 3716 0e68 62       		.byte	98
+ 3717 0e69 A0       		.byte	-96
+ 3718 0e6a F0       		.byte	-16
+ 3719 0e6b 41       		.byte	65
+ 3720 0e6c 0C       		.byte	12
+ 3721 0e6d 00       		.byte	0
+ 3722 0e6e 00       		.byte	0
+ 3723 0e6f 00       		.byte	0
+ 3724 0e70 00       		.byte	0
+ 3725 0e71 00       		.byte	0
+ 3726 0e72 02       		.byte	2
+ 3727 0e73 13       		.byte	19
+ 3728 0e74 04       		.byte	4
+ 3729 0e75 04       		.byte	4
+ 3730 0e76 04       		.byte	4
+ 3731 0e77 04       		.byte	4
+ 3732 0e78 33       		.byte	51
+ 3733 0e79 33       		.byte	51
+ 3734 0e7a 00       		.byte	0
+ 3735 0e7b 01       		.byte	1
+ 3736 0e7c 00       		.byte	0
+ 3737 0e7d 00       		.byte	0
+ 3738 0e7e 00       		.byte	0
+ 3739 0e7f 00       		.byte	0
+ 3740 0e80 00       		.byte	0
+ 3741 0e81 00       		.byte	0
+ 3742 0e82 40       		.byte	64
+ 3743 0e83 02       		.byte	2
+ 3744 0e84 00       		.byte	0
+ 3745 0e85 10       		.byte	16
+ 3746 0e86 30       		.byte	48
+ 3747 0e87 10       		.byte	16
+ 3748 0e88 00       		.byte	0
+ 3749 0e89 10       		.byte	16
+ 3750 0e8a 10       		.byte	16
+ 3751 0e8b 12       		.byte	18
+ 3752 0e8c 00       		.byte	0
+ 3753 0e8d 00       		.byte	0
+ 3754 0e8e 00       		.byte	0
+ 3755 0e8f 00       		.byte	0
+ 3756 0e90 00       		.byte	0
+ 3757 0e91 00       		.byte	0
+ 3758 0e92 00       		.byte	0
+ 3759 0e93 00       		.byte	0
+ 3760 0e94 00       		.byte	0
+ 3761 0e95 00       		.byte	0
+ 3762 0e96 00       		.byte	0
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 67
+
+
+ 3763 0e97 00       		.byte	0
+ 3764 0e98 00       		.byte	0
+ 3765 0e99 00       		.byte	0
+ 3766 0e9a 00       		.byte	0
+ 3767 0e9b 00       		.byte	0
+ 3768 0e9c 80       		.byte	-128
+ 3769 0e9d 00       		.byte	0
+ 3770 0e9e 40       		.byte	64
+ 3771 0e9f 80       		.byte	-128
+ 3772 0ea0 80       		.byte	-128
+ 3773 0ea1 00       		.byte	0
+ 3774 0ea2 80       		.byte	-128
+ 3775 0ea3 00       		.byte	0
+ 3776 0ea4 00       		.byte	0
+ 3777 0ea5 00       		.byte	0
+ 3778 0ea6 00       		.byte	0
+ 3779 0ea7 00       		.byte	0
+ 3780 0ea8 02       		.byte	2
+ 3781 0ea9 00       		.byte	0
+ 3782 0eaa 04       		.byte	4
+ 3783 0eab 02       		.byte	2
+ 3784 0eac 02       		.byte	2
+ 3785 0ead 00       		.byte	0
+ 3786 0eae 02       		.byte	2
+ 3787 0eaf 00       		.byte	0
+ 3788 0eb0 00       		.byte	0
+ 3789 0eb1 00       		.byte	0
+ 3790 0eb2 00       		.byte	0
+ 3791 0eb3 00       		.byte	0
+ 3792 0eb4 20       		.byte	32
+ 3793 0eb5 00       		.byte	0
+ 3794 0eb6 10       		.byte	16
+ 3795 0eb7 20       		.byte	32
+ 3796 0eb8 20       		.byte	32
+ 3797 0eb9 00       		.byte	0
+ 3798 0eba 20       		.byte	32
+ 3799 0ebb 00       		.byte	0
+ 3800 0ebc 00       		.byte	0
+ 3801 0ebd 00       		.byte	0
+ 3802 0ebe 00       		.byte	0
+ 3803 0ebf 00       		.byte	0
+ 3804 0ec0 81       		.byte	-127
+ 3805 0ec1 00       		.byte	0
+ 3806 0ec2 42       		.byte	66
+ 3807 0ec3 81       		.byte	-127
+ 3808 0ec4 81       		.byte	-127
+ 3809 0ec5 00       		.byte	0
+ 3810 0ec6 81       		.byte	-127
+ 3811 0ec7 00       		.byte	0
+ 3812 0ec8 00       		.byte	0
+ 3813 0ec9 00       		.byte	0
+ 3814 0eca 00       		.byte	0
+ 3815 0ecb 00       		.byte	0
+ 3816              		.section	.cywolatch,"a",%progbits
+ 3817              		.align	2
+ 3818              		.type	cy_meta_wonvl, %object
+ 3819              		.size	cy_meta_wonvl, 4
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 68
+
+
+ 3820              	cy_meta_wonvl:
+ 3821 0000 BC       		.byte	-68
+ 3822 0001 90       		.byte	-112
+ 3823 0002 AC       		.byte	-84
+ 3824 0003 AF       		.byte	-81
+ 3825              		.section	.cycustnvl,"a",%progbits
+ 3826              		.align	2
+ 3827              		.type	cy_meta_custnvl, %object
+ 3828              		.size	cy_meta_custnvl, 4
+ 3829              	cy_meta_custnvl:
+ 3830 0000 00       		.byte	0
+ 3831 0001 00       		.byte	0
+ 3832 0002 40       		.byte	64
+ 3833 0003 05       		.byte	5
+ 3834              		.section	.cymeta,"a",%progbits
+ 3835              		.align	2
+ 3836              		.type	cy_metadata, %object
+ 3837              		.size	cy_metadata, 12
+ 3838              	cy_metadata:
+ 3839 0000 00       		.byte	0
+ 3840 0001 01       		.byte	1
+ 3841 0002 2E       		.byte	46
+ 3842 0003 12       		.byte	18
+ 3843 0004 30       		.byte	48
+ 3844 0005 69       		.byte	105
+ 3845 0006 00       		.byte	0
+ 3846 0007 01       		.byte	1
+ 3847 0008 00       		.byte	0
+ 3848 0009 00       		.byte	0
+ 3849 000a 00       		.byte	0
+ 3850 000b 00       		.byte	0
+ 3851              		.section	.cyflashprotect,"a",%progbits
+ 3852              		.align	2
+ 3853              		.type	cy_meta_flashprotect, %object
+ 3854              		.size	cy_meta_flashprotect, 256
+ 3855              	cy_meta_flashprotect:
+ 3856 0000 00000000 		.space	256
+ 3856      00000000 
+ 3856      00000000 
+ 3856      00000000 
+ 3856      00000000 
+ 3857              		.text
+ 3858              	.Letext0:
+ 3859              		.file 1 ".\\Generated_Source\\PSoC5\\cymetadata.c"
+ 3860              		.file 2 ".\\Generated_Source\\PSoC5\\cytypes.h"
+ 3861              		.section	.debug_info,"",%progbits
+ 3862              	.Ldebug_info0:
+ 3863 0000 3B010000 		.4byte	0x13b
+ 3864 0004 0400     		.2byte	0x4
+ 3865 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 3866 000a 04       		.byte	0x4
+ 3867 000b 01       		.uleb128 0x1
+ 3868 000c DA000000 		.4byte	.LASF18
+ 3869 0010 01       		.byte	0x1
+ 3870 0011 46000000 		.4byte	.LASF19
+ 3871 0015 00000000 		.4byte	.LASF20
+ 3872 0019 00000000 		.4byte	.Ldebug_line0
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 69
+
+
+ 3873 001d 02       		.uleb128 0x2
+ 3874 001e 01       		.byte	0x1
+ 3875 001f 06       		.byte	0x6
+ 3876 0020 E4010000 		.4byte	.LASF0
+ 3877 0024 02       		.uleb128 0x2
+ 3878 0025 01       		.byte	0x1
+ 3879 0026 08       		.byte	0x8
+ 3880 0027 7E000000 		.4byte	.LASF1
+ 3881 002b 02       		.uleb128 0x2
+ 3882 002c 02       		.byte	0x2
+ 3883 002d 05       		.byte	0x5
+ 3884 002e CB010000 		.4byte	.LASF2
+ 3885 0032 02       		.uleb128 0x2
+ 3886 0033 02       		.byte	0x2
+ 3887 0034 07       		.byte	0x7
+ 3888 0035 9E000000 		.4byte	.LASF3
+ 3889 0039 02       		.uleb128 0x2
+ 3890 003a 04       		.byte	0x4
+ 3891 003b 05       		.byte	0x5
+ 3892 003c DB010000 		.4byte	.LASF4
+ 3893 0040 02       		.uleb128 0x2
+ 3894 0041 04       		.byte	0x4
+ 3895 0042 07       		.byte	0x7
+ 3896 0043 8C000000 		.4byte	.LASF5
+ 3897 0047 02       		.uleb128 0x2
+ 3898 0048 08       		.byte	0x8
+ 3899 0049 05       		.byte	0x5
+ 3900 004a B8010000 		.4byte	.LASF6
+ 3901 004e 02       		.uleb128 0x2
+ 3902 004f 08       		.byte	0x8
+ 3903 0050 07       		.byte	0x7
+ 3904 0051 75010000 		.4byte	.LASF7
+ 3905 0055 03       		.uleb128 0x3
+ 3906 0056 04       		.byte	0x4
+ 3907 0057 05       		.byte	0x5
+ 3908 0058 696E7400 		.ascii	"int\000"
+ 3909 005c 02       		.uleb128 0x2
+ 3910 005d 04       		.byte	0x4
+ 3911 005e 07       		.byte	0x7
+ 3912 005f 68010000 		.4byte	.LASF8
+ 3913 0063 04       		.uleb128 0x4
+ 3914 0064 D5010000 		.4byte	.LASF21
+ 3915 0068 02       		.byte	0x2
+ 3916 0069 3801     		.2byte	0x138
+ 3917 006b 24000000 		.4byte	0x24
+ 3918 006f 02       		.uleb128 0x2
+ 3919 0070 04       		.byte	0x4
+ 3920 0071 04       		.byte	0x4
+ 3921 0072 78000000 		.4byte	.LASF9
+ 3922 0076 02       		.uleb128 0x2
+ 3923 0077 08       		.byte	0x8
+ 3924 0078 04       		.byte	0x4
+ 3925 0079 B1000000 		.4byte	.LASF10
+ 3926 007d 02       		.uleb128 0x2
+ 3927 007e 01       		.byte	0x1
+ 3928 007f 08       		.byte	0x8
+ 3929 0080 C6010000 		.4byte	.LASF11
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 70
+
+
+ 3930 0084 05       		.uleb128 0x5
+ 3931 0085 63000000 		.4byte	0x63
+ 3932 0089 95000000 		.4byte	0x95
+ 3933 008d 06       		.uleb128 0x6
+ 3934 008e 95000000 		.4byte	0x95
+ 3935 0092 CB0E     		.2byte	0xecb
+ 3936 0094 00       		.byte	0
+ 3937 0095 02       		.uleb128 0x2
+ 3938 0096 04       		.byte	0x4
+ 3939 0097 07       		.byte	0x7
+ 3940 0098 AF010000 		.4byte	.LASF12
+ 3941 009c 07       		.uleb128 0x7
+ 3942 009d C8000000 		.4byte	.LASF13
+ 3943 00a1 01       		.byte	0x1
+ 3944 00a2 1F       		.byte	0x1f
+ 3945 00a3 AD000000 		.4byte	0xad
+ 3946 00a7 05       		.uleb128 0x5
+ 3947 00a8 03       		.byte	0x3
+ 3948 00a9 00000000 		.4byte	cy_meta_configecc
+ 3949 00ad 08       		.uleb128 0x8
+ 3950 00ae 84000000 		.4byte	0x84
+ 3951 00b2 05       		.uleb128 0x5
+ 3952 00b3 63000000 		.4byte	0x63
+ 3953 00b7 C2000000 		.4byte	0xc2
+ 3954 00bb 09       		.uleb128 0x9
+ 3955 00bc 95000000 		.4byte	0x95
+ 3956 00c0 03       		.byte	0x3
+ 3957 00c1 00       		.byte	0
+ 3958 00c2 0A       		.uleb128 0xa
+ 3959 00c3 B8000000 		.4byte	.LASF14
+ 3960 00c7 01       		.byte	0x1
+ 3961 00c8 0602     		.2byte	0x206
+ 3962 00ca D4000000 		.4byte	0xd4
+ 3963 00ce 05       		.uleb128 0x5
+ 3964 00cf 03       		.byte	0x3
+ 3965 00d0 00000000 		.4byte	cy_meta_custnvl
+ 3966 00d4 08       		.uleb128 0x8
+ 3967 00d5 B2000000 		.4byte	0xb2
+ 3968 00d9 0A       		.uleb128 0xa
+ 3969 00da A1010000 		.4byte	.LASF15
+ 3970 00de 01       		.byte	0x1
+ 3971 00df 1402     		.2byte	0x214
+ 3972 00e1 EB000000 		.4byte	0xeb
+ 3973 00e5 05       		.uleb128 0x5
+ 3974 00e6 03       		.byte	0x3
+ 3975 00e7 00000000 		.4byte	cy_meta_wonvl
+ 3976 00eb 08       		.uleb128 0x8
+ 3977 00ec B2000000 		.4byte	0xb2
+ 3978 00f0 05       		.uleb128 0x5
+ 3979 00f1 63000000 		.4byte	0x63
+ 3980 00f5 00010000 		.4byte	0x100
+ 3981 00f9 09       		.uleb128 0x9
+ 3982 00fa 95000000 		.4byte	0x95
+ 3983 00fe FF       		.byte	0xff
+ 3984 00ff 00       		.byte	0
+ 3985 0100 0A       		.uleb128 0xa
+ 3986 0101 8C010000 		.4byte	.LASF16
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 71
+
+
+ 3987 0105 01       		.byte	0x1
+ 3988 0106 2202     		.2byte	0x222
+ 3989 0108 12010000 		.4byte	0x112
+ 3990 010c 05       		.uleb128 0x5
+ 3991 010d 03       		.byte	0x3
+ 3992 010e 00000000 		.4byte	cy_meta_flashprotect
+ 3993 0112 08       		.uleb128 0x8
+ 3994 0113 F0000000 		.4byte	0xf0
+ 3995 0117 05       		.uleb128 0x5
+ 3996 0118 63000000 		.4byte	0x63
+ 3997 011c 27010000 		.4byte	0x127
+ 3998 0120 09       		.uleb128 0x9
+ 3999 0121 95000000 		.4byte	0x95
+ 4000 0125 0B       		.byte	0xb
+ 4001 0126 00       		.byte	0
+ 4002 0127 0A       		.uleb128 0xa
+ 4003 0128 6C000000 		.4byte	.LASF17
+ 4004 012c 01       		.byte	0x1
+ 4005 012d 4F02     		.2byte	0x24f
+ 4006 012f 39010000 		.4byte	0x139
+ 4007 0133 05       		.uleb128 0x5
+ 4008 0134 03       		.byte	0x3
+ 4009 0135 00000000 		.4byte	cy_metadata
+ 4010 0139 08       		.uleb128 0x8
+ 4011 013a 17010000 		.4byte	0x117
+ 4012 013e 00       		.byte	0
+ 4013              		.section	.debug_abbrev,"",%progbits
+ 4014              	.Ldebug_abbrev0:
+ 4015 0000 01       		.uleb128 0x1
+ 4016 0001 11       		.uleb128 0x11
+ 4017 0002 01       		.byte	0x1
+ 4018 0003 25       		.uleb128 0x25
+ 4019 0004 0E       		.uleb128 0xe
+ 4020 0005 13       		.uleb128 0x13
+ 4021 0006 0B       		.uleb128 0xb
+ 4022 0007 03       		.uleb128 0x3
+ 4023 0008 0E       		.uleb128 0xe
+ 4024 0009 1B       		.uleb128 0x1b
+ 4025 000a 0E       		.uleb128 0xe
+ 4026 000b 10       		.uleb128 0x10
+ 4027 000c 17       		.uleb128 0x17
+ 4028 000d 00       		.byte	0
+ 4029 000e 00       		.byte	0
+ 4030 000f 02       		.uleb128 0x2
+ 4031 0010 24       		.uleb128 0x24
+ 4032 0011 00       		.byte	0
+ 4033 0012 0B       		.uleb128 0xb
+ 4034 0013 0B       		.uleb128 0xb
+ 4035 0014 3E       		.uleb128 0x3e
+ 4036 0015 0B       		.uleb128 0xb
+ 4037 0016 03       		.uleb128 0x3
+ 4038 0017 0E       		.uleb128 0xe
+ 4039 0018 00       		.byte	0
+ 4040 0019 00       		.byte	0
+ 4041 001a 03       		.uleb128 0x3
+ 4042 001b 24       		.uleb128 0x24
+ 4043 001c 00       		.byte	0
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 72
+
+
+ 4044 001d 0B       		.uleb128 0xb
+ 4045 001e 0B       		.uleb128 0xb
+ 4046 001f 3E       		.uleb128 0x3e
+ 4047 0020 0B       		.uleb128 0xb
+ 4048 0021 03       		.uleb128 0x3
+ 4049 0022 08       		.uleb128 0x8
+ 4050 0023 00       		.byte	0
+ 4051 0024 00       		.byte	0
+ 4052 0025 04       		.uleb128 0x4
+ 4053 0026 16       		.uleb128 0x16
+ 4054 0027 00       		.byte	0
+ 4055 0028 03       		.uleb128 0x3
+ 4056 0029 0E       		.uleb128 0xe
+ 4057 002a 3A       		.uleb128 0x3a
+ 4058 002b 0B       		.uleb128 0xb
+ 4059 002c 3B       		.uleb128 0x3b
+ 4060 002d 05       		.uleb128 0x5
+ 4061 002e 49       		.uleb128 0x49
+ 4062 002f 13       		.uleb128 0x13
+ 4063 0030 00       		.byte	0
+ 4064 0031 00       		.byte	0
+ 4065 0032 05       		.uleb128 0x5
+ 4066 0033 01       		.uleb128 0x1
+ 4067 0034 01       		.byte	0x1
+ 4068 0035 49       		.uleb128 0x49
+ 4069 0036 13       		.uleb128 0x13
+ 4070 0037 01       		.uleb128 0x1
+ 4071 0038 13       		.uleb128 0x13
+ 4072 0039 00       		.byte	0
+ 4073 003a 00       		.byte	0
+ 4074 003b 06       		.uleb128 0x6
+ 4075 003c 21       		.uleb128 0x21
+ 4076 003d 00       		.byte	0
+ 4077 003e 49       		.uleb128 0x49
+ 4078 003f 13       		.uleb128 0x13
+ 4079 0040 2F       		.uleb128 0x2f
+ 4080 0041 05       		.uleb128 0x5
+ 4081 0042 00       		.byte	0
+ 4082 0043 00       		.byte	0
+ 4083 0044 07       		.uleb128 0x7
+ 4084 0045 34       		.uleb128 0x34
+ 4085 0046 00       		.byte	0
+ 4086 0047 03       		.uleb128 0x3
+ 4087 0048 0E       		.uleb128 0xe
+ 4088 0049 3A       		.uleb128 0x3a
+ 4089 004a 0B       		.uleb128 0xb
+ 4090 004b 3B       		.uleb128 0x3b
+ 4091 004c 0B       		.uleb128 0xb
+ 4092 004d 49       		.uleb128 0x49
+ 4093 004e 13       		.uleb128 0x13
+ 4094 004f 3F       		.uleb128 0x3f
+ 4095 0050 19       		.uleb128 0x19
+ 4096 0051 02       		.uleb128 0x2
+ 4097 0052 18       		.uleb128 0x18
+ 4098 0053 00       		.byte	0
+ 4099 0054 00       		.byte	0
+ 4100 0055 08       		.uleb128 0x8
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 73
+
+
+ 4101 0056 26       		.uleb128 0x26
+ 4102 0057 00       		.byte	0
+ 4103 0058 49       		.uleb128 0x49
+ 4104 0059 13       		.uleb128 0x13
+ 4105 005a 00       		.byte	0
+ 4106 005b 00       		.byte	0
+ 4107 005c 09       		.uleb128 0x9
+ 4108 005d 21       		.uleb128 0x21
+ 4109 005e 00       		.byte	0
+ 4110 005f 49       		.uleb128 0x49
+ 4111 0060 13       		.uleb128 0x13
+ 4112 0061 2F       		.uleb128 0x2f
+ 4113 0062 0B       		.uleb128 0xb
+ 4114 0063 00       		.byte	0
+ 4115 0064 00       		.byte	0
+ 4116 0065 0A       		.uleb128 0xa
+ 4117 0066 34       		.uleb128 0x34
+ 4118 0067 00       		.byte	0
+ 4119 0068 03       		.uleb128 0x3
+ 4120 0069 0E       		.uleb128 0xe
+ 4121 006a 3A       		.uleb128 0x3a
+ 4122 006b 0B       		.uleb128 0xb
+ 4123 006c 3B       		.uleb128 0x3b
+ 4124 006d 05       		.uleb128 0x5
+ 4125 006e 49       		.uleb128 0x49
+ 4126 006f 13       		.uleb128 0x13
+ 4127 0070 3F       		.uleb128 0x3f
+ 4128 0071 19       		.uleb128 0x19
+ 4129 0072 02       		.uleb128 0x2
+ 4130 0073 18       		.uleb128 0x18
+ 4131 0074 00       		.byte	0
+ 4132 0075 00       		.byte	0
+ 4133 0076 00       		.byte	0
+ 4134              		.section	.debug_aranges,"",%progbits
+ 4135 0000 14000000 		.4byte	0x14
+ 4136 0004 0200     		.2byte	0x2
+ 4137 0006 00000000 		.4byte	.Ldebug_info0
+ 4138 000a 04       		.byte	0x4
+ 4139 000b 00       		.byte	0
+ 4140 000c 0000     		.2byte	0
+ 4141 000e 0000     		.2byte	0
+ 4142 0010 00000000 		.4byte	0
+ 4143 0014 00000000 		.4byte	0
+ 4144              		.section	.debug_line,"",%progbits
+ 4145              	.Ldebug_line0:
+ 4146 0000 4F000000 		.section	.debug_str,"MS",%progbits,1
+ 4146      02004900 
+ 4146      00000201 
+ 4146      FB0E0D00 
+ 4146      01010101 
+ 4147              	.LASF20:
+ 4148 0000 433A5C55 		.ascii	"C:\\Users\\Recepcion\\Documents\\GitHub\\NSY-DH\\Wo"
+ 4148      73657273 
+ 4148      5C526563 
+ 4148      65706369 
+ 4148      6F6E5C44 
+ 4149 002d 726B7370 		.ascii	"rkspace01\\Design01.cydsn\000"
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 74
+
+
+ 4149      61636530 
+ 4149      315C4465 
+ 4149      7369676E 
+ 4149      30312E63 
+ 4150              	.LASF19:
+ 4151 0046 2E5C4765 		.ascii	".\\Generated_Source\\PSoC5\\cymetadata.c\000"
+ 4151      6E657261 
+ 4151      7465645F 
+ 4151      536F7572 
+ 4151      63655C50 
+ 4152              	.LASF17:
+ 4153 006c 63795F6D 		.ascii	"cy_metadata\000"
+ 4153      65746164 
+ 4153      61746100 
+ 4154              	.LASF9:
+ 4155 0078 666C6F61 		.ascii	"float\000"
+ 4155      7400
+ 4156              	.LASF1:
+ 4157 007e 756E7369 		.ascii	"unsigned char\000"
+ 4157      676E6564 
+ 4157      20636861 
+ 4157      7200
+ 4158              	.LASF5:
+ 4159 008c 6C6F6E67 		.ascii	"long unsigned int\000"
+ 4159      20756E73 
+ 4159      69676E65 
+ 4159      6420696E 
+ 4159      7400
+ 4160              	.LASF3:
+ 4161 009e 73686F72 		.ascii	"short unsigned int\000"
+ 4161      7420756E 
+ 4161      7369676E 
+ 4161      65642069 
+ 4161      6E7400
+ 4162              	.LASF10:
+ 4163 00b1 646F7562 		.ascii	"double\000"
+ 4163      6C6500
+ 4164              	.LASF14:
+ 4165 00b8 63795F6D 		.ascii	"cy_meta_custnvl\000"
+ 4165      6574615F 
+ 4165      63757374 
+ 4165      6E766C00 
+ 4166              	.LASF13:
+ 4167 00c8 63795F6D 		.ascii	"cy_meta_configecc\000"
+ 4167      6574615F 
+ 4167      636F6E66 
+ 4167      69676563 
+ 4167      6300
+ 4168              	.LASF18:
+ 4169 00da 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 4169      4320342E 
+ 4169      392E3320 
+ 4169      32303135 
+ 4169      30333033 
+ 4170 010d 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 4170      20726576 
+ 4170      6973696F 
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 75
+
+
+ 4170      6E203232 
+ 4170      31323230 
+ 4171 0140 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 4171      66756E63 
+ 4171      74696F6E 
+ 4171      2D736563 
+ 4171      74696F6E 
+ 4172              	.LASF8:
+ 4173 0168 756E7369 		.ascii	"unsigned int\000"
+ 4173      676E6564 
+ 4173      20696E74 
+ 4173      00
+ 4174              	.LASF7:
+ 4175 0175 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 4175      206C6F6E 
+ 4175      6720756E 
+ 4175      7369676E 
+ 4175      65642069 
+ 4176              	.LASF16:
+ 4177 018c 63795F6D 		.ascii	"cy_meta_flashprotect\000"
+ 4177      6574615F 
+ 4177      666C6173 
+ 4177      6870726F 
+ 4177      74656374 
+ 4178              	.LASF15:
+ 4179 01a1 63795F6D 		.ascii	"cy_meta_wonvl\000"
+ 4179      6574615F 
+ 4179      776F6E76 
+ 4179      6C00
+ 4180              	.LASF12:
+ 4181 01af 73697A65 		.ascii	"sizetype\000"
+ 4181      74797065 
+ 4181      00
+ 4182              	.LASF6:
+ 4183 01b8 6C6F6E67 		.ascii	"long long int\000"
+ 4183      206C6F6E 
+ 4183      6720696E 
+ 4183      7400
+ 4184              	.LASF11:
+ 4185 01c6 63686172 		.ascii	"char\000"
+ 4185      00
+ 4186              	.LASF2:
+ 4187 01cb 73686F72 		.ascii	"short int\000"
+ 4187      7420696E 
+ 4187      7400
+ 4188              	.LASF21:
+ 4189 01d5 75696E74 		.ascii	"uint8\000"
+ 4189      3800
+ 4190              	.LASF4:
+ 4191 01db 6C6F6E67 		.ascii	"long int\000"
+ 4191      20696E74 
+ 4191      00
+ 4192              	.LASF0:
+ 4193 01e4 7369676E 		.ascii	"signed char\000"
+ 4193      65642063 
+ 4193      68617200 
+ 4194              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\cctR6zKd.s 			page 76
+
+

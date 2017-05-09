@@ -1,0 +1,3903 @@
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"protocol.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.get_state,"ax",%progbits
+  19              		.align	2
+  20              		.global	get_state
+  21              		.thumb
+  22              		.thumb_func
+  23              		.type	get_state, %function
+  24              	get_state:
+  25              	.LFB63:
+  26              		.file 1 ".\\protocol.c"
+   1:.\protocol.c  **** /*
+   2:.\protocol.c  **** ***************************************************************************************************
+   3:.\protocol.c  **** *                                         MUX ADVANCE CODE
+   4:.\protocol.c  **** *
+   5:.\protocol.c  **** *                             (c) Copyright 2016; Sistemas Insepet LTDA
+   6:.\protocol.c  **** *
+   7:.\protocol.c  **** *               All rights reserved.  Protected by international copyright laws.
+   8:.\protocol.c  **** *               Knowledge of the source code may NOT be used to develop a similar product.
+   9:.\protocol.c  **** *               Please help us continue to provide the Embedded community with the finest
+  10:.\protocol.c  **** *               software available.  Your honesty is greatly appreciated.
+  11:.\protocol.c  **** ***************************************************************************************************
+  12:.\protocol.c  **** */
+  13:.\protocol.c  **** 
+  14:.\protocol.c  **** /*
+  15:.\protocol.c  **** ***************************************************************************************************
+  16:.\protocol.c  **** *
+  17:.\protocol.c  **** *                                             MUX ADVANCE CODE
+  18:.\protocol.c  **** *
+  19:.\protocol.c  **** *                                             CYPRESS PSoC5LP
+  20:.\protocol.c  **** *                                                with the
+  21:.\protocol.c  **** *                                            CY8C5969AXI-LP035
+  22:.\protocol.c  **** *
+  23:.\protocol.c  **** * Filename      : protocol.c
+  24:.\protocol.c  **** * Version       : V1.00
+  25:.\protocol.c  **** * Programmer(s) : 
+  26:.\protocol.c  ****                   
+  27:.\protocol.c  **** ***************************************************************************************************
+  28:.\protocol.c  **** */
+  29:.\protocol.c  **** 
+  30:.\protocol.c  **** 
+  31:.\protocol.c  **** /*
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 2
+
+
+  32:.\protocol.c  **** ***************************************************************************************************
+  33:.\protocol.c  **** *                                             INCLUDE FILES
+  34:.\protocol.c  **** ***************************************************************************************************
+  35:.\protocol.c  **** */
+  36:.\protocol.c  **** #include <device.h>
+  37:.\protocol.c  **** #include <variables.h>
+  38:.\protocol.c  **** uint8_t GetLRC(char8 *_pbuffer);
+  39:.\protocol.c  **** /*
+  40:.\protocol.c  **** ***************************************************************************************************
+  41:.\protocol.c  **** *                                    uint8 get_state(uint8 pos)
+  42:.\protocol.c  **** *
+  43:.\protocol.c  **** * Description : 
+  44:.\protocol.c  **** *               
+  45:.\protocol.c  **** *
+  46:.\protocol.c  **** * Argument(s) : none
+  47:.\protocol.c  **** *
+  48:.\protocol.c  **** * Return(s)   : none
+  49:.\protocol.c  **** *
+  50:.\protocol.c  **** * Caller(s)   : 
+  51:.\protocol.c  **** *
+  52:.\protocol.c  **** * Note(s)     : none.
+  53:.\protocol.c  **** ***************************************************************************************************
+  54:.\protocol.c  **** */
+  55:.\protocol.c  **** 
+  56:.\protocol.c  **** uint8 get_state(uint8 pos){
+  27              		.loc 1 56 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              	.LVL0:
+  32 0000 10B5     		push	{r4, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 4, -8
+  35              		.cfi_offset 14, -4
+  36 0002 0446     		mov	r4, r0
+  57:.\protocol.c  ****     uint8 state;
+  58:.\protocol.c  ****     Pump_ClearRxBuffer();
+  37              		.loc 1 58 0
+  38 0004 FFF7FEFF 		bl	Pump_ClearRxBuffer
+  39              	.LVL1:
+  59:.\protocol.c  ****     Pump_PutChar(pos);
+  40              		.loc 1 59 0
+  41 0008 2046     		mov	r0, r4
+  42 000a FFF7FEFF 		bl	Pump_PutChar
+  43              	.LVL2:
+  60:.\protocol.c  ****     CyDelay(60);
+  44              		.loc 1 60 0
+  45 000e 3C20     		movs	r0, #60
+  46 0010 FFF7FEFF 		bl	CyDelay
+  47              	.LVL3:
+  61:.\protocol.c  ****     if(Pump_GetRxBufferSize()>=1){
+  48              		.loc 1 61 0
+  49 0014 FFF7FEFF 		bl	Pump_GetRxBufferSize
+  50              	.LVL4:
+  51 0018 38B1     		cbz	r0, .L3
+  62:.\protocol.c  ****        state=(Pump_ReadRxData()&0xF0)>>4;
+  52              		.loc 1 62 0
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 3
+
+
+  53 001a FFF7FEFF 		bl	Pump_ReadRxData
+  54              	.LVL5:
+  55 001e C0F30714 		ubfx	r4, r0, #4, #8
+  56              	.LVL6:
+  63:.\protocol.c  ****        Pump_ClearRxBuffer();
+  57              		.loc 1 63 0
+  58 0022 FFF7FEFF 		bl	Pump_ClearRxBuffer
+  59              	.LVL7:
+  64:.\protocol.c  ****        return state;
+  60              		.loc 1 64 0
+  61 0026 2046     		mov	r0, r4
+  62 0028 10BD     		pop	{r4, pc}
+  63              	.LVL8:
+  64              	.L3:
+  65:.\protocol.c  ****     }
+  66:.\protocol.c  ****     else{
+  67:.\protocol.c  ****         return 0;
+  65              		.loc 1 67 0
+  66 002a 0020     		movs	r0, #0
+  68:.\protocol.c  ****     }
+  69:.\protocol.c  **** }
+  67              		.loc 1 69 0
+  68 002c 10BD     		pop	{r4, pc}
+  69              		.cfi_endproc
+  70              	.LFE63:
+  71              		.size	get_state, .-get_state
+  72 002e 00BF     		.section	.text.get_position,"ax",%progbits
+  73              		.align	2
+  74              		.global	get_position
+  75              		.thumb
+  76              		.thumb_func
+  77              		.type	get_position, %function
+  78              	get_position:
+  79              	.LFB64:
+  70:.\protocol.c  **** 
+  71:.\protocol.c  **** /*
+  72:.\protocol.c  **** ***************************************************************************************************
+  73:.\protocol.c  **** *                                         uint8 get_position(void)
+  74:.\protocol.c  **** *
+  75:.\protocol.c  **** * Description : 
+  76:.\protocol.c  **** *               
+  77:.\protocol.c  **** *
+  78:.\protocol.c  **** * Argument(s) : none
+  79:.\protocol.c  **** *
+  80:.\protocol.c  **** * Return(s)   : none
+  81:.\protocol.c  **** *
+  82:.\protocol.c  **** * Caller(s)   : 
+  83:.\protocol.c  **** *
+  84:.\protocol.c  **** * Note(s)     : none.
+  85:.\protocol.c  **** ***************************************************************************************************
+  86:.\protocol.c  **** */
+  87:.\protocol.c  **** uint8 get_position(void){
+  80              		.loc 1 87 0
+  81              		.cfi_startproc
+  82              		@ args = 0, pretend = 0, frame = 0
+  83              		@ frame_needed = 0, uses_anonymous_args = 0
+  84 0000 10B5     		push	{r4, lr}
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 4
+
+
+  85              		.cfi_def_cfa_offset 8
+  86              		.cfi_offset 4, -8
+  87              		.cfi_offset 14, -4
+  88:.\protocol.c  ****     uint8 x;
+  89:.\protocol.c  ****         
+  90:.\protocol.c  ****     side.a.dir=0xff;
+  88              		.loc 1 90 0
+  89 0002 464B     		ldr	r3, .L20
+  90 0004 FF22     		movs	r2, #255
+  91 0006 1A70     		strb	r2, [r3]
+  91:.\protocol.c  ****     side.b.dir=0xff;
+  92              		.loc 1 91 0
+  93 0008 83F80021 		strb	r2, [r3, #256]
+  92:.\protocol.c  ****     side.c.dir=0xff;
+  94              		.loc 1 92 0
+  95 000c 83F80022 		strb	r2, [r3, #512]
+  93:.\protocol.c  ****     side.d.dir=0xff;
+  96              		.loc 1 93 0
+  97 0010 83F80023 		strb	r2, [r3, #768]
+  98              	.LVL9:
+  94:.\protocol.c  ****     for(x=1;x<=16;x++){
+  99              		.loc 1 94 0
+ 100 0014 0124     		movs	r4, #1
+ 101 0016 54E0     		b	.L6
+ 102              	.LVL10:
+ 103              	.L11:
+  95:.\protocol.c  ****         Pump_PutChar(x);
+ 104              		.loc 1 95 0
+ 105 0018 2046     		mov	r0, r4
+ 106 001a FFF7FEFF 		bl	Pump_PutChar
+ 107              	.LVL11:
+  96:.\protocol.c  ****         CyDelay(100);                        
+ 108              		.loc 1 96 0
+ 109 001e 6420     		movs	r0, #100
+ 110 0020 FFF7FEFF 		bl	CyDelay
+ 111              	.LVL12:
+  97:.\protocol.c  ****         if((Pump_GetRxBufferSize()>=1)&&(side.a.dir==0xff)){
+ 112              		.loc 1 97 0
+ 113 0024 FFF7FEFF 		bl	Pump_GetRxBufferSize
+ 114              	.LVL13:
+ 115 0028 38B1     		cbz	r0, .L7
+ 116              		.loc 1 97 0 is_stmt 0 discriminator 1
+ 117 002a 3C4B     		ldr	r3, .L20
+ 118 002c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 119 002e FF2B     		cmp	r3, #255
+ 120 0030 03D1     		bne	.L7
+  98:.\protocol.c  ****            side.a.dir=x;	
+ 121              		.loc 1 98 0 is_stmt 1
+ 122 0032 3A4B     		ldr	r3, .L20
+ 123 0034 1C70     		strb	r4, [r3]
+  99:.\protocol.c  ****            Pump_ClearRxBuffer();
+ 124              		.loc 1 99 0
+ 125 0036 FFF7FEFF 		bl	Pump_ClearRxBuffer
+ 126              	.LVL14:
+ 127              	.L7:
+ 100:.\protocol.c  ****         }
+ 101:.\protocol.c  ****         if((Pump_GetRxBufferSize()>=1)&&(x!=side.a.dir)&&(side.b.dir==0xff)){
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 5
+
+
+ 128              		.loc 1 101 0
+ 129 003a FFF7FEFF 		bl	Pump_GetRxBufferSize
+ 130              	.LVL15:
+ 131 003e 68B1     		cbz	r0, .L8
+ 132              		.loc 1 101 0 is_stmt 0 discriminator 1
+ 133 0040 364B     		ldr	r3, .L20
+ 134 0042 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 135 0044 A342     		cmp	r3, r4
+ 136 0046 09D0     		beq	.L8
+ 137              		.loc 1 101 0 discriminator 2
+ 138 0048 344B     		ldr	r3, .L20
+ 139 004a 93F80031 		ldrb	r3, [r3, #256]	@ zero_extendqisi2
+ 140 004e FF2B     		cmp	r3, #255
+ 141 0050 04D1     		bne	.L8
+ 102:.\protocol.c  ****            side.b.dir=x;
+ 142              		.loc 1 102 0 is_stmt 1
+ 143 0052 324B     		ldr	r3, .L20
+ 144 0054 83F80041 		strb	r4, [r3, #256]
+ 103:.\protocol.c  ****            Pump_ClearRxBuffer();
+ 145              		.loc 1 103 0
+ 146 0058 FFF7FEFF 		bl	Pump_ClearRxBuffer
+ 147              	.LVL16:
+ 148              	.L8:
+ 104:.\protocol.c  ****         }
+ 105:.\protocol.c  ****         if((Pump_GetRxBufferSize()>=1)&&(x!=side.a.dir)&&(x!=side.b.dir)&&(side.c.dir==0xff)){
+ 149              		.loc 1 105 0
+ 150 005c FFF7FEFF 		bl	Pump_GetRxBufferSize
+ 151              	.LVL17:
+ 152 0060 90B1     		cbz	r0, .L9
+ 153              		.loc 1 105 0 is_stmt 0 discriminator 1
+ 154 0062 2E4B     		ldr	r3, .L20
+ 155 0064 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 156 0066 A342     		cmp	r3, r4
+ 157 0068 0ED0     		beq	.L9
+ 158              		.loc 1 105 0 discriminator 2
+ 159 006a 2C4B     		ldr	r3, .L20
+ 160 006c 93F80031 		ldrb	r3, [r3, #256]	@ zero_extendqisi2
+ 161 0070 A342     		cmp	r3, r4
+ 162 0072 09D0     		beq	.L9
+ 163              		.loc 1 105 0 discriminator 3
+ 164 0074 294B     		ldr	r3, .L20
+ 165 0076 93F80032 		ldrb	r3, [r3, #512]	@ zero_extendqisi2
+ 166 007a FF2B     		cmp	r3, #255
+ 167 007c 04D1     		bne	.L9
+ 106:.\protocol.c  ****            side.c.dir=x;
+ 168              		.loc 1 106 0 is_stmt 1
+ 169 007e 274B     		ldr	r3, .L20
+ 170 0080 83F80042 		strb	r4, [r3, #512]
+ 107:.\protocol.c  ****            Pump_ClearRxBuffer();
+ 171              		.loc 1 107 0
+ 172 0084 FFF7FEFF 		bl	Pump_ClearRxBuffer
+ 173              	.LVL18:
+ 174              	.L9:
+ 108:.\protocol.c  ****         }
+ 109:.\protocol.c  ****         if((Pump_GetRxBufferSize()>=1)&&(x!=side.a.dir)&&(x!=side.b.dir)&&(x!=side.c.dir)&&(side.d.
+ 175              		.loc 1 109 0
+ 176 0088 FFF7FEFF 		bl	Pump_GetRxBufferSize
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 6
+
+
+ 177              	.LVL19:
+ 178 008c B8B1     		cbz	r0, .L10
+ 179              		.loc 1 109 0 is_stmt 0 discriminator 1
+ 180 008e 234B     		ldr	r3, .L20
+ 181 0090 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 182 0092 A342     		cmp	r3, r4
+ 183 0094 13D0     		beq	.L10
+ 184              		.loc 1 109 0 discriminator 2
+ 185 0096 214B     		ldr	r3, .L20
+ 186 0098 93F80031 		ldrb	r3, [r3, #256]	@ zero_extendqisi2
+ 187 009c A342     		cmp	r3, r4
+ 188 009e 0ED0     		beq	.L10
+ 189              		.loc 1 109 0 discriminator 3
+ 190 00a0 1E4B     		ldr	r3, .L20
+ 191 00a2 93F80032 		ldrb	r3, [r3, #512]	@ zero_extendqisi2
+ 192 00a6 A342     		cmp	r3, r4
+ 193 00a8 09D0     		beq	.L10
+ 194              		.loc 1 109 0 discriminator 4
+ 195 00aa 1C4B     		ldr	r3, .L20
+ 196 00ac 93F80033 		ldrb	r3, [r3, #768]	@ zero_extendqisi2
+ 197 00b0 FF2B     		cmp	r3, #255
+ 198 00b2 04D1     		bne	.L10
+ 110:.\protocol.c  ****            side.d.dir=x;
+ 199              		.loc 1 110 0 is_stmt 1
+ 200 00b4 194B     		ldr	r3, .L20
+ 201 00b6 83F80043 		strb	r4, [r3, #768]
+ 111:.\protocol.c  ****            Pump_ClearRxBuffer();
+ 202              		.loc 1 111 0
+ 203 00ba FFF7FEFF 		bl	Pump_ClearRxBuffer
+ 204              	.LVL20:
+ 205              	.L10:
+  94:.\protocol.c  ****         Pump_PutChar(x);
+ 206              		.loc 1 94 0 discriminator 2
+ 207 00be 0134     		adds	r4, r4, #1
+ 208              	.LVL21:
+ 209 00c0 E4B2     		uxtb	r4, r4
+ 210              	.LVL22:
+ 211              	.L6:
+  94:.\protocol.c  ****         Pump_PutChar(x);
+ 212              		.loc 1 94 0 is_stmt 0 discriminator 1
+ 213 00c2 102C     		cmp	r4, #16
+ 214 00c4 A8D9     		bls	.L11
+ 112:.\protocol.c  ****         }
+ 113:.\protocol.c  ****                         
+ 114:.\protocol.c  ****     }
+ 115:.\protocol.c  ****     if((side.a.dir!=0xff)&&(side.b.dir!=0xff)&&(side.c.dir!=0xff)&&(side.d.dir!=0xff)){
+ 215              		.loc 1 115 0 is_stmt 1
+ 216 00c6 154B     		ldr	r3, .L20
+ 217 00c8 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 218 00ca FF2B     		cmp	r3, #255
+ 219 00cc 0ED0     		beq	.L12
+ 220              		.loc 1 115 0 is_stmt 0 discriminator 1
+ 221 00ce 134A     		ldr	r2, .L20
+ 222 00d0 92F80021 		ldrb	r2, [r2, #256]	@ zero_extendqisi2
+ 223 00d4 FF2A     		cmp	r2, #255
+ 224 00d6 09D0     		beq	.L12
+ 225              		.loc 1 115 0 discriminator 2
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 7
+
+
+ 226 00d8 104A     		ldr	r2, .L20
+ 227 00da 92F80022 		ldrb	r2, [r2, #512]	@ zero_extendqisi2
+ 228 00de FF2A     		cmp	r2, #255
+ 229 00e0 04D0     		beq	.L12
+ 230              		.loc 1 115 0 discriminator 3
+ 231 00e2 0E4A     		ldr	r2, .L20
+ 232 00e4 92F80023 		ldrb	r2, [r2, #768]	@ zero_extendqisi2
+ 233 00e8 FF2A     		cmp	r2, #255
+ 234 00ea 0FD1     		bne	.L15
+ 235              	.L12:
+ 116:.\protocol.c  ****         return 4;
+ 117:.\protocol.c  ****     }
+ 118:.\protocol.c  ****     if((side.a.dir!=0xff)&&(side.b.dir!=0xff)){
+ 236              		.loc 1 118 0 is_stmt 1
+ 237 00ec FF2B     		cmp	r3, #255
+ 238 00ee 04D0     		beq	.L14
+ 239              		.loc 1 118 0 is_stmt 0 discriminator 1
+ 240 00f0 0A4A     		ldr	r2, .L20
+ 241 00f2 92F80021 		ldrb	r2, [r2, #256]	@ zero_extendqisi2
+ 242 00f6 FF2A     		cmp	r2, #255
+ 243 00f8 0AD1     		bne	.L16
+ 244              	.L14:
+ 119:.\protocol.c  ****         return 2;
+ 120:.\protocol.c  ****     }
+ 121:.\protocol.c  ****     else{
+ 122:.\protocol.c  ****         if((side.a.dir!=0xff)||(side.b.dir!=0xff)){
+ 245              		.loc 1 122 0 is_stmt 1
+ 246 00fa FF2B     		cmp	r3, #255
+ 247 00fc 0AD1     		bne	.L17
+ 248              		.loc 1 122 0 is_stmt 0 discriminator 1
+ 249 00fe 074B     		ldr	r3, .L20
+ 250 0100 93F80031 		ldrb	r3, [r3, #256]	@ zero_extendqisi2
+ 251 0104 FF2B     		cmp	r3, #255
+ 252 0106 07D0     		beq	.L18
+ 123:.\protocol.c  ****             return 1;
+ 253              		.loc 1 123 0 is_stmt 1
+ 254 0108 0120     		movs	r0, #1
+ 255 010a 10BD     		pop	{r4, pc}
+ 256              	.LVL23:
+ 257              	.L15:
+ 116:.\protocol.c  ****         return 4;
+ 258              		.loc 1 116 0
+ 259 010c 0420     		movs	r0, #4
+ 260 010e 10BD     		pop	{r4, pc}
+ 261              	.LVL24:
+ 262              	.L16:
+ 119:.\protocol.c  ****         return 2;
+ 263              		.loc 1 119 0
+ 264 0110 0220     		movs	r0, #2
+ 265 0112 10BD     		pop	{r4, pc}
+ 266              	.LVL25:
+ 267              	.L17:
+ 268              		.loc 1 123 0
+ 269 0114 0120     		movs	r0, #1
+ 270 0116 10BD     		pop	{r4, pc}
+ 271              	.LVL26:
+ 272              	.L18:
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 8
+
+
+ 124:.\protocol.c  ****         }
+ 125:.\protocol.c  ****         else{
+ 126:.\protocol.c  ****             return 0;
+ 273              		.loc 1 126 0
+ 274 0118 0020     		movs	r0, #0
+ 127:.\protocol.c  ****         }
+ 128:.\protocol.c  ****     }
+ 129:.\protocol.c  **** }
+ 275              		.loc 1 129 0
+ 276 011a 10BD     		pop	{r4, pc}
+ 277              	.LVL27:
+ 278              	.L21:
+ 279              		.align	2
+ 280              	.L20:
+ 281 011c 00000000 		.word	side
+ 282              		.cfi_endproc
+ 283              	.LFE64:
+ 284              		.size	get_position, .-get_position
+ 285              		.section	.text.AcquirePumpCompleteConfiguration,"ax",%progbits
+ 286              		.align	2
+ 287              		.global	AcquirePumpCompleteConfiguration
+ 288              		.thumb
+ 289              		.thumb_func
+ 290              		.type	AcquirePumpCompleteConfiguration, %function
+ 291              	AcquirePumpCompleteConfiguration:
+ 292              	.LFB66:
+ 130:.\protocol.c  **** 
+ 131:.\protocol.c  **** 
+ 132:.\protocol.c  **** 
+ 133:.\protocol.c  **** uint8 PumpCompleteConfiguration( uint8 side){   
+ 134:.\protocol.c  ****     uint8 state,x;
+ 135:.\protocol.c  ****     char8 SendComand[9];
+ 136:.\protocol.c  ****     char8 PumpDataReceive =0;    
+ 137:.\protocol.c  ****     
+ 138:.\protocol.c  ****     uint8 BufferSize = 0;
+ 139:.\protocol.c  **** ///////////////////////////////////////////////////////////////////////////////////////////////////
+ 140:.\protocol.c  ****     state = get_state(side);
+ 141:.\protocol.c  ****     if(state == 0x06){
+ 142:.\protocol.c  ****         Pump_PutChar(0x20|side);
+ 143:.\protocol.c  ****         CyDelay(50);
+ 144:.\protocol.c  ****         PumpDataReceive = Pump_ReadRxData();
+ 145:.\protocol.c  ****     }
+ 146:.\protocol.c  ****     Pump_ClearRxBuffer();
+ 147:.\protocol.c  ****     if(PumpDataReceive == (0xd0|side)){    
+ 148:.\protocol.c  ****         SendComand[0] = SOM; //Start Of Message    
+ 149:.\protocol.c  ****         SendComand[1] = (0xE9);//Data Length
+ 150:.\protocol.c  ****         SendComand[2] = (0xFE);//Special Functions Next (0xB0 0xB0 0xBE)
+ 151:.\protocol.c  ****         SendComand[3] = (0xEE);//Complete Pump Configuration Request (sf1)
+ 152:.\protocol.c  ****         SendComand[4] = (0xE0);//Complete Pump Configuration Request (sf2)
+ 153:.\protocol.c  ****         SendComand[5] = (0xE0);//Complete Pump Configuration Request (sf3)
+ 154:.\protocol.c  ****         SendComand[6] = (0xFB);
+ 155:.\protocol.c  ****         SendComand[7] = GetLRC(SendComand);
+ 156:.\protocol.c  ****         SendComand[8] = (EOM);
+ 157:.\protocol.c  ****         for(x=0; x<=8;x++){
+ 158:.\protocol.c  ****             Pump_PutChar(SendComand[x]);
+ 159:.\protocol.c  ****         } 
+ 160:.\protocol.c  ****         CyDelay(200);
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 9
+
+
+ 161:.\protocol.c  ****     }
+ 162:.\protocol.c  ****     BufferSize =Pump_GetRxBufferSize();
+ 163:.\protocol.c  ****     char8 buffer[BufferSize];
+ 164:.\protocol.c  ****     for(x=0;x<=BufferSize;x++){
+ 165:.\protocol.c  ****        buffer[x]=Pump_ReadRxData(); 
+ 166:.\protocol.c  ****     }
+ 167:.\protocol.c  ****     Pump_ClearRxBuffer();
+ 168:.\protocol.c  **** ///////////////////////////////////////////////////////////////////////////////////////////////////
+ 169:.\protocol.c  ****     UnitType            = buffer [10] &0x0F;
+ 170:.\protocol.c  ****     ConversionFactor    = buffer [12] &0x0F;
+ 171:.\protocol.c  ****     MoneyDec            = buffer [14] &0x0F;
+ 172:.\protocol.c  ****     VolDec              = buffer [16] &0x0F;
+ 173:.\protocol.c  ****     PPUDec              = buffer [18] &0x0F;
+ 174:.\protocol.c  ****     DDMode              = buffer [20] &0x0F;
+ 175:.\protocol.c  ****     
+ 176:.\protocol.c  ****     return 0;
+ 177:.\protocol.c  **** } 
+ 178:.\protocol.c  **** void AcquirePumpCompleteConfiguration(){
+ 293              		.loc 1 178 0
+ 294              		.cfi_startproc
+ 295              		@ args = 0, pretend = 0, frame = 0
+ 296              		@ frame_needed = 0, uses_anonymous_args = 0
+ 297              		@ link register save eliminated.
+ 298 0000 7047     		bx	lr
+ 299              		.cfi_endproc
+ 300              	.LFE66:
+ 301              		.size	AcquirePumpCompleteConfiguration, .-AcquirePumpCompleteConfiguration
+ 302 0002 00BF     		.section	.text.GetLRC,"ax",%progbits
+ 303              		.align	2
+ 304              		.global	GetLRC
+ 305              		.thumb
+ 306              		.thumb_func
+ 307              		.type	GetLRC, %function
+ 308              	GetLRC:
+ 309              	.LFB67:
+ 179:.\protocol.c  ****     
+ 180:.\protocol.c  ****     
+ 181:.\protocol.c  **** //    if(Pump_GetRxBufferSize()>=1){
+ 182:.\protocol.c  **** //        
+ 183:.\protocol.c  **** //        
+ 184:.\protocol.c  **** //        if((buffer[0]==0xBA)&&(buffer[17]==0x8D)&&(buffer[18]==0x8A)&&(buffer[12]==0xB1)&&(buffer
+ 185:.\protocol.c  **** //            //return buffer[14]&0x07;
+ 186:.\protocol.c  **** //        }
+ 187:.\protocol.c  **** //        else{
+ 188:.\protocol.c  **** //           // return 0;
+ 189:.\protocol.c  **** //        }
+ 190:.\protocol.c  **** //    }
+ 191:.\protocol.c  **** }
+ 192:.\protocol.c  **** uint8_t GetLRC(char8 *_pbuffer)
+ 193:.\protocol.c  **** {
+ 310              		.loc 1 193 0
+ 311              		.cfi_startproc
+ 312              		@ args = 0, pretend = 0, frame = 0
+ 313              		@ frame_needed = 0, uses_anonymous_args = 0
+ 314              		@ link register save eliminated.
+ 315              	.LVL28:
+ 194:.\protocol.c  ****     uint8_t lrc = 0;
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 10
+
+
+ 316              		.loc 1 194 0
+ 317 0000 0021     		movs	r1, #0
+ 195:.\protocol.c  ****     while(*_pbuffer != 0xFB)
+ 318              		.loc 1 195 0
+ 319 0002 04E0     		b	.L24
+ 320              	.LVL29:
+ 321              	.L25:
+ 196:.\protocol.c  ****     {
+ 197:.\protocol.c  ****         lrc += (*_pbuffer & 0x0F);
+ 322              		.loc 1 197 0
+ 323 0004 03F00F03 		and	r3, r3, #15
+ 324 0008 0B44     		add	r3, r3, r1
+ 325 000a D9B2     		uxtb	r1, r3
+ 326              	.LVL30:
+ 198:.\protocol.c  ****         _pbuffer++;
+ 327              		.loc 1 198 0
+ 328 000c 0130     		adds	r0, r0, #1
+ 329              	.LVL31:
+ 330              	.L24:
+ 195:.\protocol.c  ****     while(*_pbuffer != 0xFB)
+ 331              		.loc 1 195 0
+ 332 000e 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
+ 333 0010 FB2B     		cmp	r3, #251
+ 334 0012 F7D1     		bne	.L25
+ 199:.\protocol.c  ****     }
+ 200:.\protocol.c  ****     lrc += (*_pbuffer & 0x0F);
+ 335              		.loc 1 200 0
+ 336 0014 03F00F02 		and	r2, r3, #15
+ 337 0018 8818     		adds	r0, r1, r2
+ 338              	.LVL32:
+ 201:.\protocol.c  ****     return (((~lrc + 1) & 0x0F) | 0xE0);
+ 339              		.loc 1 201 0
+ 340 001a 4042     		negs	r0, r0
+ 341              	.LVL33:
+ 342 001c 00F00F00 		and	r0, r0, #15
+ 343              	.LVL34:
+ 202:.\protocol.c  **** }
+ 344              		.loc 1 202 0
+ 345 0020 40F0E000 		orr	r0, r0, #224
+ 346 0024 7047     		bx	lr
+ 347              		.cfi_endproc
+ 348              	.LFE67:
+ 349              		.size	GetLRC, .-GetLRC
+ 350 0026 00BF     		.section	.text.PumpCompleteConfiguration,"ax",%progbits
+ 351              		.align	2
+ 352              		.global	PumpCompleteConfiguration
+ 353              		.thumb
+ 354              		.thumb_func
+ 355              		.type	PumpCompleteConfiguration, %function
+ 356              	PumpCompleteConfiguration:
+ 357              	.LFB65:
+ 133:.\protocol.c  ****     uint8 state,x;
+ 358              		.loc 1 133 0
+ 359              		.cfi_startproc
+ 360              		@ args = 0, pretend = 0, frame = 16
+ 361              		@ frame_needed = 1, uses_anonymous_args = 0
+ 362              	.LVL35:
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 11
+
+
+ 363 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 364              		.cfi_def_cfa_offset 20
+ 365              		.cfi_offset 4, -20
+ 366              		.cfi_offset 5, -16
+ 367              		.cfi_offset 6, -12
+ 368              		.cfi_offset 7, -8
+ 369              		.cfi_offset 14, -4
+ 370 0002 85B0     		sub	sp, sp, #20
+ 371              		.cfi_def_cfa_offset 40
+ 372 0004 00AF     		add	r7, sp, #0
+ 373              		.cfi_def_cfa_register 7
+ 374 0006 0446     		mov	r4, r0
+ 375              	.LVL36:
+ 140:.\protocol.c  ****     if(state == 0x06){
+ 376              		.loc 1 140 0
+ 377 0008 FFF7FEFF 		bl	get_state
+ 378              	.LVL37:
+ 141:.\protocol.c  ****         Pump_PutChar(0x20|side);
+ 379              		.loc 1 141 0
+ 380 000c 0628     		cmp	r0, #6
+ 381 000e 0AD1     		bne	.L33
+ 142:.\protocol.c  ****         CyDelay(50);
+ 382              		.loc 1 142 0
+ 383 0010 44F02000 		orr	r0, r4, #32
+ 384              	.LVL38:
+ 385 0014 FFF7FEFF 		bl	Pump_PutChar
+ 386              	.LVL39:
+ 143:.\protocol.c  ****         PumpDataReceive = Pump_ReadRxData();
+ 387              		.loc 1 143 0
+ 388 0018 3220     		movs	r0, #50
+ 389 001a FFF7FEFF 		bl	CyDelay
+ 390              	.LVL40:
+ 144:.\protocol.c  ****     }
+ 391              		.loc 1 144 0
+ 392 001e FFF7FEFF 		bl	Pump_ReadRxData
+ 393              	.LVL41:
+ 394 0022 0546     		mov	r5, r0
+ 395              	.LVL42:
+ 396 0024 00E0     		b	.L27
+ 397              	.LVL43:
+ 398              	.L33:
+ 136:.\protocol.c  ****     
+ 399              		.loc 1 136 0
+ 400 0026 0025     		movs	r5, #0
+ 401              	.LVL44:
+ 402              	.L27:
+ 146:.\protocol.c  ****     if(PumpDataReceive == (0xd0|side)){    
+ 403              		.loc 1 146 0
+ 404 0028 FFF7FEFF 		bl	Pump_ClearRxBuffer
+ 405              	.LVL45:
+ 147:.\protocol.c  ****         SendComand[0] = SOM; //Start Of Message    
+ 406              		.loc 1 147 0
+ 407 002c 44F0D004 		orr	r4, r4, #208
+ 408 0030 AC42     		cmp	r4, r5
+ 409 0032 22D1     		bne	.L28
+ 148:.\protocol.c  ****         SendComand[1] = (0xE9);//Data Length
+ 410              		.loc 1 148 0
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 12
+
+
+ 411 0034 FF23     		movs	r3, #255
+ 412 0036 3B71     		strb	r3, [r7, #4]
+ 149:.\protocol.c  ****         SendComand[2] = (0xFE);//Special Functions Next (0xB0 0xB0 0xBE)
+ 413              		.loc 1 149 0
+ 414 0038 E923     		movs	r3, #233
+ 415 003a 7B71     		strb	r3, [r7, #5]
+ 150:.\protocol.c  ****         SendComand[3] = (0xEE);//Complete Pump Configuration Request (sf1)
+ 416              		.loc 1 150 0
+ 417 003c FE23     		movs	r3, #254
+ 418 003e BB71     		strb	r3, [r7, #6]
+ 151:.\protocol.c  ****         SendComand[4] = (0xE0);//Complete Pump Configuration Request (sf2)
+ 419              		.loc 1 151 0
+ 420 0040 EE23     		movs	r3, #238
+ 421 0042 FB71     		strb	r3, [r7, #7]
+ 152:.\protocol.c  ****         SendComand[5] = (0xE0);//Complete Pump Configuration Request (sf3)
+ 422              		.loc 1 152 0
+ 423 0044 E023     		movs	r3, #224
+ 424 0046 3B72     		strb	r3, [r7, #8]
+ 153:.\protocol.c  ****         SendComand[6] = (0xFB);
+ 425              		.loc 1 153 0
+ 426 0048 7B72     		strb	r3, [r7, #9]
+ 154:.\protocol.c  ****         SendComand[7] = GetLRC(SendComand);
+ 427              		.loc 1 154 0
+ 428 004a FB23     		movs	r3, #251
+ 429 004c BB72     		strb	r3, [r7, #10]
+ 155:.\protocol.c  ****         SendComand[8] = (EOM);
+ 430              		.loc 1 155 0
+ 431 004e 381D     		adds	r0, r7, #4
+ 432 0050 FFF7FEFF 		bl	GetLRC
+ 433              	.LVL46:
+ 434 0054 F872     		strb	r0, [r7, #11]
+ 156:.\protocol.c  ****         for(x=0; x<=8;x++){
+ 435              		.loc 1 156 0
+ 436 0056 F023     		movs	r3, #240
+ 437 0058 3B73     		strb	r3, [r7, #12]
+ 438              	.LVL47:
+ 157:.\protocol.c  ****             Pump_PutChar(SendComand[x]);
+ 439              		.loc 1 157 0
+ 440 005a 0024     		movs	r4, #0
+ 441 005c 08E0     		b	.L29
+ 442              	.LVL48:
+ 443              	.L30:
+ 158:.\protocol.c  ****         } 
+ 444              		.loc 1 158 0 discriminator 3
+ 445 005e 07F11003 		add	r3, r7, #16
+ 446 0062 2344     		add	r3, r3, r4
+ 447 0064 13F80C0C 		ldrb	r0, [r3, #-12]	@ zero_extendqisi2
+ 448 0068 FFF7FEFF 		bl	Pump_PutChar
+ 449              	.LVL49:
+ 157:.\protocol.c  ****             Pump_PutChar(SendComand[x]);
+ 450              		.loc 1 157 0 discriminator 3
+ 451 006c 0134     		adds	r4, r4, #1
+ 452              	.LVL50:
+ 453 006e E4B2     		uxtb	r4, r4
+ 454              	.LVL51:
+ 455              	.L29:
+ 157:.\protocol.c  ****             Pump_PutChar(SendComand[x]);
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 13
+
+
+ 456              		.loc 1 157 0 is_stmt 0 discriminator 1
+ 457 0070 082C     		cmp	r4, #8
+ 458 0072 F4D9     		bls	.L30
+ 160:.\protocol.c  ****     }
+ 459              		.loc 1 160 0 is_stmt 1
+ 460 0074 C820     		movs	r0, #200
+ 461 0076 FFF7FEFF 		bl	CyDelay
+ 462              	.LVL52:
+ 463              	.L28:
+ 162:.\protocol.c  ****     char8 buffer[BufferSize];
+ 464              		.loc 1 162 0
+ 465 007a FFF7FEFF 		bl	Pump_GetRxBufferSize
+ 466              	.LVL53:
+ 467 007e C6B2     		uxtb	r6, r0
+ 468              	.LVL54:
+ 163:.\protocol.c  ****     for(x=0;x<=BufferSize;x++){
+ 469              		.loc 1 163 0
+ 470 0080 F31D     		adds	r3, r6, #7
+ 471 0082 23F00703 		bic	r3, r3, #7
+ 472 0086 ADEB030D 		sub	sp, sp, r3
+ 473 008a 6D46     		mov	r5, sp
+ 474              	.LVL55:
+ 164:.\protocol.c  ****        buffer[x]=Pump_ReadRxData(); 
+ 475              		.loc 1 164 0
+ 476 008c 0024     		movs	r4, #0
+ 477 008e 04E0     		b	.L31
+ 478              	.LVL56:
+ 479              	.L32:
+ 165:.\protocol.c  ****     }
+ 480              		.loc 1 165 0 discriminator 3
+ 481 0090 FFF7FEFF 		bl	Pump_ReadRxData
+ 482              	.LVL57:
+ 483 0094 2855     		strb	r0, [r5, r4]
+ 164:.\protocol.c  ****        buffer[x]=Pump_ReadRxData(); 
+ 484              		.loc 1 164 0 discriminator 3
+ 485 0096 0134     		adds	r4, r4, #1
+ 486              	.LVL58:
+ 487 0098 E4B2     		uxtb	r4, r4
+ 488              	.LVL59:
+ 489              	.L31:
+ 164:.\protocol.c  ****        buffer[x]=Pump_ReadRxData(); 
+ 490              		.loc 1 164 0 is_stmt 0 discriminator 1
+ 491 009a B442     		cmp	r4, r6
+ 492 009c F8D9     		bls	.L32
+ 167:.\protocol.c  **** ///////////////////////////////////////////////////////////////////////////////////////////////////
+ 493              		.loc 1 167 0 is_stmt 1
+ 494 009e FFF7FEFF 		bl	Pump_ClearRxBuffer
+ 495              	.LVL60:
+ 169:.\protocol.c  ****     ConversionFactor    = buffer [12] &0x0F;
+ 496              		.loc 1 169 0
+ 497 00a2 AB7A     		ldrb	r3, [r5, #10]	@ zero_extendqisi2
+ 498 00a4 03F00F03 		and	r3, r3, #15
+ 499 00a8 0F4A     		ldr	r2, .L35
+ 500 00aa 1370     		strb	r3, [r2]
+ 170:.\protocol.c  ****     MoneyDec            = buffer [14] &0x0F;
+ 501              		.loc 1 170 0
+ 502 00ac 2B7B     		ldrb	r3, [r5, #12]	@ zero_extendqisi2
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 14
+
+
+ 503 00ae 03F00F03 		and	r3, r3, #15
+ 504 00b2 0E4A     		ldr	r2, .L35+4
+ 505 00b4 1370     		strb	r3, [r2]
+ 171:.\protocol.c  ****     VolDec              = buffer [16] &0x0F;
+ 506              		.loc 1 171 0
+ 507 00b6 AB7B     		ldrb	r3, [r5, #14]	@ zero_extendqisi2
+ 508 00b8 03F00F03 		and	r3, r3, #15
+ 509 00bc 0C4A     		ldr	r2, .L35+8
+ 510 00be 1370     		strb	r3, [r2]
+ 172:.\protocol.c  ****     PPUDec              = buffer [18] &0x0F;
+ 511              		.loc 1 172 0
+ 512 00c0 2B7C     		ldrb	r3, [r5, #16]	@ zero_extendqisi2
+ 513 00c2 03F00F03 		and	r3, r3, #15
+ 514 00c6 0B4A     		ldr	r2, .L35+12
+ 515 00c8 1370     		strb	r3, [r2]
+ 173:.\protocol.c  ****     DDMode              = buffer [20] &0x0F;
+ 516              		.loc 1 173 0
+ 517 00ca AB7C     		ldrb	r3, [r5, #18]	@ zero_extendqisi2
+ 518 00cc 03F00F03 		and	r3, r3, #15
+ 519 00d0 094A     		ldr	r2, .L35+16
+ 520 00d2 1370     		strb	r3, [r2]
+ 174:.\protocol.c  ****     
+ 521              		.loc 1 174 0
+ 522 00d4 2B7D     		ldrb	r3, [r5, #20]	@ zero_extendqisi2
+ 523 00d6 03F00F03 		and	r3, r3, #15
+ 524 00da 084A     		ldr	r2, .L35+20
+ 525 00dc 1370     		strb	r3, [r2]
+ 177:.\protocol.c  **** void AcquirePumpCompleteConfiguration(){
+ 526              		.loc 1 177 0
+ 527 00de 0020     		movs	r0, #0
+ 528 00e0 1437     		adds	r7, r7, #20
+ 529              		.cfi_def_cfa_offset 20
+ 530 00e2 BD46     		mov	sp, r7
+ 531              		.cfi_def_cfa_register 13
+ 532              		@ sp needed
+ 533 00e4 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 534              	.LVL61:
+ 535              	.L36:
+ 536 00e6 00BF     		.align	2
+ 537              	.L35:
+ 538 00e8 00000000 		.word	UnitType
+ 539 00ec 00000000 		.word	ConversionFactor
+ 540 00f0 00000000 		.word	MoneyDec
+ 541 00f4 00000000 		.word	VolDec
+ 542 00f8 00000000 		.word	PPUDec
+ 543 00fc 00000000 		.word	DDMode
+ 544              		.cfi_endproc
+ 545              	.LFE65:
+ 546              		.size	PumpCompleteConfiguration, .-PumpCompleteConfiguration
+ 547              		.comm	side,1024,4
+ 548              		.comm	bufferDisplay4,661,4
+ 549              		.comm	bufferDisplay3,661,4
+ 550              		.comm	bufferDisplay2,661,4
+ 551              		.comm	bufferDisplay1,661,4
+ 552              		.comm	statePump,4,4
+ 553              		.comm	DDMode,1,1
+ 554              		.comm	PPUDec,1,1
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 15
+
+
+ 555              		.comm	VolDec,1,1
+ 556              		.comm	MoneyDec,1,1
+ 557              		.comm	ConversionFactor,1,1
+ 558              		.comm	UnitType,1,1
+ 559              		.comm	PrevStatePump,4,4
+ 560              		.comm	stateBeagleSoft,1,1
+ 561              		.comm	flagResetMux,1,1
+ 562              		.comm	passwordSeller,8,4
+ 563              		.comm	typeIdSeller,1,1
+ 564              		.comm	idSeller,25,4
+ 565              		.comm	lockTurn,1,1
+ 566              		.comm	turn,1,1
+ 567              		.comm	temporalCom,30,4
+ 568              		.comm	temporal,30,4
+ 569              		.comm	residue,14,4
+ 570              		.comm	screen,2,4
+ 571              		.comm	date,3,4
+ 572              		.comm	time,3,4
+ 573              		.comm	symbols,2,4
+ 574              		.comm	decimalVolume,1,1
+ 575              		.comm	decimalMoney,1,1
+ 576              		.comm	ppux10,1,1
+ 577              		.comm	delayPicture2,4,4
+ 578              		.comm	delayPicture1,4,4
+ 579              		.comm	presetFast,30,4
+ 580              		.comm	productNumber,1,1
+ 581              		.comm	button,960,4
+ 582              		.comm	flagPoint2,1,1
+ 583              		.comm	flagPoint1,1,1
+ 584              		.comm	numberKeys2,1,1
+ 585              		.comm	numberKeys1,1,1
+ 586              		.comm	ipAdress,12,4
+ 587              		.comm	digits,1,1
+ 588              		.comm	flowDisplay2,4,4
+ 589              		.comm	flowDisplay1,4,4
+ 590              		.comm	countPump,8,8
+ 591              		.comm	countBeagleTX,8,8
+ 592              		.comm	countAnimation2,8,8
+ 593              		.comm	countAnimation1,8,8
+ 594              		.text
+ 595              	.Letext0:
+ 596              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\3.3\\psoc creator\\import\\gnu\\arm\\4.9.
+ 597              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\3.3\\psoc creator\\import\\gnu\\arm\\4.9.
+ 598              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+ 599              		.file 5 "./variables.h"
+ 600              		.file 6 "Generated_Source\\PSoC5/core_cm3.h"
+ 601              		.file 7 "Generated_Source\\PSoC5/Pump.h"
+ 602              		.file 8 "Generated_Source\\PSoC5/CyLib.h"
+ 603              		.section	.debug_info,"",%progbits
+ 604              	.Ldebug_info0:
+ 605 0000 550C0000 		.4byte	0xc55
+ 606 0004 0400     		.2byte	0x4
+ 607 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 608 000a 04       		.byte	0x4
+ 609 000b 01       		.uleb128 0x1
+ 610 000c F9050000 		.4byte	.LASF145
+ 611 0010 01       		.byte	0x1
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 16
+
+
+ 612 0011 D3010000 		.4byte	.LASF146
+ 613 0015 B8060000 		.4byte	.LASF147
+ 614 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 615 001d 00000000 		.4byte	0
+ 616 0021 00000000 		.4byte	.Ldebug_line0
+ 617 0025 02       		.uleb128 0x2
+ 618 0026 01       		.byte	0x1
+ 619 0027 06       		.byte	0x6
+ 620 0028 33070000 		.4byte	.LASF0
+ 621 002c 03       		.uleb128 0x3
+ 622 002d 05050000 		.4byte	.LASF4
+ 623 0031 02       		.byte	0x2
+ 624 0032 1D       		.byte	0x1d
+ 625 0033 37000000 		.4byte	0x37
+ 626 0037 02       		.uleb128 0x2
+ 627 0038 01       		.byte	0x1
+ 628 0039 08       		.byte	0x8
+ 629 003a DE050000 		.4byte	.LASF1
+ 630 003e 02       		.uleb128 0x2
+ 631 003f 02       		.byte	0x2
+ 632 0040 05       		.byte	0x5
+ 633 0041 7D040000 		.4byte	.LASF2
+ 634 0045 02       		.uleb128 0x2
+ 635 0046 02       		.byte	0x2
+ 636 0047 07       		.byte	0x7
+ 637 0048 3F070000 		.4byte	.LASF3
+ 638 004c 03       		.uleb128 0x3
+ 639 004d 75000000 		.4byte	.LASF5
+ 640 0051 02       		.byte	0x2
+ 641 0052 3F       		.byte	0x3f
+ 642 0053 57000000 		.4byte	0x57
+ 643 0057 02       		.uleb128 0x2
+ 644 0058 04       		.byte	0x4
+ 645 0059 05       		.byte	0x5
+ 646 005a 87040000 		.4byte	.LASF6
+ 647 005e 02       		.uleb128 0x2
+ 648 005f 04       		.byte	0x4
+ 649 0060 07       		.byte	0x7
+ 650 0061 6D050000 		.4byte	.LASF7
+ 651 0065 02       		.uleb128 0x2
+ 652 0066 08       		.byte	0x8
+ 653 0067 05       		.byte	0x5
+ 654 0068 2C030000 		.4byte	.LASF8
+ 655 006c 02       		.uleb128 0x2
+ 656 006d 08       		.byte	0x8
+ 657 006e 07       		.byte	0x7
+ 658 006f 36010000 		.4byte	.LASF9
+ 659 0073 04       		.uleb128 0x4
+ 660 0074 04       		.byte	0x4
+ 661 0075 05       		.byte	0x5
+ 662 0076 696E7400 		.ascii	"int\000"
+ 663 007a 02       		.uleb128 0x2
+ 664 007b 04       		.byte	0x4
+ 665 007c 07       		.byte	0x7
+ 666 007d 5A000000 		.4byte	.LASF10
+ 667 0081 03       		.uleb128 0x3
+ 668 0082 B4020000 		.4byte	.LASF11
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 17
+
+
+ 669 0086 03       		.byte	0x3
+ 670 0087 15       		.byte	0x15
+ 671 0088 2C000000 		.4byte	0x2c
+ 672 008c 03       		.uleb128 0x3
+ 673 008d A5050000 		.4byte	.LASF12
+ 674 0091 03       		.byte	0x3
+ 675 0092 2C       		.byte	0x2c
+ 676 0093 4C000000 		.4byte	0x4c
+ 677 0097 05       		.uleb128 0x5
+ 678 0098 68070000 		.4byte	.LASF13
+ 679 009c 04       		.byte	0x4
+ 680 009d 3801     		.2byte	0x138
+ 681 009f 37000000 		.4byte	0x37
+ 682 00a3 05       		.uleb128 0x5
+ 683 00a4 A3020000 		.4byte	.LASF14
+ 684 00a8 04       		.byte	0x4
+ 685 00a9 3901     		.2byte	0x139
+ 686 00ab 45000000 		.4byte	0x45
+ 687 00af 05       		.uleb128 0x5
+ 688 00b0 F2030000 		.4byte	.LASF15
+ 689 00b4 04       		.byte	0x4
+ 690 00b5 3A01     		.2byte	0x13a
+ 691 00b7 5E000000 		.4byte	0x5e
+ 692 00bb 02       		.uleb128 0x2
+ 693 00bc 04       		.byte	0x4
+ 694 00bd 04       		.byte	0x4
+ 695 00be FB000000 		.4byte	.LASF16
+ 696 00c2 02       		.uleb128 0x2
+ 697 00c3 08       		.byte	0x8
+ 698 00c4 04       		.byte	0x4
+ 699 00c5 6E070000 		.4byte	.LASF17
+ 700 00c9 05       		.uleb128 0x5
+ 701 00ca 38050000 		.4byte	.LASF18
+ 702 00ce 04       		.byte	0x4
+ 703 00cf 4401     		.2byte	0x144
+ 704 00d1 6C000000 		.4byte	0x6c
+ 705 00d5 05       		.uleb128 0x5
+ 706 00d6 D8020000 		.4byte	.LASF19
+ 707 00da 04       		.byte	0x4
+ 708 00db 4901     		.2byte	0x149
+ 709 00dd E1000000 		.4byte	0xe1
+ 710 00e1 02       		.uleb128 0x2
+ 711 00e2 01       		.byte	0x1
+ 712 00e3 08       		.byte	0x8
+ 713 00e4 4A020000 		.4byte	.LASF20
+ 714 00e8 06       		.uleb128 0x6
+ 715 00e9 97000000 		.4byte	0x97
+ 716 00ed 06       		.uleb128 0x6
+ 717 00ee AF000000 		.4byte	0xaf
+ 718 00f2 02       		.uleb128 0x2
+ 719 00f3 04       		.byte	0x4
+ 720 00f4 07       		.byte	0x7
+ 721 00f5 64050000 		.4byte	.LASF21
+ 722 00f9 07       		.uleb128 0x7
+ 723 00fa 97000000 		.4byte	0x97
+ 724 00fe 09010000 		.4byte	0x109
+ 725 0102 08       		.uleb128 0x8
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 18
+
+
+ 726 0103 F2000000 		.4byte	0xf2
+ 727 0107 03       		.byte	0x3
+ 728 0108 00       		.byte	0
+ 729 0109 09       		.uleb128 0x9
+ 730 010a 31000000 		.4byte	.LASF72
+ 731 010e 9502     		.2byte	0x295
+ 732 0110 05       		.byte	0x5
+ 733 0111 5B       		.byte	0x5b
+ 734 0112 85030000 		.4byte	0x385
+ 735 0116 0A       		.uleb128 0xa
+ 736 0117 96000000 		.4byte	.LASF22
+ 737 011b 05       		.byte	0x5
+ 738 011c 5C       		.byte	0x5c
+ 739 011d 97000000 		.4byte	0x97
+ 740 0121 00       		.byte	0
+ 741 0122 0A       		.uleb128 0xa
+ 742 0123 96010000 		.4byte	.LASF23
+ 743 0127 05       		.byte	0x5
+ 744 0128 5D       		.byte	0x5d
+ 745 0129 85030000 		.4byte	0x385
+ 746 012d 01       		.byte	0x1
+ 747 012e 0A       		.uleb128 0xa
+ 748 012f DE020000 		.4byte	.LASF24
+ 749 0133 05       		.byte	0x5
+ 750 0134 5E       		.byte	0x5e
+ 751 0135 85030000 		.4byte	0x385
+ 752 0139 1A       		.byte	0x1a
+ 753 013a 0A       		.uleb128 0xa
+ 754 013b 75070000 		.4byte	.LASF25
+ 755 013f 05       		.byte	0x5
+ 756 0140 5F       		.byte	0x5f
+ 757 0141 97000000 		.4byte	0x97
+ 758 0145 33       		.byte	0x33
+ 759 0146 0A       		.uleb128 0xa
+ 760 0147 CC050000 		.4byte	.LASF26
+ 761 014b 05       		.byte	0x5
+ 762 014c 60       		.byte	0x60
+ 763 014d 97000000 		.4byte	0x97
+ 764 0151 34       		.byte	0x34
+ 765 0152 0A       		.uleb128 0xa
+ 766 0153 B1000000 		.4byte	.LASF27
+ 767 0157 05       		.byte	0x5
+ 768 0158 61       		.byte	0x61
+ 769 0159 95030000 		.4byte	0x395
+ 770 015d 35       		.byte	0x35
+ 771 015e 0A       		.uleb128 0xa
+ 772 015f 4A040000 		.4byte	.LASF28
+ 773 0163 05       		.byte	0x5
+ 774 0164 62       		.byte	0x62
+ 775 0165 95030000 		.4byte	0x395
+ 776 0169 3F       		.byte	0x3f
+ 777 016a 0A       		.uleb128 0xa
+ 778 016b A4070000 		.4byte	.LASF29
+ 779 016f 05       		.byte	0x5
+ 780 0170 63       		.byte	0x63
+ 781 0171 85030000 		.4byte	0x385
+ 782 0175 49       		.byte	0x49
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 19
+
+
+ 783 0176 0A       		.uleb128 0xa
+ 784 0177 14040000 		.4byte	.LASF30
+ 785 017b 05       		.byte	0x5
+ 786 017c 64       		.byte	0x64
+ 787 017d 97000000 		.4byte	0x97
+ 788 0181 62       		.byte	0x62
+ 789 0182 0A       		.uleb128 0xa
+ 790 0183 87060000 		.4byte	.LASF31
+ 791 0187 05       		.byte	0x5
+ 792 0188 65       		.byte	0x65
+ 793 0189 97000000 		.4byte	0x97
+ 794 018d 63       		.byte	0x63
+ 795 018e 0A       		.uleb128 0xa
+ 796 018f 40020000 		.4byte	.LASF32
+ 797 0193 05       		.byte	0x5
+ 798 0194 66       		.byte	0x66
+ 799 0195 A5030000 		.4byte	0x3a5
+ 800 0199 64       		.byte	0x64
+ 801 019a 0A       		.uleb128 0xa
+ 802 019b 9E030000 		.4byte	.LASF33
+ 803 019f 05       		.byte	0x5
+ 804 01a0 67       		.byte	0x67
+ 805 01a1 97000000 		.4byte	0x97
+ 806 01a5 79       		.byte	0x79
+ 807 01a6 0A       		.uleb128 0xa
+ 808 01a7 37020000 		.4byte	.LASF34
+ 809 01ab 05       		.byte	0x5
+ 810 01ac 68       		.byte	0x68
+ 811 01ad 97000000 		.4byte	0x97
+ 812 01b1 7A       		.byte	0x7a
+ 813 01b2 0A       		.uleb128 0xa
+ 814 01b3 4E000000 		.4byte	.LASF35
+ 815 01b7 05       		.byte	0x5
+ 816 01b8 69       		.byte	0x69
+ 817 01b9 97000000 		.4byte	0x97
+ 818 01bd 7B       		.byte	0x7b
+ 819 01be 0A       		.uleb128 0xa
+ 820 01bf 0D070000 		.4byte	.LASF36
+ 821 01c3 05       		.byte	0x5
+ 822 01c4 6A       		.byte	0x6a
+ 823 01c5 B5030000 		.4byte	0x3b5
+ 824 01c9 7C       		.byte	0x7c
+ 825 01ca 0A       		.uleb128 0xa
+ 826 01cb 1B020000 		.4byte	.LASF37
+ 827 01cf 05       		.byte	0x5
+ 828 01d0 6B       		.byte	0x6b
+ 829 01d1 C5030000 		.4byte	0x3c5
+ 830 01d5 7E       		.byte	0x7e
+ 831 01d6 0A       		.uleb128 0xa
+ 832 01d7 6D010000 		.4byte	.LASF38
+ 833 01db 05       		.byte	0x5
+ 834 01dc 6C       		.byte	0x6c
+ 835 01dd 97000000 		.4byte	0x97
+ 836 01e1 92       		.byte	0x92
+ 837 01e2 0A       		.uleb128 0xa
+ 838 01e3 5B050000 		.4byte	.LASF39
+ 839 01e7 05       		.byte	0x5
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 20
+
+
+ 840 01e8 6D       		.byte	0x6d
+ 841 01e9 DB030000 		.4byte	0x3db
+ 842 01ed 93       		.byte	0x93
+ 843 01ee 0A       		.uleb128 0xa
+ 844 01ef B9040000 		.4byte	.LASF40
+ 845 01f3 05       		.byte	0x5
+ 846 01f4 6E       		.byte	0x6e
+ 847 01f5 EB030000 		.4byte	0x3eb
+ 848 01f9 98       		.byte	0x98
+ 849 01fa 0A       		.uleb128 0xa
+ 850 01fb 87010000 		.4byte	.LASF41
+ 851 01ff 05       		.byte	0x5
+ 852 0200 6F       		.byte	0x6f
+ 853 0201 EB030000 		.4byte	0x3eb
+ 854 0205 9E       		.byte	0x9e
+ 855 0206 0A       		.uleb128 0xa
+ 856 0207 87070000 		.4byte	.LASF42
+ 857 020b 05       		.byte	0x5
+ 858 020c 70       		.byte	0x70
+ 859 020d EB030000 		.4byte	0x3eb
+ 860 0211 A4       		.byte	0xa4
+ 861 0212 0A       		.uleb128 0xa
+ 862 0213 8F030000 		.4byte	.LASF43
+ 863 0217 05       		.byte	0x5
+ 864 0218 71       		.byte	0x71
+ 865 0219 EB030000 		.4byte	0x3eb
+ 866 021d AA       		.byte	0xaa
+ 867 021e 0A       		.uleb128 0xa
+ 868 021f 2C040000 		.4byte	.LASF44
+ 869 0223 05       		.byte	0x5
+ 870 0224 72       		.byte	0x72
+ 871 0225 FB030000 		.4byte	0x3fb
+ 872 0229 B0       		.byte	0xb0
+ 873 022a 0A       		.uleb128 0xa
+ 874 022b 4D010000 		.4byte	.LASF45
+ 875 022f 05       		.byte	0x5
+ 876 0230 73       		.byte	0x73
+ 877 0231 FB030000 		.4byte	0x3fb
+ 878 0235 BE       		.byte	0xbe
+ 879 0236 0A       		.uleb128 0xa
+ 880 0237 62030000 		.4byte	.LASF46
+ 881 023b 05       		.byte	0x5
+ 882 023c 74       		.byte	0x74
+ 883 023d FB030000 		.4byte	0x3fb
+ 884 0241 CC       		.byte	0xcc
+ 885 0242 0A       		.uleb128 0xa
+ 886 0243 F3020000 		.4byte	.LASF47
+ 887 0247 05       		.byte	0x5
+ 888 0248 75       		.byte	0x75
+ 889 0249 FB030000 		.4byte	0x3fb
+ 890 024d DA       		.byte	0xda
+ 891 024e 0A       		.uleb128 0xa
+ 892 024f 1E050000 		.4byte	.LASF48
+ 893 0253 05       		.byte	0x5
+ 894 0254 76       		.byte	0x76
+ 895 0255 FB030000 		.4byte	0x3fb
+ 896 0259 E8       		.byte	0xe8
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 21
+
+
+ 897 025a 0A       		.uleb128 0xa
+ 898 025b 06040000 		.4byte	.LASF49
+ 899 025f 05       		.byte	0x5
+ 900 0260 77       		.byte	0x77
+ 901 0261 FB030000 		.4byte	0x3fb
+ 902 0265 F6       		.byte	0xf6
+ 903 0266 0B       		.uleb128 0xb
+ 904 0267 64040000 		.4byte	.LASF50
+ 905 026b 05       		.byte	0x5
+ 906 026c 78       		.byte	0x78
+ 907 026d 0B040000 		.4byte	0x40b
+ 908 0271 0401     		.2byte	0x104
+ 909 0273 0B       		.uleb128 0xb
+ 910 0274 B9010000 		.4byte	.LASF51
+ 911 0278 05       		.byte	0x5
+ 912 0279 79       		.byte	0x79
+ 913 027a 0B040000 		.4byte	0x40b
+ 914 027e 0F01     		.2byte	0x10f
+ 915 0280 0B       		.uleb128 0xb
+ 916 0281 2C020000 		.4byte	.LASF52
+ 917 0285 05       		.byte	0x5
+ 918 0286 7A       		.byte	0x7a
+ 919 0287 0B040000 		.4byte	0x40b
+ 920 028b 1A01     		.2byte	0x11a
+ 921 028d 0B       		.uleb128 0xb
+ 922 028e AA030000 		.4byte	.LASF53
+ 923 0292 05       		.byte	0x5
+ 924 0293 7B       		.byte	0x7b
+ 925 0294 97000000 		.4byte	0x97
+ 926 0298 2501     		.2byte	0x125
+ 927 029a 0B       		.uleb128 0xb
+ 928 029b CC020000 		.4byte	.LASF54
+ 929 029f 05       		.byte	0x5
+ 930 02a0 7C       		.byte	0x7c
+ 931 02a1 97000000 		.4byte	0x97
+ 932 02a5 2601     		.2byte	0x126
+ 933 02a7 0B       		.uleb128 0xb
+ 934 02a8 7F000000 		.4byte	.LASF55
+ 935 02ac 05       		.byte	0x5
+ 936 02ad 7D       		.byte	0x7d
+ 937 02ae 97000000 		.4byte	0x97
+ 938 02b2 2701     		.2byte	0x127
+ 939 02b4 0B       		.uleb128 0xb
+ 940 02b5 AD040000 		.4byte	.LASF56
+ 941 02b9 05       		.byte	0x5
+ 942 02ba 7E       		.byte	0x7e
+ 943 02bb 97000000 		.4byte	0x97
+ 944 02bf 2801     		.2byte	0x128
+ 945 02c1 0B       		.uleb128 0xb
+ 946 02c2 1F000000 		.4byte	.LASF57
+ 947 02c6 05       		.byte	0x5
+ 948 02c7 7F       		.byte	0x7f
+ 949 02c8 1B040000 		.4byte	0x41b
+ 950 02cc 2901     		.2byte	0x129
+ 951 02ce 0B       		.uleb128 0xb
+ 952 02cf 03030000 		.4byte	.LASF58
+ 953 02d3 05       		.byte	0x5
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 22
+
+
+ 954 02d4 80       		.byte	0x80
+ 955 02d5 95030000 		.4byte	0x395
+ 956 02d9 6A01     		.2byte	0x16a
+ 957 02db 0B       		.uleb128 0xb
+ 958 02dc EF000000 		.4byte	.LASF59
+ 959 02e0 05       		.byte	0x5
+ 960 02e1 81       		.byte	0x81
+ 961 02e2 95030000 		.4byte	0x395
+ 962 02e6 7401     		.2byte	0x174
+ 963 02e8 0B       		.uleb128 0xb
+ 964 02e9 EA020000 		.4byte	.LASF60
+ 965 02ed 05       		.byte	0x5
+ 966 02ee 82       		.byte	0x82
+ 967 02ef 95030000 		.4byte	0x395
+ 968 02f3 7E01     		.2byte	0x17e
+ 969 02f5 0B       		.uleb128 0xb
+ 970 02f6 01020000 		.4byte	.LASF61
+ 971 02fa 05       		.byte	0x5
+ 972 02fb 83       		.byte	0x83
+ 973 02fc 2B040000 		.4byte	0x42b
+ 974 0300 8801     		.2byte	0x188
+ 975 0302 0B       		.uleb128 0xb
+ 976 0303 67000000 		.4byte	.LASF62
+ 977 0307 05       		.byte	0x5
+ 978 0308 84       		.byte	0x84
+ 979 0309 2B040000 		.4byte	0x42b
+ 980 030d D301     		.2byte	0x1d3
+ 981 030f 0B       		.uleb128 0xb
+ 982 0310 BE000000 		.4byte	.LASF63
+ 983 0314 05       		.byte	0x5
+ 984 0315 85       		.byte	0x85
+ 985 0316 41040000 		.4byte	0x441
+ 986 031a 1E02     		.2byte	0x21e
+ 987 031c 0B       		.uleb128 0xb
+ 988 031d B9050000 		.4byte	.LASF64
+ 989 0321 05       		.byte	0x5
+ 990 0322 86       		.byte	0x86
+ 991 0323 41040000 		.4byte	0x441
+ 992 0327 2D02     		.2byte	0x22d
+ 993 0329 0B       		.uleb128 0xb
+ 994 032a 99060000 		.4byte	.LASF65
+ 995 032e 05       		.byte	0x5
+ 996 032f 87       		.byte	0x87
+ 997 0330 57040000 		.4byte	0x457
+ 998 0334 3C02     		.2byte	0x23c
+ 999 0336 0B       		.uleb128 0xb
+ 1000 0337 18070000 		.4byte	.LASF66
+ 1001 033b 05       		.byte	0x5
+ 1002 033c 88       		.byte	0x88
+ 1003 033d 57040000 		.4byte	0x457
+ 1004 0341 5A02     		.2byte	0x25a
+ 1005 0343 0B       		.uleb128 0xb
+ 1006 0344 83030000 		.4byte	.LASF67
+ 1007 0348 05       		.byte	0x5
+ 1008 0349 89       		.byte	0x89
+ 1009 034a 95030000 		.4byte	0x395
+ 1010 034e 7802     		.2byte	0x278
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 23
+
+
+ 1011 0350 0B       		.uleb128 0xb
+ 1012 0351 93050000 		.4byte	.LASF68
+ 1013 0355 05       		.byte	0x5
+ 1014 0356 8A       		.byte	0x8a
+ 1015 0357 97000000 		.4byte	0x97
+ 1016 035b 8202     		.2byte	0x282
+ 1017 035d 0B       		.uleb128 0xb
+ 1018 035e 70040000 		.4byte	.LASF69
+ 1019 0362 05       		.byte	0x5
+ 1020 0363 8B       		.byte	0x8b
+ 1021 0364 6D040000 		.4byte	0x46d
+ 1022 0368 8302     		.2byte	0x283
+ 1023 036a 0B       		.uleb128 0xb
+ 1024 036b 0E030000 		.4byte	.LASF70
+ 1025 036f 05       		.byte	0x5
+ 1026 0370 8C       		.byte	0x8c
+ 1027 0371 B5030000 		.4byte	0x3b5
+ 1028 0375 9202     		.2byte	0x292
+ 1029 0377 0B       		.uleb128 0xb
+ 1030 0378 C5010000 		.4byte	.LASF71
+ 1031 037c 05       		.byte	0x5
+ 1032 037d 8D       		.byte	0x8d
+ 1033 037e 97000000 		.4byte	0x97
+ 1034 0382 9402     		.2byte	0x294
+ 1035 0384 00       		.byte	0
+ 1036 0385 07       		.uleb128 0x7
+ 1037 0386 97000000 		.4byte	0x97
+ 1038 038a 95030000 		.4byte	0x395
+ 1039 038e 08       		.uleb128 0x8
+ 1040 038f F2000000 		.4byte	0xf2
+ 1041 0393 18       		.byte	0x18
+ 1042 0394 00       		.byte	0
+ 1043 0395 07       		.uleb128 0x7
+ 1044 0396 97000000 		.4byte	0x97
+ 1045 039a A5030000 		.4byte	0x3a5
+ 1046 039e 08       		.uleb128 0x8
+ 1047 039f F2000000 		.4byte	0xf2
+ 1048 03a3 09       		.byte	0x9
+ 1049 03a4 00       		.byte	0
+ 1050 03a5 07       		.uleb128 0x7
+ 1051 03a6 97000000 		.4byte	0x97
+ 1052 03aa B5030000 		.4byte	0x3b5
+ 1053 03ae 08       		.uleb128 0x8
+ 1054 03af F2000000 		.4byte	0xf2
+ 1055 03b3 14       		.byte	0x14
+ 1056 03b4 00       		.byte	0
+ 1057 03b5 07       		.uleb128 0x7
+ 1058 03b6 97000000 		.4byte	0x97
+ 1059 03ba C5030000 		.4byte	0x3c5
+ 1060 03be 08       		.uleb128 0x8
+ 1061 03bf F2000000 		.4byte	0xf2
+ 1062 03c3 01       		.byte	0x1
+ 1063 03c4 00       		.byte	0
+ 1064 03c5 07       		.uleb128 0x7
+ 1065 03c6 97000000 		.4byte	0x97
+ 1066 03ca DB030000 		.4byte	0x3db
+ 1067 03ce 08       		.uleb128 0x8
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 24
+
+
+ 1068 03cf F2000000 		.4byte	0xf2
+ 1069 03d3 01       		.byte	0x1
+ 1070 03d4 08       		.uleb128 0x8
+ 1071 03d5 F2000000 		.4byte	0xf2
+ 1072 03d9 09       		.byte	0x9
+ 1073 03da 00       		.byte	0
+ 1074 03db 07       		.uleb128 0x7
+ 1075 03dc 97000000 		.4byte	0x97
+ 1076 03e0 EB030000 		.4byte	0x3eb
+ 1077 03e4 08       		.uleb128 0x8
+ 1078 03e5 F2000000 		.4byte	0xf2
+ 1079 03e9 04       		.byte	0x4
+ 1080 03ea 00       		.byte	0
+ 1081 03eb 07       		.uleb128 0x7
+ 1082 03ec 97000000 		.4byte	0x97
+ 1083 03f0 FB030000 		.4byte	0x3fb
+ 1084 03f4 08       		.uleb128 0x8
+ 1085 03f5 F2000000 		.4byte	0xf2
+ 1086 03f9 05       		.byte	0x5
+ 1087 03fa 00       		.byte	0
+ 1088 03fb 07       		.uleb128 0x7
+ 1089 03fc 97000000 		.4byte	0x97
+ 1090 0400 0B040000 		.4byte	0x40b
+ 1091 0404 08       		.uleb128 0x8
+ 1092 0405 F2000000 		.4byte	0xf2
+ 1093 0409 0D       		.byte	0xd
+ 1094 040a 00       		.byte	0
+ 1095 040b 07       		.uleb128 0x7
+ 1096 040c 97000000 		.4byte	0x97
+ 1097 0410 1B040000 		.4byte	0x41b
+ 1098 0414 08       		.uleb128 0x8
+ 1099 0415 F2000000 		.4byte	0xf2
+ 1100 0419 0A       		.byte	0xa
+ 1101 041a 00       		.byte	0
+ 1102 041b 07       		.uleb128 0x7
+ 1103 041c 97000000 		.4byte	0x97
+ 1104 0420 2B040000 		.4byte	0x42b
+ 1105 0424 08       		.uleb128 0x8
+ 1106 0425 F2000000 		.4byte	0xf2
+ 1107 0429 40       		.byte	0x40
+ 1108 042a 00       		.byte	0
+ 1109 042b 07       		.uleb128 0x7
+ 1110 042c 97000000 		.4byte	0x97
+ 1111 0430 41040000 		.4byte	0x441
+ 1112 0434 08       		.uleb128 0x8
+ 1113 0435 F2000000 		.4byte	0xf2
+ 1114 0439 02       		.byte	0x2
+ 1115 043a 08       		.uleb128 0x8
+ 1116 043b F2000000 		.4byte	0xf2
+ 1117 043f 18       		.byte	0x18
+ 1118 0440 00       		.byte	0
+ 1119 0441 07       		.uleb128 0x7
+ 1120 0442 97000000 		.4byte	0x97
+ 1121 0446 57040000 		.4byte	0x457
+ 1122 044a 08       		.uleb128 0x8
+ 1123 044b F2000000 		.4byte	0xf2
+ 1124 044f 02       		.byte	0x2
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 25
+
+
+ 1125 0450 08       		.uleb128 0x8
+ 1126 0451 F2000000 		.4byte	0xf2
+ 1127 0455 04       		.byte	0x4
+ 1128 0456 00       		.byte	0
+ 1129 0457 07       		.uleb128 0x7
+ 1130 0458 97000000 		.4byte	0x97
+ 1131 045c 6D040000 		.4byte	0x46d
+ 1132 0460 08       		.uleb128 0x8
+ 1133 0461 F2000000 		.4byte	0xf2
+ 1134 0465 02       		.byte	0x2
+ 1135 0466 08       		.uleb128 0x8
+ 1136 0467 F2000000 		.4byte	0xf2
+ 1137 046b 09       		.byte	0x9
+ 1138 046c 00       		.byte	0
+ 1139 046d 07       		.uleb128 0x7
+ 1140 046e 97000000 		.4byte	0x97
+ 1141 0472 7D040000 		.4byte	0x47d
+ 1142 0476 08       		.uleb128 0x8
+ 1143 0477 F2000000 		.4byte	0xf2
+ 1144 047b 0E       		.byte	0xe
+ 1145 047c 00       		.byte	0
+ 1146 047d 09       		.uleb128 0x9
+ 1147 047e B7070000 		.4byte	.LASF73
+ 1148 0482 0001     		.2byte	0x100
+ 1149 0484 05       		.byte	0x5
+ 1150 0485 9E       		.byte	0x9e
+ 1151 0486 DF040000 		.4byte	0x4df
+ 1152 048a 0C       		.uleb128 0xc
+ 1153 048b 64697200 		.ascii	"dir\000"
+ 1154 048f 05       		.byte	0x5
+ 1155 0490 9F       		.byte	0x9f
+ 1156 0491 97000000 		.4byte	0x97
+ 1157 0495 00       		.byte	0
+ 1158 0496 0A       		.uleb128 0xa
+ 1159 0497 0E020000 		.4byte	.LASF74
+ 1160 049b 05       		.byte	0x5
+ 1161 049c A0       		.byte	0xa0
+ 1162 049d DF040000 		.4byte	0x4df
+ 1163 04a1 01       		.byte	0x1
+ 1164 04a2 0A       		.uleb128 0xa
+ 1165 04a3 96070000 		.4byte	.LASF75
+ 1166 04a7 05       		.byte	0x5
+ 1167 04a8 A1       		.byte	0xa1
+ 1168 04a9 FB040000 		.4byte	0x4fb
+ 1169 04ad B5       		.byte	0xb5
+ 1170 04ae 0A       		.uleb128 0xa
+ 1171 04af 22030000 		.4byte	.LASF76
+ 1172 04b3 05       		.byte	0x5
+ 1173 04b4 A2       		.byte	0xa2
+ 1174 04b5 FB030000 		.4byte	0x3fb
+ 1175 04b9 D5       		.byte	0xd5
+ 1176 04ba 0A       		.uleb128 0xa
+ 1177 04bb 28070000 		.4byte	.LASF77
+ 1178 04bf 05       		.byte	0x5
+ 1179 04c0 A3       		.byte	0xa3
+ 1180 04c1 FB030000 		.4byte	0x3fb
+ 1181 04c5 E3       		.byte	0xe3
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 26
+
+
+ 1182 04c6 0A       		.uleb128 0xa
+ 1183 04c7 3A030000 		.4byte	.LASF78
+ 1184 04cb 05       		.byte	0x5
+ 1185 04cc A4       		.byte	0xa4
+ 1186 04cd FB030000 		.4byte	0x3fb
+ 1187 04d1 F1       		.byte	0xf1
+ 1188 04d2 0A       		.uleb128 0xa
+ 1189 04d3 5C070000 		.4byte	.LASF79
+ 1190 04d7 05       		.byte	0x5
+ 1191 04d8 A5       		.byte	0xa5
+ 1192 04d9 97000000 		.4byte	0x97
+ 1193 04dd FF       		.byte	0xff
+ 1194 04de 00       		.byte	0
+ 1195 04df 07       		.uleb128 0x7
+ 1196 04e0 97000000 		.4byte	0x97
+ 1197 04e4 FB040000 		.4byte	0x4fb
+ 1198 04e8 08       		.uleb128 0x8
+ 1199 04e9 F2000000 		.4byte	0xf2
+ 1200 04ed 03       		.byte	0x3
+ 1201 04ee 08       		.uleb128 0x8
+ 1202 04ef F2000000 		.4byte	0xf2
+ 1203 04f3 02       		.byte	0x2
+ 1204 04f4 08       		.uleb128 0x8
+ 1205 04f5 F2000000 		.4byte	0xf2
+ 1206 04f9 0E       		.byte	0xe
+ 1207 04fa 00       		.byte	0
+ 1208 04fb 07       		.uleb128 0x7
+ 1209 04fc 97000000 		.4byte	0x97
+ 1210 0500 11050000 		.4byte	0x511
+ 1211 0504 08       		.uleb128 0x8
+ 1212 0505 F2000000 		.4byte	0xf2
+ 1213 0509 03       		.byte	0x3
+ 1214 050a 08       		.uleb128 0x8
+ 1215 050b F2000000 		.4byte	0xf2
+ 1216 050f 07       		.byte	0x7
+ 1217 0510 00       		.byte	0
+ 1218 0511 09       		.uleb128 0x9
+ 1219 0512 B3060000 		.4byte	.LASF80
+ 1220 0516 0004     		.2byte	0x400
+ 1221 0518 05       		.byte	0x5
+ 1222 0519 A8       		.byte	0xa8
+ 1223 051a 4A050000 		.4byte	0x54a
+ 1224 051e 0C       		.uleb128 0xc
+ 1225 051f 6100     		.ascii	"a\000"
+ 1226 0521 05       		.byte	0x5
+ 1227 0522 A9       		.byte	0xa9
+ 1228 0523 7D040000 		.4byte	0x47d
+ 1229 0527 00       		.byte	0
+ 1230 0528 0D       		.uleb128 0xd
+ 1231 0529 6200     		.ascii	"b\000"
+ 1232 052b 05       		.byte	0x5
+ 1233 052c AA       		.byte	0xaa
+ 1234 052d 7D040000 		.4byte	0x47d
+ 1235 0531 0001     		.2byte	0x100
+ 1236 0533 0D       		.uleb128 0xd
+ 1237 0534 6300     		.ascii	"c\000"
+ 1238 0536 05       		.byte	0x5
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 27
+
+
+ 1239 0537 AB       		.byte	0xab
+ 1240 0538 7D040000 		.4byte	0x47d
+ 1241 053c 0002     		.2byte	0x200
+ 1242 053e 0D       		.uleb128 0xd
+ 1243 053f 6400     		.ascii	"d\000"
+ 1244 0541 05       		.byte	0x5
+ 1245 0542 AC       		.byte	0xac
+ 1246 0543 7D040000 		.4byte	0x47d
+ 1247 0547 0003     		.2byte	0x300
+ 1248 0549 00       		.byte	0
+ 1249 054a 0E       		.uleb128 0xe
+ 1250 054b C8040000 		.4byte	.LASF148
+ 1251 054f 01       		.byte	0x1
+ 1252 0550 05       		.byte	0x5
+ 1253 0551 B2       		.byte	0xb2
+ 1254 0552 A4050000 		.4byte	0x5a4
+ 1255 0556 0F       		.uleb128 0xf
+ 1256 0557 534F4D00 		.ascii	"SOM\000"
+ 1257 055b FF01     		.sleb128 255
+ 1258 055d 0F       		.uleb128 0xf
+ 1259 055e 56505400 		.ascii	"VPT\000"
+ 1260 0562 F101     		.sleb128 241
+ 1261 0564 0F       		.uleb128 0xf
+ 1262 0565 4D505400 		.ascii	"MPT\000"
+ 1263 0569 F201     		.sleb128 242
+ 1264 056b 0F       		.uleb128 0xf
+ 1265 056c 48446E00 		.ascii	"HDn\000"
+ 1266 0570 F601     		.sleb128 246
+ 1267 0572 10       		.uleb128 0x10
+ 1268 0573 00000000 		.4byte	.LASF81
+ 1269 0577 F701     		.sleb128 247
+ 1270 0579 10       		.uleb128 0x10
+ 1271 057a AD050000 		.4byte	.LASF82
+ 1272 057e F801     		.sleb128 248
+ 1273 0580 0F       		.uleb128 0xf
+ 1274 0581 56446E00 		.ascii	"VDn\000"
+ 1275 0585 F901     		.sleb128 249
+ 1276 0587 0F       		.uleb128 0xf
+ 1277 0588 4D446E00 		.ascii	"MDn\000"
+ 1278 058c FA01     		.sleb128 250
+ 1279 058e 10       		.uleb128 0x10
+ 1280 058f AA020000 		.4byte	.LASF83
+ 1281 0593 FB01     		.sleb128 251
+ 1282 0595 0F       		.uleb128 0xf
+ 1283 0596 53466E00 		.ascii	"SFn\000"
+ 1284 059a FE01     		.sleb128 254
+ 1285 059c 0F       		.uleb128 0xf
+ 1286 059d 454F4D00 		.ascii	"EOM\000"
+ 1287 05a1 F001     		.sleb128 240
+ 1288 05a3 00       		.byte	0
+ 1289 05a4 11       		.uleb128 0x11
+ 1290 05a5 99020000 		.4byte	.LASF84
+ 1291 05a9 01       		.byte	0x1
+ 1292 05aa 38       		.byte	0x38
+ 1293 05ab 97000000 		.4byte	0x97
+ 1294 05af 00000000 		.4byte	.LFB63
+ 1295 05b3 2E000000 		.4byte	.LFE63-.LFB63
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 28
+
+
+ 1296 05b7 01       		.uleb128 0x1
+ 1297 05b8 9C       		.byte	0x9c
+ 1298 05b9 28060000 		.4byte	0x628
+ 1299 05bd 12       		.uleb128 0x12
+ 1300 05be 706F7300 		.ascii	"pos\000"
+ 1301 05c2 01       		.byte	0x1
+ 1302 05c3 38       		.byte	0x38
+ 1303 05c4 97000000 		.4byte	0x97
+ 1304 05c8 00000000 		.4byte	.LLST0
+ 1305 05cc 13       		.uleb128 0x13
+ 1306 05cd 07070000 		.4byte	.LASF86
+ 1307 05d1 01       		.byte	0x1
+ 1308 05d2 39       		.byte	0x39
+ 1309 05d3 97000000 		.4byte	0x97
+ 1310 05d7 21000000 		.4byte	.LLST1
+ 1311 05db 14       		.uleb128 0x14
+ 1312 05dc 08000000 		.4byte	.LVL1
+ 1313 05e0 190C0000 		.4byte	0xc19
+ 1314 05e4 15       		.uleb128 0x15
+ 1315 05e5 0E000000 		.4byte	.LVL2
+ 1316 05e9 200C0000 		.4byte	0xc20
+ 1317 05ed F8050000 		.4byte	0x5f8
+ 1318 05f1 16       		.uleb128 0x16
+ 1319 05f2 01       		.uleb128 0x1
+ 1320 05f3 50       		.byte	0x50
+ 1321 05f4 02       		.uleb128 0x2
+ 1322 05f5 74       		.byte	0x74
+ 1323 05f6 00       		.sleb128 0
+ 1324 05f7 00       		.byte	0
+ 1325 05f8 15       		.uleb128 0x15
+ 1326 05f9 14000000 		.4byte	.LVL3
+ 1327 05fd 310C0000 		.4byte	0xc31
+ 1328 0601 0C060000 		.4byte	0x60c
+ 1329 0605 16       		.uleb128 0x16
+ 1330 0606 01       		.uleb128 0x1
+ 1331 0607 50       		.byte	0x50
+ 1332 0608 02       		.uleb128 0x2
+ 1333 0609 08       		.byte	0x8
+ 1334 060a 3C       		.byte	0x3c
+ 1335 060b 00       		.byte	0
+ 1336 060c 14       		.uleb128 0x14
+ 1337 060d 18000000 		.4byte	.LVL4
+ 1338 0611 420C0000 		.4byte	0xc42
+ 1339 0615 14       		.uleb128 0x14
+ 1340 0616 1E000000 		.4byte	.LVL5
+ 1341 061a 4D0C0000 		.4byte	0xc4d
+ 1342 061e 14       		.uleb128 0x14
+ 1343 061f 26000000 		.4byte	.LVL7
+ 1344 0623 190C0000 		.4byte	0xc19
+ 1345 0627 00       		.byte	0
+ 1346 0628 11       		.uleb128 0x11
+ 1347 0629 A4000000 		.4byte	.LASF85
+ 1348 062d 01       		.byte	0x1
+ 1349 062e 57       		.byte	0x57
+ 1350 062f 97000000 		.4byte	0x97
+ 1351 0633 00000000 		.4byte	.LFB64
+ 1352 0637 20010000 		.4byte	.LFE64-.LFB64
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 29
+
+
+ 1353 063b 01       		.uleb128 0x1
+ 1354 063c 9C       		.byte	0x9c
+ 1355 063d BF060000 		.4byte	0x6bf
+ 1356 0641 17       		.uleb128 0x17
+ 1357 0642 7800     		.ascii	"x\000"
+ 1358 0644 01       		.byte	0x1
+ 1359 0645 58       		.byte	0x58
+ 1360 0646 97000000 		.4byte	0x97
+ 1361 064a 34000000 		.4byte	.LLST2
+ 1362 064e 15       		.uleb128 0x15
+ 1363 064f 1E000000 		.4byte	.LVL11
+ 1364 0653 200C0000 		.4byte	0xc20
+ 1365 0657 62060000 		.4byte	0x662
+ 1366 065b 16       		.uleb128 0x16
+ 1367 065c 01       		.uleb128 0x1
+ 1368 065d 50       		.byte	0x50
+ 1369 065e 02       		.uleb128 0x2
+ 1370 065f 74       		.byte	0x74
+ 1371 0660 00       		.sleb128 0
+ 1372 0661 00       		.byte	0
+ 1373 0662 15       		.uleb128 0x15
+ 1374 0663 24000000 		.4byte	.LVL12
+ 1375 0667 310C0000 		.4byte	0xc31
+ 1376 066b 76060000 		.4byte	0x676
+ 1377 066f 16       		.uleb128 0x16
+ 1378 0670 01       		.uleb128 0x1
+ 1379 0671 50       		.byte	0x50
+ 1380 0672 02       		.uleb128 0x2
+ 1381 0673 08       		.byte	0x8
+ 1382 0674 64       		.byte	0x64
+ 1383 0675 00       		.byte	0
+ 1384 0676 14       		.uleb128 0x14
+ 1385 0677 28000000 		.4byte	.LVL13
+ 1386 067b 420C0000 		.4byte	0xc42
+ 1387 067f 14       		.uleb128 0x14
+ 1388 0680 3A000000 		.4byte	.LVL14
+ 1389 0684 190C0000 		.4byte	0xc19
+ 1390 0688 14       		.uleb128 0x14
+ 1391 0689 3E000000 		.4byte	.LVL15
+ 1392 068d 420C0000 		.4byte	0xc42
+ 1393 0691 14       		.uleb128 0x14
+ 1394 0692 5C000000 		.4byte	.LVL16
+ 1395 0696 190C0000 		.4byte	0xc19
+ 1396 069a 14       		.uleb128 0x14
+ 1397 069b 60000000 		.4byte	.LVL17
+ 1398 069f 420C0000 		.4byte	0xc42
+ 1399 06a3 14       		.uleb128 0x14
+ 1400 06a4 88000000 		.4byte	.LVL18
+ 1401 06a8 190C0000 		.4byte	0xc19
+ 1402 06ac 14       		.uleb128 0x14
+ 1403 06ad 8C000000 		.4byte	.LVL19
+ 1404 06b1 420C0000 		.4byte	0xc42
+ 1405 06b5 14       		.uleb128 0x14
+ 1406 06b6 BE000000 		.4byte	.LVL20
+ 1407 06ba 190C0000 		.4byte	0xc19
+ 1408 06be 00       		.byte	0
+ 1409 06bf 18       		.uleb128 0x18
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 30
+
+
+ 1410 06c0 D1030000 		.4byte	.LASF149
+ 1411 06c4 01       		.byte	0x1
+ 1412 06c5 B2       		.byte	0xb2
+ 1413 06c6 00000000 		.4byte	.LFB66
+ 1414 06ca 02000000 		.4byte	.LFE66-.LFB66
+ 1415 06ce 01       		.uleb128 0x1
+ 1416 06cf 9C       		.byte	0x9c
+ 1417 06d0 11       		.uleb128 0x11
+ 1418 06d1 B2050000 		.4byte	.LASF87
+ 1419 06d5 01       		.byte	0x1
+ 1420 06d6 C0       		.byte	0xc0
+ 1421 06d7 81000000 		.4byte	0x81
+ 1422 06db 00000000 		.4byte	.LFB67
+ 1423 06df 26000000 		.4byte	.LFE67-.LFB67
+ 1424 06e3 01       		.uleb128 0x1
+ 1425 06e4 9C       		.byte	0x9c
+ 1426 06e5 08070000 		.4byte	0x708
+ 1427 06e9 19       		.uleb128 0x19
+ 1428 06ea 7E070000 		.4byte	.LASF88
+ 1429 06ee 01       		.byte	0x1
+ 1430 06ef C0       		.byte	0xc0
+ 1431 06f0 08070000 		.4byte	0x708
+ 1432 06f4 5E000000 		.4byte	.LLST3
+ 1433 06f8 17       		.uleb128 0x17
+ 1434 06f9 6C726300 		.ascii	"lrc\000"
+ 1435 06fd 01       		.byte	0x1
+ 1436 06fe C2       		.byte	0xc2
+ 1437 06ff 81000000 		.4byte	0x81
+ 1438 0703 7C000000 		.4byte	.LLST4
+ 1439 0707 00       		.byte	0
+ 1440 0708 1A       		.uleb128 0x1a
+ 1441 0709 04       		.byte	0x4
+ 1442 070a D5000000 		.4byte	0xd5
+ 1443 070e 11       		.uleb128 0x11
+ 1444 070f B7030000 		.4byte	.LASF89
+ 1445 0713 01       		.byte	0x1
+ 1446 0714 85       		.byte	0x85
+ 1447 0715 97000000 		.4byte	0x97
+ 1448 0719 00000000 		.4byte	.LFB65
+ 1449 071d 00010000 		.4byte	.LFE65-.LFB65
+ 1450 0721 01       		.uleb128 0x1
+ 1451 0722 9C       		.byte	0x9c
+ 1452 0723 34080000 		.4byte	0x834
+ 1453 0727 19       		.uleb128 0x19
+ 1454 0728 9F010000 		.4byte	.LASF90
+ 1455 072c 01       		.byte	0x1
+ 1456 072d 85       		.byte	0x85
+ 1457 072e 97000000 		.4byte	0x97
+ 1458 0732 C4000000 		.4byte	.LLST5
+ 1459 0736 13       		.uleb128 0x13
+ 1460 0737 07070000 		.4byte	.LASF86
+ 1461 073b 01       		.byte	0x1
+ 1462 073c 86       		.byte	0x86
+ 1463 073d 97000000 		.4byte	0x97
+ 1464 0741 E5000000 		.4byte	.LLST6
+ 1465 0745 17       		.uleb128 0x17
+ 1466 0746 7800     		.ascii	"x\000"
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 31
+
+
+ 1467 0748 01       		.byte	0x1
+ 1468 0749 86       		.byte	0x86
+ 1469 074a 97000000 		.4byte	0x97
+ 1470 074e 03010000 		.4byte	.LLST7
+ 1471 0752 1B       		.uleb128 0x1b
+ 1472 0753 01010000 		.4byte	.LASF91
+ 1473 0757 01       		.byte	0x1
+ 1474 0758 87       		.byte	0x87
+ 1475 0759 34080000 		.4byte	0x834
+ 1476 075d 02       		.uleb128 0x2
+ 1477 075e 91       		.byte	0x91
+ 1478 075f 5C       		.sleb128 -36
+ 1479 0760 13       		.uleb128 0x13
+ 1480 0761 CD000000 		.4byte	.LASF92
+ 1481 0765 01       		.byte	0x1
+ 1482 0766 88       		.byte	0x88
+ 1483 0767 D5000000 		.4byte	0xd5
+ 1484 076b 4F010000 		.4byte	.LLST8
+ 1485 076f 13       		.uleb128 0x13
+ 1486 0770 86020000 		.4byte	.LASF93
+ 1487 0774 01       		.byte	0x1
+ 1488 0775 8A       		.byte	0x8a
+ 1489 0776 97000000 		.4byte	0x97
+ 1490 077a 85010000 		.4byte	.LLST9
+ 1491 077e 1C       		.uleb128 0x1c
+ 1492 077f 57080000 		.4byte	0x857
+ 1493 0783 A4010000 		.4byte	.LLST10
+ 1494 0787 13       		.uleb128 0x13
+ 1495 0788 31000000 		.4byte	.LASF72
+ 1496 078c 01       		.byte	0x1
+ 1497 078d A3       		.byte	0xa3
+ 1498 078e 44080000 		.4byte	0x844
+ 1499 0792 BE010000 		.4byte	.LLST11
+ 1500 0796 15       		.uleb128 0x15
+ 1501 0797 0C000000 		.4byte	.LVL37
+ 1502 079b A4050000 		.4byte	0x5a4
+ 1503 079f AA070000 		.4byte	0x7aa
+ 1504 07a3 16       		.uleb128 0x16
+ 1505 07a4 01       		.uleb128 0x1
+ 1506 07a5 50       		.byte	0x50
+ 1507 07a6 02       		.uleb128 0x2
+ 1508 07a7 74       		.byte	0x74
+ 1509 07a8 00       		.sleb128 0
+ 1510 07a9 00       		.byte	0
+ 1511 07aa 15       		.uleb128 0x15
+ 1512 07ab 18000000 		.4byte	.LVL39
+ 1513 07af 200C0000 		.4byte	0xc20
+ 1514 07b3 C1070000 		.4byte	0x7c1
+ 1515 07b7 16       		.uleb128 0x16
+ 1516 07b8 01       		.uleb128 0x1
+ 1517 07b9 50       		.byte	0x50
+ 1518 07ba 05       		.uleb128 0x5
+ 1519 07bb 74       		.byte	0x74
+ 1520 07bc 00       		.sleb128 0
+ 1521 07bd 08       		.byte	0x8
+ 1522 07be 20       		.byte	0x20
+ 1523 07bf 21       		.byte	0x21
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 32
+
+
+ 1524 07c0 00       		.byte	0
+ 1525 07c1 15       		.uleb128 0x15
+ 1526 07c2 1E000000 		.4byte	.LVL40
+ 1527 07c6 310C0000 		.4byte	0xc31
+ 1528 07ca D5070000 		.4byte	0x7d5
+ 1529 07ce 16       		.uleb128 0x16
+ 1530 07cf 01       		.uleb128 0x1
+ 1531 07d0 50       		.byte	0x50
+ 1532 07d1 02       		.uleb128 0x2
+ 1533 07d2 08       		.byte	0x8
+ 1534 07d3 32       		.byte	0x32
+ 1535 07d4 00       		.byte	0
+ 1536 07d5 14       		.uleb128 0x14
+ 1537 07d6 22000000 		.4byte	.LVL41
+ 1538 07da 4D0C0000 		.4byte	0xc4d
+ 1539 07de 14       		.uleb128 0x14
+ 1540 07df 2C000000 		.4byte	.LVL45
+ 1541 07e3 190C0000 		.4byte	0xc19
+ 1542 07e7 15       		.uleb128 0x15
+ 1543 07e8 54000000 		.4byte	.LVL46
+ 1544 07ec D0060000 		.4byte	0x6d0
+ 1545 07f0 FB070000 		.4byte	0x7fb
+ 1546 07f4 16       		.uleb128 0x16
+ 1547 07f5 01       		.uleb128 0x1
+ 1548 07f6 50       		.byte	0x50
+ 1549 07f7 02       		.uleb128 0x2
+ 1550 07f8 7D       		.byte	0x7d
+ 1551 07f9 14       		.sleb128 20
+ 1552 07fa 00       		.byte	0
+ 1553 07fb 14       		.uleb128 0x14
+ 1554 07fc 6C000000 		.4byte	.LVL49
+ 1555 0800 200C0000 		.4byte	0xc20
+ 1556 0804 15       		.uleb128 0x15
+ 1557 0805 7A000000 		.4byte	.LVL52
+ 1558 0809 310C0000 		.4byte	0xc31
+ 1559 080d 18080000 		.4byte	0x818
+ 1560 0811 16       		.uleb128 0x16
+ 1561 0812 01       		.uleb128 0x1
+ 1562 0813 50       		.byte	0x50
+ 1563 0814 02       		.uleb128 0x2
+ 1564 0815 08       		.byte	0x8
+ 1565 0816 C8       		.byte	0xc8
+ 1566 0817 00       		.byte	0
+ 1567 0818 14       		.uleb128 0x14
+ 1568 0819 7E000000 		.4byte	.LVL53
+ 1569 081d 420C0000 		.4byte	0xc42
+ 1570 0821 14       		.uleb128 0x14
+ 1571 0822 94000000 		.4byte	.LVL57
+ 1572 0826 4D0C0000 		.4byte	0xc4d
+ 1573 082a 14       		.uleb128 0x14
+ 1574 082b A2000000 		.4byte	.LVL60
+ 1575 082f 190C0000 		.4byte	0xc19
+ 1576 0833 00       		.byte	0
+ 1577 0834 07       		.uleb128 0x7
+ 1578 0835 D5000000 		.4byte	0xd5
+ 1579 0839 44080000 		.4byte	0x844
+ 1580 083d 08       		.uleb128 0x8
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 33
+
+
+ 1581 083e F2000000 		.4byte	0xf2
+ 1582 0842 08       		.byte	0x8
+ 1583 0843 00       		.byte	0
+ 1584 0844 07       		.uleb128 0x7
+ 1585 0845 D5000000 		.4byte	0xd5
+ 1586 0849 57080000 		.4byte	0x857
+ 1587 084d 1D       		.uleb128 0x1d
+ 1588 084e F2000000 		.4byte	0xf2
+ 1589 0852 7E070000 		.4byte	0x77e
+ 1590 0856 00       		.byte	0
+ 1591 0857 1E       		.uleb128 0x1e
+ 1592 0858 F2000000 		.4byte	0xf2
+ 1593 085c 1F       		.uleb128 0x1f
+ 1594 085d 97040000 		.4byte	.LASF94
+ 1595 0861 06       		.byte	0x6
+ 1596 0862 5506     		.2byte	0x655
+ 1597 0864 68080000 		.4byte	0x868
+ 1598 0868 06       		.uleb128 0x6
+ 1599 0869 8C000000 		.4byte	0x8c
+ 1600 086d 20       		.uleb128 0x20
+ 1601 086e 42030000 		.4byte	.LASF95
+ 1602 0872 05       		.byte	0x5
+ 1603 0873 2C       		.byte	0x2c
+ 1604 0874 7E080000 		.4byte	0x87e
+ 1605 0878 05       		.uleb128 0x5
+ 1606 0879 03       		.byte	0x3
+ 1607 087a 00000000 		.4byte	countAnimation1
+ 1608 087e 06       		.uleb128 0x6
+ 1609 087f C9000000 		.4byte	0xc9
+ 1610 0883 20       		.uleb128 0x20
+ 1611 0884 73030000 		.4byte	.LASF96
+ 1612 0888 05       		.byte	0x5
+ 1613 0889 2D       		.byte	0x2d
+ 1614 088a 7E080000 		.4byte	0x87e
+ 1615 088e 05       		.uleb128 0x5
+ 1616 088f 03       		.byte	0x3
+ 1617 0890 00000000 		.4byte	countAnimation2
+ 1618 0894 20       		.uleb128 0x20
+ 1619 0895 78020000 		.4byte	.LASF97
+ 1620 0899 05       		.byte	0x5
+ 1621 089a 2E       		.byte	0x2e
+ 1622 089b 7E080000 		.4byte	0x87e
+ 1623 089f 05       		.uleb128 0x5
+ 1624 08a0 03       		.byte	0x3
+ 1625 08a1 00000000 		.4byte	countBeagleTX
+ 1626 08a5 20       		.uleb128 0x20
+ 1627 08a6 52070000 		.4byte	.LASF98
+ 1628 08aa 05       		.byte	0x5
+ 1629 08ab 2F       		.byte	0x2f
+ 1630 08ac 7E080000 		.4byte	0x87e
+ 1631 08b0 05       		.uleb128 0x5
+ 1632 08b1 03       		.byte	0x3
+ 1633 08b2 00000000 		.4byte	countPump
+ 1634 08b6 20       		.uleb128 0x20
+ 1635 08b7 E7010000 		.4byte	.LASF99
+ 1636 08bb 05       		.byte	0x5
+ 1637 08bc 30       		.byte	0x30
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 34
+
+
+ 1638 08bd ED000000 		.4byte	0xed
+ 1639 08c1 05       		.uleb128 0x5
+ 1640 08c2 03       		.byte	0x3
+ 1641 08c3 00000000 		.4byte	flowDisplay1
+ 1642 08c7 20       		.uleb128 0x20
+ 1643 08c8 F4010000 		.4byte	.LASF100
+ 1644 08cc 05       		.byte	0x5
+ 1645 08cd 31       		.byte	0x31
+ 1646 08ce ED000000 		.4byte	0xed
+ 1647 08d2 05       		.uleb128 0x5
+ 1648 08d3 03       		.byte	0x3
+ 1649 08d4 00000000 		.4byte	flowDisplay2
+ 1650 08d8 20       		.uleb128 0x20
+ 1651 08d9 61010000 		.4byte	.LASF101
+ 1652 08dd 05       		.byte	0x5
+ 1653 08de 32       		.byte	0x32
+ 1654 08df E8000000 		.4byte	0xe8
+ 1655 08e3 05       		.uleb128 0x5
+ 1656 08e4 03       		.byte	0x3
+ 1657 08e5 00000000 		.4byte	digits
+ 1658 08e9 07       		.uleb128 0x7
+ 1659 08ea 97000000 		.4byte	0x97
+ 1660 08ee F9080000 		.4byte	0x8f9
+ 1661 08f2 08       		.uleb128 0x8
+ 1662 08f3 F2000000 		.4byte	0xf2
+ 1663 08f7 0B       		.byte	0xb
+ 1664 08f8 00       		.byte	0
+ 1665 08f9 20       		.uleb128 0x20
+ 1666 08fa 38000000 		.4byte	.LASF102
+ 1667 08fe 05       		.byte	0x5
+ 1668 08ff 33       		.byte	0x33
+ 1669 0900 0A090000 		.4byte	0x90a
+ 1670 0904 05       		.uleb128 0x5
+ 1671 0905 03       		.byte	0x3
+ 1672 0906 00000000 		.4byte	ipAdress
+ 1673 090a 06       		.uleb128 0x6
+ 1674 090b E9080000 		.4byte	0x8e9
+ 1675 090f 20       		.uleb128 0x20
+ 1676 0910 60020000 		.4byte	.LASF103
+ 1677 0914 05       		.byte	0x5
+ 1678 0915 34       		.byte	0x34
+ 1679 0916 E8000000 		.4byte	0xe8
+ 1680 091a 05       		.uleb128 0x5
+ 1681 091b 03       		.byte	0x3
+ 1682 091c 00000000 		.4byte	numberKeys1
+ 1683 0920 20       		.uleb128 0x20
+ 1684 0921 6C020000 		.4byte	.LASF104
+ 1685 0925 05       		.byte	0x5
+ 1686 0926 35       		.byte	0x35
+ 1687 0927 E8000000 		.4byte	0xe8
+ 1688 092b 05       		.uleb128 0x5
+ 1689 092c 03       		.byte	0x3
+ 1690 092d 00000000 		.4byte	numberKeys2
+ 1691 0931 20       		.uleb128 0x20
+ 1692 0932 3F040000 		.4byte	.LASF105
+ 1693 0936 05       		.byte	0x5
+ 1694 0937 36       		.byte	0x36
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 35
+
+
+ 1695 0938 E8000000 		.4byte	0xe8
+ 1696 093c 05       		.uleb128 0x5
+ 1697 093d 03       		.byte	0x3
+ 1698 093e 00000000 		.4byte	flagPoint1
+ 1699 0942 20       		.uleb128 0x20
+ 1700 0943 DD000000 		.4byte	.LASF106
+ 1701 0947 05       		.byte	0x5
+ 1702 0948 37       		.byte	0x37
+ 1703 0949 E8000000 		.4byte	0xe8
+ 1704 094d 05       		.uleb128 0x5
+ 1705 094e 03       		.byte	0x3
+ 1706 094f 00000000 		.4byte	flagPoint2
+ 1707 0953 07       		.uleb128 0x7
+ 1708 0954 97000000 		.4byte	0x97
+ 1709 0958 69090000 		.4byte	0x969
+ 1710 095c 08       		.uleb128 0x8
+ 1711 095d F2000000 		.4byte	0xf2
+ 1712 0961 77       		.byte	0x77
+ 1713 0962 08       		.uleb128 0x8
+ 1714 0963 F2000000 		.4byte	0xf2
+ 1715 0967 07       		.byte	0x7
+ 1716 0968 00       		.byte	0
+ 1717 0969 20       		.uleb128 0x20
+ 1718 096a E0010000 		.4byte	.LASF107
+ 1719 096e 05       		.byte	0x5
+ 1720 096f 38       		.byte	0x38
+ 1721 0970 7A090000 		.4byte	0x97a
+ 1722 0974 05       		.uleb128 0x5
+ 1723 0975 03       		.byte	0x3
+ 1724 0976 00000000 		.4byte	button
+ 1725 097a 06       		.uleb128 0x6
+ 1726 097b 53090000 		.4byte	0x953
+ 1727 097f 20       		.uleb128 0x20
+ 1728 0980 79010000 		.4byte	.LASF108
+ 1729 0984 05       		.byte	0x5
+ 1730 0985 39       		.byte	0x39
+ 1731 0986 E8000000 		.4byte	0xe8
+ 1732 098a 05       		.uleb128 0x5
+ 1733 098b 03       		.byte	0x3
+ 1734 098c 00000000 		.4byte	productNumber
+ 1735 0990 20       		.uleb128 0x20
+ 1736 0991 17030000 		.4byte	.LASF109
+ 1737 0995 05       		.byte	0x5
+ 1738 0996 3A       		.byte	0x3a
+ 1739 0997 57040000 		.4byte	0x457
+ 1740 099b 05       		.uleb128 0x5
+ 1741 099c 03       		.byte	0x3
+ 1742 099d 00000000 		.4byte	presetFast
+ 1743 09a1 20       		.uleb128 0x20
+ 1744 09a2 3F050000 		.4byte	.LASF110
+ 1745 09a6 05       		.byte	0x5
+ 1746 09a7 3B       		.byte	0x3b
+ 1747 09a8 ED000000 		.4byte	0xed
+ 1748 09ac 05       		.uleb128 0x5
+ 1749 09ad 03       		.byte	0x3
+ 1750 09ae 00000000 		.4byte	delayPicture1
+ 1751 09b2 20       		.uleb128 0x20
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 36
+
+
+ 1752 09b3 4D050000 		.4byte	.LASF111
+ 1753 09b7 05       		.byte	0x5
+ 1754 09b8 3C       		.byte	0x3c
+ 1755 09b9 ED000000 		.4byte	0xed
+ 1756 09bd 05       		.uleb128 0x5
+ 1757 09be 03       		.byte	0x3
+ 1758 09bf 00000000 		.4byte	delayPicture2
+ 1759 09c3 20       		.uleb128 0x20
+ 1760 09c4 25040000 		.4byte	.LASF112
+ 1761 09c8 05       		.byte	0x5
+ 1762 09c9 3D       		.byte	0x3d
+ 1763 09ca E8000000 		.4byte	0xe8
+ 1764 09ce 05       		.uleb128 0x5
+ 1765 09cf 03       		.byte	0x3
+ 1766 09d0 00000000 		.4byte	ppux10
+ 1767 09d4 20       		.uleb128 0x20
+ 1768 09d5 41000000 		.4byte	.LASF113
+ 1769 09d9 05       		.byte	0x5
+ 1770 09da 3E       		.byte	0x3e
+ 1771 09db E8000000 		.4byte	0xe8
+ 1772 09df 05       		.uleb128 0x5
+ 1773 09e0 03       		.byte	0x3
+ 1774 09e1 00000000 		.4byte	decimalMoney
+ 1775 09e5 20       		.uleb128 0x20
+ 1776 09e6 05000000 		.4byte	.LASF114
+ 1777 09ea 05       		.byte	0x5
+ 1778 09eb 3F       		.byte	0x3f
+ 1779 09ec E8000000 		.4byte	0xe8
+ 1780 09f0 05       		.uleb128 0x5
+ 1781 09f1 03       		.byte	0x3
+ 1782 09f2 00000000 		.4byte	decimalVolume
+ 1783 09f6 20       		.uleb128 0x20
+ 1784 09f7 5C040000 		.4byte	.LASF115
+ 1785 09fb 05       		.byte	0x5
+ 1786 09fc 40       		.byte	0x40
+ 1787 09fd 070A0000 		.4byte	0xa07
+ 1788 0a01 05       		.uleb128 0x5
+ 1789 0a02 03       		.byte	0x3
+ 1790 0a03 00000000 		.4byte	symbols
+ 1791 0a07 06       		.uleb128 0x6
+ 1792 0a08 B5030000 		.4byte	0x3b5
+ 1793 0a0c 07       		.uleb128 0x7
+ 1794 0a0d 97000000 		.4byte	0x97
+ 1795 0a11 1C0A0000 		.4byte	0xa1c
+ 1796 0a15 08       		.uleb128 0x8
+ 1797 0a16 F2000000 		.4byte	0xf2
+ 1798 0a1a 02       		.byte	0x2
+ 1799 0a1b 00       		.byte	0
+ 1800 0a1c 20       		.uleb128 0x20
+ 1801 0a1d 68010000 		.4byte	.LASF116
+ 1802 0a21 05       		.byte	0x5
+ 1803 0a22 41       		.byte	0x41
+ 1804 0a23 2D0A0000 		.4byte	0xa2d
+ 1805 0a27 05       		.uleb128 0x5
+ 1806 0a28 03       		.byte	0x3
+ 1807 0a29 00000000 		.4byte	time
+ 1808 0a2d 06       		.uleb128 0x6
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 37
+
+
+ 1809 0a2e 0C0A0000 		.4byte	0xa0c
+ 1810 0a32 20       		.uleb128 0x20
+ 1811 0a33 AF020000 		.4byte	.LASF117
+ 1812 0a37 05       		.byte	0x5
+ 1813 0a38 42       		.byte	0x42
+ 1814 0a39 430A0000 		.4byte	0xa43
+ 1815 0a3d 05       		.uleb128 0x5
+ 1816 0a3e 03       		.byte	0x3
+ 1817 0a3f 00000000 		.4byte	date
+ 1818 0a43 06       		.uleb128 0x6
+ 1819 0a44 0C0A0000 		.4byte	0xa0c
+ 1820 0a48 20       		.uleb128 0x20
+ 1821 0a49 E8000000 		.4byte	.LASF118
+ 1822 0a4d 05       		.byte	0x5
+ 1823 0a4e 43       		.byte	0x43
+ 1824 0a4f 590A0000 		.4byte	0xa59
+ 1825 0a53 05       		.uleb128 0x5
+ 1826 0a54 03       		.byte	0x3
+ 1827 0a55 00000000 		.4byte	screen
+ 1828 0a59 06       		.uleb128 0x6
+ 1829 0a5a B5030000 		.4byte	0x3b5
+ 1830 0a5e 20       		.uleb128 0x20
+ 1831 0a5f 8E000000 		.4byte	.LASF119
+ 1832 0a63 05       		.byte	0x5
+ 1833 0a64 44       		.byte	0x44
+ 1834 0a65 6F0A0000 		.4byte	0xa6f
+ 1835 0a69 05       		.uleb128 0x5
+ 1836 0a6a 03       		.byte	0x3
+ 1837 0a6b 00000000 		.4byte	residue
+ 1838 0a6f 06       		.uleb128 0x6
+ 1839 0a70 FB030000 		.4byte	0x3fb
+ 1840 0a74 07       		.uleb128 0x7
+ 1841 0a75 97000000 		.4byte	0x97
+ 1842 0a79 840A0000 		.4byte	0xa84
+ 1843 0a7d 08       		.uleb128 0x8
+ 1844 0a7e F2000000 		.4byte	0xf2
+ 1845 0a82 1D       		.byte	0x1d
+ 1846 0a83 00       		.byte	0
+ 1847 0a84 20       		.uleb128 0x20
+ 1848 0a85 FE060000 		.4byte	.LASF120
+ 1849 0a89 05       		.byte	0x5
+ 1850 0a8a 45       		.byte	0x45
+ 1851 0a8b 740A0000 		.4byte	0xa74
+ 1852 0a8f 05       		.uleb128 0x5
+ 1853 0a90 03       		.byte	0x3
+ 1854 0a91 00000000 		.4byte	temporal
+ 1855 0a95 20       		.uleb128 0x20
+ 1856 0a96 13000000 		.4byte	.LASF121
+ 1857 0a9a 05       		.byte	0x5
+ 1858 0a9b 46       		.byte	0x46
+ 1859 0a9c 740A0000 		.4byte	0xa74
+ 1860 0aa0 05       		.uleb128 0x5
+ 1861 0aa1 03       		.byte	0x3
+ 1862 0aa2 00000000 		.4byte	temporalCom
+ 1863 0aa6 20       		.uleb128 0x20
+ 1864 0aa7 27020000 		.4byte	.LASF122
+ 1865 0aab 05       		.byte	0x5
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 38
+
+
+ 1866 0aac 47       		.byte	0x47
+ 1867 0aad E8000000 		.4byte	0xe8
+ 1868 0ab1 05       		.uleb128 0x5
+ 1869 0ab2 03       		.byte	0x3
+ 1870 0ab3 00000000 		.4byte	turn
+ 1871 0ab7 20       		.uleb128 0x20
+ 1872 0ab8 A4040000 		.4byte	.LASF123
+ 1873 0abc 05       		.byte	0x5
+ 1874 0abd 48       		.byte	0x48
+ 1875 0abe E8000000 		.4byte	0xe8
+ 1876 0ac2 05       		.uleb128 0x5
+ 1877 0ac3 03       		.byte	0x3
+ 1878 0ac4 00000000 		.4byte	lockTurn
+ 1879 0ac8 20       		.uleb128 0x20
+ 1880 0ac9 AA060000 		.4byte	.LASF124
+ 1881 0acd 05       		.byte	0x5
+ 1882 0ace 49       		.byte	0x49
+ 1883 0acf D90A0000 		.4byte	0xad9
+ 1884 0ad3 05       		.uleb128 0x5
+ 1885 0ad4 03       		.byte	0x3
+ 1886 0ad5 00000000 		.4byte	idSeller
+ 1887 0ad9 06       		.uleb128 0x6
+ 1888 0ada 85030000 		.4byte	0x385
+ 1889 0ade 20       		.uleb128 0x20
+ 1890 0adf 86050000 		.4byte	.LASF125
+ 1891 0ae3 05       		.byte	0x5
+ 1892 0ae4 4A       		.byte	0x4a
+ 1893 0ae5 E8000000 		.4byte	0xe8
+ 1894 0ae9 05       		.uleb128 0x5
+ 1895 0aea 03       		.byte	0x3
+ 1896 0aeb 00000000 		.4byte	typeIdSeller
+ 1897 0aef 07       		.uleb128 0x7
+ 1898 0af0 97000000 		.4byte	0x97
+ 1899 0af4 FF0A0000 		.4byte	0xaff
+ 1900 0af8 08       		.uleb128 0x8
+ 1901 0af9 F2000000 		.4byte	0xf2
+ 1902 0afd 07       		.byte	0x7
+ 1903 0afe 00       		.byte	0
+ 1904 0aff 20       		.uleb128 0x20
+ 1905 0b00 0F050000 		.4byte	.LASF126
+ 1906 0b04 05       		.byte	0x5
+ 1907 0b05 4B       		.byte	0x4b
+ 1908 0b06 100B0000 		.4byte	0xb10
+ 1909 0b0a 05       		.uleb128 0x5
+ 1910 0b0b 03       		.byte	0x3
+ 1911 0b0c 00000000 		.4byte	passwordSeller
+ 1912 0b10 06       		.uleb128 0x6
+ 1913 0b11 EF0A0000 		.4byte	0xaef
+ 1914 0b15 20       		.uleb128 0x20
+ 1915 0b16 F9030000 		.4byte	.LASF127
+ 1916 0b1a 05       		.byte	0x5
+ 1917 0b1b 4C       		.byte	0x4c
+ 1918 0b1c E8000000 		.4byte	0xe8
+ 1919 0b20 05       		.uleb128 0x5
+ 1920 0b21 03       		.byte	0x3
+ 1921 0b22 00000000 		.4byte	flagResetMux
+ 1922 0b26 20       		.uleb128 0x20
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 39
+
+
+ 1923 0b27 52030000 		.4byte	.LASF128
+ 1924 0b2b 05       		.byte	0x5
+ 1925 0b2c 4D       		.byte	0x4d
+ 1926 0b2d E8000000 		.4byte	0xe8
+ 1927 0b31 05       		.uleb128 0x5
+ 1928 0b32 03       		.byte	0x3
+ 1929 0b33 00000000 		.4byte	stateBeagleSoft
+ 1930 0b37 20       		.uleb128 0x20
+ 1931 0b38 28010000 		.4byte	.LASF129
+ 1932 0b3c 05       		.byte	0x5
+ 1933 0b3d 4E       		.byte	0x4e
+ 1934 0b3e 480B0000 		.4byte	0xb48
+ 1935 0b42 05       		.uleb128 0x5
+ 1936 0b43 03       		.byte	0x3
+ 1937 0b44 00000000 		.4byte	PrevStatePump
+ 1938 0b48 06       		.uleb128 0x6
+ 1939 0b49 F9000000 		.4byte	0xf9
+ 1940 0b4d 20       		.uleb128 0x20
+ 1941 0b4e 2F050000 		.4byte	.LASF130
+ 1942 0b52 05       		.byte	0x5
+ 1943 0b53 50       		.byte	0x50
+ 1944 0b54 97000000 		.4byte	0x97
+ 1945 0b58 05       		.uleb128 0x5
+ 1946 0b59 03       		.byte	0x3
+ 1947 0b5a 00000000 		.4byte	UnitType
+ 1948 0b5e 20       		.uleb128 0x20
+ 1949 0b5f 4F020000 		.4byte	.LASF131
+ 1950 0b63 05       		.byte	0x5
+ 1951 0b64 50       		.byte	0x50
+ 1952 0b65 97000000 		.4byte	0x97
+ 1953 0b69 05       		.uleb128 0x5
+ 1954 0b6a 03       		.byte	0x3
+ 1955 0b6b 00000000 		.4byte	ConversionFactor
+ 1956 0b6f 20       		.uleb128 0x20
+ 1957 0b70 1F010000 		.4byte	.LASF132
+ 1958 0b74 05       		.byte	0x5
+ 1959 0b75 50       		.byte	0x50
+ 1960 0b76 97000000 		.4byte	0x97
+ 1961 0b7a 05       		.uleb128 0x5
+ 1962 0b7b 03       		.byte	0x3
+ 1963 0b7c 00000000 		.4byte	MoneyDec
+ 1964 0b80 20       		.uleb128 0x20
+ 1965 0b81 90040000 		.4byte	.LASF133
+ 1966 0b85 05       		.byte	0x5
+ 1967 0b86 50       		.byte	0x50
+ 1968 0b87 97000000 		.4byte	0x97
+ 1969 0b8b 05       		.uleb128 0x5
+ 1970 0b8c 03       		.byte	0x3
+ 1971 0b8d 00000000 		.4byte	VolDec
+ 1972 0b91 20       		.uleb128 0x20
+ 1973 0b92 7F050000 		.4byte	.LASF134
+ 1974 0b96 05       		.byte	0x5
+ 1975 0b97 50       		.byte	0x50
+ 1976 0b98 97000000 		.4byte	0x97
+ 1977 0b9c 05       		.uleb128 0x5
+ 1978 0b9d 03       		.byte	0x3
+ 1979 0b9e 00000000 		.4byte	PPUDec
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 40
+
+
+ 1980 0ba2 20       		.uleb128 0x20
+ 1981 0ba3 9D000000 		.4byte	.LASF135
+ 1982 0ba7 05       		.byte	0x5
+ 1983 0ba8 50       		.byte	0x50
+ 1984 0ba9 97000000 		.4byte	0x97
+ 1985 0bad 05       		.uleb128 0x5
+ 1986 0bae 03       		.byte	0x3
+ 1987 0baf 00000000 		.4byte	DDMode
+ 1988 0bb3 20       		.uleb128 0x20
+ 1989 0bb4 27000000 		.4byte	.LASF136
+ 1990 0bb8 05       		.byte	0x5
+ 1991 0bb9 51       		.byte	0x51
+ 1992 0bba F9000000 		.4byte	0xf9
+ 1993 0bbe 05       		.uleb128 0x5
+ 1994 0bbf 03       		.byte	0x3
+ 1995 0bc0 00000000 		.4byte	statePump
+ 1996 0bc4 20       		.uleb128 0x20
+ 1997 0bc5 C0070000 		.4byte	.LASF137
+ 1998 0bc9 05       		.byte	0x5
+ 1999 0bca 90       		.byte	0x90
+ 2000 0bcb 09010000 		.4byte	0x109
+ 2001 0bcf 05       		.uleb128 0x5
+ 2002 0bd0 03       		.byte	0x3
+ 2003 0bd1 00000000 		.4byte	bufferDisplay1
+ 2004 0bd5 20       		.uleb128 0x20
+ 2005 0bd6 D8040000 		.4byte	.LASF138
+ 2006 0bda 05       		.byte	0x5
+ 2007 0bdb 91       		.byte	0x91
+ 2008 0bdc 09010000 		.4byte	0x109
+ 2009 0be0 05       		.uleb128 0x5
+ 2010 0be1 03       		.byte	0x3
+ 2011 0be2 00000000 		.4byte	bufferDisplay2
+ 2012 0be6 20       		.uleb128 0x20
+ 2013 0be7 E7040000 		.4byte	.LASF139
+ 2014 0beb 05       		.byte	0x5
+ 2015 0bec 92       		.byte	0x92
+ 2016 0bed 09010000 		.4byte	0x109
+ 2017 0bf1 05       		.uleb128 0x5
+ 2018 0bf2 03       		.byte	0x3
+ 2019 0bf3 00000000 		.4byte	bufferDisplay3
+ 2020 0bf7 20       		.uleb128 0x20
+ 2021 0bf8 F6040000 		.4byte	.LASF140
+ 2022 0bfc 05       		.byte	0x5
+ 2023 0bfd 93       		.byte	0x93
+ 2024 0bfe 09010000 		.4byte	0x109
+ 2025 0c02 05       		.uleb128 0x5
+ 2026 0c03 03       		.byte	0x3
+ 2027 0c04 00000000 		.4byte	bufferDisplay4
+ 2028 0c08 20       		.uleb128 0x20
+ 2029 0c09 9F010000 		.4byte	.LASF90
+ 2030 0c0d 05       		.byte	0x5
+ 2031 0c0e AF       		.byte	0xaf
+ 2032 0c0f 11050000 		.4byte	0x511
+ 2033 0c13 05       		.uleb128 0x5
+ 2034 0c14 03       		.byte	0x3
+ 2035 0c15 00000000 		.4byte	side
+ 2036 0c19 21       		.uleb128 0x21
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 41
+
+
+ 2037 0c1a 0C010000 		.4byte	.LASF150
+ 2038 0c1e 07       		.byte	0x7
+ 2039 0c1f 75       		.byte	0x75
+ 2040 0c20 22       		.uleb128 0x22
+ 2041 0c21 EC050000 		.4byte	.LASF141
+ 2042 0c25 07       		.byte	0x7
+ 2043 0c26 8A       		.byte	0x8a
+ 2044 0c27 310C0000 		.4byte	0xc31
+ 2045 0c2b 23       		.uleb128 0x23
+ 2046 0c2c 97000000 		.4byte	0x97
+ 2047 0c30 00       		.byte	0
+ 2048 0c31 22       		.uleb128 0x22
+ 2049 0c32 91020000 		.4byte	.LASF142
+ 2050 0c36 08       		.byte	0x8
+ 2051 0c37 77       		.byte	0x77
+ 2052 0c38 420C0000 		.4byte	0xc42
+ 2053 0c3c 23       		.uleb128 0x23
+ 2054 0c3d AF000000 		.4byte	0xaf
+ 2055 0c41 00       		.byte	0
+ 2056 0c42 24       		.uleb128 0x24
+ 2057 0c43 A4010000 		.4byte	.LASF143
+ 2058 0c47 07       		.byte	0x7
+ 2059 0c48 73       		.byte	0x73
+ 2060 0c49 A3000000 		.4byte	0xa3
+ 2061 0c4d 24       		.uleb128 0x24
+ 2062 0c4e BC020000 		.4byte	.LASF144
+ 2063 0c52 07       		.byte	0x7
+ 2064 0c53 6F       		.byte	0x6f
+ 2065 0c54 97000000 		.4byte	0x97
+ 2066 0c58 00       		.byte	0
+ 2067              		.section	.debug_abbrev,"",%progbits
+ 2068              	.Ldebug_abbrev0:
+ 2069 0000 01       		.uleb128 0x1
+ 2070 0001 11       		.uleb128 0x11
+ 2071 0002 01       		.byte	0x1
+ 2072 0003 25       		.uleb128 0x25
+ 2073 0004 0E       		.uleb128 0xe
+ 2074 0005 13       		.uleb128 0x13
+ 2075 0006 0B       		.uleb128 0xb
+ 2076 0007 03       		.uleb128 0x3
+ 2077 0008 0E       		.uleb128 0xe
+ 2078 0009 1B       		.uleb128 0x1b
+ 2079 000a 0E       		.uleb128 0xe
+ 2080 000b 55       		.uleb128 0x55
+ 2081 000c 17       		.uleb128 0x17
+ 2082 000d 11       		.uleb128 0x11
+ 2083 000e 01       		.uleb128 0x1
+ 2084 000f 10       		.uleb128 0x10
+ 2085 0010 17       		.uleb128 0x17
+ 2086 0011 00       		.byte	0
+ 2087 0012 00       		.byte	0
+ 2088 0013 02       		.uleb128 0x2
+ 2089 0014 24       		.uleb128 0x24
+ 2090 0015 00       		.byte	0
+ 2091 0016 0B       		.uleb128 0xb
+ 2092 0017 0B       		.uleb128 0xb
+ 2093 0018 3E       		.uleb128 0x3e
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 42
+
+
+ 2094 0019 0B       		.uleb128 0xb
+ 2095 001a 03       		.uleb128 0x3
+ 2096 001b 0E       		.uleb128 0xe
+ 2097 001c 00       		.byte	0
+ 2098 001d 00       		.byte	0
+ 2099 001e 03       		.uleb128 0x3
+ 2100 001f 16       		.uleb128 0x16
+ 2101 0020 00       		.byte	0
+ 2102 0021 03       		.uleb128 0x3
+ 2103 0022 0E       		.uleb128 0xe
+ 2104 0023 3A       		.uleb128 0x3a
+ 2105 0024 0B       		.uleb128 0xb
+ 2106 0025 3B       		.uleb128 0x3b
+ 2107 0026 0B       		.uleb128 0xb
+ 2108 0027 49       		.uleb128 0x49
+ 2109 0028 13       		.uleb128 0x13
+ 2110 0029 00       		.byte	0
+ 2111 002a 00       		.byte	0
+ 2112 002b 04       		.uleb128 0x4
+ 2113 002c 24       		.uleb128 0x24
+ 2114 002d 00       		.byte	0
+ 2115 002e 0B       		.uleb128 0xb
+ 2116 002f 0B       		.uleb128 0xb
+ 2117 0030 3E       		.uleb128 0x3e
+ 2118 0031 0B       		.uleb128 0xb
+ 2119 0032 03       		.uleb128 0x3
+ 2120 0033 08       		.uleb128 0x8
+ 2121 0034 00       		.byte	0
+ 2122 0035 00       		.byte	0
+ 2123 0036 05       		.uleb128 0x5
+ 2124 0037 16       		.uleb128 0x16
+ 2125 0038 00       		.byte	0
+ 2126 0039 03       		.uleb128 0x3
+ 2127 003a 0E       		.uleb128 0xe
+ 2128 003b 3A       		.uleb128 0x3a
+ 2129 003c 0B       		.uleb128 0xb
+ 2130 003d 3B       		.uleb128 0x3b
+ 2131 003e 05       		.uleb128 0x5
+ 2132 003f 49       		.uleb128 0x49
+ 2133 0040 13       		.uleb128 0x13
+ 2134 0041 00       		.byte	0
+ 2135 0042 00       		.byte	0
+ 2136 0043 06       		.uleb128 0x6
+ 2137 0044 35       		.uleb128 0x35
+ 2138 0045 00       		.byte	0
+ 2139 0046 49       		.uleb128 0x49
+ 2140 0047 13       		.uleb128 0x13
+ 2141 0048 00       		.byte	0
+ 2142 0049 00       		.byte	0
+ 2143 004a 07       		.uleb128 0x7
+ 2144 004b 01       		.uleb128 0x1
+ 2145 004c 01       		.byte	0x1
+ 2146 004d 49       		.uleb128 0x49
+ 2147 004e 13       		.uleb128 0x13
+ 2148 004f 01       		.uleb128 0x1
+ 2149 0050 13       		.uleb128 0x13
+ 2150 0051 00       		.byte	0
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 43
+
+
+ 2151 0052 00       		.byte	0
+ 2152 0053 08       		.uleb128 0x8
+ 2153 0054 21       		.uleb128 0x21
+ 2154 0055 00       		.byte	0
+ 2155 0056 49       		.uleb128 0x49
+ 2156 0057 13       		.uleb128 0x13
+ 2157 0058 2F       		.uleb128 0x2f
+ 2158 0059 0B       		.uleb128 0xb
+ 2159 005a 00       		.byte	0
+ 2160 005b 00       		.byte	0
+ 2161 005c 09       		.uleb128 0x9
+ 2162 005d 13       		.uleb128 0x13
+ 2163 005e 01       		.byte	0x1
+ 2164 005f 03       		.uleb128 0x3
+ 2165 0060 0E       		.uleb128 0xe
+ 2166 0061 0B       		.uleb128 0xb
+ 2167 0062 05       		.uleb128 0x5
+ 2168 0063 3A       		.uleb128 0x3a
+ 2169 0064 0B       		.uleb128 0xb
+ 2170 0065 3B       		.uleb128 0x3b
+ 2171 0066 0B       		.uleb128 0xb
+ 2172 0067 01       		.uleb128 0x1
+ 2173 0068 13       		.uleb128 0x13
+ 2174 0069 00       		.byte	0
+ 2175 006a 00       		.byte	0
+ 2176 006b 0A       		.uleb128 0xa
+ 2177 006c 0D       		.uleb128 0xd
+ 2178 006d 00       		.byte	0
+ 2179 006e 03       		.uleb128 0x3
+ 2180 006f 0E       		.uleb128 0xe
+ 2181 0070 3A       		.uleb128 0x3a
+ 2182 0071 0B       		.uleb128 0xb
+ 2183 0072 3B       		.uleb128 0x3b
+ 2184 0073 0B       		.uleb128 0xb
+ 2185 0074 49       		.uleb128 0x49
+ 2186 0075 13       		.uleb128 0x13
+ 2187 0076 38       		.uleb128 0x38
+ 2188 0077 0B       		.uleb128 0xb
+ 2189 0078 00       		.byte	0
+ 2190 0079 00       		.byte	0
+ 2191 007a 0B       		.uleb128 0xb
+ 2192 007b 0D       		.uleb128 0xd
+ 2193 007c 00       		.byte	0
+ 2194 007d 03       		.uleb128 0x3
+ 2195 007e 0E       		.uleb128 0xe
+ 2196 007f 3A       		.uleb128 0x3a
+ 2197 0080 0B       		.uleb128 0xb
+ 2198 0081 3B       		.uleb128 0x3b
+ 2199 0082 0B       		.uleb128 0xb
+ 2200 0083 49       		.uleb128 0x49
+ 2201 0084 13       		.uleb128 0x13
+ 2202 0085 38       		.uleb128 0x38
+ 2203 0086 05       		.uleb128 0x5
+ 2204 0087 00       		.byte	0
+ 2205 0088 00       		.byte	0
+ 2206 0089 0C       		.uleb128 0xc
+ 2207 008a 0D       		.uleb128 0xd
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 44
+
+
+ 2208 008b 00       		.byte	0
+ 2209 008c 03       		.uleb128 0x3
+ 2210 008d 08       		.uleb128 0x8
+ 2211 008e 3A       		.uleb128 0x3a
+ 2212 008f 0B       		.uleb128 0xb
+ 2213 0090 3B       		.uleb128 0x3b
+ 2214 0091 0B       		.uleb128 0xb
+ 2215 0092 49       		.uleb128 0x49
+ 2216 0093 13       		.uleb128 0x13
+ 2217 0094 38       		.uleb128 0x38
+ 2218 0095 0B       		.uleb128 0xb
+ 2219 0096 00       		.byte	0
+ 2220 0097 00       		.byte	0
+ 2221 0098 0D       		.uleb128 0xd
+ 2222 0099 0D       		.uleb128 0xd
+ 2223 009a 00       		.byte	0
+ 2224 009b 03       		.uleb128 0x3
+ 2225 009c 08       		.uleb128 0x8
+ 2226 009d 3A       		.uleb128 0x3a
+ 2227 009e 0B       		.uleb128 0xb
+ 2228 009f 3B       		.uleb128 0x3b
+ 2229 00a0 0B       		.uleb128 0xb
+ 2230 00a1 49       		.uleb128 0x49
+ 2231 00a2 13       		.uleb128 0x13
+ 2232 00a3 38       		.uleb128 0x38
+ 2233 00a4 05       		.uleb128 0x5
+ 2234 00a5 00       		.byte	0
+ 2235 00a6 00       		.byte	0
+ 2236 00a7 0E       		.uleb128 0xe
+ 2237 00a8 04       		.uleb128 0x4
+ 2238 00a9 01       		.byte	0x1
+ 2239 00aa 03       		.uleb128 0x3
+ 2240 00ab 0E       		.uleb128 0xe
+ 2241 00ac 0B       		.uleb128 0xb
+ 2242 00ad 0B       		.uleb128 0xb
+ 2243 00ae 3A       		.uleb128 0x3a
+ 2244 00af 0B       		.uleb128 0xb
+ 2245 00b0 3B       		.uleb128 0x3b
+ 2246 00b1 0B       		.uleb128 0xb
+ 2247 00b2 01       		.uleb128 0x1
+ 2248 00b3 13       		.uleb128 0x13
+ 2249 00b4 00       		.byte	0
+ 2250 00b5 00       		.byte	0
+ 2251 00b6 0F       		.uleb128 0xf
+ 2252 00b7 28       		.uleb128 0x28
+ 2253 00b8 00       		.byte	0
+ 2254 00b9 03       		.uleb128 0x3
+ 2255 00ba 08       		.uleb128 0x8
+ 2256 00bb 1C       		.uleb128 0x1c
+ 2257 00bc 0D       		.uleb128 0xd
+ 2258 00bd 00       		.byte	0
+ 2259 00be 00       		.byte	0
+ 2260 00bf 10       		.uleb128 0x10
+ 2261 00c0 28       		.uleb128 0x28
+ 2262 00c1 00       		.byte	0
+ 2263 00c2 03       		.uleb128 0x3
+ 2264 00c3 0E       		.uleb128 0xe
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 45
+
+
+ 2265 00c4 1C       		.uleb128 0x1c
+ 2266 00c5 0D       		.uleb128 0xd
+ 2267 00c6 00       		.byte	0
+ 2268 00c7 00       		.byte	0
+ 2269 00c8 11       		.uleb128 0x11
+ 2270 00c9 2E       		.uleb128 0x2e
+ 2271 00ca 01       		.byte	0x1
+ 2272 00cb 3F       		.uleb128 0x3f
+ 2273 00cc 19       		.uleb128 0x19
+ 2274 00cd 03       		.uleb128 0x3
+ 2275 00ce 0E       		.uleb128 0xe
+ 2276 00cf 3A       		.uleb128 0x3a
+ 2277 00d0 0B       		.uleb128 0xb
+ 2278 00d1 3B       		.uleb128 0x3b
+ 2279 00d2 0B       		.uleb128 0xb
+ 2280 00d3 27       		.uleb128 0x27
+ 2281 00d4 19       		.uleb128 0x19
+ 2282 00d5 49       		.uleb128 0x49
+ 2283 00d6 13       		.uleb128 0x13
+ 2284 00d7 11       		.uleb128 0x11
+ 2285 00d8 01       		.uleb128 0x1
+ 2286 00d9 12       		.uleb128 0x12
+ 2287 00da 06       		.uleb128 0x6
+ 2288 00db 40       		.uleb128 0x40
+ 2289 00dc 18       		.uleb128 0x18
+ 2290 00dd 9742     		.uleb128 0x2117
+ 2291 00df 19       		.uleb128 0x19
+ 2292 00e0 01       		.uleb128 0x1
+ 2293 00e1 13       		.uleb128 0x13
+ 2294 00e2 00       		.byte	0
+ 2295 00e3 00       		.byte	0
+ 2296 00e4 12       		.uleb128 0x12
+ 2297 00e5 05       		.uleb128 0x5
+ 2298 00e6 00       		.byte	0
+ 2299 00e7 03       		.uleb128 0x3
+ 2300 00e8 08       		.uleb128 0x8
+ 2301 00e9 3A       		.uleb128 0x3a
+ 2302 00ea 0B       		.uleb128 0xb
+ 2303 00eb 3B       		.uleb128 0x3b
+ 2304 00ec 0B       		.uleb128 0xb
+ 2305 00ed 49       		.uleb128 0x49
+ 2306 00ee 13       		.uleb128 0x13
+ 2307 00ef 02       		.uleb128 0x2
+ 2308 00f0 17       		.uleb128 0x17
+ 2309 00f1 00       		.byte	0
+ 2310 00f2 00       		.byte	0
+ 2311 00f3 13       		.uleb128 0x13
+ 2312 00f4 34       		.uleb128 0x34
+ 2313 00f5 00       		.byte	0
+ 2314 00f6 03       		.uleb128 0x3
+ 2315 00f7 0E       		.uleb128 0xe
+ 2316 00f8 3A       		.uleb128 0x3a
+ 2317 00f9 0B       		.uleb128 0xb
+ 2318 00fa 3B       		.uleb128 0x3b
+ 2319 00fb 0B       		.uleb128 0xb
+ 2320 00fc 49       		.uleb128 0x49
+ 2321 00fd 13       		.uleb128 0x13
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 46
+
+
+ 2322 00fe 02       		.uleb128 0x2
+ 2323 00ff 17       		.uleb128 0x17
+ 2324 0100 00       		.byte	0
+ 2325 0101 00       		.byte	0
+ 2326 0102 14       		.uleb128 0x14
+ 2327 0103 898201   		.uleb128 0x4109
+ 2328 0106 00       		.byte	0
+ 2329 0107 11       		.uleb128 0x11
+ 2330 0108 01       		.uleb128 0x1
+ 2331 0109 31       		.uleb128 0x31
+ 2332 010a 13       		.uleb128 0x13
+ 2333 010b 00       		.byte	0
+ 2334 010c 00       		.byte	0
+ 2335 010d 15       		.uleb128 0x15
+ 2336 010e 898201   		.uleb128 0x4109
+ 2337 0111 01       		.byte	0x1
+ 2338 0112 11       		.uleb128 0x11
+ 2339 0113 01       		.uleb128 0x1
+ 2340 0114 31       		.uleb128 0x31
+ 2341 0115 13       		.uleb128 0x13
+ 2342 0116 01       		.uleb128 0x1
+ 2343 0117 13       		.uleb128 0x13
+ 2344 0118 00       		.byte	0
+ 2345 0119 00       		.byte	0
+ 2346 011a 16       		.uleb128 0x16
+ 2347 011b 8A8201   		.uleb128 0x410a
+ 2348 011e 00       		.byte	0
+ 2349 011f 02       		.uleb128 0x2
+ 2350 0120 18       		.uleb128 0x18
+ 2351 0121 9142     		.uleb128 0x2111
+ 2352 0123 18       		.uleb128 0x18
+ 2353 0124 00       		.byte	0
+ 2354 0125 00       		.byte	0
+ 2355 0126 17       		.uleb128 0x17
+ 2356 0127 34       		.uleb128 0x34
+ 2357 0128 00       		.byte	0
+ 2358 0129 03       		.uleb128 0x3
+ 2359 012a 08       		.uleb128 0x8
+ 2360 012b 3A       		.uleb128 0x3a
+ 2361 012c 0B       		.uleb128 0xb
+ 2362 012d 3B       		.uleb128 0x3b
+ 2363 012e 0B       		.uleb128 0xb
+ 2364 012f 49       		.uleb128 0x49
+ 2365 0130 13       		.uleb128 0x13
+ 2366 0131 02       		.uleb128 0x2
+ 2367 0132 17       		.uleb128 0x17
+ 2368 0133 00       		.byte	0
+ 2369 0134 00       		.byte	0
+ 2370 0135 18       		.uleb128 0x18
+ 2371 0136 2E       		.uleb128 0x2e
+ 2372 0137 00       		.byte	0
+ 2373 0138 3F       		.uleb128 0x3f
+ 2374 0139 19       		.uleb128 0x19
+ 2375 013a 03       		.uleb128 0x3
+ 2376 013b 0E       		.uleb128 0xe
+ 2377 013c 3A       		.uleb128 0x3a
+ 2378 013d 0B       		.uleb128 0xb
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 47
+
+
+ 2379 013e 3B       		.uleb128 0x3b
+ 2380 013f 0B       		.uleb128 0xb
+ 2381 0140 11       		.uleb128 0x11
+ 2382 0141 01       		.uleb128 0x1
+ 2383 0142 12       		.uleb128 0x12
+ 2384 0143 06       		.uleb128 0x6
+ 2385 0144 40       		.uleb128 0x40
+ 2386 0145 18       		.uleb128 0x18
+ 2387 0146 9742     		.uleb128 0x2117
+ 2388 0148 19       		.uleb128 0x19
+ 2389 0149 00       		.byte	0
+ 2390 014a 00       		.byte	0
+ 2391 014b 19       		.uleb128 0x19
+ 2392 014c 05       		.uleb128 0x5
+ 2393 014d 00       		.byte	0
+ 2394 014e 03       		.uleb128 0x3
+ 2395 014f 0E       		.uleb128 0xe
+ 2396 0150 3A       		.uleb128 0x3a
+ 2397 0151 0B       		.uleb128 0xb
+ 2398 0152 3B       		.uleb128 0x3b
+ 2399 0153 0B       		.uleb128 0xb
+ 2400 0154 49       		.uleb128 0x49
+ 2401 0155 13       		.uleb128 0x13
+ 2402 0156 02       		.uleb128 0x2
+ 2403 0157 17       		.uleb128 0x17
+ 2404 0158 00       		.byte	0
+ 2405 0159 00       		.byte	0
+ 2406 015a 1A       		.uleb128 0x1a
+ 2407 015b 0F       		.uleb128 0xf
+ 2408 015c 00       		.byte	0
+ 2409 015d 0B       		.uleb128 0xb
+ 2410 015e 0B       		.uleb128 0xb
+ 2411 015f 49       		.uleb128 0x49
+ 2412 0160 13       		.uleb128 0x13
+ 2413 0161 00       		.byte	0
+ 2414 0162 00       		.byte	0
+ 2415 0163 1B       		.uleb128 0x1b
+ 2416 0164 34       		.uleb128 0x34
+ 2417 0165 00       		.byte	0
+ 2418 0166 03       		.uleb128 0x3
+ 2419 0167 0E       		.uleb128 0xe
+ 2420 0168 3A       		.uleb128 0x3a
+ 2421 0169 0B       		.uleb128 0xb
+ 2422 016a 3B       		.uleb128 0x3b
+ 2423 016b 0B       		.uleb128 0xb
+ 2424 016c 49       		.uleb128 0x49
+ 2425 016d 13       		.uleb128 0x13
+ 2426 016e 02       		.uleb128 0x2
+ 2427 016f 18       		.uleb128 0x18
+ 2428 0170 00       		.byte	0
+ 2429 0171 00       		.byte	0
+ 2430 0172 1C       		.uleb128 0x1c
+ 2431 0173 34       		.uleb128 0x34
+ 2432 0174 00       		.byte	0
+ 2433 0175 34       		.uleb128 0x34
+ 2434 0176 19       		.uleb128 0x19
+ 2435 0177 49       		.uleb128 0x49
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 48
+
+
+ 2436 0178 13       		.uleb128 0x13
+ 2437 0179 02       		.uleb128 0x2
+ 2438 017a 17       		.uleb128 0x17
+ 2439 017b 00       		.byte	0
+ 2440 017c 00       		.byte	0
+ 2441 017d 1D       		.uleb128 0x1d
+ 2442 017e 21       		.uleb128 0x21
+ 2443 017f 00       		.byte	0
+ 2444 0180 49       		.uleb128 0x49
+ 2445 0181 13       		.uleb128 0x13
+ 2446 0182 2F       		.uleb128 0x2f
+ 2447 0183 13       		.uleb128 0x13
+ 2448 0184 00       		.byte	0
+ 2449 0185 00       		.byte	0
+ 2450 0186 1E       		.uleb128 0x1e
+ 2451 0187 26       		.uleb128 0x26
+ 2452 0188 00       		.byte	0
+ 2453 0189 49       		.uleb128 0x49
+ 2454 018a 13       		.uleb128 0x13
+ 2455 018b 00       		.byte	0
+ 2456 018c 00       		.byte	0
+ 2457 018d 1F       		.uleb128 0x1f
+ 2458 018e 34       		.uleb128 0x34
+ 2459 018f 00       		.byte	0
+ 2460 0190 03       		.uleb128 0x3
+ 2461 0191 0E       		.uleb128 0xe
+ 2462 0192 3A       		.uleb128 0x3a
+ 2463 0193 0B       		.uleb128 0xb
+ 2464 0194 3B       		.uleb128 0x3b
+ 2465 0195 05       		.uleb128 0x5
+ 2466 0196 49       		.uleb128 0x49
+ 2467 0197 13       		.uleb128 0x13
+ 2468 0198 3F       		.uleb128 0x3f
+ 2469 0199 19       		.uleb128 0x19
+ 2470 019a 3C       		.uleb128 0x3c
+ 2471 019b 19       		.uleb128 0x19
+ 2472 019c 00       		.byte	0
+ 2473 019d 00       		.byte	0
+ 2474 019e 20       		.uleb128 0x20
+ 2475 019f 34       		.uleb128 0x34
+ 2476 01a0 00       		.byte	0
+ 2477 01a1 03       		.uleb128 0x3
+ 2478 01a2 0E       		.uleb128 0xe
+ 2479 01a3 3A       		.uleb128 0x3a
+ 2480 01a4 0B       		.uleb128 0xb
+ 2481 01a5 3B       		.uleb128 0x3b
+ 2482 01a6 0B       		.uleb128 0xb
+ 2483 01a7 49       		.uleb128 0x49
+ 2484 01a8 13       		.uleb128 0x13
+ 2485 01a9 3F       		.uleb128 0x3f
+ 2486 01aa 19       		.uleb128 0x19
+ 2487 01ab 02       		.uleb128 0x2
+ 2488 01ac 18       		.uleb128 0x18
+ 2489 01ad 00       		.byte	0
+ 2490 01ae 00       		.byte	0
+ 2491 01af 21       		.uleb128 0x21
+ 2492 01b0 2E       		.uleb128 0x2e
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 49
+
+
+ 2493 01b1 00       		.byte	0
+ 2494 01b2 3F       		.uleb128 0x3f
+ 2495 01b3 19       		.uleb128 0x19
+ 2496 01b4 03       		.uleb128 0x3
+ 2497 01b5 0E       		.uleb128 0xe
+ 2498 01b6 3A       		.uleb128 0x3a
+ 2499 01b7 0B       		.uleb128 0xb
+ 2500 01b8 3B       		.uleb128 0x3b
+ 2501 01b9 0B       		.uleb128 0xb
+ 2502 01ba 27       		.uleb128 0x27
+ 2503 01bb 19       		.uleb128 0x19
+ 2504 01bc 3C       		.uleb128 0x3c
+ 2505 01bd 19       		.uleb128 0x19
+ 2506 01be 00       		.byte	0
+ 2507 01bf 00       		.byte	0
+ 2508 01c0 22       		.uleb128 0x22
+ 2509 01c1 2E       		.uleb128 0x2e
+ 2510 01c2 01       		.byte	0x1
+ 2511 01c3 3F       		.uleb128 0x3f
+ 2512 01c4 19       		.uleb128 0x19
+ 2513 01c5 03       		.uleb128 0x3
+ 2514 01c6 0E       		.uleb128 0xe
+ 2515 01c7 3A       		.uleb128 0x3a
+ 2516 01c8 0B       		.uleb128 0xb
+ 2517 01c9 3B       		.uleb128 0x3b
+ 2518 01ca 0B       		.uleb128 0xb
+ 2519 01cb 27       		.uleb128 0x27
+ 2520 01cc 19       		.uleb128 0x19
+ 2521 01cd 3C       		.uleb128 0x3c
+ 2522 01ce 19       		.uleb128 0x19
+ 2523 01cf 01       		.uleb128 0x1
+ 2524 01d0 13       		.uleb128 0x13
+ 2525 01d1 00       		.byte	0
+ 2526 01d2 00       		.byte	0
+ 2527 01d3 23       		.uleb128 0x23
+ 2528 01d4 05       		.uleb128 0x5
+ 2529 01d5 00       		.byte	0
+ 2530 01d6 49       		.uleb128 0x49
+ 2531 01d7 13       		.uleb128 0x13
+ 2532 01d8 00       		.byte	0
+ 2533 01d9 00       		.byte	0
+ 2534 01da 24       		.uleb128 0x24
+ 2535 01db 2E       		.uleb128 0x2e
+ 2536 01dc 00       		.byte	0
+ 2537 01dd 3F       		.uleb128 0x3f
+ 2538 01de 19       		.uleb128 0x19
+ 2539 01df 03       		.uleb128 0x3
+ 2540 01e0 0E       		.uleb128 0xe
+ 2541 01e1 3A       		.uleb128 0x3a
+ 2542 01e2 0B       		.uleb128 0xb
+ 2543 01e3 3B       		.uleb128 0x3b
+ 2544 01e4 0B       		.uleb128 0xb
+ 2545 01e5 27       		.uleb128 0x27
+ 2546 01e6 19       		.uleb128 0x19
+ 2547 01e7 49       		.uleb128 0x49
+ 2548 01e8 13       		.uleb128 0x13
+ 2549 01e9 3C       		.uleb128 0x3c
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 50
+
+
+ 2550 01ea 19       		.uleb128 0x19
+ 2551 01eb 00       		.byte	0
+ 2552 01ec 00       		.byte	0
+ 2553 01ed 00       		.byte	0
+ 2554              		.section	.debug_loc,"",%progbits
+ 2555              	.Ldebug_loc0:
+ 2556              	.LLST0:
+ 2557 0000 00000000 		.4byte	.LVL0
+ 2558 0004 07000000 		.4byte	.LVL1-1
+ 2559 0008 0100     		.2byte	0x1
+ 2560 000a 50       		.byte	0x50
+ 2561 000b 07000000 		.4byte	.LVL1-1
+ 2562 000f 2E000000 		.4byte	.LFE63
+ 2563 0013 0400     		.2byte	0x4
+ 2564 0015 F3       		.byte	0xf3
+ 2565 0016 01       		.uleb128 0x1
+ 2566 0017 50       		.byte	0x50
+ 2567 0018 9F       		.byte	0x9f
+ 2568 0019 00000000 		.4byte	0
+ 2569 001d 00000000 		.4byte	0
+ 2570              	.LLST1:
+ 2571 0021 22000000 		.4byte	.LVL6
+ 2572 0025 2A000000 		.4byte	.LVL8
+ 2573 0029 0100     		.2byte	0x1
+ 2574 002b 54       		.byte	0x54
+ 2575 002c 00000000 		.4byte	0
+ 2576 0030 00000000 		.4byte	0
+ 2577              	.LLST2:
+ 2578 0034 14000000 		.4byte	.LVL9
+ 2579 0038 18000000 		.4byte	.LVL10
+ 2580 003c 0200     		.2byte	0x2
+ 2581 003e 31       		.byte	0x31
+ 2582 003f 9F       		.byte	0x9f
+ 2583 0040 18000000 		.4byte	.LVL10
+ 2584 0044 C0000000 		.4byte	.LVL21
+ 2585 0048 0100     		.2byte	0x1
+ 2586 004a 54       		.byte	0x54
+ 2587 004b C2000000 		.4byte	.LVL22
+ 2588 004f 1C010000 		.4byte	.LVL27
+ 2589 0053 0100     		.2byte	0x1
+ 2590 0055 54       		.byte	0x54
+ 2591 0056 00000000 		.4byte	0
+ 2592 005a 00000000 		.4byte	0
+ 2593              	.LLST3:
+ 2594 005e 00000000 		.4byte	.LVL28
+ 2595 0062 0E000000 		.4byte	.LVL31
+ 2596 0066 0100     		.2byte	0x1
+ 2597 0068 50       		.byte	0x50
+ 2598 0069 0E000000 		.4byte	.LVL31
+ 2599 006d 1A000000 		.4byte	.LVL32
+ 2600 0071 0100     		.2byte	0x1
+ 2601 0073 50       		.byte	0x50
+ 2602 0074 00000000 		.4byte	0
+ 2603 0078 00000000 		.4byte	0
+ 2604              	.LLST4:
+ 2605 007c 00000000 		.4byte	.LVL28
+ 2606 0080 04000000 		.4byte	.LVL29
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 51
+
+
+ 2607 0084 0200     		.2byte	0x2
+ 2608 0086 30       		.byte	0x30
+ 2609 0087 9F       		.byte	0x9f
+ 2610 0088 04000000 		.4byte	.LVL29
+ 2611 008c 1A000000 		.4byte	.LVL32
+ 2612 0090 0100     		.2byte	0x1
+ 2613 0092 51       		.byte	0x51
+ 2614 0093 1A000000 		.4byte	.LVL32
+ 2615 0097 1C000000 		.4byte	.LVL33
+ 2616 009b 0100     		.2byte	0x1
+ 2617 009d 50       		.byte	0x50
+ 2618 009e 1C000000 		.4byte	.LVL33
+ 2619 00a2 20000000 		.4byte	.LVL34
+ 2620 00a6 0400     		.2byte	0x4
+ 2621 00a8 70       		.byte	0x70
+ 2622 00a9 00       		.sleb128 0
+ 2623 00aa 1F       		.byte	0x1f
+ 2624 00ab 9F       		.byte	0x9f
+ 2625 00ac 20000000 		.4byte	.LVL34
+ 2626 00b0 26000000 		.4byte	.LFE67
+ 2627 00b4 0600     		.2byte	0x6
+ 2628 00b6 71       		.byte	0x71
+ 2629 00b7 00       		.sleb128 0
+ 2630 00b8 72       		.byte	0x72
+ 2631 00b9 00       		.sleb128 0
+ 2632 00ba 22       		.byte	0x22
+ 2633 00bb 9F       		.byte	0x9f
+ 2634 00bc 00000000 		.4byte	0
+ 2635 00c0 00000000 		.4byte	0
+ 2636              	.LLST5:
+ 2637 00c4 00000000 		.4byte	.LVL35
+ 2638 00c8 0B000000 		.4byte	.LVL37-1
+ 2639 00cc 0100     		.2byte	0x1
+ 2640 00ce 50       		.byte	0x50
+ 2641 00cf 0B000000 		.4byte	.LVL37-1
+ 2642 00d3 00010000 		.4byte	.LFE65
+ 2643 00d7 0400     		.2byte	0x4
+ 2644 00d9 F3       		.byte	0xf3
+ 2645 00da 01       		.uleb128 0x1
+ 2646 00db 50       		.byte	0x50
+ 2647 00dc 9F       		.byte	0x9f
+ 2648 00dd 00000000 		.4byte	0
+ 2649 00e1 00000000 		.4byte	0
+ 2650              	.LLST6:
+ 2651 00e5 0C000000 		.4byte	.LVL37
+ 2652 00e9 14000000 		.4byte	.LVL38
+ 2653 00ed 0100     		.2byte	0x1
+ 2654 00ef 50       		.byte	0x50
+ 2655 00f0 26000000 		.4byte	.LVL43
+ 2656 00f4 28000000 		.4byte	.LVL44
+ 2657 00f8 0100     		.2byte	0x1
+ 2658 00fa 50       		.byte	0x50
+ 2659 00fb 00000000 		.4byte	0
+ 2660 00ff 00000000 		.4byte	0
+ 2661              	.LLST7:
+ 2662 0103 5A000000 		.4byte	.LVL47
+ 2663 0107 5E000000 		.4byte	.LVL48
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 52
+
+
+ 2664 010b 0200     		.2byte	0x2
+ 2665 010d 30       		.byte	0x30
+ 2666 010e 9F       		.byte	0x9f
+ 2667 010f 5E000000 		.4byte	.LVL48
+ 2668 0113 6E000000 		.4byte	.LVL50
+ 2669 0117 0100     		.2byte	0x1
+ 2670 0119 54       		.byte	0x54
+ 2671 011a 70000000 		.4byte	.LVL51
+ 2672 011e 7A000000 		.4byte	.LVL52
+ 2673 0122 0100     		.2byte	0x1
+ 2674 0124 54       		.byte	0x54
+ 2675 0125 8C000000 		.4byte	.LVL55
+ 2676 0129 90000000 		.4byte	.LVL56
+ 2677 012d 0200     		.2byte	0x2
+ 2678 012f 30       		.byte	0x30
+ 2679 0130 9F       		.byte	0x9f
+ 2680 0131 90000000 		.4byte	.LVL56
+ 2681 0135 98000000 		.4byte	.LVL58
+ 2682 0139 0100     		.2byte	0x1
+ 2683 013b 54       		.byte	0x54
+ 2684 013c 9A000000 		.4byte	.LVL59
+ 2685 0140 E6000000 		.4byte	.LVL61
+ 2686 0144 0100     		.2byte	0x1
+ 2687 0146 54       		.byte	0x54
+ 2688 0147 00000000 		.4byte	0
+ 2689 014b 00000000 		.4byte	0
+ 2690              	.LLST8:
+ 2691 014f 08000000 		.4byte	.LVL36
+ 2692 0153 24000000 		.4byte	.LVL42
+ 2693 0157 0200     		.2byte	0x2
+ 2694 0159 30       		.byte	0x30
+ 2695 015a 9F       		.byte	0x9f
+ 2696 015b 24000000 		.4byte	.LVL42
+ 2697 015f 26000000 		.4byte	.LVL43
+ 2698 0163 0100     		.2byte	0x1
+ 2699 0165 55       		.byte	0x55
+ 2700 0166 26000000 		.4byte	.LVL43
+ 2701 016a 28000000 		.4byte	.LVL44
+ 2702 016e 0200     		.2byte	0x2
+ 2703 0170 30       		.byte	0x30
+ 2704 0171 9F       		.byte	0x9f
+ 2705 0172 28000000 		.4byte	.LVL44
+ 2706 0176 8C000000 		.4byte	.LVL55
+ 2707 017a 0100     		.2byte	0x1
+ 2708 017c 55       		.byte	0x55
+ 2709 017d 00000000 		.4byte	0
+ 2710 0181 00000000 		.4byte	0
+ 2711              	.LLST9:
+ 2712 0185 08000000 		.4byte	.LVL36
+ 2713 0189 80000000 		.4byte	.LVL54
+ 2714 018d 0200     		.2byte	0x2
+ 2715 018f 30       		.byte	0x30
+ 2716 0190 9F       		.byte	0x9f
+ 2717 0191 80000000 		.4byte	.LVL54
+ 2718 0195 E6000000 		.4byte	.LVL61
+ 2719 0199 0100     		.2byte	0x1
+ 2720 019b 56       		.byte	0x56
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 53
+
+
+ 2721 019c 00000000 		.4byte	0
+ 2722 01a0 00000000 		.4byte	0
+ 2723              	.LLST10:
+ 2724 01a4 80000000 		.4byte	.LVL54
+ 2725 01a8 E6000000 		.4byte	.LVL61
+ 2726 01ac 0800     		.2byte	0x8
+ 2727 01ae 76       		.byte	0x76
+ 2728 01af 00       		.sleb128 0
+ 2729 01b0 08       		.byte	0x8
+ 2730 01b1 FF       		.byte	0xff
+ 2731 01b2 1A       		.byte	0x1a
+ 2732 01b3 31       		.byte	0x31
+ 2733 01b4 1C       		.byte	0x1c
+ 2734 01b5 9F       		.byte	0x9f
+ 2735 01b6 00000000 		.4byte	0
+ 2736 01ba 00000000 		.4byte	0
+ 2737              	.LLST11:
+ 2738 01be 8C000000 		.4byte	.LVL55
+ 2739 01c2 E6000000 		.4byte	.LVL61
+ 2740 01c6 0200     		.2byte	0x2
+ 2741 01c8 75       		.byte	0x75
+ 2742 01c9 00       		.sleb128 0
+ 2743 01ca 00000000 		.4byte	0
+ 2744 01ce 00000000 		.4byte	0
+ 2745              		.section	.debug_aranges,"",%progbits
+ 2746 0000 3C000000 		.4byte	0x3c
+ 2747 0004 0200     		.2byte	0x2
+ 2748 0006 00000000 		.4byte	.Ldebug_info0
+ 2749 000a 04       		.byte	0x4
+ 2750 000b 00       		.byte	0
+ 2751 000c 0000     		.2byte	0
+ 2752 000e 0000     		.2byte	0
+ 2753 0010 00000000 		.4byte	.LFB63
+ 2754 0014 2E000000 		.4byte	.LFE63-.LFB63
+ 2755 0018 00000000 		.4byte	.LFB64
+ 2756 001c 20010000 		.4byte	.LFE64-.LFB64
+ 2757 0020 00000000 		.4byte	.LFB66
+ 2758 0024 02000000 		.4byte	.LFE66-.LFB66
+ 2759 0028 00000000 		.4byte	.LFB67
+ 2760 002c 26000000 		.4byte	.LFE67-.LFB67
+ 2761 0030 00000000 		.4byte	.LFB65
+ 2762 0034 00010000 		.4byte	.LFE65-.LFB65
+ 2763 0038 00000000 		.4byte	0
+ 2764 003c 00000000 		.4byte	0
+ 2765              		.section	.debug_ranges,"",%progbits
+ 2766              	.Ldebug_ranges0:
+ 2767 0000 00000000 		.4byte	.LFB63
+ 2768 0004 2E000000 		.4byte	.LFE63
+ 2769 0008 00000000 		.4byte	.LFB64
+ 2770 000c 20010000 		.4byte	.LFE64
+ 2771 0010 00000000 		.4byte	.LFB66
+ 2772 0014 02000000 		.4byte	.LFE66
+ 2773 0018 00000000 		.4byte	.LFB67
+ 2774 001c 26000000 		.4byte	.LFE67
+ 2775 0020 00000000 		.4byte	.LFB65
+ 2776 0024 00010000 		.4byte	.LFE65
+ 2777 0028 00000000 		.4byte	0
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 54
+
+
+ 2778 002c 00000000 		.4byte	0
+ 2779              		.section	.debug_line,"",%progbits
+ 2780              	.Ldebug_line0:
+ 2781 0000 A3020000 		.section	.debug_str,"MS",%progbits,1
+ 2781      02007301 
+ 2781      00000201 
+ 2781      FB0E0D00 
+ 2781      01010101 
+ 2782              	.LASF81:
+ 2783 0000 5055446E 		.ascii	"PUDn\000"
+ 2783      00
+ 2784              	.LASF114:
+ 2785 0005 64656369 		.ascii	"decimalVolume\000"
+ 2785      6D616C56 
+ 2785      6F6C756D 
+ 2785      6500
+ 2786              	.LASF121:
+ 2787 0013 74656D70 		.ascii	"temporalCom\000"
+ 2787      6F72616C 
+ 2787      436F6D00 
+ 2788              	.LASF57:
+ 2789 001f 6D657373 		.ascii	"message\000"
+ 2789      61676500 
+ 2790              	.LASF136:
+ 2791 0027 73746174 		.ascii	"statePump\000"
+ 2791      6550756D 
+ 2791      7000
+ 2792              	.LASF72:
+ 2793 0031 62756666 		.ascii	"buffer\000"
+ 2793      657200
+ 2794              	.LASF102:
+ 2795 0038 69704164 		.ascii	"ipAdress\000"
+ 2795      72657373 
+ 2795      00
+ 2796              	.LASF113:
+ 2797 0041 64656369 		.ascii	"decimalMoney\000"
+ 2797      6D616C4D 
+ 2797      6F6E6579 
+ 2797      00
+ 2798              	.LASF35:
+ 2799 004e 73616C65 		.ascii	"salePerform\000"
+ 2799      50657266 
+ 2799      6F726D00 
+ 2800              	.LASF10:
+ 2801 005a 756E7369 		.ascii	"unsigned int\000"
+ 2801      676E6564 
+ 2801      20696E74 
+ 2801      00
+ 2802              	.LASF62:
+ 2803 0067 70726F64 		.ascii	"productMarket\000"
+ 2803      7563744D 
+ 2803      61726B65 
+ 2803      7400
+ 2804              	.LASF5:
+ 2805 0075 5F5F696E 		.ascii	"__int32_t\000"
+ 2805      7433325F 
+ 2805      7400
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 55
+
+
+ 2806              	.LASF55:
+ 2807 007f 666C6167 		.ascii	"flagLiftHandle\000"
+ 2807      4C696674 
+ 2807      48616E64 
+ 2807      6C6500
+ 2808              	.LASF119:
+ 2809 008e 72657369 		.ascii	"residue\000"
+ 2809      64756500 
+ 2810              	.LASF22:
+ 2811 0096 69645479 		.ascii	"idType\000"
+ 2811      706500
+ 2812              	.LASF135:
+ 2813 009d 44444D6F 		.ascii	"DDMode\000"
+ 2813      646500
+ 2814              	.LASF85:
+ 2815 00a4 6765745F 		.ascii	"get_position\000"
+ 2815      706F7369 
+ 2815      74696F6E 
+ 2815      00
+ 2816              	.LASF27:
+ 2817 00b1 73656C65 		.ascii	"selectedSale\000"
+ 2817      63746564 
+ 2817      53616C65 
+ 2817      00
+ 2818              	.LASF63:
+ 2819 00be 7175616E 		.ascii	"quantityMarket\000"
+ 2819      74697479 
+ 2819      4D61726B 
+ 2819      657400
+ 2820              	.LASF92:
+ 2821 00cd 50756D70 		.ascii	"PumpDataReceive\000"
+ 2821      44617461 
+ 2821      52656365 
+ 2821      69766500 
+ 2822              	.LASF106:
+ 2823 00dd 666C6167 		.ascii	"flagPoint2\000"
+ 2823      506F696E 
+ 2823      743200
+ 2824              	.LASF118:
+ 2825 00e8 73637265 		.ascii	"screen\000"
+ 2825      656E00
+ 2826              	.LASF59:
+ 2827 00ef 766F6C75 		.ascii	"volumeQuota\000"
+ 2827      6D655175 
+ 2827      6F746100 
+ 2828              	.LASF16:
+ 2829 00fb 666C6F61 		.ascii	"float\000"
+ 2829      7400
+ 2830              	.LASF91:
+ 2831 0101 53656E64 		.ascii	"SendComand\000"
+ 2831      436F6D61 
+ 2831      6E6400
+ 2832              	.LASF150:
+ 2833 010c 50756D70 		.ascii	"Pump_ClearRxBuffer\000"
+ 2833      5F436C65 
+ 2833      61725278 
+ 2833      42756666 
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 56
+
+
+ 2833      657200
+ 2834              	.LASF132:
+ 2835 011f 4D6F6E65 		.ascii	"MoneyDec\000"
+ 2835      79446563 
+ 2835      00
+ 2836              	.LASF129:
+ 2837 0128 50726576 		.ascii	"PrevStatePump\000"
+ 2837      53746174 
+ 2837      6550756D 
+ 2837      7000
+ 2838              	.LASF9:
+ 2839 0136 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2839      206C6F6E 
+ 2839      6720756E 
+ 2839      7369676E 
+ 2839      65642069 
+ 2840              	.LASF45:
+ 2841 014d 746F7461 		.ascii	"totalVolumePrevious\000"
+ 2841      6C566F6C 
+ 2841      756D6550 
+ 2841      72657669 
+ 2841      6F757300 
+ 2842              	.LASF101:
+ 2843 0161 64696769 		.ascii	"digits\000"
+ 2843      747300
+ 2844              	.LASF116:
+ 2845 0168 74696D65 		.ascii	"time\000"
+ 2845      00
+ 2846              	.LASF38:
+ 2847 016d 70726F64 		.ascii	"productType\000"
+ 2847      75637454 
+ 2847      79706500 
+ 2848              	.LASF108:
+ 2849 0179 70726F64 		.ascii	"productNumber\000"
+ 2849      7563744E 
+ 2849      756D6265 
+ 2849      7200
+ 2850              	.LASF41:
+ 2851 0187 64617465 		.ascii	"dateDownHandle\000"
+ 2851      446F776E 
+ 2851      48616E64 
+ 2851      6C6500
+ 2852              	.LASF23:
+ 2853 0196 69645365 		.ascii	"idSerial\000"
+ 2853      7269616C 
+ 2853      00
+ 2854              	.LASF90:
+ 2855 019f 73696465 		.ascii	"side\000"
+ 2855      00
+ 2856              	.LASF143:
+ 2857 01a4 50756D70 		.ascii	"Pump_GetRxBufferSize\000"
+ 2857      5F476574 
+ 2857      52784275 
+ 2857      66666572 
+ 2857      53697A65 
+ 2858              	.LASF51:
+ 2859 01b9 6D696C65 		.ascii	"mileageSale\000"
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 57
+
+
+ 2859      61676553 
+ 2859      616C6500 
+ 2860              	.LASF71:
+ 2861 01c5 666C6167 		.ascii	"flagChangePPU\000"
+ 2861      4368616E 
+ 2861      67655050 
+ 2861      5500
+ 2862              	.LASF146:
+ 2863 01d3 2E5C7072 		.ascii	".\\protocol.c\000"
+ 2863      6F746F63 
+ 2863      6F6C2E63 
+ 2863      00
+ 2864              	.LASF107:
+ 2865 01e0 62757474 		.ascii	"button\000"
+ 2865      6F6E00
+ 2866              	.LASF99:
+ 2867 01e7 666C6F77 		.ascii	"flowDisplay1\000"
+ 2867      44697370 
+ 2867      6C617931 
+ 2867      00
+ 2868              	.LASF100:
+ 2869 01f4 666C6F77 		.ascii	"flowDisplay2\000"
+ 2869      44697370 
+ 2869      6C617932 
+ 2869      00
+ 2870              	.LASF61:
+ 2871 0201 73657269 		.ascii	"serialMarket\000"
+ 2871      616C4D61 
+ 2871      726B6574 
+ 2871      00
+ 2872              	.LASF74:
+ 2873 020e 746F7461 		.ascii	"totalsHandle\000"
+ 2873      6C734861 
+ 2873      6E646C65 
+ 2873      00
+ 2874              	.LASF37:
+ 2875 021b 70726573 		.ascii	"presetValue\000"
+ 2875      65745661 
+ 2875      6C756500 
+ 2876              	.LASF122:
+ 2877 0227 7475726E 		.ascii	"turn\000"
+ 2877      00
+ 2878              	.LASF52:
+ 2879 022c 6964656E 		.ascii	"identySale\000"
+ 2879      74795361 
+ 2879      6C6500
+ 2880              	.LASF34:
+ 2881 0237 73616C65 		.ascii	"saleType\000"
+ 2881      54797065 
+ 2881      00
+ 2882              	.LASF32:
+ 2883 0240 76616C75 		.ascii	"valueKeys\000"
+ 2883      654B6579 
+ 2883      7300
+ 2884              	.LASF20:
+ 2885 024a 63686172 		.ascii	"char\000"
+ 2885      00
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 58
+
+
+ 2886              	.LASF131:
+ 2887 024f 436F6E76 		.ascii	"ConversionFactor\000"
+ 2887      65727369 
+ 2887      6F6E4661 
+ 2887      63746F72 
+ 2887      00
+ 2888              	.LASF103:
+ 2889 0260 6E756D62 		.ascii	"numberKeys1\000"
+ 2889      65724B65 
+ 2889      79733100 
+ 2890              	.LASF104:
+ 2891 026c 6E756D62 		.ascii	"numberKeys2\000"
+ 2891      65724B65 
+ 2891      79733200 
+ 2892              	.LASF97:
+ 2893 0278 636F756E 		.ascii	"countBeagleTX\000"
+ 2893      74426561 
+ 2893      676C6554 
+ 2893      5800
+ 2894              	.LASF93:
+ 2895 0286 42756666 		.ascii	"BufferSize\000"
+ 2895      65725369 
+ 2895      7A6500
+ 2896              	.LASF142:
+ 2897 0291 43794465 		.ascii	"CyDelay\000"
+ 2897      6C617900 
+ 2898              	.LASF84:
+ 2899 0299 6765745F 		.ascii	"get_state\000"
+ 2899      73746174 
+ 2899      6500
+ 2900              	.LASF14:
+ 2901 02a3 75696E74 		.ascii	"uint16\000"
+ 2901      313600
+ 2902              	.LASF83:
+ 2903 02aa 4C52436E 		.ascii	"LRCn\000"
+ 2903      00
+ 2904              	.LASF117:
+ 2905 02af 64617465 		.ascii	"date\000"
+ 2905      00
+ 2906              	.LASF11:
+ 2907 02b4 75696E74 		.ascii	"uint8_t\000"
+ 2907      385F7400 
+ 2908              	.LASF144:
+ 2909 02bc 50756D70 		.ascii	"Pump_ReadRxData\000"
+ 2909      5F526561 
+ 2909      64527844 
+ 2909      61746100 
+ 2910              	.LASF54:
+ 2911 02cc 666C6167 		.ascii	"flagPayment\000"
+ 2911      5061796D 
+ 2911      656E7400 
+ 2912              	.LASF19:
+ 2913 02d8 63686172 		.ascii	"char8\000"
+ 2913      3800
+ 2914              	.LASF24:
+ 2915 02de 69645365 		.ascii	"idSerialCom\000"
+ 2915      7269616C 
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 59
+
+
+ 2915      436F6D00 
+ 2916              	.LASF60:
+ 2917 02ea 70707551 		.ascii	"ppuQuota\000"
+ 2917      756F7461 
+ 2917      00
+ 2918              	.LASF47:
+ 2919 02f3 746F7461 		.ascii	"totalMoneyAfter\000"
+ 2919      6C4D6F6E 
+ 2919      65794166 
+ 2919      74657200 
+ 2920              	.LASF58:
+ 2921 0303 6D6F6E65 		.ascii	"moneyQuota\000"
+ 2921      7951756F 
+ 2921      746100
+ 2922              	.LASF70:
+ 2923 030e 7072696E 		.ascii	"printers\000"
+ 2923      74657273 
+ 2923      00
+ 2924              	.LASF109:
+ 2925 0317 70726573 		.ascii	"presetFast\000"
+ 2925      65744661 
+ 2925      737400
+ 2926              	.LASF76:
+ 2927 0322 6D6F6E65 		.ascii	"moneySale\000"
+ 2927      7953616C 
+ 2927      6500
+ 2928              	.LASF8:
+ 2929 032c 6C6F6E67 		.ascii	"long long int\000"
+ 2929      206C6F6E 
+ 2929      6720696E 
+ 2929      7400
+ 2930              	.LASF78:
+ 2931 033a 70707553 		.ascii	"ppuSale\000"
+ 2931      616C6500 
+ 2932              	.LASF95:
+ 2933 0342 636F756E 		.ascii	"countAnimation1\000"
+ 2933      74416E69 
+ 2933      6D617469 
+ 2933      6F6E3100 
+ 2934              	.LASF128:
+ 2935 0352 73746174 		.ascii	"stateBeagleSoft\000"
+ 2935      65426561 
+ 2935      676C6553 
+ 2935      6F667400 
+ 2936              	.LASF46:
+ 2937 0362 746F7461 		.ascii	"totalPPUPrevious\000"
+ 2937      6C505055 
+ 2937      50726576 
+ 2937      696F7573 
+ 2937      00
+ 2938              	.LASF96:
+ 2939 0373 636F756E 		.ascii	"countAnimation2\000"
+ 2939      74416E69 
+ 2939      6D617469 
+ 2939      6F6E3200 
+ 2940              	.LASF67:
+ 2941 0383 746F7461 		.ascii	"totalMarket\000"
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 60
+
+
+ 2941      6C4D6172 
+ 2941      6B657400 
+ 2942              	.LASF43:
+ 2943 038f 74696D65 		.ascii	"timeDownHandle\000"
+ 2943      446F776E 
+ 2943      48616E64 
+ 2943      6C6500
+ 2944              	.LASF33:
+ 2945 039e 76656869 		.ascii	"vehicleType\000"
+ 2945      636C6554 
+ 2945      79706500 
+ 2946              	.LASF53:
+ 2947 03aa 666C6167 		.ascii	"flagKeyboard\000"
+ 2947      4B657962 
+ 2947      6F617264 
+ 2947      00
+ 2948              	.LASF89:
+ 2949 03b7 50756D70 		.ascii	"PumpCompleteConfiguration\000"
+ 2949      436F6D70 
+ 2949      6C657465 
+ 2949      436F6E66 
+ 2949      69677572 
+ 2950              	.LASF149:
+ 2951 03d1 41637175 		.ascii	"AcquirePumpCompleteConfiguration\000"
+ 2951      69726550 
+ 2951      756D7043 
+ 2951      6F6D706C 
+ 2951      65746543 
+ 2952              	.LASF15:
+ 2953 03f2 75696E74 		.ascii	"uint32\000"
+ 2953      333200
+ 2954              	.LASF127:
+ 2955 03f9 666C6167 		.ascii	"flagResetMux\000"
+ 2955      52657365 
+ 2955      744D7578 
+ 2955      00
+ 2956              	.LASF49:
+ 2957 0406 746F7461 		.ascii	"totalPPUAfter\000"
+ 2957      6C505055 
+ 2957      41667465 
+ 2957      7200
+ 2958              	.LASF30:
+ 2959 0414 6B657962 		.ascii	"keyboardWayToPay\000"
+ 2959      6F617264 
+ 2959      57617954 
+ 2959      6F506179 
+ 2959      00
+ 2960              	.LASF112:
+ 2961 0425 70707578 		.ascii	"ppux10\000"
+ 2961      313000
+ 2962              	.LASF44:
+ 2963 042c 746F7461 		.ascii	"totalMoneyPrevious\000"
+ 2963      6C4D6F6E 
+ 2963      65795072 
+ 2963      6576696F 
+ 2963      757300
+ 2964              	.LASF105:
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 61
+
+
+ 2965 043f 666C6167 		.ascii	"flagPoint1\000"
+ 2965      506F696E 
+ 2965      743100
+ 2966              	.LASF28:
+ 2967 044a 6D6F6E65 		.ascii	"moneySelectedSale\000"
+ 2967      7953656C 
+ 2967      65637465 
+ 2967      6453616C 
+ 2967      6500
+ 2968              	.LASF115:
+ 2969 045c 73796D62 		.ascii	"symbols\000"
+ 2969      6F6C7300 
+ 2970              	.LASF50:
+ 2971 0464 6C696365 		.ascii	"licenceSale\000"
+ 2971      6E636553 
+ 2971      616C6500 
+ 2972              	.LASF69:
+ 2973 0470 70726963 		.ascii	"priceConsign\000"
+ 2973      65436F6E 
+ 2973      7369676E 
+ 2973      00
+ 2974              	.LASF2:
+ 2975 047d 73686F72 		.ascii	"short int\000"
+ 2975      7420696E 
+ 2975      7400
+ 2976              	.LASF6:
+ 2977 0487 6C6F6E67 		.ascii	"long int\000"
+ 2977      20696E74 
+ 2977      00
+ 2978              	.LASF133:
+ 2979 0490 566F6C44 		.ascii	"VolDec\000"
+ 2979      656300
+ 2980              	.LASF94:
+ 2981 0497 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 2981      52784275 
+ 2981      66666572 
+ 2981      00
+ 2982              	.LASF123:
+ 2983 04a4 6C6F636B 		.ascii	"lockTurn\000"
+ 2983      5475726E 
+ 2983      00
+ 2984              	.LASF56:
+ 2985 04ad 666C6167 		.ascii	"flagEndSale\000"
+ 2985      456E6453 
+ 2985      616C6500 
+ 2986              	.LASF40:
+ 2987 04b9 64617465 		.ascii	"dateLiftHandle\000"
+ 2987      4C696674 
+ 2987      48616E64 
+ 2987      6C6500
+ 2988              	.LASF148:
+ 2989 04c8 5F434F4E 		.ascii	"_CONTROL_WORDS_\000"
+ 2989      54524F4C 
+ 2989      5F574F52 
+ 2989      44535F00 
+ 2990              	.LASF138:
+ 2991 04d8 62756666 		.ascii	"bufferDisplay2\000"
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 62
+
+
+ 2991      65724469 
+ 2991      73706C61 
+ 2991      793200
+ 2992              	.LASF139:
+ 2993 04e7 62756666 		.ascii	"bufferDisplay3\000"
+ 2993      65724469 
+ 2993      73706C61 
+ 2993      793300
+ 2994              	.LASF140:
+ 2995 04f6 62756666 		.ascii	"bufferDisplay4\000"
+ 2995      65724469 
+ 2995      73706C61 
+ 2995      793400
+ 2996              	.LASF4:
+ 2997 0505 5F5F7569 		.ascii	"__uint8_t\000"
+ 2997      6E74385F 
+ 2997      7400
+ 2998              	.LASF126:
+ 2999 050f 70617373 		.ascii	"passwordSeller\000"
+ 2999      776F7264 
+ 2999      53656C6C 
+ 2999      657200
+ 3000              	.LASF48:
+ 3001 051e 746F7461 		.ascii	"totalVolumeAfter\000"
+ 3001      6C566F6C 
+ 3001      756D6541 
+ 3001      66746572 
+ 3001      00
+ 3002              	.LASF130:
+ 3003 052f 556E6974 		.ascii	"UnitType\000"
+ 3003      54797065 
+ 3003      00
+ 3004              	.LASF18:
+ 3005 0538 75696E74 		.ascii	"uint64\000"
+ 3005      363400
+ 3006              	.LASF110:
+ 3007 053f 64656C61 		.ascii	"delayPicture1\000"
+ 3007      79506963 
+ 3007      74757265 
+ 3007      3100
+ 3008              	.LASF111:
+ 3009 054d 64656C61 		.ascii	"delayPicture2\000"
+ 3009      79506963 
+ 3009      74757265 
+ 3009      3200
+ 3010              	.LASF39:
+ 3011 055b 73746174 		.ascii	"stateMux\000"
+ 3011      654D7578 
+ 3011      00
+ 3012              	.LASF21:
+ 3013 0564 73697A65 		.ascii	"sizetype\000"
+ 3013      74797065 
+ 3013      00
+ 3014              	.LASF7:
+ 3015 056d 6C6F6E67 		.ascii	"long unsigned int\000"
+ 3015      20756E73 
+ 3015      69676E65 
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 63
+
+
+ 3015      6420696E 
+ 3015      7400
+ 3016              	.LASF134:
+ 3017 057f 50505544 		.ascii	"PPUDec\000"
+ 3017      656300
+ 3018              	.LASF125:
+ 3019 0586 74797065 		.ascii	"typeIdSeller\000"
+ 3019      49645365 
+ 3019      6C6C6572 
+ 3019      00
+ 3020              	.LASF68:
+ 3021 0593 666C6167 		.ascii	"flagProductmarket\000"
+ 3021      50726F64 
+ 3021      7563746D 
+ 3021      61726B65 
+ 3021      7400
+ 3022              	.LASF12:
+ 3023 05a5 696E7433 		.ascii	"int32_t\000"
+ 3023      325F7400 
+ 3024              	.LASF82:
+ 3025 05ad 5052446E 		.ascii	"PRDn\000"
+ 3025      00
+ 3026              	.LASF87:
+ 3027 05b2 4765744C 		.ascii	"GetLRC\000"
+ 3027      524300
+ 3028              	.LASF64:
+ 3029 05b9 7175616E 		.ascii	"quantAvailableMark\000"
+ 3029      74417661 
+ 3029      696C6162 
+ 3029      6C654D61 
+ 3029      726B00
+ 3030              	.LASF26:
+ 3031 05cc 666C6167 		.ascii	"flagWayToPayMixed\000"
+ 3031      57617954 
+ 3031      6F506179 
+ 3031      4D697865 
+ 3031      6400
+ 3032              	.LASF1:
+ 3033 05de 756E7369 		.ascii	"unsigned char\000"
+ 3033      676E6564 
+ 3033      20636861 
+ 3033      7200
+ 3034              	.LASF141:
+ 3035 05ec 50756D70 		.ascii	"Pump_PutChar\000"
+ 3035      5F507574 
+ 3035      43686172 
+ 3035      00
+ 3036              	.LASF145:
+ 3037 05f9 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 3037      4320342E 
+ 3037      392E3320 
+ 3037      32303135 
+ 3037      30333033 
+ 3038 062c 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 3038      20726576 
+ 3038      6973696F 
+ 3038      6E203232 
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 64
+
+
+ 3038      31323230 
+ 3039 065f 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 3039      66756E63 
+ 3039      74696F6E 
+ 3039      2D736563 
+ 3039      74696F6E 
+ 3040              	.LASF31:
+ 3041 0687 61757468 		.ascii	"authorizationFlag\000"
+ 3041      6F72697A 
+ 3041      6174696F 
+ 3041      6E466C61 
+ 3041      6700
+ 3042              	.LASF65:
+ 3043 0699 70726963 		.ascii	"priceTotalMarket\000"
+ 3043      65546F74 
+ 3043      616C4D61 
+ 3043      726B6574 
+ 3043      00
+ 3044              	.LASF124:
+ 3045 06aa 69645365 		.ascii	"idSeller\000"
+ 3045      6C6C6572 
+ 3045      00
+ 3046              	.LASF80:
+ 3047 06b3 70756D70 		.ascii	"pump\000"
+ 3047      00
+ 3048              	.LASF147:
+ 3049 06b8 433A5C55 		.ascii	"C:\\Users\\Recepcion\\Documents\\GitHub\\NSY-DH\\Wo"
+ 3049      73657273 
+ 3049      5C526563 
+ 3049      65706369 
+ 3049      6F6E5C44 
+ 3050 06e5 726B7370 		.ascii	"rkspace01\\Design01.cydsn\000"
+ 3050      61636530 
+ 3050      315C4465 
+ 3050      7369676E 
+ 3050      30312E63 
+ 3051              	.LASF120:
+ 3052 06fe 74656D70 		.ascii	"temporal\000"
+ 3052      6F72616C 
+ 3052      00
+ 3053              	.LASF86:
+ 3054 0707 73746174 		.ascii	"state\000"
+ 3054      6500
+ 3055              	.LASF36:
+ 3056 070d 70726573 		.ascii	"presetType\000"
+ 3056      65745479 
+ 3056      706500
+ 3057              	.LASF66:
+ 3058 0718 70726963 		.ascii	"priceUnitMarket\000"
+ 3058      65556E69 
+ 3058      744D6172 
+ 3058      6B657400 
+ 3059              	.LASF77:
+ 3060 0728 766F6C75 		.ascii	"volumeSale\000"
+ 3060      6D655361 
+ 3060      6C6500
+ 3061              	.LASF0:
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 65
+
+
+ 3062 0733 7369676E 		.ascii	"signed char\000"
+ 3062      65642063 
+ 3062      68617200 
+ 3063              	.LASF3:
+ 3064 073f 73686F72 		.ascii	"short unsigned int\000"
+ 3064      7420756E 
+ 3064      7369676E 
+ 3064      65642069 
+ 3064      6E7400
+ 3065              	.LASF98:
+ 3066 0752 636F756E 		.ascii	"countPump\000"
+ 3066      7450756D 
+ 3066      7000
+ 3067              	.LASF79:
+ 3068 075c 70726F64 		.ascii	"productSale\000"
+ 3068      75637453 
+ 3068      616C6500 
+ 3069              	.LASF13:
+ 3070 0768 75696E74 		.ascii	"uint8\000"
+ 3070      3800
+ 3071              	.LASF17:
+ 3072 076e 646F7562 		.ascii	"double\000"
+ 3072      6C6500
+ 3073              	.LASF25:
+ 3074 0775 77617954 		.ascii	"wayToPay\000"
+ 3074      6F506179 
+ 3074      00
+ 3075              	.LASF88:
+ 3076 077e 5F706275 		.ascii	"_pbuffer\000"
+ 3076      66666572 
+ 3076      00
+ 3077              	.LASF42:
+ 3078 0787 74696D65 		.ascii	"timeLiftHandle\000"
+ 3078      4C696674 
+ 3078      48616E64 
+ 3078      6C6500
+ 3079              	.LASF75:
+ 3080 0796 70707541 		.ascii	"ppuAuthorized\000"
+ 3080      7574686F 
+ 3080      72697A65 
+ 3080      6400
+ 3081              	.LASF29:
+ 3082 07a4 73657269 		.ascii	"serialSelectedSale\000"
+ 3082      616C5365 
+ 3082      6C656374 
+ 3082      65645361 
+ 3082      6C6500
+ 3083              	.LASF73:
+ 3084 07b7 706F7369 		.ascii	"position\000"
+ 3084      74696F6E 
+ 3084      00
+ 3085              	.LASF137:
+ 3086 07c0 62756666 		.ascii	"bufferDisplay1\000"
+ 3086      65724469 
+ 3086      73706C61 
+ 3086      793100
+ 3087              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccDqxUmb.s 			page 66
+
+
