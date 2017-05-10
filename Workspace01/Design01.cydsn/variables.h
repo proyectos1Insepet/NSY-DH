@@ -45,8 +45,10 @@
     volatile uint64 countAnimation2; //Contador de animacion para pantalla 2
     volatile uint64 countBeagleTX;   //Contador de tiempos de envio de informacion al beagle
     volatile uint64 countPump;       //Contador de tiempos de pregunta estado a surtidor
-    volatile uint32 flowDisplay1;        //Flujo pantalla 1
-    volatile uint32 flowDisplay2;        //Flujo pantalla 2
+    volatile uint32 flowDisplay1;    //Flujo pantalla 1
+    volatile uint32 flowDisplay2;    //Flujo pantalla 2
+    volatile uint32 flowDisplay3;    //Flujo pantalla 3
+    volatile uint32 flowDisplay4;    //Flujo pantalla 4
     volatile uint8 digits;           //Version de digitos del surtidor
     volatile uint8 ipAdress[12];     //Version de digitos del surtidor
     volatile uint8 numberKeys1;      //Cantidad de digitos a digitar en los teclados numericos para pantalla 1
@@ -76,6 +78,7 @@
     volatile uint8 flagResetMux;     //Bandera que habilita Resetar el MUX
     volatile uint8 stateBeagleSoft;  //Indica si el Beagle se encuentra en comunicaion con el software
     volatile uint8 PrevStatePump[4]; //Estado anterior en el dispensador [0,pos1,1 pos2...
+    volatile uint8 PrevScreen;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     uint8 UnitType,ConversionFactor,MoneyDec,VolDec,PPUDec,DDMode; // Variables configuracion del dispensador
     uint8 statePump[4];              //Estado en el que se encuentra el dispensador

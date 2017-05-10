@@ -39,6 +39,11 @@ void SetColor(uint8 lcd);
 void show_info(uint8 lcd, uint8 *version);
 void ShowMessage(uint8 lcd,uint8 *msg, uint8 posx);
 void show_market(uint8 lcd);
+typedef struct
+{
+    uint8 _refchar;
+    uint8 _mappedto;
+} DisplayCharacterMap;
 
 #endif
 
