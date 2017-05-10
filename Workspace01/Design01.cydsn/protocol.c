@@ -35,6 +35,7 @@
 */
 #include <device.h>
 #include <variables.h>
+#include <stdbool.h>
 uint8_t GetLRC(char8 *_pbuffer);
 /*
 *********************************************************************************************************
@@ -59,9 +60,10 @@ uint8 get_state(uint8 pos){
     Pump_PutChar(pos);
     CyDelay(60);
     if(Pump_GetRxBufferSize()>=1){
-       state=(Pump_ReadRxData()&0xF0)>>4;
-       Pump_ClearRxBuffer();
-       return state;
+        state=(Pump_ReadRxData()&0xF0)>>4;
+        //state = Pump_ReadRxData();
+        Pump_ClearRxBuffer();
+        return state;
     }
     else{
         return 0;
@@ -85,15 +87,15 @@ uint8 get_state(uint8 pos){
 *********************************************************************************************************
 */
 uint8 get_position(void){
-    uint8 x;
-        
+    uint8 x;            
     side.a.dir=0xff;
     side.b.dir=0xff;
     side.c.dir=0xff;
     side.d.dir=0xff;
     for(x=1;x<=16;x++){
         Pump_PutChar(x);
-        CyDelay(100);                        
+        CyDelay(100);           
+        
         if((Pump_GetRxBufferSize()>=1)&&(side.a.dir==0xff)){
            side.a.dir=x;	
            Pump_ClearRxBuffer();
@@ -175,20 +177,28 @@ uint8 PumpCompleteConfiguration( uint8 side){
     
     return 0;
 } 
-void AcquirePumpCompleteConfiguration(){
-    
-    
-//    if(Pump_GetRxBufferSize()>=1){
-//        
-//        
-//        if((buffer[0]==0xBA)&&(buffer[17]==0x8D)&&(buffer[18]==0x8A)&&(buffer[12]==0xB1)&&(buffer[14]>=0xB1)&&(buffer[14]<=0xB4)){
-//            //return buffer[14]&0x07;
-//        }
-//        else{
-//           // return 0;
-//        }
-//    }
+
+bool PumpIsInValidState(state)
+{
+    bool retval = false;    
+    switch(state)
+    {
+        case PUMP_IDLE:
+        case PUMP_CALLING:
+        case PUMP_AUTHORIZED:
+        case PUMP_BUSY:
+        case PUMP_PEOT:
+        case PUMP_FEOT:
+        case PUMP_STOPPED:
+        case PUMP_FAIL:
+            retval = true;
+            break;
+    }
+    return retval;
 }
+
+
+
 uint8_t GetLRC(char8 *_pbuffer)
 {
     uint8_t lrc = 0;

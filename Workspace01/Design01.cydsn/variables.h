@@ -79,6 +79,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     uint8 UnitType,ConversionFactor,MoneyDec,VolDec,PPUDec,DDMode; // Variables configuracion del dispensador
     uint8 statePump[4];              //Estado en el que se encuentra el dispensador
+    uint8 NumPositions;
 
     
 /*
@@ -264,6 +265,18 @@ enum _AVAILABLE_DISPLAYS_
     
     DISPLAY_SIDE_DUMMY_DISPLAY   = 0xFA,
     DISPLAY_NULL = 0xFF
+};
+
+enum _PUMP_STATES_
+{
+    PUMP_FAIL       = 0x00,
+    PUMP_IDLE       = 0x06,
+    PUMP_CALLING    = 0x07,
+    PUMP_AUTHORIZED = 0x08,
+    PUMP_BUSY       = 0x09,
+    PUMP_PEOT       = 0x0A,
+    PUMP_FEOT       = 0x0B,
+    PUMP_STOPPED    = 0x0C
 };
 
 #endif

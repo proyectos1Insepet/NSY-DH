@@ -16,7 +16,7 @@
 #include <device.h>
 
 /**********************************/
-uint8 NumPositions;
+
 uint8 MuxVersion [10] = "MUX V. 1.0";
 
 void GlobalInitializer()
@@ -42,11 +42,43 @@ void InitLCD(){
     uint8_t Unit2[10] = "Quadrupla";
     uint8_t Unit3[10] = "Sextupla";
     uint8_t Unit4[10] = "Octupla";
+    uint8_t DisplayMode0[10] = "5-5-4     ";
     uint8_t DisplayMode[10] = "6-6-4     ";
     uint8_t DisplayMode2[10] = "7-7-5     ";
+    uint8_t DisplayMode3[10] = "8-7-5     ";
     if(NumPositions == 2){
         SetPicture(1,DISPLAY_INICIO0);
         SetPicture(2,DISPLAY_INICIO0); 
+        ShowMessage(1,iniText,0);    
+        CyDelay(500);
+        if(UnitType == 0){
+            ShowMessage(1,Unit,0);  //Mostrar tipo de dispensador      
+        }
+        if(UnitType == 1){
+            ShowMessage(1,Unit2,0);
+        }
+        if(UnitType == 2){
+           ShowMessage(1,Unit3,0);
+        }
+        if(UnitType == 3){
+            ShowMessage(1,Unit4,0);
+        } 
+        if(DDMode == 0){
+            ShowMessage(1,DisplayMode0,22); //Mostrar modo de display
+        }
+        if(DDMode == 1){
+            ShowMessage(1,DisplayMode,22); //Mostrar modo de display
+        }
+        if(DDMode == 2){
+           ShowMessage(1,DisplayMode2,22);
+        }
+        if(DDMode == 3){
+           ShowMessage(1,DisplayMode3,22);
+        }
+    }
+    if(NumPositions == 4){
+        SetPicture(1,DISPLAY_SELECCIONE_POSICION);
+        SetPicture(2,DISPLAY_SELECCIONE_POSICION); 
         ShowMessage(1,iniText,0);    
         CyDelay(500);
         if(UnitType == 0){
@@ -67,17 +99,32 @@ void InitLCD(){
         if(DDMode == 2){
            ShowMessage(1,DisplayMode2,22);
         }
-    }else{
+    }        
+    if(NumPositions < 2){
         SetPicture(1,DISPLAY_ERROR);
         SetPicture(2,DISPLAY_ERROR);
     }     
     ShowMessage(2,MuxVersion,0);
 }
-void InitPump(){    
+void InitPump(){        
     NumPositions = get_position();
     if(NumPositions > 0){
-        PumpCompleteConfiguration(side.a.dir);
-        StoreConfiguration();
+        if(!PumpIsInValidState(get_state(side.a.dir))){
+            SetPicture(1,DISPLAY_ERROR);
+            SetPicture(2,DISPLAY_ERROR);
+            NumPositions = 0;
+        }
+        if(!PumpIsInValidState(get_state(side.b.dir))){
+            SetPicture(1,DISPLAY_ERROR);
+            SetPicture(2,DISPLAY_ERROR);
+            NumPositions = 0;
+        }
+        if(PumpIsInValidState(get_state(side.a.dir)) && PumpIsInValidState(get_state(side.b.dir))){    
+            NumPositions = get_position();
+            PumpCompleteConfiguration(side.a.dir);
+            StoreConfiguration();
+            InitLCD(); 
+        }        
     }
     
 }
@@ -105,25 +152,27 @@ void PollingPump(void){
         PrevStatePump[x] = statePump[x];
     }
     if (NumPositions == 2){
-        statePump[0] = get_state(side.a.dir);         
-        CyDelay(40);
-        statePump[1] = get_state(side.b.dir);  
-        CyDelay(40);
+        statePump[0] = get_state(side.a.dir);                 
+        statePump[1] = get_state(side.b.dir);          
     }
     if (NumPositions == 4 ){
-        statePump[0] = get_state(side.a.dir);         
-        CyDelay(40);
-        statePump[1] = get_state(side.b.dir);  
-        CyDelay(40);
-        statePump[2] = get_state(side.c.dir);
-        CyDelay(40);
-        statePump[3] = get_state(side.d.dir);
-        CyDelay(40);
+        statePump[0] = get_state(side.a.dir);               
+        statePump[1] = get_state(side.b.dir);          
+        statePump[2] = get_state(side.c.dir);        
+        statePump[3] = get_state(side.d.dir);        
     }
-    if(NumPositions < 2 || get_state(side.a.dir) == 0x00 ){
-        NumPositions = 0;
+    if (NumPositions == 0){
         InitPump();
-        InitLCD();
+    }
+    if(!PumpIsInValidState(get_state(side.a.dir))){
+        SetPicture(1,DISPLAY_ERROR);
+        SetPicture(2,DISPLAY_ERROR);
+        NumPositions = 0;
+    }
+    if(!PumpIsInValidState(get_state(side.b.dir))){
+        SetPicture(1,DISPLAY_ERROR);
+        SetPicture(2,DISPLAY_ERROR);
+        NumPositions = 0;
     }
 }
 int main()
@@ -136,8 +185,7 @@ int main()
         statePump[x]=0;
     }
     GlobalInitializer();
-    InitPump();
-    InitLCD();      
+    InitPump();        
     for(;;)
     {
         CyWdtClear();
