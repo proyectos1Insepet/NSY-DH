@@ -12,6 +12,7 @@
 #include <project.h>
 #include <protocol.h>
 #include <variables.h>
+#include <keyboard.h>
 #include <LCD.h>
 #include <device.h>
 
@@ -278,10 +279,15 @@ void PollingDisplay1(void){
                     switch(Display1_rxBuffer[3]){
                         case 0x0F:  //Preset dinero                
                             flowDisplay1 = 4;
+                            WriteLCD(1,'$',2,2,1,0x0000,'N');
+                            bufferDisplay1.presetType[0]=2;
+                            bufferDisplay1.presetType[1]='D';
+                            numberKeys1=0;
                             SetPicture(1,DISPLAY_INTRODUZCA_VALOR);                            
                         break; 
                         case 0x10:  //Preset volumen                 
                             flowDisplay1 = 5;
+                            WriteLCD(1,'V',2,2,1,0x0000,'N');
                             SetPicture(1,DISPLAY_INTRODUZCA_VOLUMEN);                            
                         break;
                         case 0x43:  //Preset full                       
