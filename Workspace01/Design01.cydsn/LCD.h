@@ -32,13 +32,15 @@
 #include <device.h>
 	
 void SetPicture(uint8 lcd, uint16 picture);
-void WriteLCD(uint8_t lcd,uint8_t data, uint16_t posy, uint16_t posx,uint8_t size, uint16_t fgcolor ,uint8_t bottomless);
+void WriteMessage(uint8_t lcd,uint8_t data, uint16_t posy, uint16_t posx,uint8_t size, uint16_t fgcolor ,uint8_t bottomless);
+void WriteLCD(uint8_t lcd,uint8_t data, uint16_t posy, uint16_t posx,uint8_t size, uint16_t fgcolor, uint8_t bottomless);
 void write_button(uint8 lcd, uint8 screen);
 void ShowRectangle(uint8 lcd,uint8 coordinate);
 void SetColor(uint8 lcd);
 void show_info(uint8 lcd, uint8 *version);
 void ShowMessage(uint8 lcd,uint8 *msg, uint8 posx);
 void show_market(uint8 lcd);
+char8 UnmapCode(uint8 code);
 typedef struct
 {
     uint8 _refchar;

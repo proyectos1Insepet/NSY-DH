@@ -190,6 +190,7 @@
 <v>Workspace01\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\Display2_IntClock.lst</v>
 <v>Workspace01\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\Display2_PM.lst</v>
 <v>Workspace01\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\EEPROM_1.lst</v>
+<v>Workspace01\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\keyboard.lst</v>
 <v>Workspace01\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\LCD.lst</v>
 <v>Workspace01\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\main.lst</v>
 <v>Workspace01\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\Printer.lst</v>
@@ -243,6 +244,7 @@
 <v>Workspace01\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\Display2_IntClock.lst</v>
 <v>Workspace01\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\Display2_PM.lst</v>
 <v>Workspace01\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\EEPROM_1.lst</v>
+<v>Workspace01\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\keyboard.lst</v>
 <v>Workspace01\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\LCD.lst</v>
 <v>Workspace01\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\main.lst</v>
 <v>Workspace01\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\Printer.lst</v>
@@ -250,7 +252,6 @@
 <v>Workspace01\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\Printer_INT.lst</v>
 <v>Workspace01\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\Printer_IntClock.lst</v>
 <v>Workspace01\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\Printer_PM.lst</v>
-<v>Workspace01\Design01\CortexM3\ARM_GCC_493\Debug\Listing Files\protocol.lst</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStates>
@@ -301,11 +302,14 @@
 <OpenDocs>
 <name v=".\Design01.cydsn\TopDesign\TopDesign.cysch" />
 <name v=".\Design01.cydsn\main.c" />
-<name v=".\Design01.cydsn\protocol.h" />
 <name v=".\Design01.cydsn\protocol.c" />
-<name v=".\Design01.cydsn\variables.h" />
+<name v=".\Design01.cydsn\protocol.h" />
 <name v=".\Design01.cydsn\LCD.c" />
 <name v=".\Design01.cydsn\LCD.h" />
+<name v=".\Design01.cydsn\variables.h" />
+<name v=".\Design01.cydsn\Generated_Source\PSoC5\Pump_INT.c" />
+<name v=".\Design01.cydsn\keyboard.c" />
+<name v=".\Design01.cydsn\Generated_Source\PSoC5\Display1_INT.c" />
 </OpenDocs>
 <config v="" />
 <AutoUpdate v="true" />

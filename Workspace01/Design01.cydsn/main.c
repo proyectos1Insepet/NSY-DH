@@ -39,14 +39,14 @@ void StoreConfiguration(){
 }
 /*
 *********************************************************************************************************
-*                                         void InitLCD1(void)
+*                                         void InitDisplay1(void)
 *
 * Description : Pregunta configuraciones al dispensador 
 *               
 *
 *********************************************************************************************************
 */
-void InitLCD1(){      
+void InitDisplay1(){      
     uint8_t iniText[10]="Iniciando"; 
     uint8_t Unit[10] = "S/D/Dupla ";
     uint8_t Unit2[10] = "Quadrupla";
@@ -74,15 +74,19 @@ void InitLCD1(){
         } 
         if(DDMode == 0){
             ShowMessage(1,DisplayMode0,22); //Mostrar modo de display
+            digits = 5;
         }
         if(DDMode == 1){
             ShowMessage(1,DisplayMode,22); //Mostrar modo de display
+            digits = 6;
         }
         if(DDMode == 2){
            ShowMessage(1,DisplayMode2,22);
+            digits = 7;
         }
         if(DDMode == 3){
-           ShowMessage(1,DisplayMode3,22);
+            ShowMessage(1,DisplayMode3,22);
+            digits = 8;
         }        
     }
     if(NumPositions == 4){
@@ -115,14 +119,14 @@ void InitLCD1(){
 
 /*
 *********************************************************************************************************
-*                                         void InitLCD1(void)
+*                                         void InitDisplay1(void)
 *
 * Description : Pregunta configuraciones al dispensador 
 *               
 *
 *********************************************************************************************************
 */
-void InitLCD2(){      
+void InitDisplay2(){      
     if(NumPositions == 2){        
         SetPicture(2,DISPLAY_INICIO0);  
         flowDisplay2 = 0;
@@ -179,8 +183,10 @@ void InitPump(){
 
 void PollingPump(void){
     uint8 x;
-    for(x= 0; x < 4; x++){
-        PrevStatePump[x] = statePump[x];
+    if(PumpIsInValidState(get_state(side.a.dir)) && PumpIsInValidState(get_state(side.b.dir)) ){
+        for(x= 0; x < 4; x++){
+            PrevStatePump[x] = statePump[x];
+        }
     }
     if (NumPositions == 2){
         statePump[0] = get_state(side.a.dir);                 
@@ -216,10 +222,11 @@ void PollingPump(void){
 *********************************************************************************************************
 */
 
-void PollingDisplay1(void){     
+void PollingDisplay1(void){ 
+    uint8 x;
     switch(flowDisplay1){
         case 0:
-            InitLCD1();
+            InitDisplay1();
             flowDisplay1 =1;
         break;
         case 1: //Menu
@@ -278,17 +285,20 @@ void PollingDisplay1(void){
                 if((Display1_rxBuffer[0]==0xAA) && (Display1_rxBuffer[6]==0xC3) && (Display1_rxBuffer[7]==0x3C)){
                     switch(Display1_rxBuffer[3]){
                         case 0x0F:  //Preset dinero                
-                            flowDisplay1 = 4;
-                            WriteLCD(1,'$',2,2,1,0x0000,'N');
+                            flowDisplay1 = 4;                            
                             bufferDisplay1.presetType[0]=2;
                             bufferDisplay1.presetType[1]='D';
                             numberKeys1=0;
-                            SetPicture(1,DISPLAY_INTRODUZCA_VALOR);                            
+                            SetPicture(1,DISPLAY_INTRODUZCA_VALOR);   
+                            WriteLCD(1,'$',3,2,1,0x0000,'N');
                         break; 
                         case 0x10:  //Preset volumen                 
-                            flowDisplay1 = 5;
-                            WriteLCD(1,'V',2,2,1,0x0000,'N');
+                            flowDisplay1 = 4;
+                            bufferDisplay1.presetType[0]=1;
+                            bufferDisplay1.presetType[1]='V';
+                            numberKeys1=0;                            
                             SetPicture(1,DISPLAY_INTRODUZCA_VOLUMEN);                            
+                            WriteLCD(1,'V',3,2,1,0x0000,'N');                            
                         break;
                         case 0x43:  //Preset full                       
                             flowDisplay1 = 6;
@@ -314,54 +324,80 @@ void PollingDisplay1(void){
         break;
         
         case 4:
-            if(Display1_GetRxBufferSize()==8){
-                if((Display1_rxBuffer[0]==0xAA) && (Display1_rxBuffer[6]==0xC3) && (Display1_rxBuffer[7]==0x3C)){
-                    switch(Display1_rxBuffer[3]){
-                        case 0x94:  //Retroceso 
-                            flowDisplay1 = 0;   
-                            SetPicture(1,DISPLAY_INICIO0);                                                     
-                        break;
-                        case 0x7E:  //Pantalla Inicial    
-                            flowDisplay1 = 0;
-                            SetPicture(1,DISPLAY_INICIO0);                            
-                        break;
+            switch (alphanumeric_keyboard(1,digits,0)){
+                case 0:  //Pantalla Inicial    
+                    flowDisplay1 = 0;
+                    SetPicture(1,DISPLAY_INICIO0);                            
+                break;
+                    
+                case 1: //Enter
+                    for(x=0;x<=bufferDisplay1.valueKeys[0];x++){
+                        bufferDisplay1.presetValue[0][x]=bufferDisplay1.valueKeys[x];
+                        bufferDisplay1.presetValue[1][x]=bufferDisplay1.valueKeys[x];
                     }
-                }
-                CyDelay(10);         
-                Display1_ClearRxBuffer();
+                    temporal[0]=1;
+                    temporal[1]='0';    
+                    flowDisplay1 = 5;//caso para seleccion de producto
+                    SetPicture(1,DISPLAY_SELECCIONE_PRODUCTO4);
+                break;
             }
         break;
             
-        case 5: //Preset por volumen
+        case 5:
             if(Display1_GetRxBufferSize()==8){
                 if((Display1_rxBuffer[0]==0xAA) && (Display1_rxBuffer[6]==0xC3) && (Display1_rxBuffer[7]==0x3C)){
                     switch(Display1_rxBuffer[3]){
+                        case 0x80:  //Grado 1 
+                            flowDisplay1 = 6;
+                            side.a.hose = 1;
+                            SetPicture(1,DISPLAY_DESEA_IMPRIMIR_RECIBO);                                                        
+                        break;
+                            
+                        case 0x81:  //Grado 2 
+                            flowDisplay1 = 6;
+                            side.a.hose = 2;
+                            SetPicture(1,DISPLAY_DESEA_IMPRIMIR_RECIBO);                                                        
+                        break;
+                            
+                        case 0x7F:  //Grado 3
+                            flowDisplay1 = 6;
+                            side.a.hose = 3;
+                            SetPicture(1,DISPLAY_DESEA_IMPRIMIR_RECIBO);                                                        
+                        break;   
+                        
+                        case 0xB8:  //Grado 4 
+                            flowDisplay1 = 6;
+                            side.a.hose = 4;
+                            SetPicture(1,DISPLAY_DESEA_IMPRIMIR_RECIBO);                                                        
+                        break;
+                            
                         case 0x94:  //Retroceso 
-                            flowDisplay1 = 0;   
-                            SetPicture(1,DISPLAY_INICIO0);                                                     
-                        break;
-                        case 0x7E:  //Pantalla Inicial    
                             flowDisplay1 = 0;
-                            SetPicture(1,DISPLAY_INICIO0);                            
+                            SetPicture(1,DISPLAY_INICIO0);                                                        
                         break;
-                    }
+                            
+                        case 0x7E:  //Pantalla Inicial                                                        
+                            SetPicture(1,DISPLAY_INICIO0);
+                            flowDisplay1 = 0;
+                        break;
+                    }                    
                 }
                 CyDelay(10);         
                 Display1_ClearRxBuffer();
             }
         break;
-        
+                    
         case 6:
             if(Display1_GetRxBufferSize()==8){
                 if((Display1_rxBuffer[0]==0xAA) && (Display1_rxBuffer[6]==0xC3) && (Display1_rxBuffer[7]==0x3C)){
                     switch(Display1_rxBuffer[3]){
                         case 0x39:  //Si copia                                                        
                             SetPicture(1,DISPLAY_DIGITE_PLACA);
-                            flowDisplay1 = 7;
+                            flowDisplay1 = 4;
                         break; 
                         case 0x38:  //No copia                                                       
-                            SetPicture(1,DISPLAY_SELECCIONE_PRODUCTO4);
-                            flowDisplay1 = 8;//caso para seleccion de producto
+                            SetPicture(1,DISPLAY_SUBA_MANIJA);
+                            flowDisplay1 = 7;//Esperando estado del dispensador
                         break;
                         case 0x7E:  //Pantalla Inicial                                                        
                             SetPicture(1,DISPLAY_INICIO0);
@@ -373,8 +409,34 @@ void PollingDisplay1(void){
                 Display1_ClearRxBuffer();
             }
         break;
+                                        
+            
+        case 7:
+            side.a.activeHose = PumpHoseActiveState(1);  
+            if (side.a.activeHose == side.a.hose){
+                flowDisplay1 = 8;
+                SetPicture(1,DISPLAY_DESPACHANDO);
+            }else{
+                flowDisplay1 = 7;
+            }
+            if(Display1_GetRxBufferSize()==8){
+                if((Display1_rxBuffer[0]==0xAA) && (Display1_rxBuffer[6]==0xC3) && (Display1_rxBuffer[7]==0x3C)){
+                    switch(Display1_rxBuffer[3]){                        
+                        case 0x7E:  //Pantalla Inicial                                                        
+                            SetPicture(1,DISPLAY_INICIO0);
+                            flowDisplay1 = 0;
+                        break;
+                    }                    
+                }
+                CyDelay(10);                         
+            }
+            Display1_ClearRxBuffer();
+        break;
     }
 }
+
+
+
 /*
 *********************************************************************************************************
 *                                         void polling_Pump(void)
@@ -387,10 +449,11 @@ void PollingDisplay1(void){
 void PollingDisplay2(void){     
     switch(flowDisplay2){
         case 0:
-            InitLCD2();
+            InitDisplay2();
             flowDisplay2 =1;
         break;
         case 1: //Menu
+			ShowRectangle(2,35);        
             if(Display2_GetRxBufferSize()==8){
                 if((Display2_rxBuffer[0]==0xAA) && (Display2_rxBuffer[6]==0xC3) && (Display2_rxBuffer[7]==0x3C)){
                     switch(Display2_rxBuffer[3]){
@@ -549,14 +612,13 @@ int main()
         statePump[x]=0;
     }
     GlobalInitializer();
-    InitPump();        
+    InitPump();  
+    CyWdtStart(CYWDT_1024_TICKS,CYWDT_LPMODE_NOCHANGE); 
     for(;;)
     {
         CyWdtClear();
         PollingPump();
-        CyWdtClear();
-        ShowRectangle(2,35);
-        CyWdtClear();
+        CyWdtClear();        
         PollingDisplay1();
         CyWdtClear();
         PollingDisplay2();

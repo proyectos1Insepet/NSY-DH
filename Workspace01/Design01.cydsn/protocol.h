@@ -39,6 +39,7 @@ uint8 price_change(uint8 pos,uint8 handle,uint8 *value);
 uint8 preset_data(uint8 pos, uint8 grade, uint8 *value, uint8 preset);
 uint8 get_sale(uint8 pos);
 uint8 PumpCompleteConfiguration( uint8 side);
+uint8 PumpHoseActiveState(uint8 side);
 bool PumpIsInValidState(uint8 state);
 
 #endif

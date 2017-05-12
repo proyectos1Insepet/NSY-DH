@@ -167,6 +167,8 @@ struct position{
     uint8 volumeSale[14];           //Venta de Volumen vendido
     uint8 ppuSale[14];              //Venta de PPU vendido
     uint8 productSale;              //Venta de Producto vendido
+    uint8 activeHose;
+    uint8 hose;
 };
 
 struct pump{

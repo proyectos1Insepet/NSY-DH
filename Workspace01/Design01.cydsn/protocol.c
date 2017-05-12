@@ -178,6 +178,51 @@ uint8 PumpCompleteConfiguration( uint8 side){
     return 0;
 } 
 
+uint8 PumpHoseActiveState(uint8 side){       
+    uint8 state,x;
+    char8 SendComand[9];
+    char8 PumpDataReceive =0;    
+    
+    uint8 BufferSize = 0;
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    state = get_state(side);
+    if(state == PUMP_IDLE || state == PUMP_CALLING){
+        Pump_PutChar(0x20|side);
+        CyDelay(50);
+        PumpDataReceive = Pump_ReadRxData();
+    }
+    Pump_ClearRxBuffer();
+    if(PumpDataReceive == (0xd0|side)){
+        SendComand[0] = SOM;//Start Of Message
+        SendComand[1] = 0xE9;//Data Length
+        SendComand[2] = 0xFE;//Special Functions Next (0xB0 0xB0 0xB6)
+        SendComand[3] = 0xE0;//Complete Pump Configuration Request (sf1)
+        SendComand[4] = 0xE1;//Complete Pump Configuration Request (sf2)
+        SendComand[5] = 0xE0;//Complete Pump Configuration Request (sf3)
+        SendComand[6] = 0xFB;
+        SendComand[7] = GetLRC(SendComand);
+        SendComand[8] = EOM;
+        for(x=0; x<=8;x++){
+            Pump_PutChar(SendComand[x]);
+        } 
+        CyDelay(200);
+    }    
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    BufferSize =Pump_GetRxBufferSize();
+    char8 buffer[BufferSize];
+    for(x=0;x<=BufferSize;x++){
+       buffer[x]=Pump_ReadRxData(); 
+    }
+    Pump_ClearRxBuffer();
+    if((buffer[0x0C] & 0x0F) == 0x01){
+        return (buffer[0x0E] & 0x0F);
+    }
+    
+    return 0;
+    
+}
+
+
 bool PumpIsInValidState(state)
 {
     bool retval = false;    
