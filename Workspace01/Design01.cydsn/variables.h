@@ -68,8 +68,7 @@
     volatile uint8 date[3];          //Fecha
     volatile uint8 screen[2];        //Pantallas 0:Inhabilitada 1:Habilitada => [0]Tipo de vehiculo [1]Ingrese N° Venta Forma
     volatile uint8 residue[14];      //Residuo de operacion resta 
-    uint8 temporal[30];              //Utilizada para realizar operaciones temporales
-    uint8 temporalCom[30];           //Utilizada para realizar operaciones temporales de comparacion
+    uint8 temporal[30];              //Utilizada para realizar operaciones temporales    
     volatile uint8 turn;             //Habilita si el turno esta 1=abierto o 0=cerrado
     volatile uint8 lockTurn;         //Bloquea temporalmente el turno 1=bloqueado o 0=desbloqueado
     volatile uint8 idSeller[25];     //Identificacion de vendedor
@@ -77,8 +76,8 @@
     volatile uint8 passwordSeller[8];//Contraseña Vendedor
     volatile uint8 flagResetMux;     //Bandera que habilita Resetar el MUX
     volatile uint8 stateBeagleSoft;  //Indica si el Beagle se encuentra en comunicaion con el software
-    volatile uint8 PrevStatePump[4]; //Estado anterior en el dispensador [0,pos1,1 pos2...
-    volatile uint8 PrevScreen;
+    volatile uint8 PrevStatePump[4]; //Estado anterior en el dispensador [0,pos1,1 pos2...    
+    volatile uint8 PlateRequest;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     uint8 UnitType,ConversionFactor,MoneyDec,VolDec,PPUDec,DDMode; // Variables configuracion del dispensador
     uint8 statePump[4];              //Estado en el que se encuentra el dispensador

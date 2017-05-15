@@ -223,7 +223,7 @@ void PollingPump(void){
 */
 
 void PollingDisplay1(void){ 
-    uint8 x;
+    uint8 x;     
     switch(flowDisplay1){
         case 0:
             InitDisplay1();
@@ -285,7 +285,8 @@ void PollingDisplay1(void){
                 if((Display1_rxBuffer[0]==0xAA) && (Display1_rxBuffer[6]==0xC3) && (Display1_rxBuffer[7]==0x3C)){
                     switch(Display1_rxBuffer[3]){
                         case 0x0F:  //Preset dinero                
-                            flowDisplay1 = 4;                            
+                            flowDisplay1 = 4;  
+                            bufferDisplay1.flagKeyboard = 0;
                             bufferDisplay1.presetType[0]=2;
                             bufferDisplay1.presetType[1]='D';
                             numberKeys1=0;
@@ -294,6 +295,7 @@ void PollingDisplay1(void){
                         break; 
                         case 0x10:  //Preset volumen                 
                             flowDisplay1 = 4;
+                            bufferDisplay1.flagKeyboard = 0;
                             bufferDisplay1.presetType[0]=1;
                             bufferDisplay1.presetType[1]='V';
                             numberKeys1=0;                            
@@ -301,8 +303,8 @@ void PollingDisplay1(void){
                             WriteLCD(1,'V',3,2,1,0x0000,'N');                            
                         break;
                         case 0x43:  //Preset full                       
-                            flowDisplay1 = 6;
-                            SetPicture(1,DISPLAY_DESEA_IMPRIMIR_RECIBO);                            
+                            flowDisplay1 = 5;
+                            SetPicture(1,DISPLAY_SELECCIONE_PRODUCTO4);                          
                         break;
                         case 0x94:  //Retroceso 
                             flowDisplay1 = 0;
@@ -323,7 +325,7 @@ void PollingDisplay1(void){
             }
         break;
         
-        case 4:
+        case 4:            
             switch (alphanumeric_keyboard(1,digits,0)){
                 case 0:  //Pantalla Inicial    
                     flowDisplay1 = 0;
@@ -391,13 +393,15 @@ void PollingDisplay1(void){
             if(Display1_GetRxBufferSize()==8){
                 if((Display1_rxBuffer[0]==0xAA) && (Display1_rxBuffer[6]==0xC3) && (Display1_rxBuffer[7]==0x3C)){
                     switch(Display1_rxBuffer[3]){
-                        case 0x39:  //Si copia                                                        
-                            SetPicture(1,DISPLAY_DIGITE_PLACA);
-                            flowDisplay1 = 4;
+                        case 0x39:  //Si imprimir  
+                            flowDisplay1 = 9;
+                            bufferDisplay1.flagKeyboard = 1;
+                            SetPicture(1,DISPLAY_DIGITE_PLACA);                            
                         break; 
-                        case 0x38:  //No copia                                                       
-                            SetPicture(1,DISPLAY_SUBA_MANIJA);
+                        case 0x38:  //No imprimir
+                            bufferDisplay1.flagKeyboard = 0;
                             flowDisplay1 = 7;//Esperando estado del dispensador
+                            SetPicture(1,DISPLAY_SUBA_MANIJA);                            
                         break;
                         case 0x7E:  //Pantalla Inicial                                                        
                             SetPicture(1,DISPLAY_INICIO0);
@@ -432,6 +436,76 @@ void PollingDisplay1(void){
             }
             Display1_ClearRxBuffer();
         break;
+            
+        case 8:
+            switch (get_state(side.a.dir)){
+                case 0x0A: //reporte fin venta
+                break;
+                case 0x0B://Reporte de venta
+                break;
+                case 0x06://Espera
+                    flowDisplay1 = 0;
+                    SetPicture(1,DISPLAY_INICIO0);
+                break;
+            }
+            
+        break;
+            
+        case 9: //Teclado Placa            
+            switch (alphanumeric_keyboard(1,10,0)){
+                case 0: //Cancelar
+                    switch(bufferDisplay1.flagKeyboard){
+                        case 1://Placa
+                            for(x=0;x<=10;x++){
+                                bufferDisplay1.licenceSale[x]=0;
+                            }
+                            flowDisplay1 = 0;//Inicio
+                            SetPicture(1,DISPLAY_INICIO0);
+                        break;
+                        
+                        case 2://Kilometraje
+                            for(x=0;x<=10;x++){
+                                bufferDisplay1.mileageSale[x]=0;
+                            }
+                        break;
+                        
+                        case 3://CC/NIT
+                            for(x=0;x<=10;x++){
+                                bufferDisplay1.identySale[x]=0;
+                            }
+                        break;
+                    }                    
+                    Display1_ClearRxBuffer();
+                break;
+                    
+                case 1: //Enter
+                    switch(bufferDisplay1.flagKeyboard){
+                        case 1://Placa
+                            for(x=0;x<=bufferDisplay1.valueKeys[0];x++){
+                                bufferDisplay1.licenceSale[x]=bufferDisplay1.valueKeys[x];
+                            }
+                            flowDisplay1 = 7;//Inicio
+                            SetPicture(1,DISPLAY_SUBA_MANIJA);
+                        break;
+                        
+                        case 2://Kilometraje
+                            for(x=0;x<=bufferDisplay1.valueKeys[0];x++){
+                                bufferDisplay1.mileageSale[x]=bufferDisplay1.valueKeys[x];
+                            }
+                        break;
+                        
+                        case 3://CC/NIT
+                            for(x=0;x<=bufferDisplay1.valueKeys[0];x++){
+                                bufferDisplay1.identySale[x]=bufferDisplay1.valueKeys[x];
+                            }
+                        break;
+                    }                    
+                    Display1_ClearRxBuffer();
+                break;
+            }            
+        break;    
+            
+            
     }
 }
 
@@ -617,8 +691,8 @@ int main()
     for(;;)
     {
         CyWdtClear();
-        PollingPump();
-        CyWdtClear();        
+//        PollingPump();
+//        CyWdtClear();        
         PollingDisplay1();
         CyWdtClear();
         PollingDisplay2();

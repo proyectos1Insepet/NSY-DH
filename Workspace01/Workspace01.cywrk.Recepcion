@@ -310,6 +310,7 @@
 <name v=".\Design01.cydsn\Generated_Source\PSoC5\Pump_INT.c" />
 <name v=".\Design01.cydsn\keyboard.c" />
 <name v=".\Design01.cydsn\Generated_Source\PSoC5\Display1_INT.c" />
+<name v=".\Design01.cydsn\Generated_Source\PSoC5\CyBootAsmGnu.s" />
 </OpenDocs>
 <config v="" />
 <AutoUpdate v="true" />

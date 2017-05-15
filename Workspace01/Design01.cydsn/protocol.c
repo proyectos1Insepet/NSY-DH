@@ -205,7 +205,11 @@ uint8 PumpHoseActiveState(uint8 side){
         for(x=0; x<=8;x++){
             Pump_PutChar(SendComand[x]);
         } 
-        CyDelay(200);
+        if(UnitType > 0){
+            CyDelay(700);
+        }else{
+            CyDelay(200);
+        }
     }    
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     BufferSize =Pump_GetRxBufferSize();
@@ -214,7 +218,7 @@ uint8 PumpHoseActiveState(uint8 side){
        buffer[x]=Pump_ReadRxData(); 
     }
     Pump_ClearRxBuffer();
-    if((buffer[0x0C] & 0x0F) == 0x01){
+    if((buffer[0x0D] & 0x0F) == 0x01){
         return (buffer[0x0E] & 0x0F);
     }
     
