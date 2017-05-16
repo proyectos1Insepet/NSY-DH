@@ -48,8 +48,7 @@
     volatile uint32 flowDisplay1;    //Flujo pantalla 1
     volatile uint32 flowDisplay2;    //Flujo pantalla 2
     volatile uint32 flowDisplay3;    //Flujo pantalla 3
-    volatile uint32 flowDisplay4;    //Flujo pantalla 4
-    volatile uint8 digits;           //Version de digitos del surtidor
+    volatile uint32 flowDisplay4;    //Flujo pantalla 4    
     volatile uint8 ipAdress[12];     //Version de digitos del surtidor
     volatile uint8 numberKeys1;      //Cantidad de digitos a digitar en los teclados numericos para pantalla 1
     volatile uint8 numberKeys2;      //Cantidad de digitos a digitar en los teclados numericos para pantalla 1
@@ -82,6 +81,7 @@
     uint8 UnitType,ConversionFactor,MoneyDec,VolDec,PPUDec,DDMode; // Variables configuracion del dispensador
     uint8 statePump[4];              //Estado en el que se encuentra el dispensador
     uint8 NumPositions;
+    uint8 digits;           //Version de digitos del surtidor
 
     
 /*
@@ -142,6 +142,7 @@ struct buffer{
     uint8 priceConsign[15];         //Precio a consignar
     uint8 printers[2];              //Impresoras seleccionadas para imprimir
     uint8 flagChangePPU;            //Bandera que habilita cambiar PPUs cuando los envie el beagle
+    uint8 flagPrint;
 };
 
 struct buffer bufferDisplay1;
@@ -168,6 +169,7 @@ struct position{
     uint8 productSale;              //Venta de Producto vendido
     uint8 activeHose;
     uint8 hose;
+    uint8 hoseNumber;
 };
 
 struct pump{

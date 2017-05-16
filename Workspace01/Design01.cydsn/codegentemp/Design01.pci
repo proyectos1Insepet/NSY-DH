@@ -1,5 +1,5 @@
 # Design01
-# 2017-05-04 16:49:56Z
+# 2017-05-16 18:22:14Z
 
 # IO_0@[IOP=(1)][IoId=(0)] is reserved: SWDDebugEnabled
 dont_use_io iocell 1 0
@@ -17,3 +17,6 @@ set_io "Rx_Disp1(0)" iocell 1 6
 set_io "Tx_Disp1(0)" iocell 1 7
 set_io "Rx_Disp2(0)" iocell 5 4
 set_io "Tx_Disp2(0)" iocell 5 5
+set_io "SDA_1(0)" iocell 12 5
+set_io "SCL_1(0)" iocell 12 4
+set_io "Pin_WP(0)" iocell 6 4

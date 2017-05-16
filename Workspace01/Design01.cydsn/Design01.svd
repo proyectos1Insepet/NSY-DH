@@ -7,153 +7,6 @@
   <width>32</width>
   <peripherals>
     <peripheral>
-      <name>Display1</name>
-      <description>UART</description>
-      <baseAddress>0x0</baseAddress>
-      <addressBlock>
-        <offset>0</offset>
-        <size>0x0</size>
-        <usage>registers</usage>
-      </addressBlock>
-      <registers>
-        <register>
-          <name>TX_Display1_TX_DATA</name>
-          <description>TX Data Register</description>
-          <addressOffset>0x40006447</addressOffset>
-          <size>8</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0</resetMask>
-        </register>
-        <register>
-          <name>TX_Display1_TX_STATUS</name>
-          <description>TX status register</description>
-          <addressOffset>0x40006467</addressOffset>
-          <size>8</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0</resetMask>
-          <fields>
-            <field>
-              <name>Display1_TX_STS_COMPLETE</name>
-              <description>No description available</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>Display1_TX_STS_FIFO_EMPTY</name>
-              <description>No description available</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>Display1_TX_STS_FIFO_FULL</name>
-              <description>No description available</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>Display1_TX_STS_FIFO_NOT_FULL</name>
-              <description>No description available</description>
-              <lsb>3</lsb>
-              <msb>3</msb>
-              <access>read-only</access>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>RX_Display1_RX_ADDRESS1</name>
-          <description>RX Address1 Register</description>
-          <addressOffset>0x40006528</addressOffset>
-          <size>8</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0</resetMask>
-        </register>
-        <register>
-          <name>RX_Display1_RX_ADDRESS2</name>
-          <description>RX Address2 Register</description>
-          <addressOffset>0x40006538</addressOffset>
-          <size>8</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0</resetMask>
-        </register>
-        <register>
-          <name>RX_Display1_RX_DATA</name>
-          <description>RX Data Register</description>
-          <addressOffset>0x40006548</addressOffset>
-          <size>8</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0</resetMask>
-        </register>
-        <register>
-          <name>RX_Display1_RX_STATUS</name>
-          <description>RX status register</description>
-          <addressOffset>0x40006568</addressOffset>
-          <size>8</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0</resetMask>
-          <fields>
-            <field>
-              <name>Display1_RX_STS_MRKSPC</name>
-              <description>No description available</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>Display1_RX_STS_BREAK</name>
-              <description>No description available</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>Display1_RX_STS_PAR_ERROR</name>
-              <description>No description available</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>Display1_RX_STS_STOP_ERROR</name>
-              <description>No description available</description>
-              <lsb>3</lsb>
-              <msb>3</msb>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>Display1_RX_STS_OVERRUN</name>
-              <description>No description available</description>
-              <lsb>4</lsb>
-              <msb>4</msb>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>Display1_RX_STS_FIFO_NOTEMPTY</name>
-              <description>No description available</description>
-              <lsb>5</lsb>
-              <msb>5</msb>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>Display1_RX_STS_ADDR_MATCH</name>
-              <description>No description available</description>
-              <lsb>6</lsb>
-              <msb>6</msb>
-              <access>read-only</access>
-            </field>
-          </fields>
-        </register>
-      </registers>
-    </peripheral>
-    <peripheral>
       <name>Display2</name>
       <description>UART</description>
       <baseAddress>0x0</baseAddress>
@@ -164,9 +17,18 @@
       </addressBlock>
       <registers>
         <register>
+          <name>TX_Display2_TX_DATA</name>
+          <description>TX Data Register</description>
+          <addressOffset>0x40006446</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+        </register>
+        <register>
           <name>TX_Display2_TX_STATUS</name>
           <description>TX status register</description>
-          <addressOffset>0x40006464</addressOffset>
+          <addressOffset>0x40006466</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -203,45 +65,9 @@
           </fields>
         </register>
         <register>
-          <name>RX_Display2_RX_ADDRESS1</name>
-          <description>RX Address1 Register</description>
-          <addressOffset>0x40006529</addressOffset>
-          <size>8</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0</resetMask>
-        </register>
-        <register>
-          <name>RX_Display2_RX_ADDRESS2</name>
-          <description>RX Address2 Register</description>
-          <addressOffset>0x40006539</addressOffset>
-          <size>8</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0</resetMask>
-        </register>
-        <register>
-          <name>TX_Display2_TX_DATA</name>
-          <description>TX Data Register</description>
-          <addressOffset>0x40006547</addressOffset>
-          <size>8</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0</resetMask>
-        </register>
-        <register>
-          <name>RX_Display2_RX_DATA</name>
-          <description>RX Data Register</description>
-          <addressOffset>0x40006549</addressOffset>
-          <size>8</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0</resetMask>
-        </register>
-        <register>
           <name>RX_Display2_RX_STATUS</name>
           <description>RX status register</description>
-          <addressOffset>0x4000656B</addressOffset>
+          <addressOffset>0x4000646B</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -298,6 +124,590 @@
             </field>
           </fields>
         </register>
+        <register>
+          <name>RX_Display2_RX_ADDRESS1</name>
+          <description>RX Address1 Register</description>
+          <addressOffset>0x4000652A</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+        </register>
+        <register>
+          <name>RX_Display2_RX_ADDRESS2</name>
+          <description>RX Address2 Register</description>
+          <addressOffset>0x4000653A</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+        </register>
+        <register>
+          <name>RX_Display2_RX_DATA</name>
+          <description>RX Data Register</description>
+          <addressOffset>0x4000654A</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+        </register>
+      </registers>
+    </peripheral>
+    <peripheral>
+      <name>I2C_Bus</name>
+      <description>No description available</description>
+      <baseAddress>0x0</baseAddress>
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x0</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <registers>
+        <register>
+          <name>I2C_Bus_FF_XCFG</name>
+          <description>Extended Configuration Register: I2C_XCFG</description>
+          <addressOffset>0x400049C8</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+          <fields>
+            <field>
+              <name>csr_clk_en</name>
+              <description>No description available</description>
+              <lsb>7</lsb>
+              <msb>7</msb>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>i2c_on</name>
+              <description>No description available</description>
+              <lsb>6</lsb>
+              <msb>6</msb>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>ready_to_sleep</name>
+              <description>No description available</description>
+              <lsb>5</lsb>
+              <msb>5</msb>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>force_nack</name>
+              <description>No description available</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>hw_addr_en</name>
+              <description>No description available</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>I2C_Bus_FF_ADDR</name>
+          <description>Slave Adddress Register: I2C_ADR</description>
+          <addressOffset>0x400049CA</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+          <fields>
+            <field>
+              <name>slave_address</name>
+              <description>This register holds the slave's 7-bit address.</description>
+              <lsb>0</lsb>
+              <msb>6</msb>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>I2C_Bus_FF_CFG</name>
+          <description>Configuration Register: I2C_CFG</description>
+          <addressOffset>0x400049D6</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+          <fields>
+            <field>
+              <name>sio_select</name>
+              <description>No description available</description>
+              <lsb>7</lsb>
+              <msb>7</msb>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>pselect</name>
+              <description>No description available</description>
+              <lsb>6</lsb>
+              <msb>6</msb>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>bus_error_ie</name>
+              <description>No description available</description>
+              <lsb>5</lsb>
+              <msb>5</msb>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>stop_ie</name>
+              <description>No description available</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>clock_rate</name>
+              <description>No description available</description>
+              <lsb>2</lsb>
+              <msb>2</msb>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>en_mstr</name>
+              <description>No description available</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>en_slave</name>
+              <description>No description available</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>I2C_Bus_FF_CSR</name>
+          <description>Control and Status Register: I2C_CSR</description>
+          <addressOffset>0x400049D7</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+          <fields>
+            <field>
+              <name>bus_error</name>
+              <description>No description available</description>
+              <lsb>7</lsb>
+              <msb>7</msb>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>lost_arb</name>
+              <description>No description available</description>
+              <lsb>6</lsb>
+              <msb>6</msb>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>stop_status</name>
+              <description>No description available</description>
+              <lsb>5</lsb>
+              <msb>5</msb>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>ack</name>
+              <description>No description available</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>address</name>
+              <description>No description available</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>transmit</name>
+              <description>No description available</description>
+              <lsb>2</lsb>
+              <msb>2</msb>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>lrb</name>
+              <description>No description available</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>byte_complete</name>
+              <description>No description available</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>I2C_Bus_FF_DATA</name>
+          <description>Data Register: I2C_D</description>
+          <addressOffset>0x400049D8</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+          <fields>
+            <field>
+              <name>data</name>
+              <description>This register provides read/write access to the Shift register.</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>I2C_Bus_FF_MCSR</name>
+          <description>Master Control and Status Register: I2C_MCSR</description>
+          <addressOffset>0x400049D9</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+          <fields>
+            <field>
+              <name>stop_gen</name>
+              <description>No description available</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>bus_busy</name>
+              <description>No description available</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>master_mode</name>
+              <description>No description available</description>
+              <lsb>2</lsb>
+              <msb>2</msb>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>restart_gen</name>
+              <description>No description available</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>start_gen</name>
+              <description>No description available</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>I2C_Bus_FF__CLK_DIV1</name>
+          <description>Divider of BUS_CLK low part: I2C_CLK_DIV1</description>
+          <addressOffset>0x400049DB</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+          <fields>
+            <field>
+              <name>Div</name>
+              <description>No description available</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>I2C_Bus_FF__CLK_DIV2</name>
+          <description>Divider high part: I2C_CLK_DIV1</description>
+          <addressOffset>0x400049DC</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+          <fields>
+            <field>
+              <name>Div</name>
+              <description>No description available</description>
+              <lsb>0</lsb>
+              <msb>1</msb>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>I2C_Bus_FF__TMOUT_CSR</name>
+          <description>Extended Configuration Register: I2C_TMOUT_CSR</description>
+          <addressOffset>0x400049DD</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+          <fields>
+            <field>
+              <name>sda_pin_status</name>
+              <description>No description available</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>scl_pin_status</name>
+              <description>No description available</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>i2c_timeout_int_enable</name>
+              <description>No description available</description>
+              <lsb>2</lsb>
+              <msb>2</msb>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>i2c_sda_timeout_enable</name>
+              <description>No description available</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>i2c_scl_timeout_enable</name>
+              <description>No description available</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>I2C_Bus_FF__TMOUT_SR</name>
+          <description>Extended Configuration Register: I2C_TMOUT_SR</description>
+          <addressOffset>0x400049DE</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+          <fields>
+            <field>
+              <name>sda_tmout_status</name>
+              <description>No description available</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>scl_tmout_status</name>
+              <description>No description available</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>I2C_Bus_FF__TMOUT_CFG0</name>
+          <description>Extended Configuration Register: TMOUT_CFG0</description>
+          <addressOffset>0x400049DF</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+          <fields>
+            <field>
+              <name>timeout_period_lowbyte</name>
+              <description>No description available</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>I2C_Bus_FF__TMOUT_CFG1</name>
+          <description>Extended Configuration Register: TMOUT_CFG1</description>
+          <addressOffset>0x400049E0</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+          <fields>
+            <field>
+              <name>timeout_period_highnibble</name>
+              <description>No description available</description>
+              <lsb>0</lsb>
+              <msb>3</msb>
+              <access>read-write</access>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+    <peripheral>
+      <name>Display1</name>
+      <description>UART</description>
+      <baseAddress>0x0</baseAddress>
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x0</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <registers>
+        <register>
+          <name>TX_Display1_TX_DATA</name>
+          <description>TX Data Register</description>
+          <addressOffset>0x40006447</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+        </register>
+        <register>
+          <name>TX_Display1_TX_STATUS</name>
+          <description>TX status register</description>
+          <addressOffset>0x40006464</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+          <fields>
+            <field>
+              <name>Display1_TX_STS_COMPLETE</name>
+              <description>No description available</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>Display1_TX_STS_FIFO_EMPTY</name>
+              <description>No description available</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>Display1_TX_STS_FIFO_FULL</name>
+              <description>No description available</description>
+              <lsb>2</lsb>
+              <msb>2</msb>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>Display1_TX_STS_FIFO_NOT_FULL</name>
+              <description>No description available</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RX_Display1_RX_STATUS</name>
+          <description>RX status register</description>
+          <addressOffset>0x40006467</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+          <fields>
+            <field>
+              <name>Display1_RX_STS_MRKSPC</name>
+              <description>No description available</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>Display1_RX_STS_BREAK</name>
+              <description>No description available</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>Display1_RX_STS_PAR_ERROR</name>
+              <description>No description available</description>
+              <lsb>2</lsb>
+              <msb>2</msb>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>Display1_RX_STS_STOP_ERROR</name>
+              <description>No description available</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>Display1_RX_STS_OVERRUN</name>
+              <description>No description available</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>Display1_RX_STS_FIFO_NOTEMPTY</name>
+              <description>No description available</description>
+              <lsb>5</lsb>
+              <msb>5</msb>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>Display1_RX_STS_ADDR_MATCH</name>
+              <description>No description available</description>
+              <lsb>6</lsb>
+              <msb>6</msb>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RX_Display1_RX_ADDRESS1</name>
+          <description>RX Address1 Register</description>
+          <addressOffset>0x40006528</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+        </register>
+        <register>
+          <name>RX_Display1_RX_ADDRESS2</name>
+          <description>RX Address2 Register</description>
+          <addressOffset>0x40006538</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+        </register>
+        <register>
+          <name>RX_Display1_RX_DATA</name>
+          <description>RX Data Register</description>
+          <addressOffset>0x40006548</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+        </register>
       </registers>
     </peripheral>
     <peripheral>
@@ -313,7 +723,7 @@
         <register>
           <name>RX_Printer_RX_ADDRESS1</name>
           <description>RX Address1 Register</description>
-          <addressOffset>0x4000642A</addressOffset>
+          <addressOffset>0x4000642C</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -322,7 +732,7 @@
         <register>
           <name>RX_Printer_RX_ADDRESS2</name>
           <description>RX Address2 Register</description>
-          <addressOffset>0x4000643A</addressOffset>
+          <addressOffset>0x4000643C</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -331,7 +741,7 @@
         <register>
           <name>TX_Printer_TX_DATA</name>
           <description>TX Data Register</description>
-          <addressOffset>0x40006444</addressOffset>
+          <addressOffset>0x40006442</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -340,16 +750,55 @@
         <register>
           <name>RX_Printer_RX_DATA</name>
           <description>RX Data Register</description>
-          <addressOffset>0x4000644A</addressOffset>
+          <addressOffset>0x4000644C</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
           <resetMask>0</resetMask>
         </register>
         <register>
+          <name>TX_Printer_TX_STATUS</name>
+          <description>TX status register</description>
+          <addressOffset>0x40006462</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+          <fields>
+            <field>
+              <name>Printer_TX_STS_COMPLETE</name>
+              <description>No description available</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>Printer_TX_STS_FIFO_EMPTY</name>
+              <description>No description available</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>Printer_TX_STS_FIFO_FULL</name>
+              <description>No description available</description>
+              <lsb>2</lsb>
+              <msb>2</msb>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>Printer_TX_STS_FIFO_NOT_FULL</name>
+              <description>No description available</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
           <name>RX_Printer_RX_STATUS</name>
           <description>RX status register</description>
-          <addressOffset>0x4000646A</addressOffset>
+          <addressOffset>0x4000646C</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -406,45 +855,6 @@
             </field>
           </fields>
         </register>
-        <register>
-          <name>TX_Printer_TX_STATUS</name>
-          <description>TX status register</description>
-          <addressOffset>0x4000646B</addressOffset>
-          <size>8</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0</resetMask>
-          <fields>
-            <field>
-              <name>Printer_TX_STS_COMPLETE</name>
-              <description>No description available</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>Printer_TX_STS_FIFO_EMPTY</name>
-              <description>No description available</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>Printer_TX_STS_FIFO_FULL</name>
-              <description>No description available</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>Printer_TX_STS_FIFO_NOT_FULL</name>
-              <description>No description available</description>
-              <lsb>3</lsb>
-              <msb>3</msb>
-              <access>read-only</access>
-            </field>
-          </fields>
-        </register>
       </registers>
     </peripheral>
     <peripheral>
@@ -460,7 +870,7 @@
         <register>
           <name>RX_RF_Physical_RX_ADDRESS1</name>
           <description>RX Address1 Register</description>
-          <addressOffset>0x40006420</addressOffset>
+          <addressOffset>0x4000642E</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -469,16 +879,7 @@
         <register>
           <name>RX_RF_Physical_RX_ADDRESS2</name>
           <description>RX Address2 Register</description>
-          <addressOffset>0x40006430</addressOffset>
-          <size>8</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0</resetMask>
-        </register>
-        <register>
-          <name>RX_RF_Physical_RX_DATA</name>
-          <description>RX Data Register</description>
-          <addressOffset>0x40006440</addressOffset>
+          <addressOffset>0x4000643E</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -487,7 +888,16 @@
         <register>
           <name>TX_RF_Physical_TX_DATA</name>
           <description>TX Data Register</description>
-          <addressOffset>0x40006445</addressOffset>
+          <addressOffset>0x40006440</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+        </register>
+        <register>
+          <name>RX_RF_Physical_RX_DATA</name>
+          <description>RX Data Register</description>
+          <addressOffset>0x4000644E</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -496,7 +906,7 @@
         <register>
           <name>TX_RF_Physical_TX_STATUS</name>
           <description>TX status register</description>
-          <addressOffset>0x40006462</addressOffset>
+          <addressOffset>0x40006463</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -535,7 +945,7 @@
         <register>
           <name>RX_RF_Physical_RX_STATUS</name>
           <description>RX status register</description>
-          <addressOffset>0x40006463</addressOffset>
+          <addressOffset>0x4000646D</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -607,7 +1017,7 @@
         <register>
           <name>RX_Pump_RX_ADDRESS1</name>
           <description>RX Address1 Register</description>
-          <addressOffset>0x4000642C</addressOffset>
+          <addressOffset>0x4000652B</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -616,7 +1026,16 @@
         <register>
           <name>RX_Pump_RX_ADDRESS2</name>
           <description>RX Address2 Register</description>
-          <addressOffset>0x4000643C</addressOffset>
+          <addressOffset>0x4000653B</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+        </register>
+        <register>
+          <name>TX_Pump_TX_DATA</name>
+          <description>TX Data Register</description>
+          <addressOffset>0x40006545</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -625,55 +1044,16 @@
         <register>
           <name>RX_Pump_RX_DATA</name>
           <description>RX Data Register</description>
-          <addressOffset>0x4000644C</addressOffset>
+          <addressOffset>0x4000654B</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
           <resetMask>0</resetMask>
-        </register>
-        <register>
-          <name>TX_Pump_TX_STATUS</name>
-          <description>TX status register</description>
-          <addressOffset>0x40006466</addressOffset>
-          <size>8</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0</resetMask>
-          <fields>
-            <field>
-              <name>Pump_TX_STS_COMPLETE</name>
-              <description>No description available</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>Pump_TX_STS_FIFO_EMPTY</name>
-              <description>No description available</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>Pump_TX_STS_FIFO_FULL</name>
-              <description>No description available</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>Pump_TX_STS_FIFO_NOT_FULL</name>
-              <description>No description available</description>
-              <lsb>3</lsb>
-              <msb>3</msb>
-              <access>read-only</access>
-            </field>
-          </fields>
         </register>
         <register>
           <name>RX_Pump_RX_STATUS</name>
           <description>RX status register</description>
-          <addressOffset>0x40006469</addressOffset>
+          <addressOffset>0x40006564</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -731,13 +1111,43 @@
           </fields>
         </register>
         <register>
-          <name>TX_Pump_TX_DATA</name>
-          <description>TX Data Register</description>
-          <addressOffset>0x40006546</addressOffset>
+          <name>TX_Pump_TX_STATUS</name>
+          <description>TX status register</description>
+          <addressOffset>0x40006565</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
           <resetMask>0</resetMask>
+          <fields>
+            <field>
+              <name>Pump_TX_STS_COMPLETE</name>
+              <description>No description available</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>Pump_TX_STS_FIFO_EMPTY</name>
+              <description>No description available</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>Pump_TX_STS_FIFO_FULL</name>
+              <description>No description available</description>
+              <lsb>2</lsb>
+              <msb>2</msb>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>Pump_TX_STS_FIFO_NOT_FULL</name>
+              <description>No description available</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+              <access>read-only</access>
+            </field>
+          </fields>
         </register>
       </registers>
     </peripheral>

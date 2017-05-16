@@ -1,0 +1,1685 @@
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccXO3AU3.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"I2C_Bus_INT.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.I2C_Bus_ISR,"ax",%progbits
+  19              		.align	2
+  20              		.global	I2C_Bus_ISR
+  21              		.thumb
+  22              		.thumb_func
+  23              		.type	I2C_Bus_ISR, %function
+  24              	I2C_Bus_ISR:
+  25              	.LFB0:
+  26              		.file 1 ".\\Generated_Source\\PSoC5\\I2C_Bus_INT.c"
+   1:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** /*******************************************************************************
+   2:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** * File Name: I2C_Bus_INT.c
+   3:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** * Version 3.30
+   4:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** *
+   5:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** * Description:
+   6:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** *  This file provides the source code of Interrupt Service Routine (ISR)
+   7:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** *  for I2C component.
+   8:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** *
+   9:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** *  Note:
+  10:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** *
+  11:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** ********************************************************************************
+  12:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** * Copyright 2008-2012, Cypress Semiconductor Corporation.  All rights reserved.
+  13:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** * You may use this file only in accordance with the license, terms, conditions,
+  14:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  15:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** * the software package with which this file was provided.
+  16:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** *******************************************************************************/
+  17:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+  18:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** #include "I2C_Bus_PVT.h"
+  19:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+  20:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+  21:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** /*******************************************************************************
+  22:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** *  Place your includes, defines and code here
+  23:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** ********************************************************************************/
+  24:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** /* `#START I2C_Bus_ISR_intc` */
+  25:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+  26:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** /* `#END` */
+  27:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+  28:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+  29:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** /*******************************************************************************
+  30:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** * Function Name: I2C_Bus_ISR
+  31:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** ********************************************************************************
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccXO3AU3.s 			page 2
+
+
+  32:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** *
+  33:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** * Summary:
+  34:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** *  Handler for I2C interrupt. The Slave and Master operations are handled here.
+  35:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** *
+  36:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** * Parameters:
+  37:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** *  void
+  38:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** *
+  39:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** * Return:
+  40:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** *  void
+  41:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** *
+  42:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** * Reentrant:
+  43:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** *  No
+  44:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** *
+  45:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** *******************************************************************************/
+  46:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** CY_ISR(I2C_Bus_ISR)
+  47:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** {
+  27              		.loc 1 47 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31 0000 38B5     		push	{r3, r4, r5, lr}
+  32              		.cfi_def_cfa_offset 16
+  33              		.cfi_offset 3, -16
+  34              		.cfi_offset 4, -12
+  35              		.cfi_offset 5, -8
+  36              		.cfi_offset 14, -4
+  48:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****     #if(I2C_Bus_MODE_SLAVE_ENABLED)
+  49:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****        uint8  tmp8;
+  50:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****     #endif  /* (I2C_Bus_MODE_SLAVE_ENABLED) */
+  51:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+  52:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****     uint8  tmpCsr;
+  53:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+  54:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****     #if(I2C_Bus_TIMEOUT_FF_ENABLED)
+  55:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****         if(0u != I2C_Bus_TimeoutGetStatus())
+  56:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****         {
+  57:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****             I2C_Bus_TimeoutReset();
+  58:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****             I2C_Bus_state = I2C_Bus_SM_EXIT_IDLE;
+  59:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****             /* I2C_Bus_CSR_REG should be cleared after reset */
+  60:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****         }
+  61:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****     #endif /* (I2C_Bus_TIMEOUT_FF_ENABLED) */
+  62:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+  63:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+  64:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****     tmpCsr = I2C_Bus_CSR_REG;      /* Make copy as interrupts clear */
+  37              		.loc 1 64 0
+  38 0002 A54B     		ldr	r3, .L27
+  39 0004 1C78     		ldrb	r4, [r3]	@ zero_extendqisi2
+  40 0006 E4B2     		uxtb	r4, r4
+  41              	.LVL0:
+  65:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+  66:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****     #if(I2C_Bus_MODE_MULTI_MASTER_SLAVE_ENABLED)
+  67:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****         if(I2C_Bus_CHECK_START_GEN(I2C_Bus_MCSR_REG))
+  68:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****         {
+  69:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****             I2C_Bus_CLEAR_START_GEN;
+  70:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+  71:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****             /* Set READ complete, but was aborted */
+  72:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****             I2C_Bus_mstrStatus |= (I2C_Bus_MSTAT_ERR_XFER |
+  73:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                             I2C_Bus_GET_MSTAT_CMPLT);
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccXO3AU3.s 			page 3
+
+
+  74:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+  75:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****             /* The slave was addressed */
+  76:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****             I2C_Bus_state = I2C_Bus_SM_SLAVE;
+  77:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****         }
+  78:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****     #endif /* (I2C_Bus_MODE_MULTI_MASTER_SLAVE_ENABLED) */
+  79:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+  80:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+  81:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****     #if(I2C_Bus_MODE_MULTI_MASTER_ENABLED)
+  82:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****         if(I2C_Bus_CHECK_LOST_ARB(tmpCsr))
+  83:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****         {
+  84:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****             /* Set errors */
+  85:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****             I2C_Bus_mstrStatus |= (I2C_Bus_MSTAT_ERR_XFER     |
+  86:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                             I2C_Bus_MSTAT_ERR_ARB_LOST |
+  87:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                             I2C_Bus_GET_MSTAT_CMPLT);
+  88:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+  89:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****             I2C_Bus_DISABLE_INT_ON_STOP; /* Interrupt on Stop is enabled by write */
+  90:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+  91:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****             #if(I2C_Bus_MODE_MULTI_MASTER_SLAVE_ENABLED)
+  92:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 if(I2C_Bus_CHECK_ADDRESS_STS(tmpCsr))
+  93:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 {
+  94:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     /* The slave was addressed */
+  95:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     I2C_Bus_state = I2C_Bus_SM_SLAVE;
+  96:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 }
+  97:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 else
+  98:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 {
+  99:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     I2C_Bus_BUS_RELEASE;
+ 100:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 101:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     I2C_Bus_state = I2C_Bus_SM_EXIT_IDLE;
+ 102:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 }
+ 103:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****             #else
+ 104:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 I2C_Bus_BUS_RELEASE;
+ 105:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 106:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 I2C_Bus_state = I2C_Bus_SM_EXIT_IDLE;
+ 107:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 108:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****             #endif /* (I2C_Bus_MODE_MULTI_MASTER_SLAVE_ENABLED) */
+ 109:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****         }
+ 110:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****     #endif /* (I2C_Bus_MODE_MULTI_MASTER_ENABLED) */
+ 111:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 112:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****     /* Check for Master operation mode */
+ 113:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****     if(I2C_Bus_CHECK_SM_MASTER)
+  42              		.loc 1 113 0
+  43 0008 A44B     		ldr	r3, .L27+4
+  44 000a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  45 000c 13F0400F 		tst	r3, #64
+  46 0010 00F03981 		beq	.L2
+ 114:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****     {
+ 115:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****         #if(I2C_Bus_MODE_MASTER_ENABLED)
+ 116:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****             if(I2C_Bus_CHECK_BYTE_COMPLETE(tmpCsr))
+  47              		.loc 1 116 0
+  48 0014 14F0010F 		tst	r4, #1
+  49 0018 00F01D81 		beq	.L3
+ 117:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****             {
+ 118:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 switch (I2C_Bus_state)
+  50              		.loc 1 118 0
+  51 001c 9F4B     		ldr	r3, .L27+4
+  52 001e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  53 0020 453B     		subs	r3, r3, #69
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccXO3AU3.s 			page 4
+
+
+  54 0022 052B     		cmp	r3, #5
+  55 0024 00F21481 		bhi	.L4
+  56 0028 DFE813F0 		tbh	[pc, r3, lsl #1]
+  57              	.L6:
+  58 002c 0600     		.2byte	(.L5-.L6)/2
+  59 002e 8200     		.2byte	(.L7-.L6)/2
+  60 0030 1201     		.2byte	(.L4-.L6)/2
+  61 0032 1201     		.2byte	(.L4-.L6)/2
+  62 0034 0600     		.2byte	(.L5-.L6)/2
+  63 0036 E000     		.2byte	(.L8-.L6)/2
+  64              		.p2align 1
+  65              	.L5:
+ 119:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 {
+ 120:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 case I2C_Bus_SM_MSTR_WR_ADDR:  /* After address is sent, WRITE data */
+ 121:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 case I2C_Bus_SM_MSTR_RD_ADDR:  /* After address is sent, READ  data */
+ 122:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 123:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     tmpCsr &= ((uint8) ~I2C_Bus_CSR_STOP_STATUS); /* Clear STOP bit history on addr
+  66              		.loc 1 123 0
+  67 0038 04F0DF05 		and	r5, r4, #223
+  68              	.LVL1:
+ 124:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     
+ 125:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     if(I2C_Bus_CHECK_ADDR_ACK(tmpCsr))
+  69              		.loc 1 125 0
+  70 003c 04F00A04 		and	r4, r4, #10
+  71 0040 082C     		cmp	r4, #8
+  72 0042 42D1     		bne	.L9
+ 126:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     {
+ 127:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         /* Setup for transmit or receive of data */
+ 128:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         if(I2C_Bus_state == I2C_Bus_SM_MSTR_WR_ADDR)   /* TRANSMIT data */
+  73              		.loc 1 128 0
+  74 0044 954B     		ldr	r3, .L27+4
+  75 0046 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  76 0048 DBB2     		uxtb	r3, r3
+  77 004a 452B     		cmp	r3, #69
+  78 004c 35D1     		bne	.L10
+ 129:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         {
+ 130:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             /* Check if at least one byte to transfer */
+ 131:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             if(I2C_Bus_mstrWrBufSize > 0u)
+  79              		.loc 1 131 0
+  80 004e 944B     		ldr	r3, .L27+8
+  81 0050 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  82 0052 13F0FF0F 		tst	r3, #255
+  83 0056 10D0     		beq	.L11
+ 132:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             {
+ 133:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                 /* Load the 1st data byte */
+ 134:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                 I2C_Bus_DATA_REG = I2C_Bus_mstrWrBufPtr[0u];
+  84              		.loc 1 134 0
+  85 0058 924B     		ldr	r3, .L27+12
+  86 005a 1B68     		ldr	r3, [r3]
+  87 005c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  88 005e DBB2     		uxtb	r3, r3
+  89 0060 914A     		ldr	r2, .L27+16
+  90 0062 1370     		strb	r3, [r2]
+ 135:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                 I2C_Bus_TRANSMIT_DATA;
+  91              		.loc 1 135 0
+  92 0064 0422     		movs	r2, #4
+  93 0066 8C4B     		ldr	r3, .L27
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccXO3AU3.s 			page 5
+
+
+  94 0068 1A70     		strb	r2, [r3]
+ 136:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                 I2C_Bus_mstrWrBufIndex = 1u;   /* Set index to 2nd element */
+  95              		.loc 1 136 0
+  96 006a 0122     		movs	r2, #1
+  97 006c 8F4B     		ldr	r3, .L27+20
+  98 006e 1A70     		strb	r2, [r3]
+ 137:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 138:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                 /* Set transmit state until done */
+ 139:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                 I2C_Bus_state = I2C_Bus_SM_MSTR_WR_DATA;
+  99              		.loc 1 139 0
+ 100 0070 4622     		movs	r2, #70
+ 101 0072 8A4B     		ldr	r3, .L27+4
+ 102 0074 1A70     		strb	r2, [r3]
+ 123:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     
+ 103              		.loc 1 123 0
+ 104 0076 2C46     		mov	r4, r5
+ 105 0078 EDE0     		b	.L3
+ 106              	.L11:
+ 140:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             }
+ 141:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             /* End of buffer: complete writing */
+ 142:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             else if(I2C_Bus_CHECK_NO_STOP(I2C_Bus_mstrControl))
+ 107              		.loc 1 142 0
+ 108 007a 8D4B     		ldr	r3, .L27+24
+ 109 007c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 110 007e 13F0020F 		tst	r3, #2
+ 111 0082 0DD0     		beq	.L12
+ 143:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             {
+ 144:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                 #if(CY_PSOC5A)
+ 145:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                     /* Do not handles 0 bytes transfer - HALT is NOT allowed */
+ 146:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                     I2C_Bus_ENABLE_INT_ON_STOP;
+ 147:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                     I2C_Bus_GENERATE_STOP;
+ 148:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                 
+ 149:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                 #else
+ 150:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                     /* Set WRITE complete and Master HALTED */
+ 151:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                     I2C_Bus_mstrStatus |= (I2C_Bus_MSTAT_XFER_HALT |
+ 112              		.loc 1 151 0
+ 113 0084 8B4A     		ldr	r2, .L27+28
+ 114 0086 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 115 0088 43F00A03 		orr	r3, r3, #10
+ 116 008c 1370     		strb	r3, [r2]
+ 152:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                                                     I2C_Bus_MSTAT_WR_CMPLT);
+ 153:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 154:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                     I2C_Bus_state = I2C_Bus_SM_MSTR_HALT; /* Expect RESTART */
+ 117              		.loc 1 154 0
+ 118 008e 6022     		movs	r2, #96
+ 119 0090 824B     		ldr	r3, .L27+4
+ 120 0092 1A70     		strb	r2, [r3]
+ 155:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                     I2C_Bus_DisableInt();
+ 121              		.loc 1 155 0
+ 122 0094 4FF40042 		mov	r2, #32768
+ 123 0098 874B     		ldr	r3, .L27+32
+ 124 009a 1A60     		str	r2, [r3]
+ 123:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     
+ 125              		.loc 1 123 0
+ 126 009c 2C46     		mov	r4, r5
+ 127 009e DAE0     		b	.L3
+ 128              	.L12:
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccXO3AU3.s 			page 6
+
+
+ 156:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                 
+ 157:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                 #endif /* (CY_PSOC5A) */
+ 158:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             }
+ 159:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             else
+ 160:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             {
+ 161:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                 I2C_Bus_ENABLE_INT_ON_STOP; /* Enable interrupt on STOP, to catch i
+ 129              		.loc 1 161 0
+ 130 00a0 864A     		ldr	r2, .L27+36
+ 131 00a2 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 132 00a4 43F01003 		orr	r3, r3, #16
+ 133 00a8 1370     		strb	r3, [r2]
+ 162:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                 I2C_Bus_GENERATE_STOP;
+ 134              		.loc 1 162 0
+ 135 00aa 1022     		movs	r2, #16
+ 136 00ac 844B     		ldr	r3, .L27+40
+ 137 00ae 1A70     		strb	r2, [r3]
+ 138 00b0 0422     		movs	r2, #4
+ 139 00b2 023B     		subs	r3, r3, #2
+ 140 00b4 1A70     		strb	r2, [r3]
+ 123:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     
+ 141              		.loc 1 123 0
+ 142 00b6 2C46     		mov	r4, r5
+ 143 00b8 CDE0     		b	.L3
+ 144              	.L10:
+ 163:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             }
+ 164:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         }
+ 165:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         else  /* Master Receive data */
+ 166:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         {
+ 167:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             I2C_Bus_READY_TO_READ; /* Release bus to read data */
+ 145              		.loc 1 167 0
+ 146 00ba 0022     		movs	r2, #0
+ 147 00bc 764B     		ldr	r3, .L27
+ 148 00be 1A70     		strb	r2, [r3]
+ 168:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 169:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             I2C_Bus_state  = I2C_Bus_SM_MSTR_RD_DATA;
+ 149              		.loc 1 169 0
+ 150 00c0 4A22     		movs	r2, #74
+ 151 00c2 764B     		ldr	r3, .L27+4
+ 152 00c4 1A70     		strb	r2, [r3]
+ 123:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     
+ 153              		.loc 1 123 0
+ 154 00c6 2C46     		mov	r4, r5
+ 155 00c8 C5E0     		b	.L3
+ 156              	.L9:
+ 170:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         }
+ 171:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     }
+ 172:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     /* Address is NACKed */
+ 173:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     else if(I2C_Bus_CHECK_ADDR_NAK(tmpCsr))
+ 157              		.loc 1 173 0
+ 158 00ca 0A2C     		cmp	r4, #10
+ 159 00cc 2BD1     		bne	.L13
+ 174:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     {
+ 175:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         /* Set Address NAK error */
+ 176:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         I2C_Bus_mstrStatus |= (I2C_Bus_MSTAT_ERR_XFER |
+ 160              		.loc 1 176 0
+ 161 00ce 794A     		ldr	r2, .L27+28
+ 162 00d0 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccXO3AU3.s 			page 7
+
+
+ 163 00d2 43F0A003 		orr	r3, r3, #160
+ 164 00d6 1370     		strb	r3, [r2]
+ 177:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                                         I2C_Bus_MSTAT_ERR_ADDR_NAK);
+ 178:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                                         
+ 179:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         if(I2C_Bus_CHECK_NO_STOP(I2C_Bus_mstrControl))
+ 165              		.loc 1 179 0
+ 166 00d8 754B     		ldr	r3, .L27+24
+ 167 00da 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 168 00dc 13F0020F 		tst	r3, #2
+ 169 00e0 14D0     		beq	.L14
+ 180:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         {
+ 181:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             I2C_Bus_mstrStatus |= (I2C_Bus_MSTAT_XFER_HALT | 
+ 182:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                                             I2C_Bus_GET_MSTAT_CMPLT);
+ 170              		.loc 1 182 0
+ 171 00e2 6E4B     		ldr	r3, .L27+4
+ 172 00e4 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 181:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                                             I2C_Bus_GET_MSTAT_CMPLT);
+ 173              		.loc 1 181 0
+ 174 00e6 13F0080F 		tst	r3, #8
+ 175 00ea 01D0     		beq	.L24
+ 176 00ec 0923     		movs	r3, #9
+ 177 00ee 00E0     		b	.L15
+ 178              	.L24:
+ 179 00f0 0A23     		movs	r3, #10
+ 180              	.L15:
+ 181:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                                             I2C_Bus_GET_MSTAT_CMPLT);
+ 181              		.loc 1 181 0 is_stmt 0 discriminator 4
+ 182 00f2 704A     		ldr	r2, .L27+28
+ 183 00f4 1178     		ldrb	r1, [r2]	@ zero_extendqisi2
+ 184 00f6 0B43     		orrs	r3, r3, r1
+ 185 00f8 1370     		strb	r3, [r2]
+ 183:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 184:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             I2C_Bus_state = I2C_Bus_SM_MSTR_HALT; /* Expect RESTART */
+ 186              		.loc 1 184 0 is_stmt 1 discriminator 4
+ 187 00fa 6022     		movs	r2, #96
+ 188 00fc 674B     		ldr	r3, .L27+4
+ 189 00fe 1A70     		strb	r2, [r3]
+ 185:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             I2C_Bus_DisableInt();
+ 190              		.loc 1 185 0 discriminator 4
+ 191 0100 4FF40042 		mov	r2, #32768
+ 192 0104 6C4B     		ldr	r3, .L27+32
+ 193 0106 1A60     		str	r2, [r3]
+ 123:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     
+ 194              		.loc 1 123 0 discriminator 4
+ 195 0108 2C46     		mov	r4, r5
+ 196 010a A4E0     		b	.L3
+ 197              	.L14:
+ 186:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         }
+ 187:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         else  /* Do normal Stop */
+ 188:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         {
+ 189:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             I2C_Bus_ENABLE_INT_ON_STOP; /* Enable interrupt on STOP, to catch it */
+ 198              		.loc 1 189 0
+ 199 010c 6B4A     		ldr	r2, .L27+36
+ 200 010e 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 201 0110 43F01003 		orr	r3, r3, #16
+ 202 0114 1370     		strb	r3, [r2]
+ 190:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             I2C_Bus_GENERATE_STOP;
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccXO3AU3.s 			page 8
+
+
+ 203              		.loc 1 190 0
+ 204 0116 1022     		movs	r2, #16
+ 205 0118 694B     		ldr	r3, .L27+40
+ 206 011a 1A70     		strb	r2, [r3]
+ 207 011c 0422     		movs	r2, #4
+ 208 011e 023B     		subs	r3, r3, #2
+ 209 0120 1A70     		strb	r2, [r3]
+ 123:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     
+ 210              		.loc 1 123 0
+ 211 0122 2C46     		mov	r4, r5
+ 212 0124 97E0     		b	.L3
+ 213              	.L13:
+ 191:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         }
+ 192:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     }
+ 193:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     else
+ 194:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     {
+ 195:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         /* Address phase is not set for some reason: error */
+ 196:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         #if(I2C_Bus_TIMEOUT_ENABLED)
+ 197:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             /* Exit from interrupt to take a chance for timeout timer handle this c
+ 198:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             I2C_Bus_DisableInt();
+ 199:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             I2C_Bus_ClearPendingInt();
+ 200:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         #else
+ 201:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             /* Block execution flow: unexpected condition */
+ 202:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             CYASSERT(0u != 0u);
+ 214              		.loc 1 202 0 discriminator 1
+ 215 0126 0020     		movs	r0, #0
+ 216 0128 FFF7FEFF 		bl	CyHalt
+ 217              	.LVL2:
+ 123:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     
+ 218              		.loc 1 123 0 discriminator 1
+ 219 012c 2C46     		mov	r4, r5
+ 220 012e 92E0     		b	.L3
+ 221              	.LVL3:
+ 222              	.L7:
+ 203:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         #endif /* (I2C_Bus_TIMEOUT_ENABLED) */
+ 204:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     }
+ 205:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     break;
+ 206:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 207:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 case I2C_Bus_SM_MSTR_WR_DATA:
+ 208:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 209:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     if(I2C_Bus_CHECK_DATA_ACK(tmpCsr))
+ 223              		.loc 1 209 0
+ 224 0130 14F0020F 		tst	r4, #2
+ 225 0134 37D1     		bne	.L16
+ 210:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     {
+ 211:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         /* Check if end of buffer */
+ 212:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         if(I2C_Bus_mstrWrBufIndex  < I2C_Bus_mstrWrBufSize)
+ 226              		.loc 1 212 0
+ 227 0136 5D4B     		ldr	r3, .L27+20
+ 228 0138 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 229 013a 594A     		ldr	r2, .L27+8
+ 230 013c 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
+ 231 013e DBB2     		uxtb	r3, r3
+ 232 0140 9342     		cmp	r3, r2
+ 233 0142 10D2     		bcs	.L17
+ 213:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         {
+ 214:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             I2C_Bus_DATA_REG =
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccXO3AU3.s 			page 9
+
+
+ 215:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                                      I2C_Bus_mstrWrBufPtr[I2C_Bus_mstrWrBufIndex];
+ 234              		.loc 1 215 0
+ 235 0144 594A     		ldr	r2, .L27+20
+ 236 0146 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 237 0148 DBB2     		uxtb	r3, r3
+ 238 014a 5649     		ldr	r1, .L27+12
+ 239 014c 0968     		ldr	r1, [r1]
+ 240 014e CB5C     		ldrb	r3, [r1, r3]	@ zero_extendqisi2
+ 241 0150 DBB2     		uxtb	r3, r3
+ 214:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                                      I2C_Bus_mstrWrBufPtr[I2C_Bus_mstrWrBufIndex];
+ 242              		.loc 1 214 0
+ 243 0152 5549     		ldr	r1, .L27+16
+ 244 0154 0B70     		strb	r3, [r1]
+ 216:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             I2C_Bus_TRANSMIT_DATA;
+ 245              		.loc 1 216 0
+ 246 0156 0421     		movs	r1, #4
+ 247 0158 4F4B     		ldr	r3, .L27
+ 248 015a 1970     		strb	r1, [r3]
+ 217:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             I2C_Bus_mstrWrBufIndex++;
+ 249              		.loc 1 217 0
+ 250 015c 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 251 015e 0133     		adds	r3, r3, #1
+ 252 0160 DBB2     		uxtb	r3, r3
+ 253 0162 1370     		strb	r3, [r2]
+ 254 0164 77E0     		b	.L3
+ 255              	.L17:
+ 218:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         }
+ 219:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         /* End of buffer: complete writing */
+ 220:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         else if(I2C_Bus_CHECK_NO_STOP(I2C_Bus_mstrControl))
+ 256              		.loc 1 220 0
+ 257 0166 524B     		ldr	r3, .L27+24
+ 258 0168 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 259 016a 13F0020F 		tst	r3, #2
+ 260 016e 0CD0     		beq	.L18
+ 221:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         {
+ 222:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             /* Set WRITE complete and Master HALTED */
+ 223:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             I2C_Bus_mstrStatus |= (I2C_Bus_MSTAT_XFER_HALT |
+ 261              		.loc 1 223 0
+ 262 0170 504A     		ldr	r2, .L27+28
+ 263 0172 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 264 0174 43F00A03 		orr	r3, r3, #10
+ 265 0178 1370     		strb	r3, [r2]
+ 224:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                                             I2C_Bus_MSTAT_WR_CMPLT);
+ 225:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 226:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             I2C_Bus_state = I2C_Bus_SM_MSTR_HALT;    /* Expect RESTART */
+ 266              		.loc 1 226 0
+ 267 017a 6022     		movs	r2, #96
+ 268 017c 474B     		ldr	r3, .L27+4
+ 269 017e 1A70     		strb	r2, [r3]
+ 227:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             I2C_Bus_DisableInt();
+ 270              		.loc 1 227 0
+ 271 0180 4FF40042 		mov	r2, #32768
+ 272 0184 4C4B     		ldr	r3, .L27+32
+ 273 0186 1A60     		str	r2, [r3]
+ 274 0188 65E0     		b	.L3
+ 275              	.L18:
+ 228:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         }
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccXO3AU3.s 			page 10
+
+
+ 229:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         else  /* Do normal STOP */
+ 230:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         {
+ 231:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             I2C_Bus_Workaround();          /* Workaround: empty function */
+ 276              		.loc 1 231 0
+ 277 018a FFF7FEFF 		bl	I2C_Bus_Workaround
+ 278              	.LVL4:
+ 232:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             I2C_Bus_ENABLE_INT_ON_STOP;    /* Enable interrupt on STOP, to catch it
+ 279              		.loc 1 232 0
+ 280 018e 4B4A     		ldr	r2, .L27+36
+ 281 0190 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 282 0192 43F01003 		orr	r3, r3, #16
+ 283 0196 1370     		strb	r3, [r2]
+ 233:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             I2C_Bus_GENERATE_STOP;
+ 284              		.loc 1 233 0
+ 285 0198 1022     		movs	r2, #16
+ 286 019a 494B     		ldr	r3, .L27+40
+ 287 019c 1A70     		strb	r2, [r3]
+ 288 019e 0422     		movs	r2, #4
+ 289 01a0 023B     		subs	r3, r3, #2
+ 290 01a2 1A70     		strb	r2, [r3]
+ 291 01a4 57E0     		b	.L3
+ 292              	.L16:
+ 234:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         }
+ 235:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     }
+ 236:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     /* Last byte NAKed: end writing */
+ 237:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     else if(I2C_Bus_CHECK_NO_STOP(I2C_Bus_mstrControl))
+ 293              		.loc 1 237 0
+ 294 01a6 424B     		ldr	r3, .L27+24
+ 295 01a8 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 296 01aa 13F0020F 		tst	r3, #2
+ 297 01ae 0CD0     		beq	.L19
+ 238:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     {
+ 239:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         /* Set WRITE complete, SHORT transfer and Master HALTED */
+ 240:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         I2C_Bus_mstrStatus |= (I2C_Bus_MSTAT_ERR_XFER       |
+ 298              		.loc 1 240 0
+ 299 01b0 404A     		ldr	r2, .L27+28
+ 300 01b2 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 301 01b4 43F09A03 		orr	r3, r3, #154
+ 302 01b8 1370     		strb	r3, [r2]
+ 241:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                                         I2C_Bus_MSTAT_ERR_SHORT_XFER |
+ 242:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                                         I2C_Bus_MSTAT_XFER_HALT      |
+ 243:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                                         I2C_Bus_MSTAT_WR_CMPLT);
+ 244:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 245:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         I2C_Bus_state = I2C_Bus_SM_MSTR_HALT;    /* Expect RESTART */
+ 303              		.loc 1 245 0
+ 304 01ba 6022     		movs	r2, #96
+ 305 01bc 374B     		ldr	r3, .L27+4
+ 306 01be 1A70     		strb	r2, [r3]
+ 246:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         I2C_Bus_DisableInt();
+ 307              		.loc 1 246 0
+ 308 01c0 4FF40042 		mov	r2, #32768
+ 309 01c4 3C4B     		ldr	r3, .L27+32
+ 310 01c6 1A60     		str	r2, [r3]
+ 311 01c8 45E0     		b	.L3
+ 312              	.L19:
+ 247:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     }
+ 248:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     else  /* Do normal STOP */
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccXO3AU3.s 			page 11
+
+
+ 249:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     {
+ 250:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         I2C_Bus_ENABLE_INT_ON_STOP;    /* Enable interrupt on STOP, to catch it */
+ 313              		.loc 1 250 0
+ 314 01ca 3C4A     		ldr	r2, .L27+36
+ 315 01cc 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 316 01ce 43F01003 		orr	r3, r3, #16
+ 317 01d2 1370     		strb	r3, [r2]
+ 251:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         I2C_Bus_GENERATE_STOP;
+ 318              		.loc 1 251 0
+ 319 01d4 1022     		movs	r2, #16
+ 320 01d6 3A4B     		ldr	r3, .L27+40
+ 321 01d8 1A70     		strb	r2, [r3]
+ 322 01da 0422     		movs	r2, #4
+ 323 01dc 023B     		subs	r3, r3, #2
+ 324 01de 1A70     		strb	r2, [r3]
+ 252:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 253:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         /* Set SHORT and ERR transfer */
+ 254:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         I2C_Bus_mstrStatus |= (I2C_Bus_MSTAT_ERR_SHORT_XFER |
+ 325              		.loc 1 254 0
+ 326 01e0 344A     		ldr	r2, .L27+28
+ 327 01e2 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 328 01e4 43F09003 		orr	r3, r3, #144
+ 329 01e8 1370     		strb	r3, [r2]
+ 330 01ea 34E0     		b	.L3
+ 331              	.L8:
+ 255:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                                         I2C_Bus_MSTAT_ERR_XFER);
+ 256:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     }
+ 257:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     
+ 258:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     break;
+ 259:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 260:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 case I2C_Bus_SM_MSTR_RD_DATA:
+ 261:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 262:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     I2C_Bus_mstrRdBufPtr[I2C_Bus_mstrRdBufIndex] = I2C_Bus_DATA_REG;
+ 332              		.loc 1 262 0
+ 333 01ec 354A     		ldr	r2, .L27+44
+ 334 01ee 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 335 01f0 DBB2     		uxtb	r3, r3
+ 336 01f2 3549     		ldr	r1, .L27+48
+ 337 01f4 0868     		ldr	r0, [r1]
+ 338 01f6 2C49     		ldr	r1, .L27+16
+ 339 01f8 0978     		ldrb	r1, [r1]	@ zero_extendqisi2
+ 340 01fa C9B2     		uxtb	r1, r1
+ 341 01fc C154     		strb	r1, [r0, r3]
+ 263:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     I2C_Bus_mstrRdBufIndex++;
+ 342              		.loc 1 263 0
+ 343 01fe 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 344 0200 0133     		adds	r3, r3, #1
+ 345 0202 DBB2     		uxtb	r3, r3
+ 346 0204 1370     		strb	r3, [r2]
+ 264:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 265:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     /* Check if end of buffer */
+ 266:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     if(I2C_Bus_mstrRdBufIndex < I2C_Bus_mstrRdBufSize)
+ 347              		.loc 1 266 0
+ 348 0206 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 349 0208 304A     		ldr	r2, .L27+52
+ 350 020a 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
+ 351 020c DBB2     		uxtb	r3, r3
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccXO3AU3.s 			page 12
+
+
+ 352 020e 9342     		cmp	r3, r2
+ 353 0210 03D2     		bcs	.L20
+ 267:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     {
+ 268:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         I2C_Bus_ACK_AND_RECEIVE;       /* ACK and receive byte */
+ 354              		.loc 1 268 0
+ 355 0212 1022     		movs	r2, #16
+ 356 0214 204B     		ldr	r3, .L27
+ 357 0216 1A70     		strb	r2, [r3]
+ 358 0218 1DE0     		b	.L3
+ 359              	.L20:
+ 269:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     }
+ 270:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     /* End of buffer: complete reading */
+ 271:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     else if(I2C_Bus_CHECK_NO_STOP(I2C_Bus_mstrControl))
+ 360              		.loc 1 271 0
+ 361 021a 254B     		ldr	r3, .L27+24
+ 362 021c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 363 021e 13F0020F 		tst	r3, #2
+ 364 0222 0CD0     		beq	.L21
+ 272:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     {                        
+ 273:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         /* Set READ complete and Master HALTED */
+ 274:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         I2C_Bus_mstrStatus |= (I2C_Bus_MSTAT_XFER_HALT |
+ 365              		.loc 1 274 0
+ 366 0224 234A     		ldr	r2, .L27+28
+ 367 0226 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 368 0228 43F00903 		orr	r3, r3, #9
+ 369 022c 1370     		strb	r3, [r2]
+ 275:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                                         I2C_Bus_MSTAT_RD_CMPLT);
+ 276:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         
+ 277:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         I2C_Bus_state = I2C_Bus_SM_MSTR_HALT;    /* Expect RESTART */
+ 370              		.loc 1 277 0
+ 371 022e 6022     		movs	r2, #96
+ 372 0230 1A4B     		ldr	r3, .L27+4
+ 373 0232 1A70     		strb	r2, [r3]
+ 278:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         I2C_Bus_DisableInt();
+ 374              		.loc 1 278 0
+ 375 0234 4FF40042 		mov	r2, #32768
+ 376 0238 1F4B     		ldr	r3, .L27+32
+ 377 023a 1A60     		str	r2, [r3]
+ 378 023c 0BE0     		b	.L3
+ 379              	.L21:
+ 279:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     }
+ 280:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     else
+ 281:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     {
+ 282:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         I2C_Bus_ENABLE_INT_ON_STOP;
+ 380              		.loc 1 282 0
+ 381 023e 1F4A     		ldr	r2, .L27+36
+ 382 0240 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 383 0242 43F01003 		orr	r3, r3, #16
+ 384 0246 1370     		strb	r3, [r2]
+ 283:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         I2C_Bus_NAK_AND_RECEIVE;       /* NACK and TRY to generate STOP */
+ 385              		.loc 1 283 0
+ 386 0248 0022     		movs	r2, #0
+ 387 024a 134B     		ldr	r3, .L27
+ 388 024c 1A70     		strb	r2, [r3]
+ 389 024e 02E0     		b	.L3
+ 390              	.L4:
+ 284:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     }
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccXO3AU3.s 			page 13
+
+
+ 285:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     break;
+ 286:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 287:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 default: /* This is an invalid state and should not occur */
+ 288:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 289:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     #if(I2C_Bus_TIMEOUT_ENABLED)
+ 290:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         /* Exit from interrupt to take a chance for timeout timer handle this case 
+ 291:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         I2C_Bus_DisableInt();
+ 292:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         I2C_Bus_ClearPendingInt();
+ 293:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     #else
+ 294:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         /* Block execution flow: unexpected condition */
+ 295:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         CYASSERT(0u != 0u);
+ 391              		.loc 1 295 0 discriminator 1
+ 392 0250 0020     		movs	r0, #0
+ 393 0252 FFF7FEFF 		bl	CyHalt
+ 394              	.LVL5:
+ 395              	.L3:
+ 296:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     #endif /* (I2C_Bus_TIMEOUT_ENABLED) */
+ 297:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 298:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     break;
+ 299:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 }
+ 300:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****             }
+ 301:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 302:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****             /* Catches the Stop: end of transaction */
+ 303:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****             if(I2C_Bus_CHECK_STOP_STS(tmpCsr))
+ 396              		.loc 1 303 0
+ 397 0256 14F0200F 		tst	r4, #32
+ 398 025a 1CD0     		beq	.L1
+ 304:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****             {
+ 305:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 I2C_Bus_mstrStatus |= I2C_Bus_GET_MSTAT_CMPLT;
+ 399              		.loc 1 305 0
+ 400 025c 0F4B     		ldr	r3, .L27+4
+ 401 025e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 402 0260 13F0080F 		tst	r3, #8
+ 403 0264 01D0     		beq	.L25
+ 404 0266 0123     		movs	r3, #1
+ 405 0268 00E0     		b	.L23
+ 406              	.L25:
+ 407 026a 0223     		movs	r3, #2
+ 408              	.L23:
+ 409              		.loc 1 305 0 is_stmt 0 discriminator 4
+ 410 026c 114A     		ldr	r2, .L27+28
+ 411 026e 1178     		ldrb	r1, [r2]	@ zero_extendqisi2
+ 412 0270 0B43     		orrs	r3, r3, r1
+ 413 0272 1370     		strb	r3, [r2]
+ 306:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 307:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 I2C_Bus_DISABLE_INT_ON_STOP;
+ 414              		.loc 1 307 0 is_stmt 1 discriminator 4
+ 415 0274 114A     		ldr	r2, .L27+36
+ 416 0276 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 417 0278 03F0EF03 		and	r3, r3, #239
+ 418 027c 1370     		strb	r3, [r2]
+ 308:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 I2C_Bus_state = I2C_Bus_SM_IDLE;
+ 419              		.loc 1 308 0 discriminator 4
+ 420 027e 1022     		movs	r2, #16
+ 421 0280 064B     		ldr	r3, .L27+4
+ 422 0282 1A70     		strb	r2, [r3]
+ 423 0284 38BD     		pop	{r3, r4, r5, pc}
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccXO3AU3.s 			page 14
+
+
+ 424              	.LVL6:
+ 425              	.L2:
+ 309:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****             }
+ 310:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****         #endif /* (I2C_Bus_MODE_MASTER_ENABLED) */
+ 311:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****     }
+ 312:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****     else if(I2C_Bus_CHECK_SM_SLAVE)
+ 426              		.loc 1 312 0
+ 427 0286 054B     		ldr	r3, .L27+4
+ 428 0288 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 429 028a 13F0100F 		tst	r3, #16
+ 430 028e 02D1     		bne	.L1
+ 313:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****     {
+ 314:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****         #if(I2C_Bus_MODE_SLAVE_ENABLED)
+ 315:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****             
+ 316:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****             if((I2C_Bus_CHECK_STOP_STS(tmpCsr)) || /* Stop || Restart */
+ 317:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                (I2C_Bus_CHECK_BYTE_COMPLETE(tmpCsr) && I2C_Bus_CHECK_ADDRESS_STS(tmpCsr)))
+ 318:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****             {
+ 319:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 /* Catch end of master write transcation: use interrupt on Stop */
+ 320:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 /* The STOP bit history on address phase does not have correct state */
+ 321:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 if(I2C_Bus_SM_SL_WR_DATA == I2C_Bus_state)
+ 322:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 {
+ 323:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     I2C_Bus_DISABLE_INT_ON_STOP;
+ 324:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 325:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     I2C_Bus_slStatus &= ((uint8) ~I2C_Bus_SSTAT_WR_BUSY);
+ 326:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     I2C_Bus_slStatus |= ((uint8)  I2C_Bus_SSTAT_WR_CMPLT);
+ 327:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 328:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     I2C_Bus_state = I2C_Bus_SM_IDLE;
+ 329:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 }
+ 330:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****             }
+ 331:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 332:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****             if(I2C_Bus_CHECK_BYTE_COMPLETE(tmpCsr))
+ 333:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****             {
+ 334:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 /* The address only issued after Start or ReStart: so check address
+ 335:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                    to catch this events:
+ 336:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     FF : sets Addr phase with byte_complete interrupt trigger.
+ 337:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     UDB: sets Addr phase immediately after Start or ReStart. */
+ 338:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 if(I2C_Bus_CHECK_ADDRESS_STS(tmpCsr))
+ 339:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 {
+ 340:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     /* Check for software address detection */
+ 341:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     #if(I2C_Bus_SW_ADRR_DECODE)
+ 342:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         tmp8 = I2C_Bus_GET_SLAVE_ADDR(I2C_Bus_DATA_REG);
+ 343:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 344:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         if(tmp8 == I2C_Bus_slAddress)   /* Check for address match */
+ 345:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         {
+ 346:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             if(0u != (I2C_Bus_DATA_REG & I2C_Bus_READ_FLAG))
+ 347:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             {
+ 348:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                 /* Place code to prepare read buffer here                  */
+ 349:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                 /* `#START I2C_Bus_SW_PREPARE_READ_BUF_interrupt` */
+ 350:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 351:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                 /* `#END` */
+ 352:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 353:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                 /* Prepare next opeation to read, get data and place in data regist
+ 354:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                 if(I2C_Bus_slRdBufIndex < I2C_Bus_slRdBufSize)
+ 355:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                 {
+ 356:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                     /* Load first data byte from array */
+ 357:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                     I2C_Bus_DATA_REG = I2C_Bus_slRdBufPtr[I2C_Bus_slRdBufIndex];
+ 358:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                     I2C_Bus_ACK_AND_TRANSMIT;
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccXO3AU3.s 			page 15
+
+
+ 359:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                     I2C_Bus_slRdBufIndex++;
+ 360:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 361:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                     I2C_Bus_slStatus |= I2C_Bus_SSTAT_RD_BUSY;
+ 362:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                 }
+ 363:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                 else    /* Overflow: provide 0xFF on the bus */
+ 364:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                 {
+ 365:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                     I2C_Bus_DATA_REG = I2C_Bus_OVERFLOW_RETURN;
+ 366:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                     I2C_Bus_ACK_AND_TRANSMIT;
+ 367:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 368:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                     I2C_Bus_slStatus  |= (I2C_Bus_SSTAT_RD_BUSY |
+ 369:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                                                    I2C_Bus_SSTAT_RD_ERR_OVFL);
+ 370:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                 }
+ 371:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 372:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                 I2C_Bus_state = I2C_Bus_SM_SL_RD_DATA;
+ 373:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             }
+ 374:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             else  /* Write transaction: receive 1st byte */
+ 375:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             {
+ 376:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                 I2C_Bus_ACK_AND_RECEIVE;
+ 377:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                 I2C_Bus_state = I2C_Bus_SM_SL_WR_DATA;
+ 378:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 379:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                 I2C_Bus_slStatus |= I2C_Bus_SSTAT_WR_BUSY;
+ 380:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                 I2C_Bus_ENABLE_INT_ON_STOP;
+ 381:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             }
+ 382:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         }    
+ 383:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         else
+ 384:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         {
+ 385:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             /*     Place code to compare for additional address here    */
+ 386:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             /* `#START I2C_Bus_SW_ADDR_COMPARE_interruptStart` */
+ 387:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 388:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             /* `#END` */
+ 389:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             
+ 390:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             I2C_Bus_NAK_AND_RECEIVE;   /* NACK address */
+ 391:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 392:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             /* Place code to end of condition for NACK generation here */
+ 393:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             /* `#START I2C_Bus_SW_ADDR_COMPARE_interruptEnd`  */
+ 394:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 395:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             /* `#END` */
+ 396:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         }
+ 397:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         
+ 398:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     #else /* (I2C_Bus_HW_ADRR_DECODE) */
+ 399:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         
+ 400:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         if(0u != (I2C_Bus_DATA_REG & I2C_Bus_READ_FLAG))
+ 401:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         {
+ 402:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             /* Place code to prepare read buffer here                  */
+ 403:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             /* `#START I2C_Bus_HW_PREPARE_READ_BUF_interrupt` */
+ 404:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 405:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             /* `#END` */
+ 406:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 407:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             /* Prepare next opeation to read, get data and place in data register *
+ 408:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             if(I2C_Bus_slRdBufIndex < I2C_Bus_slRdBufSize)
+ 409:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             {
+ 410:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                 /* Load first data byte from array */
+ 411:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                 I2C_Bus_DATA_REG = I2C_Bus_slRdBufPtr[I2C_Bus_slRdBufIndex];
+ 412:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                 I2C_Bus_ACK_AND_TRANSMIT;
+ 413:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                 I2C_Bus_slRdBufIndex++;
+ 414:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 415:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                 I2C_Bus_slStatus |= I2C_Bus_SSTAT_RD_BUSY;
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccXO3AU3.s 			page 16
+
+
+ 416:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             }
+ 417:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             else    /* Overflow: provide 0xFF on the bus */
+ 418:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             {
+ 419:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                 I2C_Bus_DATA_REG = I2C_Bus_OVERFLOW_RETURN;
+ 420:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                 I2C_Bus_ACK_AND_TRANSMIT;
+ 421:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 422:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                 I2C_Bus_slStatus  |= (I2C_Bus_SSTAT_RD_BUSY |
+ 423:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                                                                I2C_Bus_SSTAT_RD_ERR_OVFL);
+ 424:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             }
+ 425:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 426:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             I2C_Bus_state = I2C_Bus_SM_SL_RD_DATA;
+ 427:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         }
+ 428:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         else  /* Write transaction: receive 1st byte */
+ 429:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         {
+ 430:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             I2C_Bus_ACK_AND_RECEIVE;
+ 431:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             I2C_Bus_state = I2C_Bus_SM_SL_WR_DATA;
+ 432:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 433:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             I2C_Bus_slStatus |= I2C_Bus_SSTAT_WR_BUSY;
+ 434:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             I2C_Bus_ENABLE_INT_ON_STOP;
+ 435:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         }
+ 436:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         
+ 437:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     #endif /* (I2C_Bus_SW_ADRR_DECODE) */
+ 438:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 }
+ 439:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 /* Data states */
+ 440:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 /* Data master writes into slave */
+ 441:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 else if(I2C_Bus_state == I2C_Bus_SM_SL_WR_DATA)
+ 442:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 {
+ 443:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     if(I2C_Bus_slWrBufIndex < I2C_Bus_slWrBufSize)
+ 444:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     {
+ 445:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         tmp8 = I2C_Bus_DATA_REG;
+ 446:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         I2C_Bus_ACK_AND_RECEIVE;
+ 447:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         I2C_Bus_slWrBufPtr[I2C_Bus_slWrBufIndex] = tmp8;
+ 448:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         I2C_Bus_slWrBufIndex++;
+ 449:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     }
+ 450:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     else  /* of array: complete write, send NACK */
+ 451:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     {
+ 452:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         I2C_Bus_NAK_AND_RECEIVE;
+ 453:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 454:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         I2C_Bus_slStatus |= I2C_Bus_SSTAT_WR_ERR_OVFL;
+ 455:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     }
+ 456:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 }
+ 457:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 /* Data master reads from slave */
+ 458:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 else if(I2C_Bus_state == I2C_Bus_SM_SL_RD_DATA)
+ 459:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 {
+ 460:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     if(I2C_Bus_CHECK_DATA_ACK(tmpCsr))
+ 461:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     {
+ 462:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         if(I2C_Bus_slRdBufIndex < I2C_Bus_slRdBufSize)
+ 463:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         {
+ 464:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                              /* Get data from array */
+ 465:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             I2C_Bus_DATA_REG = I2C_Bus_slRdBufPtr[I2C_Bus_slRdBufIndex];
+ 466:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             I2C_Bus_TRANSMIT_DATA;
+ 467:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             I2C_Bus_slRdBufIndex++;
+ 468:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         }
+ 469:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         else   /* Overflow: provide 0xFF on the bus */
+ 470:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         {
+ 471:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             I2C_Bus_DATA_REG = I2C_Bus_OVERFLOW_RETURN;
+ 472:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             I2C_Bus_TRANSMIT_DATA;
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccXO3AU3.s 			page 17
+
+
+ 473:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 474:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                             I2C_Bus_slStatus |= I2C_Bus_SSTAT_RD_ERR_OVFL;
+ 475:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         }
+ 476:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     }
+ 477:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     else  /* Last byte was NACKed: read complete */
+ 478:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     {
+ 479:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         /* Only NACK appears on the bus */
+ 480:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         I2C_Bus_DATA_REG = I2C_Bus_OVERFLOW_RETURN;
+ 481:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         I2C_Bus_NAK_AND_TRANSMIT;
+ 482:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 483:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         I2C_Bus_slStatus &= ((uint8) ~I2C_Bus_SSTAT_RD_BUSY);
+ 484:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         I2C_Bus_slStatus |= ((uint8)  I2C_Bus_SSTAT_RD_CMPLT);
+ 485:.\Generated_Source\PSoC5/I2C_Bus_INT.c **** 
+ 486:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         I2C_Bus_state = I2C_Bus_SM_IDLE;
+ 487:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     }
+ 488:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 }
+ 489:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 else
+ 490:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 {
+ 491:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     #if(I2C_Bus_TIMEOUT_ENABLED)
+ 492:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         /* Exit from interrupt to take a chance for timeout timer handle this case 
+ 493:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         I2C_Bus_DisableInt();
+ 494:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         I2C_Bus_ClearPendingInt();
+ 495:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     #else
+ 496:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         /* Block execution flow: unexpected condition */
+ 497:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                         CYASSERT(0u != 0u);
+ 498:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                     #endif /* (I2C_Bus_TIMEOUT_ENABLED) */
+ 499:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****                 }
+ 500:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****             }
+ 501:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****         #endif /* (I2C_Bus_MODE_SLAVE_ENABLED) */
+ 502:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****     }
+ 503:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****     else
+ 504:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****     {
+ 505:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****         /* The FSM skips master and slave processing: return to IDLE */
+ 506:.\Generated_Source\PSoC5/I2C_Bus_INT.c ****         I2C_Bus_state = I2C_Bus_SM_IDLE;
+ 431              		.loc 1 506 0
+ 432 0290 1022     		movs	r2, #16
+ 433 0292 024B     		ldr	r3, .L27+4
+ 434 0294 1A70     		strb	r2, [r3]
+ 435              	.L1:
+ 436 0296 38BD     		pop	{r3, r4, r5, pc}
+ 437              	.LVL7:
+ 438              	.L28:
+ 439              		.align	2
+ 440              	.L27:
+ 441 0298 D7490040 		.word	1073760727
+ 442 029c 00000000 		.word	I2C_Bus_state
+ 443 02a0 00000000 		.word	I2C_Bus_mstrWrBufSize
+ 444 02a4 00000000 		.word	I2C_Bus_mstrWrBufPtr
+ 445 02a8 D8490040 		.word	1073760728
+ 446 02ac 00000000 		.word	I2C_Bus_mstrWrBufIndex
+ 447 02b0 00000000 		.word	I2C_Bus_mstrControl
+ 448 02b4 00000000 		.word	I2C_Bus_mstrStatus
+ 449 02b8 80E100E0 		.word	-536813184
+ 450 02bc D6490040 		.word	1073760726
+ 451 02c0 D9490040 		.word	1073760729
+ 452 02c4 00000000 		.word	I2C_Bus_mstrRdBufIndex
+ 453 02c8 00000000 		.word	I2C_Bus_mstrRdBufPtr
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccXO3AU3.s 			page 18
+
+
+ 454 02cc 00000000 		.word	I2C_Bus_mstrRdBufSize
+ 455              		.cfi_endproc
+ 456              	.LFE0:
+ 457              		.size	I2C_Bus_ISR, .-I2C_Bus_ISR
+ 458              		.text
+ 459              	.Letext0:
+ 460              		.file 2 ".\\Generated_Source\\PSoC5\\cytypes.h"
+ 461              		.file 3 ".\\Generated_Source\\PSoC5\\I2C_Bus_PVT.h"
+ 462              		.file 4 ".\\Generated_Source\\PSoC5\\CyLib.h"
+ 463              		.file 5 ".\\Generated_Source\\PSoC5\\I2C_Bus.h"
+ 464              		.section	.debug_info,"",%progbits
+ 465              	.Ldebug_info0:
+ 466 0000 8F010000 		.4byte	0x18f
+ 467 0004 0400     		.2byte	0x4
+ 468 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 469 000a 04       		.byte	0x4
+ 470 000b 01       		.uleb128 0x1
+ 471 000c 1D010000 		.4byte	.LASF26
+ 472 0010 01       		.byte	0x1
+ 473 0011 26020000 		.4byte	.LASF27
+ 474 0015 21000000 		.4byte	.LASF28
+ 475 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 476 001d 00000000 		.4byte	0
+ 477 0021 00000000 		.4byte	.Ldebug_line0
+ 478 0025 02       		.uleb128 0x2
+ 479 0026 01       		.byte	0x1
+ 480 0027 06       		.byte	0x6
+ 481 0028 75020000 		.4byte	.LASF0
+ 482 002c 02       		.uleb128 0x2
+ 483 002d 01       		.byte	0x1
+ 484 002e 08       		.byte	0x8
+ 485 002f AB000000 		.4byte	.LASF1
+ 486 0033 02       		.uleb128 0x2
+ 487 0034 02       		.byte	0x2
+ 488 0035 05       		.byte	0x5
+ 489 0036 1C020000 		.4byte	.LASF2
+ 490 003a 02       		.uleb128 0x2
+ 491 003b 02       		.byte	0x2
+ 492 003c 07       		.byte	0x7
+ 493 003d 67000000 		.4byte	.LASF3
+ 494 0041 02       		.uleb128 0x2
+ 495 0042 04       		.byte	0x4
+ 496 0043 05       		.byte	0x5
+ 497 0044 60020000 		.4byte	.LASF4
+ 498 0048 02       		.uleb128 0x2
+ 499 0049 04       		.byte	0x4
+ 500 004a 07       		.byte	0x7
+ 501 004b CC000000 		.4byte	.LASF5
+ 502 004f 02       		.uleb128 0x2
+ 503 0050 08       		.byte	0x8
+ 504 0051 05       		.byte	0x5
+ 505 0052 F2010000 		.4byte	.LASF6
+ 506 0056 02       		.uleb128 0x2
+ 507 0057 08       		.byte	0x8
+ 508 0058 07       		.byte	0x7
+ 509 0059 B8010000 		.4byte	.LASF7
+ 510 005d 03       		.uleb128 0x3
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccXO3AU3.s 			page 19
+
+
+ 511 005e 04       		.byte	0x4
+ 512 005f 05       		.byte	0x5
+ 513 0060 696E7400 		.ascii	"int\000"
+ 514 0064 02       		.uleb128 0x2
+ 515 0065 04       		.byte	0x4
+ 516 0066 07       		.byte	0x7
+ 517 0067 AB010000 		.4byte	.LASF8
+ 518 006b 04       		.uleb128 0x4
+ 519 006c DE000000 		.4byte	.LASF9
+ 520 0070 02       		.byte	0x2
+ 521 0071 3801     		.2byte	0x138
+ 522 0073 2C000000 		.4byte	0x2c
+ 523 0077 04       		.uleb128 0x4
+ 524 0078 16010000 		.4byte	.LASF10
+ 525 007c 02       		.byte	0x2
+ 526 007d 3A01     		.2byte	0x13a
+ 527 007f 48000000 		.4byte	0x48
+ 528 0083 02       		.uleb128 0x2
+ 529 0084 04       		.byte	0x4
+ 530 0085 04       		.byte	0x4
+ 531 0086 8F000000 		.4byte	.LASF11
+ 532 008a 02       		.uleb128 0x2
+ 533 008b 08       		.byte	0x8
+ 534 008c 04       		.byte	0x4
+ 535 008d E4000000 		.4byte	.LASF12
+ 536 0091 02       		.uleb128 0x2
+ 537 0092 01       		.byte	0x1
+ 538 0093 08       		.byte	0x8
+ 539 0094 00020000 		.4byte	.LASF13
+ 540 0098 04       		.uleb128 0x4
+ 541 0099 C7000000 		.4byte	.LASF14
+ 542 009d 02       		.byte	0x2
+ 543 009e E201     		.2byte	0x1e2
+ 544 00a0 A4000000 		.4byte	0xa4
+ 545 00a4 05       		.uleb128 0x5
+ 546 00a5 6B000000 		.4byte	0x6b
+ 547 00a9 04       		.uleb128 0x4
+ 548 00aa 07000000 		.4byte	.LASF15
+ 549 00ae 02       		.byte	0x2
+ 550 00af E401     		.2byte	0x1e4
+ 551 00b1 B5000000 		.4byte	0xb5
+ 552 00b5 05       		.uleb128 0x5
+ 553 00b6 77000000 		.4byte	0x77
+ 554 00ba 02       		.uleb128 0x2
+ 555 00bb 04       		.byte	0x4
+ 556 00bc 07       		.byte	0x7
+ 557 00bd E9010000 		.4byte	.LASF16
+ 558 00c1 06       		.uleb128 0x6
+ 559 00c2 69020000 		.4byte	.LASF29
+ 560 00c6 01       		.byte	0x1
+ 561 00c7 2E       		.byte	0x2e
+ 562 00c8 00000000 		.4byte	.LFB0
+ 563 00cc D0020000 		.4byte	.LFE0-.LFB0
+ 564 00d0 01       		.uleb128 0x1
+ 565 00d1 9C       		.byte	0x9c
+ 566 00d2 11010000 		.4byte	0x111
+ 567 00d6 07       		.uleb128 0x7
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccXO3AU3.s 			page 20
+
+
+ 568 00d7 00000000 		.4byte	.LASF30
+ 569 00db 01       		.byte	0x1
+ 570 00dc 34       		.byte	0x34
+ 571 00dd 6B000000 		.4byte	0x6b
+ 572 00e1 00000000 		.4byte	.LLST0
+ 573 00e5 08       		.uleb128 0x8
+ 574 00e6 2C010000 		.4byte	.LVL2
+ 575 00ea 7A010000 		.4byte	0x17a
+ 576 00ee F8000000 		.4byte	0xf8
+ 577 00f2 09       		.uleb128 0x9
+ 578 00f3 01       		.uleb128 0x1
+ 579 00f4 50       		.byte	0x50
+ 580 00f5 01       		.uleb128 0x1
+ 581 00f6 30       		.byte	0x30
+ 582 00f7 00       		.byte	0
+ 583 00f8 0A       		.uleb128 0xa
+ 584 00f9 8E010000 		.4byte	.LVL4
+ 585 00fd 8B010000 		.4byte	0x18b
+ 586 0101 0B       		.uleb128 0xb
+ 587 0102 56020000 		.4byte	.LVL5
+ 588 0106 7A010000 		.4byte	0x17a
+ 589 010a 09       		.uleb128 0x9
+ 590 010b 01       		.uleb128 0x1
+ 591 010c 50       		.byte	0x50
+ 592 010d 01       		.uleb128 0x1
+ 593 010e 30       		.byte	0x30
+ 594 010f 00       		.byte	0
+ 595 0110 00       		.byte	0
+ 596 0111 0C       		.uleb128 0xc
+ 597 0112 B9000000 		.4byte	.LASF17
+ 598 0116 03       		.byte	0x3
+ 599 0117 23       		.byte	0x23
+ 600 0118 A4000000 		.4byte	0xa4
+ 601 011c 0C       		.uleb128 0xc
+ 602 011d 4D020000 		.4byte	.LASF18
+ 603 0121 03       		.byte	0x3
+ 604 0122 27       		.byte	0x27
+ 605 0123 A4000000 		.4byte	0xa4
+ 606 0127 0C       		.uleb128 0xc
+ 607 0128 0D000000 		.4byte	.LASF19
+ 608 012c 03       		.byte	0x3
+ 609 012d 28       		.byte	0x28
+ 610 012e A4000000 		.4byte	0xa4
+ 611 0132 0C       		.uleb128 0xc
+ 612 0133 7A000000 		.4byte	.LASF20
+ 613 0137 03       		.byte	0x3
+ 614 0138 2B       		.byte	0x2b
+ 615 0139 3D010000 		.4byte	0x13d
+ 616 013d 0D       		.uleb128 0xd
+ 617 013e 04       		.byte	0x4
+ 618 013f A4000000 		.4byte	0xa4
+ 619 0143 0C       		.uleb128 0xc
+ 620 0144 95000000 		.4byte	.LASF21
+ 621 0148 03       		.byte	0x3
+ 622 0149 2C       		.byte	0x2c
+ 623 014a A4000000 		.4byte	0xa4
+ 624 014e 0C       		.uleb128 0xc
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccXO3AU3.s 			page 21
+
+
+ 625 014f 81020000 		.4byte	.LASF22
+ 626 0153 03       		.byte	0x3
+ 627 0154 2D       		.byte	0x2d
+ 628 0155 A4000000 		.4byte	0xa4
+ 629 0159 0C       		.uleb128 0xc
+ 630 015a EB000000 		.4byte	.LASF23
+ 631 015e 03       		.byte	0x3
+ 632 015f 30       		.byte	0x30
+ 633 0160 3D010000 		.4byte	0x13d
+ 634 0164 0C       		.uleb128 0xc
+ 635 0165 00010000 		.4byte	.LASF24
+ 636 0169 03       		.byte	0x3
+ 637 016a 31       		.byte	0x31
+ 638 016b A4000000 		.4byte	0xa4
+ 639 016f 0C       		.uleb128 0xc
+ 640 0170 05020000 		.4byte	.LASF25
+ 641 0174 03       		.byte	0x3
+ 642 0175 32       		.byte	0x32
+ 643 0176 A4000000 		.4byte	0xa4
+ 644 017a 0E       		.uleb128 0xe
+ 645 017b E2010000 		.4byte	.LASF31
+ 646 017f 04       		.byte	0x4
+ 647 0180 80       		.byte	0x80
+ 648 0181 8B010000 		.4byte	0x18b
+ 649 0185 0F       		.uleb128 0xf
+ 650 0186 6B000000 		.4byte	0x6b
+ 651 018a 00       		.byte	0
+ 652 018b 10       		.uleb128 0x10
+ 653 018c CF010000 		.4byte	.LASF32
+ 654 0190 05       		.byte	0x5
+ 655 0191 D3       		.byte	0xd3
+ 656 0192 00       		.byte	0
+ 657              		.section	.debug_abbrev,"",%progbits
+ 658              	.Ldebug_abbrev0:
+ 659 0000 01       		.uleb128 0x1
+ 660 0001 11       		.uleb128 0x11
+ 661 0002 01       		.byte	0x1
+ 662 0003 25       		.uleb128 0x25
+ 663 0004 0E       		.uleb128 0xe
+ 664 0005 13       		.uleb128 0x13
+ 665 0006 0B       		.uleb128 0xb
+ 666 0007 03       		.uleb128 0x3
+ 667 0008 0E       		.uleb128 0xe
+ 668 0009 1B       		.uleb128 0x1b
+ 669 000a 0E       		.uleb128 0xe
+ 670 000b 55       		.uleb128 0x55
+ 671 000c 17       		.uleb128 0x17
+ 672 000d 11       		.uleb128 0x11
+ 673 000e 01       		.uleb128 0x1
+ 674 000f 10       		.uleb128 0x10
+ 675 0010 17       		.uleb128 0x17
+ 676 0011 00       		.byte	0
+ 677 0012 00       		.byte	0
+ 678 0013 02       		.uleb128 0x2
+ 679 0014 24       		.uleb128 0x24
+ 680 0015 00       		.byte	0
+ 681 0016 0B       		.uleb128 0xb
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccXO3AU3.s 			page 22
+
+
+ 682 0017 0B       		.uleb128 0xb
+ 683 0018 3E       		.uleb128 0x3e
+ 684 0019 0B       		.uleb128 0xb
+ 685 001a 03       		.uleb128 0x3
+ 686 001b 0E       		.uleb128 0xe
+ 687 001c 00       		.byte	0
+ 688 001d 00       		.byte	0
+ 689 001e 03       		.uleb128 0x3
+ 690 001f 24       		.uleb128 0x24
+ 691 0020 00       		.byte	0
+ 692 0021 0B       		.uleb128 0xb
+ 693 0022 0B       		.uleb128 0xb
+ 694 0023 3E       		.uleb128 0x3e
+ 695 0024 0B       		.uleb128 0xb
+ 696 0025 03       		.uleb128 0x3
+ 697 0026 08       		.uleb128 0x8
+ 698 0027 00       		.byte	0
+ 699 0028 00       		.byte	0
+ 700 0029 04       		.uleb128 0x4
+ 701 002a 16       		.uleb128 0x16
+ 702 002b 00       		.byte	0
+ 703 002c 03       		.uleb128 0x3
+ 704 002d 0E       		.uleb128 0xe
+ 705 002e 3A       		.uleb128 0x3a
+ 706 002f 0B       		.uleb128 0xb
+ 707 0030 3B       		.uleb128 0x3b
+ 708 0031 05       		.uleb128 0x5
+ 709 0032 49       		.uleb128 0x49
+ 710 0033 13       		.uleb128 0x13
+ 711 0034 00       		.byte	0
+ 712 0035 00       		.byte	0
+ 713 0036 05       		.uleb128 0x5
+ 714 0037 35       		.uleb128 0x35
+ 715 0038 00       		.byte	0
+ 716 0039 49       		.uleb128 0x49
+ 717 003a 13       		.uleb128 0x13
+ 718 003b 00       		.byte	0
+ 719 003c 00       		.byte	0
+ 720 003d 06       		.uleb128 0x6
+ 721 003e 2E       		.uleb128 0x2e
+ 722 003f 01       		.byte	0x1
+ 723 0040 3F       		.uleb128 0x3f
+ 724 0041 19       		.uleb128 0x19
+ 725 0042 03       		.uleb128 0x3
+ 726 0043 0E       		.uleb128 0xe
+ 727 0044 3A       		.uleb128 0x3a
+ 728 0045 0B       		.uleb128 0xb
+ 729 0046 3B       		.uleb128 0x3b
+ 730 0047 0B       		.uleb128 0xb
+ 731 0048 27       		.uleb128 0x27
+ 732 0049 19       		.uleb128 0x19
+ 733 004a 11       		.uleb128 0x11
+ 734 004b 01       		.uleb128 0x1
+ 735 004c 12       		.uleb128 0x12
+ 736 004d 06       		.uleb128 0x6
+ 737 004e 40       		.uleb128 0x40
+ 738 004f 18       		.uleb128 0x18
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccXO3AU3.s 			page 23
+
+
+ 739 0050 9742     		.uleb128 0x2117
+ 740 0052 19       		.uleb128 0x19
+ 741 0053 01       		.uleb128 0x1
+ 742 0054 13       		.uleb128 0x13
+ 743 0055 00       		.byte	0
+ 744 0056 00       		.byte	0
+ 745 0057 07       		.uleb128 0x7
+ 746 0058 34       		.uleb128 0x34
+ 747 0059 00       		.byte	0
+ 748 005a 03       		.uleb128 0x3
+ 749 005b 0E       		.uleb128 0xe
+ 750 005c 3A       		.uleb128 0x3a
+ 751 005d 0B       		.uleb128 0xb
+ 752 005e 3B       		.uleb128 0x3b
+ 753 005f 0B       		.uleb128 0xb
+ 754 0060 49       		.uleb128 0x49
+ 755 0061 13       		.uleb128 0x13
+ 756 0062 02       		.uleb128 0x2
+ 757 0063 17       		.uleb128 0x17
+ 758 0064 00       		.byte	0
+ 759 0065 00       		.byte	0
+ 760 0066 08       		.uleb128 0x8
+ 761 0067 898201   		.uleb128 0x4109
+ 762 006a 01       		.byte	0x1
+ 763 006b 11       		.uleb128 0x11
+ 764 006c 01       		.uleb128 0x1
+ 765 006d 31       		.uleb128 0x31
+ 766 006e 13       		.uleb128 0x13
+ 767 006f 01       		.uleb128 0x1
+ 768 0070 13       		.uleb128 0x13
+ 769 0071 00       		.byte	0
+ 770 0072 00       		.byte	0
+ 771 0073 09       		.uleb128 0x9
+ 772 0074 8A8201   		.uleb128 0x410a
+ 773 0077 00       		.byte	0
+ 774 0078 02       		.uleb128 0x2
+ 775 0079 18       		.uleb128 0x18
+ 776 007a 9142     		.uleb128 0x2111
+ 777 007c 18       		.uleb128 0x18
+ 778 007d 00       		.byte	0
+ 779 007e 00       		.byte	0
+ 780 007f 0A       		.uleb128 0xa
+ 781 0080 898201   		.uleb128 0x4109
+ 782 0083 00       		.byte	0
+ 783 0084 11       		.uleb128 0x11
+ 784 0085 01       		.uleb128 0x1
+ 785 0086 31       		.uleb128 0x31
+ 786 0087 13       		.uleb128 0x13
+ 787 0088 00       		.byte	0
+ 788 0089 00       		.byte	0
+ 789 008a 0B       		.uleb128 0xb
+ 790 008b 898201   		.uleb128 0x4109
+ 791 008e 01       		.byte	0x1
+ 792 008f 11       		.uleb128 0x11
+ 793 0090 01       		.uleb128 0x1
+ 794 0091 31       		.uleb128 0x31
+ 795 0092 13       		.uleb128 0x13
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccXO3AU3.s 			page 24
+
+
+ 796 0093 00       		.byte	0
+ 797 0094 00       		.byte	0
+ 798 0095 0C       		.uleb128 0xc
+ 799 0096 34       		.uleb128 0x34
+ 800 0097 00       		.byte	0
+ 801 0098 03       		.uleb128 0x3
+ 802 0099 0E       		.uleb128 0xe
+ 803 009a 3A       		.uleb128 0x3a
+ 804 009b 0B       		.uleb128 0xb
+ 805 009c 3B       		.uleb128 0x3b
+ 806 009d 0B       		.uleb128 0xb
+ 807 009e 49       		.uleb128 0x49
+ 808 009f 13       		.uleb128 0x13
+ 809 00a0 3F       		.uleb128 0x3f
+ 810 00a1 19       		.uleb128 0x19
+ 811 00a2 3C       		.uleb128 0x3c
+ 812 00a3 19       		.uleb128 0x19
+ 813 00a4 00       		.byte	0
+ 814 00a5 00       		.byte	0
+ 815 00a6 0D       		.uleb128 0xd
+ 816 00a7 0F       		.uleb128 0xf
+ 817 00a8 00       		.byte	0
+ 818 00a9 0B       		.uleb128 0xb
+ 819 00aa 0B       		.uleb128 0xb
+ 820 00ab 49       		.uleb128 0x49
+ 821 00ac 13       		.uleb128 0x13
+ 822 00ad 00       		.byte	0
+ 823 00ae 00       		.byte	0
+ 824 00af 0E       		.uleb128 0xe
+ 825 00b0 2E       		.uleb128 0x2e
+ 826 00b1 01       		.byte	0x1
+ 827 00b2 3F       		.uleb128 0x3f
+ 828 00b3 19       		.uleb128 0x19
+ 829 00b4 03       		.uleb128 0x3
+ 830 00b5 0E       		.uleb128 0xe
+ 831 00b6 3A       		.uleb128 0x3a
+ 832 00b7 0B       		.uleb128 0xb
+ 833 00b8 3B       		.uleb128 0x3b
+ 834 00b9 0B       		.uleb128 0xb
+ 835 00ba 27       		.uleb128 0x27
+ 836 00bb 19       		.uleb128 0x19
+ 837 00bc 3C       		.uleb128 0x3c
+ 838 00bd 19       		.uleb128 0x19
+ 839 00be 01       		.uleb128 0x1
+ 840 00bf 13       		.uleb128 0x13
+ 841 00c0 00       		.byte	0
+ 842 00c1 00       		.byte	0
+ 843 00c2 0F       		.uleb128 0xf
+ 844 00c3 05       		.uleb128 0x5
+ 845 00c4 00       		.byte	0
+ 846 00c5 49       		.uleb128 0x49
+ 847 00c6 13       		.uleb128 0x13
+ 848 00c7 00       		.byte	0
+ 849 00c8 00       		.byte	0
+ 850 00c9 10       		.uleb128 0x10
+ 851 00ca 2E       		.uleb128 0x2e
+ 852 00cb 00       		.byte	0
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccXO3AU3.s 			page 25
+
+
+ 853 00cc 3F       		.uleb128 0x3f
+ 854 00cd 19       		.uleb128 0x19
+ 855 00ce 03       		.uleb128 0x3
+ 856 00cf 0E       		.uleb128 0xe
+ 857 00d0 3A       		.uleb128 0x3a
+ 858 00d1 0B       		.uleb128 0xb
+ 859 00d2 3B       		.uleb128 0x3b
+ 860 00d3 0B       		.uleb128 0xb
+ 861 00d4 27       		.uleb128 0x27
+ 862 00d5 19       		.uleb128 0x19
+ 863 00d6 3C       		.uleb128 0x3c
+ 864 00d7 19       		.uleb128 0x19
+ 865 00d8 00       		.byte	0
+ 866 00d9 00       		.byte	0
+ 867 00da 00       		.byte	0
+ 868              		.section	.debug_loc,"",%progbits
+ 869              	.Ldebug_loc0:
+ 870              	.LLST0:
+ 871 0000 08000000 		.4byte	.LVL0
+ 872 0004 3C000000 		.4byte	.LVL1
+ 873 0008 0100     		.2byte	0x1
+ 874 000a 54       		.byte	0x54
+ 875 000b 3C000000 		.4byte	.LVL1
+ 876 000f 30010000 		.4byte	.LVL3
+ 877 0013 0100     		.2byte	0x1
+ 878 0015 55       		.byte	0x55
+ 879 0016 30010000 		.4byte	.LVL3
+ 880 001a 98020000 		.4byte	.LVL7
+ 881 001e 0100     		.2byte	0x1
+ 882 0020 54       		.byte	0x54
+ 883 0021 00000000 		.4byte	0
+ 884 0025 00000000 		.4byte	0
+ 885              		.section	.debug_aranges,"",%progbits
+ 886 0000 1C000000 		.4byte	0x1c
+ 887 0004 0200     		.2byte	0x2
+ 888 0006 00000000 		.4byte	.Ldebug_info0
+ 889 000a 04       		.byte	0x4
+ 890 000b 00       		.byte	0
+ 891 000c 0000     		.2byte	0
+ 892 000e 0000     		.2byte	0
+ 893 0010 00000000 		.4byte	.LFB0
+ 894 0014 D0020000 		.4byte	.LFE0-.LFB0
+ 895 0018 00000000 		.4byte	0
+ 896 001c 00000000 		.4byte	0
+ 897              		.section	.debug_ranges,"",%progbits
+ 898              	.Ldebug_ranges0:
+ 899 0000 00000000 		.4byte	.LFB0
+ 900 0004 D0020000 		.4byte	.LFE0
+ 901 0008 00000000 		.4byte	0
+ 902 000c 00000000 		.4byte	0
+ 903              		.section	.debug_line,"",%progbits
+ 904              	.Ldebug_line0:
+ 905 0000 2C010000 		.section	.debug_str,"MS",%progbits,1
+ 905      02007300 
+ 905      00000201 
+ 905      FB0E0D00 
+ 905      01010101 
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccXO3AU3.s 			page 26
+
+
+ 906              	.LASF30:
+ 907 0000 746D7043 		.ascii	"tmpCsr\000"
+ 907      737200
+ 908              	.LASF15:
+ 909 0007 72656733 		.ascii	"reg32\000"
+ 909      3200
+ 910              	.LASF19:
+ 911 000d 4932435F 		.ascii	"I2C_Bus_mstrControl\000"
+ 911      4275735F 
+ 911      6D737472 
+ 911      436F6E74 
+ 911      726F6C00 
+ 912              	.LASF28:
+ 913 0021 433A5C55 		.ascii	"C:\\Users\\Recepcion\\Documents\\GitHub\\NSY-DH\\Wo"
+ 913      73657273 
+ 913      5C526563 
+ 913      65706369 
+ 913      6F6E5C44 
+ 914 004e 726B7370 		.ascii	"rkspace01\\Design01.cydsn\000"
+ 914      61636530 
+ 914      315C4465 
+ 914      7369676E 
+ 914      30312E63 
+ 915              	.LASF3:
+ 916 0067 73686F72 		.ascii	"short unsigned int\000"
+ 916      7420756E 
+ 916      7369676E 
+ 916      65642069 
+ 916      6E7400
+ 917              	.LASF20:
+ 918 007a 4932435F 		.ascii	"I2C_Bus_mstrRdBufPtr\000"
+ 918      4275735F 
+ 918      6D737472 
+ 918      52644275 
+ 918      66507472 
+ 919              	.LASF11:
+ 920 008f 666C6F61 		.ascii	"float\000"
+ 920      7400
+ 921              	.LASF21:
+ 922 0095 4932435F 		.ascii	"I2C_Bus_mstrRdBufSize\000"
+ 922      4275735F 
+ 922      6D737472 
+ 922      52644275 
+ 922      6653697A 
+ 923              	.LASF1:
+ 924 00ab 756E7369 		.ascii	"unsigned char\000"
+ 924      676E6564 
+ 924      20636861 
+ 924      7200
+ 925              	.LASF17:
+ 926 00b9 4932435F 		.ascii	"I2C_Bus_state\000"
+ 926      4275735F 
+ 926      73746174 
+ 926      6500
+ 927              	.LASF14:
+ 928 00c7 72656738 		.ascii	"reg8\000"
+ 928      00
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccXO3AU3.s 			page 27
+
+
+ 929              	.LASF5:
+ 930 00cc 6C6F6E67 		.ascii	"long unsigned int\000"
+ 930      20756E73 
+ 930      69676E65 
+ 930      6420696E 
+ 930      7400
+ 931              	.LASF9:
+ 932 00de 75696E74 		.ascii	"uint8\000"
+ 932      3800
+ 933              	.LASF12:
+ 934 00e4 646F7562 		.ascii	"double\000"
+ 934      6C6500
+ 935              	.LASF23:
+ 936 00eb 4932435F 		.ascii	"I2C_Bus_mstrWrBufPtr\000"
+ 936      4275735F 
+ 936      6D737472 
+ 936      57724275 
+ 936      66507472 
+ 937              	.LASF24:
+ 938 0100 4932435F 		.ascii	"I2C_Bus_mstrWrBufSize\000"
+ 938      4275735F 
+ 938      6D737472 
+ 938      57724275 
+ 938      6653697A 
+ 939              	.LASF10:
+ 940 0116 75696E74 		.ascii	"uint32\000"
+ 940      333200
+ 941              	.LASF26:
+ 942 011d 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 942      4320342E 
+ 942      392E3320 
+ 942      32303135 
+ 942      30333033 
+ 943 0150 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 943      20726576 
+ 943      6973696F 
+ 943      6E203232 
+ 943      31323230 
+ 944 0183 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 944      66756E63 
+ 944      74696F6E 
+ 944      2D736563 
+ 944      74696F6E 
+ 945              	.LASF8:
+ 946 01ab 756E7369 		.ascii	"unsigned int\000"
+ 946      676E6564 
+ 946      20696E74 
+ 946      00
+ 947              	.LASF7:
+ 948 01b8 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 948      206C6F6E 
+ 948      6720756E 
+ 948      7369676E 
+ 948      65642069 
+ 949              	.LASF32:
+ 950 01cf 4932435F 		.ascii	"I2C_Bus_Workaround\000"
+ 950      4275735F 
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccXO3AU3.s 			page 28
+
+
+ 950      576F726B 
+ 950      61726F75 
+ 950      6E6400
+ 951              	.LASF31:
+ 952 01e2 43794861 		.ascii	"CyHalt\000"
+ 952      6C7400
+ 953              	.LASF16:
+ 954 01e9 73697A65 		.ascii	"sizetype\000"
+ 954      74797065 
+ 954      00
+ 955              	.LASF6:
+ 956 01f2 6C6F6E67 		.ascii	"long long int\000"
+ 956      206C6F6E 
+ 956      6720696E 
+ 956      7400
+ 957              	.LASF13:
+ 958 0200 63686172 		.ascii	"char\000"
+ 958      00
+ 959              	.LASF25:
+ 960 0205 4932435F 		.ascii	"I2C_Bus_mstrWrBufIndex\000"
+ 960      4275735F 
+ 960      6D737472 
+ 960      57724275 
+ 960      66496E64 
+ 961              	.LASF2:
+ 962 021c 73686F72 		.ascii	"short int\000"
+ 962      7420696E 
+ 962      7400
+ 963              	.LASF27:
+ 964 0226 2E5C4765 		.ascii	".\\Generated_Source\\PSoC5\\I2C_Bus_INT.c\000"
+ 964      6E657261 
+ 964      7465645F 
+ 964      536F7572 
+ 964      63655C50 
+ 965              	.LASF18:
+ 966 024d 4932435F 		.ascii	"I2C_Bus_mstrStatus\000"
+ 966      4275735F 
+ 966      6D737472 
+ 966      53746174 
+ 966      757300
+ 967              	.LASF4:
+ 968 0260 6C6F6E67 		.ascii	"long int\000"
+ 968      20696E74 
+ 968      00
+ 969              	.LASF29:
+ 970 0269 4932435F 		.ascii	"I2C_Bus_ISR\000"
+ 970      4275735F 
+ 970      49535200 
+ 971              	.LASF0:
+ 972 0275 7369676E 		.ascii	"signed char\000"
+ 972      65642063 
+ 972      68617200 
+ 973              	.LASF22:
+ 974 0281 4932435F 		.ascii	"I2C_Bus_mstrRdBufIndex\000"
+ 974      4275735F 
+ 974      6D737472 
+ 974      52644275 
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccXO3AU3.s 			page 29
+
+
+ 974      66496E64 
+ 975              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br

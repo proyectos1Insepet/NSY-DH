@@ -49,6 +49,23 @@
   <file name="C:\Users\Recepcion\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\codegentemp\Display2_BOOT.c" value="ARM_C_FILE;Display2" />
   <file name="C:\Users\Recepcion\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\codegentemp\EEPROM_1.c" value="ARM_C_FILE;EEPROM_1" />
   <file name="C:\Users\Recepcion\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\codegentemp\EEPROM_1.h" value="NONE;EEPROM_1" />
+  <file name="C:\Users\Recepcion\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\codegentemp\SDA_1_aliases.h" value="NONE;SDA_1" />
+  <file name="C:\Users\Recepcion\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\codegentemp\SDA_1.c" value="ARM_C_FILE;SDA_1" />
+  <file name="C:\Users\Recepcion\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\codegentemp\SDA_1.h" value="NONE;SDA_1" />
+  <file name="C:\Users\Recepcion\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\codegentemp\SCL_1_aliases.h" value="NONE;SCL_1" />
+  <file name="C:\Users\Recepcion\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\codegentemp\SCL_1.c" value="ARM_C_FILE;SCL_1" />
+  <file name="C:\Users\Recepcion\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\codegentemp\SCL_1.h" value="NONE;SCL_1" />
+  <file name="C:\Users\Recepcion\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\codegentemp\I2C_Bus.c" value="ARM_C_FILE;I2C_Bus" />
+  <file name="C:\Users\Recepcion\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\codegentemp\I2C_Bus.h" value="NONE;I2C_Bus" />
+  <file name="C:\Users\Recepcion\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\codegentemp\I2C_Bus_BOOT.c" value="ARM_C_FILE;I2C_Bus" />
+  <file name="C:\Users\Recepcion\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\codegentemp\I2C_Bus_INT.c" value="ARM_C_FILE;I2C_Bus" />
+  <file name="C:\Users\Recepcion\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\codegentemp\I2C_Bus_PM.c" value="ARM_C_FILE;I2C_Bus" />
+  <file name="C:\Users\Recepcion\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\codegentemp\I2C_Bus_SLAVE.c" value="ARM_C_FILE;I2C_Bus" />
+  <file name="C:\Users\Recepcion\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\codegentemp\I2C_Bus_MASTER.c" value="ARM_C_FILE;I2C_Bus" />
+  <file name="C:\Users\Recepcion\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\codegentemp\I2C_Bus_PVT.h" value="NONE;I2C_Bus" />
+  <file name="C:\Users\Recepcion\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\codegentemp\Pin_WP_aliases.h" value="NONE;Pin_WP" />
+  <file name="C:\Users\Recepcion\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\codegentemp\Pin_WP.c" value="ARM_C_FILE;Pin_WP" />
+  <file name="C:\Users\Recepcion\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\codegentemp\Pin_WP.h" value="NONE;Pin_WP" />
   <file name="C:\Users\Recepcion\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\codegentemp\RF_Physical_IntClock.c" value="ARM_C_FILE;RF_Physical_IntClock" />
   <file name="C:\Users\Recepcion\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\codegentemp\RF_Physical_IntClock.h" value="NONE;RF_Physical_IntClock" />
   <file name="C:\Users\Recepcion\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\codegentemp\Printer_IntClock.c" value="ARM_C_FILE;Printer_IntClock" />

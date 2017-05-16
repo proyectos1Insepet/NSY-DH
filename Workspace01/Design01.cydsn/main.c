@@ -14,6 +14,8 @@
 #include <variables.h>
 #include <keyboard.h>
 #include <LCD.h>
+#include <I2C.h>
+#include <Print.h>
 #include <device.h>
 
 /**********************************/
@@ -27,7 +29,8 @@ void GlobalInitializer()
     Display1_Start();
     Display2_Start();
     RF_Physical_Start();    
-    Printer_Start();           
+    Printer_Start();   
+    I2C_Bus_Start();
 }
 void StoreConfiguration(){
     EEPROM_1_WriteByte(UnitType,0);
@@ -36,6 +39,8 @@ void StoreConfiguration(){
     EEPROM_1_WriteByte(VolDec,3);
     EEPROM_1_WriteByte(PPUDec,4);
     EEPROM_1_WriteByte(DDMode,5);
+    EEPROM_1_WriteByte(digits,6);
+    EEPROM_1_WriteByte(UnitType+1,7);
 }
 /*
 *********************************************************************************************************
@@ -61,15 +66,23 @@ void InitDisplay1(){
         ShowMessage(1,iniText,0);    
         CyDelay(300);
         if(UnitType == 0){
+            side.a.hoseNumber = UnitType+1;
+            side.b.hoseNumber = UnitType+1;
             ShowMessage(1,Unit,0);  //Mostrar tipo de dispensador      
         }
         if(UnitType == 1){
+            side.a.hoseNumber = UnitType+1;
+            side.b.hoseNumber = UnitType+1;
             ShowMessage(1,Unit2,0);
         }
         if(UnitType == 2){
+            side.a.hoseNumber = UnitType+1;
+            side.b.hoseNumber = UnitType+1;
            ShowMessage(1,Unit3,0);
         }
         if(UnitType == 3){
+            side.a.hoseNumber = UnitType+1;
+            side.b.hoseNumber = UnitType+1;
             ShowMessage(1,Unit4,0);
         } 
         if(DDMode == 0){
@@ -94,15 +107,31 @@ void InitDisplay1(){
         ShowMessage(1,iniText,0);    
         CyDelay(300);
         if(UnitType == 0){
+            side.a.hoseNumber = UnitType+1;
+            side.b.hoseNumber = UnitType+1;
+            side.c.hoseNumber = UnitType+1;
+            side.d.hoseNumber = UnitType+1;
             ShowMessage(1,Unit,0);  //Mostrar tipo de dispensador      
         }
         if(UnitType == 1){
+            side.a.hoseNumber = UnitType+1;
+            side.b.hoseNumber = UnitType+1;
+            side.c.hoseNumber = UnitType+1;
+            side.d.hoseNumber = UnitType+1;
             ShowMessage(1,Unit2,0);
         }
         if(UnitType == 2){
+            side.a.hoseNumber = UnitType+1;
+            side.b.hoseNumber = UnitType+1;
+            side.c.hoseNumber = UnitType+1;
+            side.d.hoseNumber = UnitType+1;
            ShowMessage(1,Unit3,0);
         }
         if(UnitType == 3){
+            side.a.hoseNumber = UnitType+1;
+            side.b.hoseNumber = UnitType+1;
+            side.c.hoseNumber = UnitType+1;
+            side.d.hoseNumber = UnitType+1;
             ShowMessage(1,Unit4,0);
         }    
         if(DDMode == 1){
@@ -164,11 +193,42 @@ void InitPump(){
         }
         if(PumpIsInValidState(get_state(side.a.dir)) && PumpIsInValidState(get_state(side.b.dir))){    
             NumPositions = get_position();
-            PumpCompleteConfiguration(side.a.dir);
-            StoreConfiguration();            
+            if(get_state(side.a.dir) ==0x06 && get_state(side.b.dir)==0x06){
+                PumpCompleteConfiguration(side.a.dir);
+                StoreConfiguration();            
+            }else{
+                SetPicture(1,DISPLAY_BAJE_MANIJA);
+                SetPicture(2,DISPLAY_BAJE_MANIJA);
+                InitPump();                
+            }
         }        
     }
     
+}
+/*
+*********************************************************************************************************
+*                                         void PrintTest(void)
+*
+* Description : Pregunta configuraciones al dispensador 
+*               
+*
+*********************************************************************************************************
+*/
+void PrintTest(){
+    uint8 dato[17]="Test de Impresion";
+    uint8 x;
+    for(x = 0; x<17;x++){
+        write_psoc1(1,dato[x]);
+    }
+    write_psoc1(1,10);
+    write_psoc1(1,10);
+    write_psoc1(1,10);
+    for(x = 0; x<17;x++){
+        write_psoc1(2,dato[x]);
+    }
+    write_psoc1(2,10);
+    write_psoc1(2,10);
+    write_psoc1(2,10);
 }
 
 /*
@@ -302,7 +362,18 @@ void PollingDisplay1(void){
                             SetPicture(1,DISPLAY_INTRODUZCA_VOLUMEN);                            
                             WriteLCD(1,'V',3,2,1,0x0000,'N');                            
                         break;
-                        case 0x43:  //Preset full                       
+                        case 0x43:  //Preset full 
+                            bufferDisplay1.presetType[0]=2;
+                            bufferDisplay1.presetType[1]='F';
+                            for(x=1;x<(digits-1);x++){
+                                bufferDisplay1.presetValue[0][x]='9';
+                            }
+                            bufferDisplay1.presetValue[0][x]='0';
+                            bufferDisplay1.presetValue[0][x+1]='0';
+                            bufferDisplay1.presetValue[0][0]=digits;
+                            for(x=0;x<=bufferDisplay1.presetValue[0][0];x++){
+                                bufferDisplay1.presetValue[1][x]=bufferDisplay1.presetValue[0][x];
+                            }
                             flowDisplay1 = 5;
                             SetPicture(1,DISPLAY_SELECCIONE_PRODUCTO4);                          
                         break;
@@ -337,8 +408,7 @@ void PollingDisplay1(void){
                         bufferDisplay1.presetValue[0][x]=bufferDisplay1.valueKeys[x];
                         bufferDisplay1.presetValue[1][x]=bufferDisplay1.valueKeys[x];
                     }
-                    temporal[0]=1;
-                    temporal[1]='0';    
+                    bufferDisplay1.flagKeyboard = 0;   
                     flowDisplay1 = 5;//caso para seleccion de producto
                     SetPicture(1,DISPLAY_SELECCIONE_PRODUCTO4);
                 break;
@@ -395,12 +465,14 @@ void PollingDisplay1(void){
                     switch(Display1_rxBuffer[3]){
                         case 0x39:  //Si imprimir  
                             flowDisplay1 = 9;
+                            numberKeys1 = 0;
                             bufferDisplay1.flagKeyboard = 1;
+                            bufferDisplay1.flagPrint =  1;
                             SetPicture(1,DISPLAY_DIGITE_PLACA);                            
                         break; 
                         case 0x38:  //No imprimir
                             bufferDisplay1.flagKeyboard = 0;
-                            flowDisplay1 = 7;//Esperando estado del dispensador
+                            flowDisplay1 = 7;//Esperando estado del dispensador                            
                             SetPicture(1,DISPLAY_SUBA_MANIJA);                            
                         break;
                         case 0x7E:  //Pantalla Inicial                                                        
@@ -417,9 +489,19 @@ void PollingDisplay1(void){
             
         case 7:
             side.a.activeHose = PumpHoseActiveState(1);  
-            if (side.a.activeHose == side.a.hose){
-                flowDisplay1 = 8;
-                SetPicture(1,DISPLAY_DESPACHANDO);
+            if (side.a.activeHose == side.a.hose){                
+                if(PresetData(side.a.dir,side.a.activeHose,bufferDisplay1.presetValue[0],bufferDisplay1.presetType[0]&0x03)==1){
+                    get_state(side.a.dir);
+                    Pump_PutChar(0x10|side.a.dir);//Autoriza el surtidor
+                    CyDelay(50);
+                    flowDisplay1 = 8;
+                    SetPicture(1,DISPLAY_DESPACHANDO);
+                }else{
+                    flowDisplay1 = 0;
+                    SetPicture(1,DISPLAY_ERROR);
+                    CyDelay(200);
+                    SetPicture(1,DISPLAY_INICIO0);
+                }
             }else{
                 flowDisplay1 = 7;
             }
@@ -440,8 +522,20 @@ void PollingDisplay1(void){
         case 8:
             switch (get_state(side.a.dir)){
                 case 0x0A: //reporte fin venta
+                    getSale(side.a.dir);
+                    flowDisplay1 = 0;
+                    if(bufferDisplay1.flagPrint ==1){
+                        imprimir(1,1,0,side.a.dir);
+                    }
+                    SetPicture(1,DISPLAY_INICIO0);                            
                 break;
                 case 0x0B://Reporte de venta
+                    getSale(side.a.dir);
+                    flowDisplay1 = 0;
+                    if(bufferDisplay1.flagPrint ==1){
+                        imprimir(1,1,0,side.a.dir);
+                    }
+                    SetPicture(1,DISPLAY_INICIO0);
                 break;
                 case 0x06://Espera
                     flowDisplay1 = 0;
@@ -484,7 +578,7 @@ void PollingDisplay1(void){
                             for(x=0;x<=bufferDisplay1.valueKeys[0];x++){
                                 bufferDisplay1.licenceSale[x]=bufferDisplay1.valueKeys[x];
                             }
-                            flowDisplay1 = 7;//Inicio
+                            flowDisplay1 = 7;//Suba manija
                             SetPicture(1,DISPLAY_SUBA_MANIJA);
                         break;
                         
@@ -686,7 +780,7 @@ int main()
         statePump[x]=0;
     }
     GlobalInitializer();
-    InitPump();  
+    InitPump();      
     CyWdtStart(CYWDT_1024_TICKS,CYWDT_LPMODE_NOCHANGE); 
     for(;;)
     {
