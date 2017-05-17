@@ -32,9 +32,9 @@
 #include <device.h>
 
 
-void print_logo_k(uint8 val, uint8 logo);
-void print_logo_p(uint8 val, uint8 logo);
-void imprimir(uint8 val, uint8 producto, uint8 copia, uint8 pos);
+void printLogoK(uint8 val, uint8 logo);
+void printLogoP(uint8 val, uint8 logo);
+void imprimir(uint8 val, uint8 pos);
 void print_totales(uint8 val);
 void imprimir_corte(uint8 val);
 void operacion(uint8 tipo, uint8 *valor1, uint8 *valor2);

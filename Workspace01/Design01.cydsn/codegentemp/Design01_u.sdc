@@ -1,3 +1,3 @@
-# Component constraints for C:\Users\Recepcion\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\TopDesign\TopDesign.cysch
-# Project: C:\Users\Recepcion\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\Design01.cyprj
-# Date: Tue, 16 May 2017 18:22:10 GMT
+# Component constraints for C:\Users\Lenovo\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\TopDesign\TopDesign.cysch
+# Project: C:\Users\Lenovo\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\Design01.cyprj
+# Date: Wed, 17 May 2017 13:37:35 GMT

@@ -49,14 +49,11 @@
     volatile uint32 flowDisplay2;    //Flujo pantalla 2
     volatile uint32 flowDisplay3;    //Flujo pantalla 3
     volatile uint32 flowDisplay4;    //Flujo pantalla 4    
-    volatile uint8 ipAdress[12];     //Version de digitos del surtidor
     volatile uint8 numberKeys1;      //Cantidad de digitos a digitar en los teclados numericos para pantalla 1
     volatile uint8 numberKeys2;      //Cantidad de digitos a digitar en los teclados numericos para pantalla 1
     volatile uint8 flagPoint1;       //Bandera que indica si ya se digito una coma en el teclado numerico de la pantalla 1 
     volatile uint8 flagPoint2;       //Bandera que indica si ya se digito una coma en el teclado numerico de la pantalla 2 
-    volatile uint8 button[120][8];   //Nombre de Botones para las pantallas
     volatile uint8 productNumber;    //Numero de productos que tiene el surtidor
-    uint8 presetFast[3][10];         //Presets rapidos establecidos P1[0] P2[1] y P3[2]
     volatile uint32 delayPicture1;    //Tiempo que demora una imagen informativa en el caso 0 del polling_Display1
     volatile uint32 delayPicture2;    //Tiempo que demora una imagen informativa en el caso 0 del polling_Display2
     volatile uint8 ppux10;           //ppu por 10, 1=Habilitado 0=Inhabilitado
@@ -68,7 +65,6 @@
     volatile uint8 screen[2];        //Pantallas 0:Inhabilitada 1:Habilitada => [0]Tipo de vehiculo [1]Ingrese N° Venta Forma
     volatile uint8 residue[14];      //Residuo de operacion resta 
     uint8 temporal[30];              //Utilizada para realizar operaciones temporales    
-    volatile uint8 turn;             //Habilita si el turno esta 1=abierto o 0=cerrado
     volatile uint8 lockTurn;         //Bloquea temporalmente el turno 1=bloqueado o 0=desbloqueado
     volatile uint8 idSeller[25];     //Identificacion de vendedor
     volatile uint8 typeIdSeller;     //Tipo de identificacion del vendedor
@@ -82,6 +78,8 @@
     uint8 statePump[4];              //Estado en el que se encuentra el dispensador
     uint8 NumPositions;
     uint8 digits;           //Version de digitos del surtidor
+    uint8 PrinterType;
+    uint8 turn;             //Habilita si el turno esta 1=abierto o 0=cerrado
 
     
 /*
@@ -94,7 +92,6 @@
 struct buffer{
     uint8 idType;                   //Tipo de metodo de Identificacion 
     uint8 idSerial[25];             //Serial del metodo de identificacion
-    uint8 idSerialCom[25];          //Serial del metodo de identificacion para comparacion
     uint8 wayToPay;                 //Forma de pago seleccionada
     uint8 flagWayToPayMixed;        //Bandera para indicar forma de pago mixta
     uint8 selectedSale[10];         //N° de Venta seleccionada a discriminar para forma de pago
@@ -122,7 +119,7 @@ struct buffer{
     uint8 totalPPUAfter[14];        //Total de PPU depues de hacer la venta
     uint8 licenceSale[11];          //Placa venta
     uint8 mileageSale[11];          //Kilometraje venta
-    uint8 identySale[11];           //CC-NIT-Identificacion venta
+    uint8 identySale[11];           //Placa venta crédito
     uint8 flagKeyboard;             //Bandera que habilita que teclado se digito al colocar datos mientras tanquea, y cantidad canastilla
     uint8 flagPayment;              //Bandera que habilita que imagen de formas de pago se esta visualizando (1-4) 
     uint8 flagLiftHandle;           //Bandera para indicar el estado de sube manija

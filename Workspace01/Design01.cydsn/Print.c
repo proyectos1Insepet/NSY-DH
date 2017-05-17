@@ -44,30 +44,34 @@
 *                                            MENSAJES
 *********************************************************************************************************
 */
-uint8 msn_eds[15]="SERVICE STATION";
-uint8 msn_nit[4]="NIT ";
-uint8 msn_tel[4]="PH: ";
-uint8 msn_numero[8]="Number: ";
-uint8 msn_fecha[6]="Date: ";
-uint8 msn_hora[7]="Hour:  ";
-uint8 msn_pos[10]="Position: ";
-uint8 msn_ppu[14]="PPU:      H/G ";
-uint8 msn_vol[13]="Volumen:  G ";
-uint8 msn_din[11]="Money:   H ";
-uint8 msn_placa[10]="Plate:    ";
-uint8 msn_cuenta[11]="Account:   ";
-uint8 msn_km[11]="Km:        ";
-uint8 msn_id[11]="Id:        ";
-uint8 msn_copia[6]="COPY ";
-uint8 msn_producto[9]="Product: ";
-uint8 msn_fcorte[12]="Shift date: ";
-uint8 msn_hcorte[13]="Shift time:  ";
-uint8 msn_idcorte[16]="Consecutive:    ";
-uint8 msn_ufcorte[17]="Last date shift: ";
-uint8 msn_uhcorte[18]="Last time shift:  ";
-uint8 msn_consecutivo[17]="Last time shift: ";
-
-
+uint8 msn_fecha[13]       = "Fecha      : ";
+uint8 msn_hora[13]        = "Hora       : ";
+uint8 msn_placa[13]       = "Placa      : ";
+uint8 PRN_MILLEAGE[13]    = "Kilometraje: ";
+uint8 PRN_TRANSTYPE[13]   = "Tipo       : ";
+uint8 msn_pos[13]         = "Posicion   : ";
+uint8 PRN_PRODUCT[13]     = "Producto   : ";
+uint8 msn_ppu[13]         = "Ppu        : ";
+uint8 msn_vol[13]         = "Volumen    : ";
+uint8 msn_din[13]         = "Dinero     : ";
+uint8 msn_numero[13]      = "Consecutivo: ";
+uint8 PRN_BALANCE[13]     = "Saldo      : ";
+uint8 PRN_COMPANY[13]     = "Empresa    : ";
+uint8 PRN_ACCOUNT[13]     = "Cuenta     : ";
+uint8 PRN_SERIAL[13]      = "Serial     : ";
+uint8 PRN_ACCOUNTTYPE[13] = "Tipo Cuenta: ";
+uint8 PRN_VISITSDAY[13]   = "Visitas Dia: ";
+uint8 PRN_VISITSWEEK[13]  = "Visitas Sem: ";
+uint8 PRN_VISITSMONTH[13] = "Visitas Mes: ";
+uint8 PRN_VOLUMEDAY[13]   = "Volumen Dia: ";
+uint8 PRN_VOLUMEWEEK[13]  = "Volumen Sem: ";
+uint8 PRN_VOLUMEMONTH[13] = "Volumen Mes: ";
+uint8 PRN_MONEYDAY[13]    = "Dinero Dia : ";
+uint8 PRN_MONEYWEEK[13]   = "Dinero Sem : ";
+uint8 PRN_MONEYMONTH[13]  = "Dinero Mes : ";
+uint8 PRN_SIGNATURE[13]   = "Firma      : ";
+uint8 PRN_ID[13]          = "Cedula     : ";
+uint8 SEPARATOR[30]       = "******************************";
 
 
 /*
@@ -86,7 +90,7 @@ uint8 msn_consecutivo[17]="Last time shift: ";
 * Note(s)     : none.
 *********************************************************************************************************
 */
-void print_logo_k(uint8 val, uint8 logo){
+void printLogoK(uint8 val, uint8 logo){
 	uint16 i;
 	switch(logo){
 		case 0:
@@ -205,7 +209,7 @@ void print_logo_k(uint8 val, uint8 logo){
 * Note(s)     : none.
 *********************************************************************************************************
 */
-void print_logo_p(uint8 val, uint8 logo){
+void printLogoP(uint8 val, uint8 logo){
 	uint16 i;
 	switch(logo){
 		case 0:
@@ -324,148 +328,70 @@ void print_logo_p(uint8 val, uint8 logo){
 *********************************************************************************************************
 */
 
-void imprimir(uint8 val, uint8 producto, uint8 copia, uint8 pos){
+void imprimir(uint8 val, uint8 pos){ //val, puerto de impresora
     uint8 digito,x;
     
-	for(x=0;x<=((31-20)/2);x++){
-		write_psoc1(val,0x20);			
-	}		
-	for(x=0;x<=14;x++){										//ESTACION DE SERVICIO
-		write_psoc1(val,msn_eds[x]);
-	}
-    write_psoc1(val,10);
-	
+    if(PrinterType ==1){
+        printLogoP(1,0);
+    }			
     write_psoc1(val,10);
     write_psoc1(val,10);
     write_psoc1(val,10);
-    	for(x=0;x<=7;x++){										//NUMERO DE VENTA							
+    write_psoc1(val,10);
+    for(x = 0; x < 30; x++){
+        write_psoc1(val,SEPARATOR[x]);
+    }
+    write_psoc1(val,10);
+    write_psoc1(val,10);
+    for(x=0;x<=7;x++){										//NUMERO DE VENTA							
 		write_psoc1(val,msn_numero[x]);
-	}        	    
+	}     
 	write_psoc1(val,10);
 	for(x=0;x<=5;x++){										//FECHA								
 		write_psoc1(val,msn_fecha[x]);
-	}	
-	
+	}		
+    write_psoc1(val,10);
 	for(x=0;x<10;x++){										//POSICION								
 		write_psoc1(val,msn_pos[x]);
 	}
     write_psoc1(val,((pos/10)+48));
 	write_psoc1(val,((pos%10)+48));
-    write_psoc1(val,10); 
-	for(x=0;x<9;x++){										//PRODUCTO								
-		write_psoc1(val,msn_producto[x]);
-	}
-        	
-	if(pos==side.a.dir){											//PLACA		
-		write_psoc1(val,10);	
+    write_psoc1(val,10);       	
+	if(pos==side.a.dir){											//PLACA					
 		for(x=0;x<10;x++){																		
 			write_psoc1(val,msn_placa[x]);
 		} 
 		for(x=1;x<=bufferDisplay1.licenceSale[0];x++){
 			write_psoc1(val,bufferDisplay1.licenceSale[x]);	
-		}		
-//		if((bufferDisplay1.idSerial[0])==0x04){						//DATOS IBUTTON
-//			write_psoc1(val,10);	
-//			write_psoc1(val,10);		
-//			for(x=0;x<=10;x++){																		
-//				write_psoc1(val,msn_cuenta[x]);
-//			} 
-//			for(x=1;x<=Buffer_LCD1.cuenta[0];x++){
-//				write_psoc1(val,Buffer_LCD1.cuenta[x]);	
-//			}			
-//			write_psoc1(val,10);	
-//			for(x=0;x<=10;x++){																		
-//				write_psoc1(val,msn_placa[x]);
-//			} 
-//			for(x=1;x<=Buffer_LCD1.placa[0];x++){
-//				write_psoc1(val,Buffer_LCD1.placa[x]);	
-//			}
-//			if(Buffer_LCD1.km[0]>0){
-//				write_psoc1(val,10);	
-//				for(x=0;x<=10;x++){																		
-//					write_psoc1(val,msn_km[x]);
-//				}
-//				for(x=1;x<=Buffer_LCD1.km[0];x++){
-//					write_psoc1(val,Buffer_LCD1.km[x]);	
-//				}				
-//			}
-//			write_psoc1(val,10);	
-//			for(x=0;x<=10;x++){																		
-//				write_psoc1(val,msn_id[x]);
-//				
-//			}
-//			for(x=6;x>=1;x--){
-//				if(((Buffer_LCD1.id[x]>>4)&0x0F)>=10){
-//					write_psoc1(val,(((Buffer_LCD1.id[x]>>4)&0x0F)+55));
-//				}
-//				else{
-//					write_psoc1(val,(((Buffer_LCD1.id[x]>>4)&0x0F)+48));				
-//				}
-//				if((Buffer_LCD1.id[x]&0x0F)>=10){
-//					write_psoc1(val,((Buffer_LCD1.id[x]&0x0F)+55));
-//				}
-//				else{
-//					write_psoc1(val,((Buffer_LCD1.id[x]&0x0F)+48));				
-//				}				
-//			}	
-//		}
-	}
-//	else{															//DATOS PLACA LCD 2
-//		if(Buffer_LCD2.posventa==1){
-//			write_psoc1(val,10);	
-//			for(x=0;x<=10;x++){																		
-//				write_psoc1(val,msn_placa[x]);
-//			} 
-//			for(x=1;x<=Buffer_LCD2.placa[0];x++){
-//				write_psoc1(val,Buffer_LCD2.placa[x]);	
-//			}
-//		}
-//		if((Buffer_LCD2.preset&0x04)==0x04){
-//			write_psoc1(val,10);
-//			write_psoc1(val,10);
-//			for(x=0;x<=10;x++){																		
-//				write_psoc1(val,msn_cuenta[x]);
-//			} 
-//			for(x=1;x<=Buffer_LCD2.cuenta[0];x++){
-//				write_psoc1(val,Buffer_LCD2.cuenta[x]);	
-//			}	
-//			write_psoc1(val,10);
-//			for(x=0;x<=10;x++){																		
-//				write_psoc1(val,msn_placa[x]);
-//			} 
-//			for(x=1;x<=Buffer_LCD2.placa[0];x++){
-//				write_psoc1(val,Buffer_LCD2.placa[x]);	
-//			}
-//			if(Buffer_LCD2.km[0]>0){
-//				write_psoc1(val,10);
-//				for(x=0;x<=10;x++){																		
-//					write_psoc1(val,msn_km[x]);
-//				}
-//				for(x=1;x<=Buffer_LCD2.km[0];x++){
-//					write_psoc1(val,Buffer_LCD2.km[x]);	
-//				}				
-//			}
-//			write_psoc1(val,10);	
-//			for(x=0;x<=10;x++){																		
-//				write_psoc1(val,msn_id[x]);
-//				
-//			}			
-//			for(x=6;x>=1;x--){
-//				if(((Buffer_LCD2.id[x]>>4)&0x0F)>=10){
-//					write_psoc1(val,(((Buffer_LCD2.id[x]>>4)&0x0F)+55));
-//				}
-//				else{
-//					write_psoc1(val,(((Buffer_LCD2.id[x]>>4)&0x0F)+48));				
-//				}
-//				if((Buffer_LCD2.id[x]&0x0F)>=10){
-//					write_psoc1(val,((Buffer_LCD2.id[x]&0x0F)+55));
-//				}
-//				else{
-//					write_psoc1(val,((Buffer_LCD2.id[x]&0x0F)+48));				
-//				}				
-//			}
-//		}	
-//	}   
+		}
+        write_psoc1(val,10);        
+  	    if(bufferDisplay1.saleType==2){						//DATOS IBUTTON
+			write_psoc1(val,10);	
+			write_psoc1(val,10);		
+			for(x= 0;x < 13;x++){																		
+				write_psoc1(val,PRN_SERIAL[x]);
+			} 
+			for(x=1;x<=bufferDisplay1.idSerial[0];x++){
+				write_psoc1(val,bufferDisplay1.idSerial[x]);	
+			}			
+			write_psoc1(val,10);	
+			for(x=0;x < 13;x++){																		
+				write_psoc1(val,msn_placa[x]);
+			} 
+			for(x=1;x<=bufferDisplay1.identySale[0];x++){
+				write_psoc1(val,bufferDisplay1.identySale[x]);	
+			}
+            write_psoc1(val,10);
+			for(x=0;x<=10;x++){																		
+				write_psoc1(val,PRN_MILLEAGE[x]);
+			}	
+			for(x=1;x<=bufferDisplay1.mileageSale[0];x++){
+				write_psoc1(val,bufferDisplay1.mileageSale[x]);	
+			}
+            write_psoc1(val,10);
+	    }
+    }
+   
     write_psoc1(val,10); 
     write_psoc1(val,10); 
     write_psoc1(val,10);

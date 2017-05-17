@@ -146,11 +146,12 @@ uint8 get_position(void){
 *********************************************************************************************************
 */
 uint8 PresetData(uint8 side, char8 grade, uint8 *value, uint8 preset){
-    char8 SendComand[18]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},decimal;
+    char8 SendComand[18]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     uint8 state,x,y,z;
     char8 PumpDataReceive =0;    
     x = 0;
     z = 0;
+    preset = 0;
     state = get_state(side);
     if(state == 0x06 || state == 0x07){
         Pump_PutChar(0x20|side);

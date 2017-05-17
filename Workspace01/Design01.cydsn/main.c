@@ -525,7 +525,7 @@ void PollingDisplay1(void){
                     getSale(side.a.dir);
                     flowDisplay1 = 0;
                     if(bufferDisplay1.flagPrint ==1){
-                        imprimir(1,1,0,side.a.dir);
+                        imprimir(1,side.a.dir);
                     }
                     SetPicture(1,DISPLAY_INICIO0);                            
                 break;
@@ -533,7 +533,7 @@ void PollingDisplay1(void){
                     getSale(side.a.dir);
                     flowDisplay1 = 0;
                     if(bufferDisplay1.flagPrint ==1){
-                        imprimir(1,1,0,side.a.dir);
+                        imprimir(1,side.a.dir);
                     }
                     SetPicture(1,DISPLAY_INICIO0);
                 break;
@@ -781,6 +781,7 @@ int main()
     }
     GlobalInitializer();
     InitPump();      
+    PrinterType = 1;
     CyWdtStart(CYWDT_1024_TICKS,CYWDT_LPMODE_NOCHANGE); 
     for(;;)
     {
