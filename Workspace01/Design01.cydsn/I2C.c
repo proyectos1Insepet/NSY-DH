@@ -79,5 +79,100 @@ uint8 write_psoc1( uint8 puerto, uint8 valor ){
     I2C_Bus_MasterSendStop();	
 	return 1;
 }
+/*
+*********************************************************************************************************
+*                                         uint8 leer_fecha( void )
+*
+* Description : 
+*               
+*
+* Argument(s) : none
+*
+* Return(s)   : none
+*
+* Caller(s)   : 
+*
+* Note(s)     : none.
+*********************************************************************************************************
+*/
+uint8 leer_fecha(){
+	uint8 status,i;
+	for(i=4;i<=6;i++){
+        I2C_Bus_MasterClearStatus();
+        status = I2C_Bus_MasterSendStart(0x68, I2C_Bus_WRITE_XFER_MODE);
+        if(I2C_Bus_MSTR_NO_ERROR == status)								 		/* Check if transfer completed without errors */
+    	{
+            status = I2C_Bus_MasterWriteByte(i);
+            if(status != I2C_Bus_MSTR_NO_ERROR)
+            {
+                return 0;
+            }
+			else{
+		        I2C_Bus_MasterSendStop(); 										/* Send Stop */
+		        CyDelay(10);
+		        status = I2C_Bus_MasterSendStart(0x68, I2C_Bus_READ_XFER_MODE);
+		        if(I2C_Bus_MSTR_NO_ERROR == status){
+		            dateDownHandle[i-4] = I2C_Bus_MasterReadByte(I2C_Bus_NAK_DATA);
+		        }
+				else{
+					return 0;
+				}
+		        I2C_Bus_MasterSendStop();	
+			}
+        }
+		else{
+			return 0;
+		}		
+	}
+	return 1;
+}
+/*
+*********************************************************************************************************
+*                                         uint8 leer_hora( void )
+*
+* Description : 
+*               
+*
+* Argument(s) : none
+*
+* Return(s)   : none
+*
+* Caller(s)   : 
+*
+* Note(s)     : none.
+*********************************************************************************************************
+*/
+uint8 leer_hora(){
+	uint8 status,i;
+	for(i=1;i<=2;i++){
+        I2C_Bus_MasterClearStatus();
+        status = I2C_Bus_MasterSendStart(0x68, I2C_Bus_WRITE_XFER_MODE);
+        if(I2C_Bus_MSTR_NO_ERROR == status)								 		/* Check if transfer completed without errors */
+    	{
+            status = I2C_Bus_MasterWriteByte(i);
+            if(status != I2C_Bus_MSTR_NO_ERROR)
+            {
+                return 0;
+            }
+			else{
+		        I2C_Bus_MasterSendStop(); 										/* Send Stop */
+		        CyDelay(10);
+		        status = I2C_Bus_MasterSendStart(0x68, I2C_Bus_READ_XFER_MODE);
+		        if(I2C_Bus_MSTR_NO_ERROR == status){
+		            timeDownHandle[i-1] = I2C_Bus_MasterReadByte(I2C_Bus_NAK_DATA);
+		        }
+				else{
+					return 0;
+				}
+		        I2C_Bus_MasterSendStop();	
+			}
+        }
+		else{
+			return 0;
+		}		
+	}
+	return 1;
+}
+
 
 /* [] END OF FILE */

@@ -13,6 +13,7 @@
 #include <protocol.h>
 #include <variables.h>
 #include <keyboard.h>
+#include <ibutton.h>
 #include <LCD.h>
 #include <I2C.h>
 #include <Print.h>
@@ -21,6 +22,8 @@
 /**********************************/
 
 uint8 MuxVersion [10] = "MUX V. 1.0";
+CY_ISR(animacion2);
+CY_ISR(animacion);
 
 void GlobalInitializer()
 {
@@ -283,11 +286,14 @@ void PollingPump(void){
 */
 
 void PollingDisplay1(void){ 
-    uint8 x;     
+    uint8 x,y;     
     switch(flowDisplay1){
         case 0:
             InitDisplay1();
             flowDisplay1 =1;
+            isr_3_Stop(); 
+            Timer_Animacion_Stop();
+            bufferDisplay1.saleType = 0;
         break;
         case 1: //Menu
             if(Display1_GetRxBufferSize()==8){
@@ -312,11 +318,14 @@ void PollingDisplay1(void){
                 if((Display1_rxBuffer[0]==0xAA) && (Display1_rxBuffer[6]==0xC3) && (Display1_rxBuffer[7]==0x3C)){
                     switch(Display1_rxBuffer[3]){
                         case 0x0D:  //Pantalla efectivo              
-                            flowDisplay1 = 3;                            
+                            flowDisplay1 = 3; 
+                            bufferDisplay1.saleType = 1;
                             SetPicture(1,DISPLAY_FORMA_PROGRAMACION);                            
                         break;
-                        case 0x0E:  //Pantalla credito   
-                            flowDisplay1 = 4;                                                     
+                        case 0x0E:  //Pantalla credito  
+                            flowDisplay1 = 10;
+                            bufferDisplay1.saleType = 2;
+                            count_protector = 0;
                             SetPicture(1,DISPLAY_ID_DIGITAL);                            
                         break;
                         case 0x45:  //Pantalla otras opciones 
@@ -472,7 +481,8 @@ void PollingDisplay1(void){
                         break; 
                         case 0x38:  //No imprimir
                             bufferDisplay1.flagKeyboard = 0;
-                            flowDisplay1 = 7;//Esperando estado del dispensador                            
+                            flowDisplay1 = 7;//Esperando estado del dispensador  
+                            count_protector=0;
                             SetPicture(1,DISPLAY_SUBA_MANIJA);                            
                         break;
                         case 0x7E:  //Pantalla Inicial                                                        
@@ -488,6 +498,8 @@ void PollingDisplay1(void){
                                         
             
         case 7:
+            isr_3_StartEx(animacion);
+            Timer_Animacion_Start();
             side.a.activeHose = PumpHoseActiveState(1);  
             if (side.a.activeHose == side.a.hose){                
                 if(PresetData(side.a.dir,side.a.activeHose,bufferDisplay1.presetValue[0],bufferDisplay1.presetType[0]&0x03)==1){
@@ -504,6 +516,11 @@ void PollingDisplay1(void){
                 }
             }else{
                 flowDisplay1 = 7;
+                if(count_protector>=30){
+                    flowDisplay1 = 0;	
+        			count_protector=0;
+                    SetPicture(1,DISPLAY_INICIO0);
+        		 }
             }
             if(Display1_GetRxBufferSize()==8){
                 if((Display1_rxBuffer[0]==0xAA) && (Display1_rxBuffer[6]==0xC3) && (Display1_rxBuffer[7]==0x3C)){
@@ -586,6 +603,8 @@ void PollingDisplay1(void){
                             for(x=0;x<=bufferDisplay1.valueKeys[0];x++){
                                 bufferDisplay1.mileageSale[x]=bufferDisplay1.valueKeys[x];
                             }
+                            flowDisplay1 = 7;//Suba manija
+                            SetPicture(1,DISPLAY_SUBA_MANIJA);
                         break;
                         
                         case 3://CC/NIT
@@ -598,7 +617,81 @@ void PollingDisplay1(void){
                 break;
             }            
         break;    
-            
+    ////////////////// CASOS PARA CRÉDITO  /////////////////////
+        case 10:
+            if(Display1_GetRxBufferSize()==8){
+                if((Display1_rxBuffer[0]==0xAA) && (Display1_rxBuffer[6]==0xC3) && (Display1_rxBuffer[7]==0x3C)){
+                    switch(Display1_rxBuffer[3]){
+                        case 0xB6:  //Solicitud ibutton  
+                            flowDisplay1 = 11;
+                            numberKeys1 = 0;
+                            bufferDisplay1.flagKeyboard = 1;
+                            bufferDisplay1.flagPrint =  1;
+                            SetPicture(1,DISPLAY_ESPERANDO_ID);                            
+                        break; 
+                        case 0xB7:  //ID por número
+                            bufferDisplay1.flagKeyboard = 0;
+                            flowDisplay1 = 7;//Esperando estado del dispensador  
+                            count_protector=0;
+                            SetPicture(1,DISPLAY_SUBA_MANIJA);                            
+                        break;
+                        case 0x7E:  //Pantalla Inicial                                                        
+                            SetPicture(1,DISPLAY_INICIO0);
+                            flowDisplay1 = 0;
+                        break;
+                    }                    
+                }
+                CyDelay(10);         
+                Display1_ClearRxBuffer();
+            }                        
+        break;
+        
+        case 11:
+            isr_3_StartEx(animacion);
+            Timer_Animacion_Start();
+            if(touch_present(1)==1){
+				if(touch_write(1,0x33)){
+					for(x=1;x<=8;x++){
+						temporal[x]=touch_read_byte(1);
+					}
+					y=0;
+					for(x=1;x<8;x++){
+                        y=crc_check(y,temporal[x]);
+                    }
+					if(y==temporal[8]){
+						bufferDisplay1.idSerial[0]=16;
+						y=16;
+						for(x=1;x<=8;x++){
+							if((temporal[x]&0x0F)>=10){
+								bufferDisplay1.idSerial[y]=(temporal[x]&0x0F)+55;
+							}else{
+								bufferDisplay1.idSerial[y]=(temporal[x]&0x0F)+48;				
+							}
+                            y--;
+							if(((temporal[x]>>4)&0x0F)>=10){
+								bufferDisplay1.idSerial[y]=((temporal[x]>>4)&0x0F)+55;
+							}else{
+								bufferDisplay1.idSerial[y]=((temporal[x]>>4)&0x0F)+48;				
+							}
+                            y--;
+						}                        
+                        SetPicture(1,DISPLAY_ID_RECONOCIDO);                                           
+                        Display1_ClearRxBuffer();
+                        CyDelay(700);
+                        bufferDisplay1.flagKeyboard = 1;
+                        flowDisplay1 = 9;
+                        SetPicture(1,DISPLAY_INTRODUZCA_KILOMETRAJE);
+                        
+					}
+				}
+			}
+            if(count_protector>=60){
+                flowDisplay1 = 0;	
+    			count_protector=0;
+                SetPicture(1,DISPLAY_INICIO0);
+    		}
+                                    
+        break;    
             
     }
 }
@@ -769,6 +862,51 @@ void PollingDisplay2(void){
         break;
     }
 }
+
+
+
+/*
+*********************************************************************************************************
+*                                         CY_ISR(animacion)
+*
+* Description : Interrupcion que temporiza las imagenes informativas que aparecen en la pantalla 1
+*               
+*
+* Argument(s) : none
+*
+* Return(s)   : none
+*
+* Caller(s)   : 
+*
+* Note(s)     : none.
+*********************************************************************************************************
+*/
+CY_ISR(animacion){
+    Timer_Animacion_ReadStatusRegister();    					
+    count_protector++; 							//Incrementa el contador 
+}
+
+/*
+*********************************************************************************************************
+*                                         CY_ISR(animacion2)
+*
+* Description : Interrupcion que temporiza las imagenes informativas que aparecen en la pantalla 2
+*               
+*
+* Argument(s) : none
+*
+* Return(s)   : none
+*
+* Caller(s)   : 
+*
+* Note(s)     : none.
+*********************************************************************************************************
+*/
+CY_ISR(animacion2){
+    Timer_Animacion2_ReadStatusRegister();
+    count_protector2++;
+}
+
 
 int main()
 {

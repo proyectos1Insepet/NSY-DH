@@ -80,6 +80,10 @@
     uint8 digits;           //Version de digitos del surtidor
     uint8 PrinterType;
     uint8 turn;             //Habilita si el turno esta 1=abierto o 0=cerrado
+    char8 VolUnit[6];
+    uint8 dateDownHandle[3];        //Fecha en la que se baja la manija
+    uint8 timeDownHandle[2];        //Hora en la que se baja la manija
+    uint8 count_protector,count_protector2;
 
     
 /*
@@ -107,10 +111,8 @@ struct buffer{
     uint8 presetValue[2][10];       //Valor de programacion a programar, [0][n]=Valor para surtidor, [1][n]=Valor a mostrar
     uint8 productType;              //Tipo de producto que se eligio en la pantalla (anticontaminante)
     uint8 stateMux[5];              //Estado en el que se encuentra el MUX, cantidad [0], prioridad [1], en cola [2,3,4]
-    uint8 dateLiftHandle[6];        //Fecha en la que se sube la manija
-    uint8 dateDownHandle[6];        //Fecha en la que se baja la manija
+    uint8 dateLiftHandle[6];        //Fecha en la que se sube la manija    
     uint8 timeLiftHandle[6];        //Hora en la que se sube la manija
-    uint8 timeDownHandle[6];        //Hora en la que se baja la manija
     uint8 totalMoneyPrevious[14];   //Total de dinero antes de hacer la venta
     uint8 totalVolumePrevious[14];  //Total de volumen antes de hacer la venta
     uint8 totalPPUPrevious[14];     //Total de PPU antes de hacer la venta

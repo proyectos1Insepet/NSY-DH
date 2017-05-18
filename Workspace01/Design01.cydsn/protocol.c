@@ -36,6 +36,9 @@
 #include <device.h>
 #include <variables.h>
 #include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 uint8_t GetLRC(char8 *_pbuffer);
 /*
 *********************************************************************************************************
@@ -253,6 +256,22 @@ uint8 PumpCompleteConfiguration( uint8 side){
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     UnitType            =  buffer [10] &0x0F;
     ConversionFactor    =  buffer [12] &0x0F;
+    if(ConversionFactor == 1){
+        VolUnit[0] = 0x47;
+        VolUnit[1] = 0x61;
+        VolUnit[2] = 0x6C;
+        VolUnit[3] = 0x20;
+        VolUnit[4] = 0x20;
+        VolUnit[5] = 0x20;
+    }
+    if(ConversionFactor == 2){
+        VolUnit[0] = 0x55;
+        VolUnit[1] = 0x6B;
+        VolUnit[2] = 0x20;
+        VolUnit[3] = 0x47;
+        VolUnit[4] = 0x61;
+        VolUnit[5] = 0x6C;        
+    }
     MoneyDec            = (buffer [14] &0x0F)-1;
     if( (buffer [16]&0x0F) == 1 || (buffer [16]&0x0F) == 4){
         VolDec              = 3;
@@ -335,6 +354,7 @@ uint8 PumpHoseActiveState(uint8 side){
 */
 uint8 getSale(uint8 pos){
 	uint8 x;
+    
 	Pump_ClearRxBuffer();
 	Pump_PutChar(0x40|pos);
     CyDelay(300);
@@ -354,7 +374,7 @@ uint8 getSale(uint8 pos){
 				for(x=1;x<=6;x++){
 					side.a.volumeSale[7-x]=((Pump_rxBuffer[x+16]&0x0F)+0x30);
 				}		
-                side.a.volumeSale[0]=6;
+                side.a.volumeSale[0]=6;                
 				for(x=1;x<=6;x++){
 					side.a.moneySale[7-x]=((Pump_rxBuffer[x+23]&0x0F)+0x30);
 				}

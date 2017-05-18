@@ -25,7 +25,7 @@
       <Tool Name="postbuild" Command="" Options="" />
     </Toolchain>
   </Toolchains>
-  <Project Name="Design01" Path="C:\Users\Lenovo\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn" Version="5.30" Type="Normal">
+  <Project Name="Design01" Path="C:\Users\Diego\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn" Version="5.30" Type="Normal">
     <CMSIS_SVD_File>Design01.svd</CMSIS_SVD_File>
     <Datasheet />
     <LinkerFiles>
@@ -34,14 +34,15 @@
       <LinkerFile Toolchain="ARM IAR Generic">.\Generated_Source\PSoC5\Cm3Iar.icf</LinkerFile>
     </LinkerFiles>
     <Folders>
-      <Folder BuildType="BUILD" Path="C:\Users\Lenovo\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn">
-        <Files Root="C:\Users\Lenovo\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn">
+      <Folder BuildType="BUILD" Path="C:\Users\Diego\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn">
+        <Files Root="C:\Users\Diego\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn">
           <File BuildType="BUILD" Toolchain="">.\main.c</File>
           <File BuildType="BUILD" Toolchain="">.\protocol.c</File>
           <File BuildType="BUILD" Toolchain="">.\LCD.c</File>
           <File BuildType="BUILD" Toolchain="">.\keyboard.c</File>
           <File BuildType="BUILD" Toolchain="">.\I2C.c</File>
           <File BuildType="BUILD" Toolchain="">.\Print.c</File>
+          <File BuildType="BUILD" Toolchain="">.\ibuton.c</File>
           <File BuildType="BUILD" Toolchain="">.\cyapicallbacks.h</File>
           <File BuildType="BUILD" Toolchain="">.\protocol.h</File>
           <File BuildType="BUILD" Toolchain="">.\device.h</File>
@@ -51,10 +52,11 @@
           <File BuildType="BUILD" Toolchain="">.\I2C.h</File>
           <File BuildType="BUILD" Toolchain="">.\Logos.h</File>
           <File BuildType="BUILD" Toolchain="">.\Print.h</File>
+          <File BuildType="BUILD" Toolchain="">.\ibutton.h</File>
         </Files>
       </Folder>
-      <Folder BuildType="STRICT" Path="C:\Users\Lenovo\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\Generated_Source\PSoC5">
-        <Files Root="C:\Users\Lenovo\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn">
+      <Folder BuildType="STRICT" Path="C:\Users\Diego\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\Generated_Source\PSoC5">
+        <Files Root="C:\Users\Diego\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn">
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\cyfitter_cfg.h</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\cyfitter_cfg.c</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\cymetadata.c</File>
@@ -153,49 +155,67 @@
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\Pin_WP_aliases.h</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\Pin_WP.c</File>
           <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\Pin_WP.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\Timer_Animacion.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\Timer_Animacion.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\Timer_Animacion_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\timer_clock_1.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\timer_clock_1.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\isr_3.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\isr_3.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\Timer_Animacion2.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\Timer_Animacion2.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\Timer_Animacion2_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\isr_4.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\isr_4.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\IB1_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\IB1.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\IB1.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\IB2_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\IB2.c</File>
+          <File BuildType="BUILD" Toolchain="">.\Generated_Source\PSoC5\IB2.h</File>
         </Files>
       </Folder>
-      <Folder BuildType="STRICT" Path="C:\Users\Lenovo\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\Export\ARM_GCC_Generic">
-        <Files Root="C:\Users\Lenovo\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn">
+      <Folder BuildType="STRICT" Path="C:\Users\Diego\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\Export\ARM_GCC_Generic">
+        <Files Root="C:\Users\Diego\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn">
           <File BuildType="BUILD" Toolchain="ARM GCC Generic">.\Export\ARM_GCC_Generic\CyComponentLibrary.a</File>
         </Files>
       </Folder>
-      <Folder BuildType="STRICT" Path="C:\Users\Lenovo\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\Export\ARM_MDK_Generic">
-        <Files Root="C:\Users\Lenovo\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn">
+      <Folder BuildType="STRICT" Path="C:\Users\Diego\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\Export\ARM_MDK_Generic">
+        <Files Root="C:\Users\Diego\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn">
           <File BuildType="BUILD" Toolchain="ARM MDK Generic">.\Export\ARM_MDK_Generic\CyComponentLibrary.a</File>
         </Files>
       </Folder>
-      <Folder BuildType="STRICT" Path="C:\Users\Lenovo\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\Export\ARM_IAR_Generic">
-        <Files Root="C:\Users\Lenovo\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn">
+      <Folder BuildType="STRICT" Path="C:\Users\Diego\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\Export\ARM_IAR_Generic">
+        <Files Root="C:\Users\Diego\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn">
           <File BuildType="BUILD" Toolchain="ARM IAR Generic">.\Export\ARM_IAR_Generic\CyComponentLibrary.a</File>
         </Files>
       </Folder>
       <Folder BuildType="EXCLUDE" Path=".\codegentemp">
-        <Files Root="C:\Users\Lenovo\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn" />
+        <Files Root="C:\Users\Diego\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn" />
       </Folder>
       <Folder BuildType="EXCLUDE" Path=".\ARM_GCC_441">
-        <Files Root="C:\Users\Lenovo\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn" />
+        <Files Root="C:\Users\Diego\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn" />
       </Folder>
       <Folder BuildType="EXCLUDE" Path=".\ARM_GCC_473">
-        <Files Root="C:\Users\Lenovo\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn" />
+        <Files Root="C:\Users\Diego\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn" />
       </Folder>
       <Folder BuildType="EXCLUDE" Path=".\DP8051_Keil_952">
-        <Files Root="C:\Users\Lenovo\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn" />
+        <Files Root="C:\Users\Diego\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn" />
       </Folder>
       <Folder BuildType="EXCLUDE" Path=".\DP8051">
-        <Files Root="C:\Users\Lenovo\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn" />
+        <Files Root="C:\Users\Diego\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn" />
       </Folder>
       <Folder BuildType="EXCLUDE" Path=".\CortexM0">
-        <Files Root="C:\Users\Lenovo\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn" />
+        <Files Root="C:\Users\Diego\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn" />
       </Folder>
       <Folder BuildType="EXCLUDE" Path=".\CortexM3">
-        <Files Root="C:\Users\Lenovo\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn" />
+        <Files Root="C:\Users\Diego\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn" />
       </Folder>
       <Folder BuildType="EXCLUDE" Path=".\Generated_Source\PSoC3">
-        <Files Root="C:\Users\Lenovo\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn" />
+        <Files Root="C:\Users\Diego\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn" />
       </Folder>
       <Folder BuildType="EXCLUDE" Path=".\Generated_Source\PSoC4">
-        <Files Root="C:\Users\Lenovo\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn" />
+        <Files Root="C:\Users\Diego\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn" />
       </Folder>
     </Folders>
   </Project>

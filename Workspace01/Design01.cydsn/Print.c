@@ -34,6 +34,8 @@
 *********************************************************************************************************
 */
 #include <device.h>
+#include <stdlib.h>
+#include <string.h>
 #include "Variables.h"
 #include "I2C.h"
 #include "protocol.h"
@@ -71,6 +73,7 @@ uint8 PRN_MONEYWEEK[13]   = "Dinero Sem : ";
 uint8 PRN_MONEYMONTH[13]  = "Dinero Mes : ";
 uint8 PRN_SIGNATURE[13]   = "Firma      : ";
 uint8 PRN_ID[13]          = "Cedula     : ";
+uint8 PRN_CURRENCY[1]     = "$";
 uint8 SEPARATOR[30]       = "******************************";
 
 
@@ -329,43 +332,141 @@ void printLogoP(uint8 val, uint8 logo){
 */
 
 void imprimir(uint8 val, uint8 pos){ //val, puerto de impresora
-    uint8 digito,x;
+    uint8 x;
     
     if(PrinterType ==1){
         printLogoP(1,0);
     }			
     write_psoc1(val,10);
+
+
+    for(x = 0; x < 30; x++){
+        write_psoc1(val,SEPARATOR[x]);
+    }
     write_psoc1(val,10);
+    for(x=0;x < 13;x++){										//FECHA								
+		write_psoc1(val,msn_fecha[x]);
+	}
+    if(leer_fecha()==1){
+		write_psoc1(val,(((dateDownHandle[0]&0x30)>>4)+48));
+		write_psoc1(val,((dateDownHandle[0]&0x0F)+48));
+		write_psoc1(val,'/');
+		write_psoc1(val,(((dateDownHandle[1]&0x10)>>4)+48));
+		write_psoc1(val,((dateDownHandle[1]&0x0F)+48));	
+		write_psoc1(val,'/');
+		write_psoc1(val,(((dateDownHandle[2]&0xF0)>>4)+48));
+		write_psoc1(val,((dateDownHandle[2]&0x0F)+48));			
+	}		
     write_psoc1(val,10);
+    for(x=0;x < 13;x++){										//HORA								
+		write_psoc1(val,msn_hora[x]);
+	}
+    if(leer_hora()==1){										//HORA
+		write_psoc1(val,(((timeDownHandle[1]&0x10)>>4)+48));
+		write_psoc1(val,((timeDownHandle[1]&0x0F)+48));
+		write_psoc1(val,':');
+		write_psoc1(val,(((timeDownHandle[0]&0xF0)>>4)+48));
+		write_psoc1(val,((timeDownHandle[0]&0x0F)+48));
+		if((timeDownHandle[1]&0x20)==0x20){
+			write_psoc1(val,'p');
+		}
+		else{
+			write_psoc1(val,'a');						
+		}			
+		write_psoc1(val,'m');
+	}
     write_psoc1(val,10);
     for(x = 0; x < 30; x++){
         write_psoc1(val,SEPARATOR[x]);
     }
     write_psoc1(val,10);
-    write_psoc1(val,10);
-    for(x=0;x<=7;x++){										//NUMERO DE VENTA							
-		write_psoc1(val,msn_numero[x]);
-	}     
-	write_psoc1(val,10);
-	for(x=0;x<=5;x++){										//FECHA								
-		write_psoc1(val,msn_fecha[x]);
-	}		
-    write_psoc1(val,10);
-	for(x=0;x<10;x++){										//POSICION								
+    
+    for(x=0;x< 13;x++){										    //POSICION								
 		write_psoc1(val,msn_pos[x]);
 	}
     write_psoc1(val,((pos/10)+48));
 	write_psoc1(val,((pos%10)+48));
-    write_psoc1(val,10);       	
-	if(pos==side.a.dir){											//PLACA					
-		for(x=0;x<10;x++){																		
-			write_psoc1(val,msn_placa[x]);
-		} 
-		for(x=1;x<=bufferDisplay1.licenceSale[0];x++){
-			write_psoc1(val,bufferDisplay1.licenceSale[x]);	
-		}
-        write_psoc1(val,10);        
-  	    if(bufferDisplay1.saleType==2){						//DATOS IBUTTON
+    write_psoc1(val,10);
+    
+    
+    for(x=0;x < 13;x++){										    //NUMERO DE VENTA							
+		write_psoc1(val,msn_numero[x]);
+	}    	
+    write_psoc1(val,10);
+	if(pos==side.a.dir){
+        for(x=0;x < 13;x++){										//Producto							
+    		write_psoc1(val,PRN_PRODUCT[x]);
+    	}    	
+        write_psoc1(val,10);
+        
+        for(x=0;x < 13;x++){										//Ppu							
+    		write_psoc1(val,msn_ppu[x]);
+    	}   
+        for(x=1;x <= side.a.ppuSale[0];x++){						   							
+    		write_psoc1(val,side.a.ppuSale[x]);
+    	}
+        write_psoc1(val,0x20);
+        write_psoc1(val,PRN_CURRENCY[0]);
+        write_psoc1(val,0x2F);
+        for(x=0;x < 5;x++){										//Simbolos $/G							
+    		write_psoc1(val,VolUnit[x]);
+    	}
+        write_psoc1(val,10);
+        
+        
+        for(x=0;x < 13;x++){										//Volumen							
+    		write_psoc1(val,msn_vol[x]);
+    	} 
+        ///////////////////////////////////////////////////////////////
+        if(side.a.volumeSale[1] == 0x30)
+            side.a.volumeSale[1] = 0x00;
+        if(side.a.volumeSale[1] == 0x00 && side.a.volumeSale[2] ==0x30)
+            side.a.volumeSale[2] = 0x00;
+        ///////////////////////////////////////////////////////////////
+        for(x=1;x <= side.a.volumeSale[0];x++){						   							
+            write_psoc1(val,side.a.volumeSale[x]);
+            if(x == VolDec)
+                write_psoc1(val,'.');
+    	}
+        write_psoc1(val,0x20);
+        for(x=0;x < 5;x++){										//Simbolos $/G							
+    		write_psoc1(val,VolUnit[x]);
+    	}
+        write_psoc1(val,10);
+        
+       
+        for(x=0;x < 13;x++){										//Dinero							
+    		write_psoc1(val,msn_din[x]);
+    	}
+        /////////////////////////////////////////////////////////////
+        if(side.a.moneySale[1] ==0x30)
+            side.a.moneySale[1] = 0x00;
+        if(side.a.moneySale[1] ==0x00 && side.a.moneySale[2] ==0x30)
+            side.a.moneySale[2] = 0x00;
+        /////////////////////////////////////////////////////////////
+        for(x=1;x <= side.a.moneySale[0];x++){						   							
+    		write_psoc1(val,side.a.moneySale[x]);
+            if(x == MoneyDec)
+                write_psoc1(val,'.');
+    	}
+        write_psoc1(val,0x20);
+        write_psoc1(val,PRN_CURRENCY[0]);        
+        write_psoc1(val,10);
+        
+        if(bufferDisplay1.saleType==1){
+    		for(x=0;x<13;x++){																		
+    			write_psoc1(val,msn_placa[x]);                          //PLACA
+    		} 
+    		for(x=1;x<=bufferDisplay1.licenceSale[0];x++){
+    			write_psoc1(val,bufferDisplay1.licenceSale[x]);	
+    		}
+            write_psoc1(val,10);
+            for(x = 0; x < 30; x++){
+                write_psoc1(val,SEPARATOR[x]);
+            }
+            write_psoc1(val,10);
+        }
+  	    if(bufferDisplay1.saleType==2){						      //DATOS IBUTTON
 			write_psoc1(val,10);	
 			write_psoc1(val,10);		
 			for(x= 0;x < 13;x++){																		
@@ -391,7 +492,9 @@ void imprimir(uint8 val, uint8 pos){ //val, puerto de impresora
             write_psoc1(val,10);
 	    }
     }
-   
+    
+	
+    
     write_psoc1(val,10); 
     write_psoc1(val,10); 
     write_psoc1(val,10);
