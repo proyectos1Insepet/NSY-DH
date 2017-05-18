@@ -461,15 +461,23 @@ void imprimir(uint8 val, uint8 pos){ //val, puerto de impresora
     			write_psoc1(val,bufferDisplay1.licenceSale[x]);	
     		}
             write_psoc1(val,10);
-            for(x = 0; x < 30; x++){
-                write_psoc1(val,SEPARATOR[x]);
-            }
-            write_psoc1(val,10);
         }
-  	    if(bufferDisplay1.saleType==2){						      //DATOS IBUTTON
-			write_psoc1(val,10);	
-			write_psoc1(val,10);		
-			for(x= 0;x < 13;x++){																		
+        
+        for(x = 0; x < 30; x++){
+            write_psoc1(val,SEPARATOR[x]);
+        }
+        write_psoc1(val,10);
+        
+  	    if(bufferDisplay1.saleType==2){		
+            for(x=0;x<=10;x++){																		
+				write_psoc1(val,PRN_MILLEAGE[x]);
+			}	
+			for(x=1;x<=bufferDisplay1.mileageSale[0];x++){
+				write_psoc1(val,bufferDisplay1.mileageSale[x]);	
+			}
+            write_psoc1(val,10);
+            		
+			for(x= 0;x < 13;x++){										//DATOS IBUTTON								
 				write_psoc1(val,PRN_SERIAL[x]);
 			} 
 			for(x=1;x<=bufferDisplay1.idSerial[0];x++){
@@ -483,12 +491,102 @@ void imprimir(uint8 val, uint8 pos){ //val, puerto de impresora
 				write_psoc1(val,bufferDisplay1.identySale[x]);	
 			}
             write_psoc1(val,10);
-			for(x=0;x<=10;x++){																		
-				write_psoc1(val,PRN_MILLEAGE[x]);
-			}	
-			for(x=1;x<=bufferDisplay1.mileageSale[0];x++){
-				write_psoc1(val,bufferDisplay1.mileageSale[x]);	
+            
+            for(x=0;x < 13;x++){																		
+				write_psoc1(val,PRN_BALANCE[x]);
+			} 
+			for(x=1;x<=bufferDisplay1.identySale[0];x++){
+				//write_psoc1(val,bufferDisplay1.identySale[x]);	
 			}
+            write_psoc1(val,10);
+            
+            for(x=0;x < 13;x++){																		
+				write_psoc1(val,PRN_COMPANY[x]);
+			} 
+			for(x=1;x<=bufferDisplay1.identySale[0];x++){
+				//write_psoc1(val,bufferDisplay1.identySale[x]);	
+			}
+            write_psoc1(val,10);
+            
+            for(x=0;x < 13;x++){																		
+				write_psoc1(val,PRN_ACCOUNT[x]);
+			} 
+			for(x=1;x<=bufferDisplay1.identySale[0];x++){
+				//write_psoc1(val,bufferDisplay1.identySale[x]);	
+			}
+            write_psoc1(val,10);
+			
+            for(x=0;x < 13;x++){																		
+				write_psoc1(val,PRN_VISITSDAY[x]);
+			} 
+			for(x=1;x<=bufferDisplay1.identySale[0];x++){
+				//write_psoc1(val,bufferDisplay1.identySale[x]);	
+			}
+            write_psoc1(val,10);
+            
+            for(x=0;x < 13;x++){																		
+				write_psoc1(val,PRN_VISITSWEEK[x]);
+			} 
+			for(x=1;x<=bufferDisplay1.identySale[0];x++){
+				//write_psoc1(val,bufferDisplay1.identySale[x]);	
+			}
+            write_psoc1(val,10);
+            
+            for(x=0;x < 13;x++){																		
+				write_psoc1(val,PRN_VISITSMONTH[x]);
+			} 
+			for(x=1;x<=bufferDisplay1.identySale[0];x++){
+				//write_psoc1(val,bufferDisplay1.identySale[x]);	
+			}
+            write_psoc1(val,10);
+            
+            for(x=0;x < 13;x++){																		
+				write_psoc1(val,PRN_MONEYDAY[x]);
+			} 
+			for(x=1;x<=bufferDisplay1.identySale[0];x++){
+				//write_psoc1(val,bufferDisplay1.identySale[x]);	
+			}
+            write_psoc1(val,10);
+            
+            for(x=0;x < 13;x++){																		
+				write_psoc1(val,PRN_MONEYWEEK[x]);
+			} 
+			for(x=1;x<=bufferDisplay1.identySale[0];x++){
+				//write_psoc1(val,bufferDisplay1.identySale[x]);	
+			}
+            write_psoc1(val,10);
+            
+            for(x=0;x < 13;x++){																		
+				write_psoc1(val,PRN_MONEYMONTH[x]);
+			} 
+			for(x=1;x<=bufferDisplay1.identySale[0];x++){
+				//write_psoc1(val,bufferDisplay1.identySale[x]);	
+			}
+            write_psoc1(val,10);
+            
+            for(x=0;x < 13;x++){																		
+				write_psoc1(val,PRN_ACCOUNTTYPE[x]);
+			} 
+			for(x=1;x<=bufferDisplay1.identySale[0];x++){
+				//write_psoc1(val,bufferDisplay1.identySale[x]);	
+			}
+            write_psoc1(val,10);
+            
+            for(x=0;x < 13;x++){																		
+				write_psoc1(val,PRN_SIGNATURE[x]);
+			} 			
+            write_psoc1(val,10);
+            write_psoc1(val,10);
+            
+            for(x=0;x < 13;x++){																		
+				write_psoc1(val,PRN_ID[x]);
+			} 			
+            write_psoc1(val,10);
+            write_psoc1(val,10);
+            
+            for(x = 0; x < 30; x++){
+                write_psoc1(val,SEPARATOR[x]);
+            }
             write_psoc1(val,10);
 	    }
     }
