@@ -14,10 +14,14 @@
 #include <variables.h>
 #include <keyboard.h>
 #include <ibutton.h>
+#include <RFPoll.h>
 #include <LCD.h>
 #include <I2C.h>
 #include <Print.h>
 #include <device.h>
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 /**********************************/
 
@@ -45,12 +49,17 @@ void StoreConfiguration(){
     EEPROM_1_WriteByte(VolDec,3);
     EEPROM_1_WriteByte(PPUDec,4);
     EEPROM_1_WriteByte(DDMode,5);
-    EEPROM_1_WriteByte(digits,6);
-    EEPROM_1_WriteByte(UnitType+1,7);
+    EEPROM_1_WriteByte(digits,6);    
 }
 void loadConfiguration(){
-    lockTurn = EEPROM_1_ReadByte(8); //Fijo turno abierto para pruebas
+    lockTurn   = EEPROM_1_ReadByte(7);  //Fijo turno abierto para pruebas
+    printPortA = EEPROM_1_ReadByte(8);  //Puertos de impresion
+    printPortB = EEPROM_1_ReadByte(9); //Puertos de impresion
+    IDCast[0]  = EEPROM_1_ReadByte(10); //ID Estacion1
+    IDCast[1]  = EEPROM_1_ReadByte(11); //ID Estacion2    
 }
+
+
 /*
 *********************************************************************************************************
 *                                         void InitDisplay1(void)
@@ -232,9 +241,15 @@ void PrintTest(){
     write_psoc1(1,10);
     write_psoc1(1,10);
     write_psoc1(1,10);
+    write_psoc1(1,10);
+    write_psoc1(1,10);
+    write_psoc1(1,10);
     for(x = 0; x<17;x++){
         write_psoc1(2,dato[x]);
     }
+    write_psoc1(2,10);
+    write_psoc1(2,10);
+    write_psoc1(2,10);
     write_psoc1(2,10);
     write_psoc1(2,10);
     write_psoc1(2,10);
@@ -569,7 +584,7 @@ void PollingDisplay1(void){
                 case 0x0A: //reporte fin venta
                     getSale(side.a.dir);                    
                     if(bufferDisplay1.flagPrint ==1){
-                        imprimir(1,side.a.dir);
+                        imprimir(printPortA,side.a.dir);
                         flowDisplay1 = 0;
                         SetPicture(1,DISPLAY_INICIO0); 
                     }else{
@@ -582,7 +597,7 @@ void PollingDisplay1(void){
                 case 0x0B://Reporte de venta
                     getSale(side.a.dir);
                     if(bufferDisplay1.flagPrint ==1){
-                        imprimir(1,side.a.dir);
+                        imprimir(printPortA,side.a.dir);
                         flowDisplay1 = 0;
                         SetPicture(1,DISPLAY_INICIO0); 
                     }else{
@@ -636,7 +651,7 @@ void PollingDisplay1(void){
                                 bufferDisplay1.licenceSale[x]=bufferDisplay1.valueKeys[x];
                             }
                             if(bufferDisplay1.flagEndSale){
-                                imprimir(1,side.a.dir);
+                                imprimir(printPortA,side.a.dir);
                                 flowDisplay1 = 0;
                                 SetPicture(1,DISPLAY_INICIO0); 
                             }else{
@@ -774,6 +789,11 @@ void PollingDisplay1(void){
                             flowDisplay1 = 12;                            
                             SetPicture(1,DISPLAY_OPERACIONES);                            
                         break;
+                        
+                        case 0x3B:  //Pantalla Inicial    
+                            flowDisplay1 = 0;
+                            SetPicture(1,DISPLAY_INICIO0);                            
+                        break;
                             
                         case 0x94:  //Pantalla Inicial    
                             flowDisplay1 = 0;
@@ -827,8 +847,15 @@ void PollingDisplay1(void){
                 case 0: //Cancelar
                     switch(bufferDisplay1.flagKeyboard){
                         case 1://ID Estacion
-                            for(x=0;x< hiddenKeys;x++){
+                            for(x=0;x<=4;x++){
                                 idStation[x]=0;
+                            }
+                            flowDisplay1 = 0;
+                            SetPicture(1,DISPLAY_INICIO0);
+                        break;
+                        case 2://Umbral
+                            for(x=0;x< hiddenKeys;x++){
+                                pumpGap[x]=0;
                             }
                             flowDisplay1 = 0;
                             SetPicture(1,DISPLAY_INICIO0);
@@ -854,19 +881,32 @@ void PollingDisplay1(void){
                     
                 case 1: //Enter
                     switch(bufferDisplay1.flagKeyboard){   
-                        case 1://Pass
-                            for(x=0;x < hiddenKeys;x++){
-                                idStation[x] =bufferDisplay1.valueKeys[x];
+                        case 1://ID Estacion
+                            for(x=0;x <=4;x++){
+                                idStation[x] =bufferDisplay1.valueKeys[x+1];                                
                             }
-                            flowDisplay1 = 0;
-                            SetPicture(1,DISPLAY_INICIO0);
+                            idStation[4] = 0x00;
+                            intIDStation = atoi(idStation);
+                            IDCast[0] = intIDStation;
+                            IDCast[1] = intIDStation>>8;
+                            EEPROM_1_WriteByte(IDCast[0],10);
+                            EEPROM_1_WriteByte(IDCast[1],11);
+                            flowDisplay1 = 15;
+                            SetPicture(1,DISPLAY_CONFIGURACIONES);
+                        break;
+                        case 2://Pass
+                            for(x=0;x < hiddenKeys;x++){
+                                pumpGap[x] =bufferDisplay1.valueKeys[x];
+                            }
+                            flowDisplay1 = 15;
+                            SetPicture(1,DISPLAY_CONFIGURACIONES);
                         break;
                         case 5://Pass
                             for(x=0;x < hiddenKeys;x++){
                                 bufferDisplay1.shiftPassword[x] =bufferDisplay1.valueKeys[x];
                             }
-                            flowDisplay1 = 0;
-                            SetPicture(1,DISPLAY_POR_FAVOR_ESPERE);
+                            flowDisplay1 = 15;
+                            SetPicture(1,DISPLAY_CONFIGURACIONES);
                         break; 
                         case 6://Pass
                             for(x=1;x<=configAccess[0];x++){
@@ -898,24 +938,28 @@ void PollingDisplay1(void){
                             flowDisplay1 = 14;
                             numberKeys1 = 0; 
                             controlChar = 0;
+                            hiddenKeys  = 5;
+//                            idStation[0]= 4;
                             bufferDisplay1.flagKeyboard = 1;
                             SetPicture(1,DISPLAY_INTRODUZCA_VALOR);                            
                         break;
                         case 0x65:  //Test Impresoras 
-                            flowDisplay1 = 9;
-                            numberKeys1 = 0;   
-                            bufferDisplay1.flagKeyboard = 4;
+                            flowDisplay1 = 16; 
+                            PrintTest();
                             SetPicture(1,DISPLAY_AMBAS_IMPRESORAS_FUNCIONANDO);                           
                         break;
                         
                         case 0x5A:  //Umbral 
-                            flowDisplay1 = 9;
-                            numberKeys1 = 0;   
-                            bufferDisplay1.flagKeyboard = 4;
+                            flowDisplay1 = 14;
+                            numberKeys1 = 0;
+                            controlChar = 0;
+                            hiddenKeys  = 3;
+                            pumpGap[0]  = 2;
+                            bufferDisplay1.flagKeyboard = 2;
                             SetPicture(1,DISPLAY_INTRODUZCA_VALOR);                            
                         break;
                         case 0x58:  //Hora y Fecha
-                            flowDisplay1 = 9;
+                            flowDisplay1 = 18;
                             numberKeys1 = 0;   
                             bufferDisplay1.flagKeyboard = 4;
                             SetPicture(1,DISPLAY_CONFIGURAR_FECHA_HORA);                           
@@ -934,6 +978,119 @@ void PollingDisplay1(void){
                 Display1_ClearRxBuffer();
             }                        
         break; 
+            
+        case 16:
+            if(Display1_GetRxBufferSize()==8){
+                if((Display1_rxBuffer[0]==0xAA) && (Display1_rxBuffer[6]==0xC3) && (Display1_rxBuffer[7]==0x3C)){
+                    switch(Display1_rxBuffer[3]){
+                        case 0x38:  //No funcionan  
+                            flowDisplay1 = 17;
+                            SetPicture(1,DISPLAY_IMPRESORA_NO_FUNCIONANDO);                            
+                        break;
+                        case 0x39:  //Si funcionan
+                            flowDisplay1 = 15; 
+                            printPortA = 1;
+                            printPortB = 2;
+                            EEPROM_1_WriteByte(printPortA,8);
+                            EEPROM_1_WriteByte(printPortB,9);
+                            SetPicture(1,DISPLAY_CONFIGURACIONES);
+                        break;
+                                               
+                        case 0x7E:  //Pantalla Inicial                                                        
+                            SetPicture(1,DISPLAY_INICIO0);
+                            flowDisplay1 = 0;
+                        break;
+                        case 0x94:  //Pantalla Inicial                                                        
+                            SetPicture(1,DISPLAY_INICIO0);
+                            flowDisplay1 = 0;
+                        break;
+                    }                    
+                }
+                CyDelay(10);         
+                Display1_ClearRxBuffer();
+            }                        
+        break;
+            
+        case 17:
+            if(Display1_GetRxBufferSize()==8){
+                if((Display1_rxBuffer[0]==0xAA) && (Display1_rxBuffer[6]==0xC3) && (Display1_rxBuffer[7]==0x3C)){
+                    switch(Display1_rxBuffer[3]){
+                        case 0x8C:  //1 no funciona  
+                            flowDisplay1 = 15; 
+                            printPortA = 2;
+                            printPortB = 2;
+                            EEPROM_1_WriteByte(printPortA,8);
+                            EEPROM_1_WriteByte(printPortB,9);
+                            SetPicture(1,DISPLAY_CONFIGURACIONES);                            
+                        break;
+                        case 0x8D:  //2 no funciona
+                            flowDisplay1 = 15; 
+                            printPortA = 1;
+                            printPortB = 1;
+                            EEPROM_1_WriteByte(printPortA,8);
+                            EEPROM_1_WriteByte(printPortB,9);
+                            SetPicture(1,DISPLAY_CONFIGURACIONES); 
+                        break;
+                            
+                        case 0x8E:  //ninguna funciona
+                            flowDisplay1 = 15; 
+                            printPortA = 0;
+                            printPortB = 0;
+                            EEPROM_1_WriteByte(printPortA,8);
+                            EEPROM_1_WriteByte(printPortB,9);
+                            SetPicture(1,DISPLAY_CONFIGURACIONES); 
+                        break;
+                                               
+                        case 0x7E:  //Pantalla Inicial                                                        
+                            SetPicture(1,DISPLAY_INICIO0);
+                            flowDisplay1 = 0;
+                        break;
+                        case 0x94:  //Pantalla Inicial                                                        
+                            SetPicture(1,DISPLAY_INICIO0);
+                            flowDisplay1 = 0;
+                        break;
+                    }                    
+                }
+                CyDelay(10);         
+                Display1_ClearRxBuffer();
+            }                        
+        break;
+            
+        case 18:
+            if(leer_hora()==1){
+                WriteLCD(1,(((timeDownHandle[1]&0x10)>>4)+48),13,8,1,0x0000,'N');
+                WriteLCD(1,((timeDownHandle[1]&0x0F)+48),13,9,1,0x0000,'N');
+                WriteLCD(1,':',13,10,1,0x0000,'N');
+                WriteLCD(1,(((timeDownHandle[0]&0xF0)>>4)+48),13,11,1,0x0000,'N');
+                WriteLCD(1,((timeDownHandle[0]&0x0F)+48),13,12,1,0x0000,'N');               
+            }
+            if(leer_fecha()==1){                
+                WriteLCD(1,(((dateDownHandle[0]&0x30)>>4)+48),21,8,1,0x0000,'N');
+                WriteLCD(1,((dateDownHandle[0]&0x0F)+48),21,9,1,0x0000,'N');
+                WriteLCD(1,'/',21,10,1,0x0000,'N');
+                WriteLCD(1,(((dateDownHandle[1]&0x10)>>4)+48),21,11,1,0x0000,'N');
+                WriteLCD(1,((dateDownHandle[1]&0x0F)+48),21,12,1,0x0000,'N');
+                WriteLCD(1,'/',21,13,1,0x0000,'N');
+                WriteLCD(1,(((dateDownHandle[2]&0xF0)>>4)+48),21,14,1,0x0000,'N');
+                WriteLCD(1,((dateDownHandle[2]&0x0F)+48),21,15,1,0x0000,'N');
+            }
+            if(Display1_GetRxBufferSize()==8){
+                if((Display1_rxBuffer[0]==0xAA) && (Display1_rxBuffer[6]==0xC3) && (Display1_rxBuffer[7]==0x3C)){
+                    switch(Display1_rxBuffer[3]){                                                                       
+                        case 0x7E:  //Pantalla Inicial  
+                            flowDisplay1 = 0;
+                            SetPicture(1,DISPLAY_INICIO0);                            
+                        break;
+                        case 0x94:  //Pantalla Inicial    
+                            flowDisplay1 = 0;
+                            SetPicture(1,DISPLAY_INICIO0);                            
+                        break;
+                    }                    
+                }
+                CyDelay(10);         
+                Display1_ClearRxBuffer();
+            }                        
+        break;
             
             
     }
@@ -1106,6 +1263,12 @@ void PollingDisplay2(void){
     }
 }
 
+void RFConsulting(void){
+    
+}
+
+
+
 
 
 /*
@@ -1163,7 +1326,7 @@ int main()
     passwordPump[0] = 0x04;
     configAccess[0] = 0x04;
     lockTurn = 0;
-    EEPROM_1_WriteByte(lockTurn,8); //Carga turno para pruebas 
+    EEPROM_1_WriteByte(lockTurn,7); //Carga turno para pruebas 
     lockTurn = 0;
     loadConfiguration();
     InitPump();      
@@ -1179,6 +1342,9 @@ int main()
         PollingDisplay1();
         CyWdtClear();
         PollingDisplay2();
+        CyWdtClear();
+        //pollingRF_Rx();
+        CyWdtClear();
     }
 }
 

@@ -72,6 +72,7 @@
     volatile uint8 stateBeagleSoft;  //Indica si el Beagle se encuentra en comunicaion con el software
     volatile uint8 PrevStatePump[4]; //Estado anterior en el dispensador [0,pos1,1 pos2...    
     volatile uint8 PlateRequest;
+    volatile uint8 IDCast[4];
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     uint8 UnitType,ConversionFactor,MoneyDec,VolDec,PPUDec,DDMode; // Variables configuracion del dispensador
     uint8 statePump[4];              //Estado en el que se encuentra el dispensador
@@ -86,7 +87,13 @@
     uint8 count_protector,count_protector2; //
     uint8 configAccess[5];
     uint8 controlChar;
-    uint8 idStation[4];
+    char8 idStation[5];    
+    uint8 pumpGap[3];
+    uint8 printPortA;
+    uint8 printPortB;
+    uint8 buffer_rf[1500];
+    uint8 buffer_tx[1500];
+    uint16 intIDStation;
 
     
 /*

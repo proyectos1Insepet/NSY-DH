@@ -35,8 +35,8 @@ uint8 RF_Connection_initVar = 0u;
 #if (RF_Connection_RX_INTERRUPT_ENABLED && (RF_Connection_RX_ENABLED || RF_Connection_HD_ENABLED))
     uint8 RF_Connection_errorStatus = 0u;
     volatile uint8 RF_Connection_rxBuffer[RF_Connection_RX_BUFFER_SIZE];
-    volatile uint8 RF_Connection_rxBufferRead  = 0u;
-    volatile uint8 RF_Connection_rxBufferWrite = 0u;
+    volatile uint16 RF_Connection_rxBufferRead  = 0u;
+    volatile uint16 RF_Connection_rxBufferWrite = 0u;
     volatile uint8 RF_Connection_rxBufferLoopDetect = 0u;
     volatile uint8 RF_Connection_rxBufferOverflow   = 0u;
     #if (RF_Connection_RXHW_ADDRESS_ENABLED)
@@ -395,8 +395,8 @@ void  RF_Connection_WriteControlRegister(uint8 control)
 
     #if (RF_Connection_RX_INTERRUPT_ENABLED)
 
-        uint8 locRxBufferRead;
-        uint8 locRxBufferWrite;
+        uint16 locRxBufferRead;
+        uint16 locRxBufferWrite;
 
         /* Protect variables that could change on interrupt */
         RF_Connection_DisableRxInt();
@@ -535,8 +535,8 @@ void  RF_Connection_WriteControlRegister(uint8 control)
         uint8 rxStatus;
 
     #if (RF_Connection_RX_INTERRUPT_ENABLED)
-        uint8 locRxBufferRead;
-        uint8 locRxBufferWrite;
+        uint16 locRxBufferRead;
+        uint16 locRxBufferWrite;
 
         /* Protect variables that could change on interrupt */
         RF_Connection_DisableRxInt();
@@ -665,7 +665,7 @@ void  RF_Connection_WriteControlRegister(uint8 control)
     *  None.
     *
     * Return:
-    *  uint8: Number of bytes in the RX buffer. 
+    *  uint16: Number of bytes in the RX buffer. 
     *    Return value type depends on RX Buffer Size parameter.
     *
     * Global Variables:
@@ -680,10 +680,10 @@ void  RF_Connection_WriteControlRegister(uint8 control)
     *  Allows the user to find out how full the RX Buffer is.
     *
     *******************************************************************************/
-    uint8 RF_Connection_GetRxBufferSize(void)
+    uint16 RF_Connection_GetRxBufferSize(void)
                                                             
     {
-        uint8 size;
+        uint16 size;
 
     #if (RF_Connection_RX_INTERRUPT_ENABLED)
 

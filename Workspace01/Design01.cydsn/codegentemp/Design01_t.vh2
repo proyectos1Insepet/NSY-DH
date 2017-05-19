@@ -1,6 +1,6 @@
--- Project:   C:\Users\Diego\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\Design01.cyprj
--- Generated: 05/18/2017 13:06:29
--- PSoC Creator  3.3 CP2
+-- Project:   C:\Users\Recepcion\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\Design01.cyprj
+-- Generated: 05/19/2017 11:17:19
+-- PSoC Creator  3.3 SP1
 
 ENTITY Design01 IS
     PORT(

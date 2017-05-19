@@ -46,7 +46,7 @@
 #define RF_Connection_FLOW_CONTROL                   (0u)
 #define RF_Connection_CLK_FREQ                       (0u)
 #define RF_Connection_TX_BUFFER_SIZE                 (4u)
-#define RF_Connection_RX_BUFFER_SIZE                 (64u)
+#define RF_Connection_RX_BUFFER_SIZE                 (256u)
 
 /* Check to see if required defines such as CY_PSOC5LP are available */
 /* They are defined starting with cy_boot v3.0 */
@@ -112,7 +112,7 @@ void RF_Connection_Wakeup(void) ;
     uint8 RF_Connection_ReadRxStatus(void) ;
     uint8 RF_Connection_GetChar(void) ;
     uint16 RF_Connection_GetByte(void) ;
-    uint8 RF_Connection_GetRxBufferSize(void)
+    uint16 RF_Connection_GetRxBufferSize(void)
                                                             ;
     void RF_Connection_ClearRxBuffer(void) ;
 
@@ -316,8 +316,8 @@ extern uint8 RF_Connection_initVar;
 #if (RF_Connection_RX_INTERRUPT_ENABLED && (RF_Connection_RX_ENABLED || RF_Connection_HD_ENABLED))
     extern uint8 RF_Connection_errorStatus;
     extern volatile uint8 RF_Connection_rxBuffer[RF_Connection_RX_BUFFER_SIZE];
-    extern volatile uint8 RF_Connection_rxBufferRead;
-    extern volatile uint8 RF_Connection_rxBufferWrite;
+    extern volatile uint16 RF_Connection_rxBufferRead;
+    extern volatile uint16 RF_Connection_rxBufferWrite;
     extern volatile uint8 RF_Connection_rxBufferLoopDetect;
     extern volatile uint8 RF_Connection_rxBufferOverflow;
     #if (RF_Connection_RXHW_ADDRESS_ENABLED)

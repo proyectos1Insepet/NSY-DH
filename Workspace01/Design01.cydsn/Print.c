@@ -336,7 +336,7 @@ void imprimir(uint8 val, uint8 pos){ //val, puerto de impresora
     uint8 x;
     
     if(PrinterType ==1){
-        printLogoP(1,0);
+        printLogoP(printPortA,0);
     }			
     write_psoc1(val,10);
 
