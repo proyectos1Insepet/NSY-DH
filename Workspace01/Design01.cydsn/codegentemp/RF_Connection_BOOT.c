@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: RF_Physical_BOOT.c
+* File Name: RF_Connection_BOOT.c
 * Version 2.50
 *
 * Description:
@@ -15,14 +15,14 @@
 * the software package with which this file was provided.
 *******************************************************************************/
 
-#include "RF_Physical.h"
+#include "RF_Connection.h"
 
-#if defined(CYDEV_BOOTLOADER_IO_COMP) && (0u != ((CYDEV_BOOTLOADER_IO_COMP == CyBtldr_RF_Physical) || \
+#if defined(CYDEV_BOOTLOADER_IO_COMP) && (0u != ((CYDEV_BOOTLOADER_IO_COMP == CyBtldr_RF_Connection) || \
                                           (CYDEV_BOOTLOADER_IO_COMP == CyBtldr_Custom_Interface)))
 
 
 /*******************************************************************************
-* Function Name: RF_Physical_CyBtldrCommStart
+* Function Name: RF_Connection_CyBtldrCommStart
 ********************************************************************************
 *
 * Summary:
@@ -38,17 +38,17 @@
 *  This component automatically enables global interrupt.
 *
 *******************************************************************************/
-void RF_Physical_CyBtldrCommStart(void) CYSMALL 
+void RF_Connection_CyBtldrCommStart(void) CYSMALL 
 {
     /* Start UART component and clear the Tx,Rx buffers */
-    RF_Physical_Start();
-    RF_Physical_ClearRxBuffer();
-    RF_Physical_ClearTxBuffer();
+    RF_Connection_Start();
+    RF_Connection_ClearRxBuffer();
+    RF_Connection_ClearTxBuffer();
 }
 
 
 /*******************************************************************************
-* Function Name: RF_Physical_CyBtldrCommStop
+* Function Name: RF_Connection_CyBtldrCommStop
 ********************************************************************************
 *
 * Summary:
@@ -61,15 +61,15 @@ void RF_Physical_CyBtldrCommStart(void) CYSMALL
 *  None
 *
 *******************************************************************************/
-void RF_Physical_CyBtldrCommStop(void) CYSMALL 
+void RF_Connection_CyBtldrCommStop(void) CYSMALL 
 {
     /* Stop UART component */
-    RF_Physical_Stop();
+    RF_Connection_Stop();
 }
 
 
 /*******************************************************************************
-* Function Name: RF_Physical_CyBtldrCommReset
+* Function Name: RF_Connection_CyBtldrCommReset
 ********************************************************************************
 *
 * Summary:
@@ -82,16 +82,16 @@ void RF_Physical_CyBtldrCommStop(void) CYSMALL
 *  None
 *
 *******************************************************************************/
-void RF_Physical_CyBtldrCommReset(void) CYSMALL 
+void RF_Connection_CyBtldrCommReset(void) CYSMALL 
 {
     /* Clear RX and TX buffers */
-    RF_Physical_ClearRxBuffer();
-    RF_Physical_ClearTxBuffer();
+    RF_Connection_ClearRxBuffer();
+    RF_Connection_ClearTxBuffer();
 }
 
 
 /*******************************************************************************
-* Function Name: RF_Physical_CyBtldrCommWrite
+* Function Name: RF_Connection_CyBtldrCommWrite
 ********************************************************************************
 *
 * Summary:
@@ -113,7 +113,7 @@ void RF_Physical_CyBtldrCommReset(void) CYSMALL
 *  This function should be called after command was received .
 *
 *******************************************************************************/
-cystatus RF_Physical_CyBtldrCommWrite(const uint8 pData[], uint16 size, uint16 * count, uint8 timeOut) CYSMALL
+cystatus RF_Connection_CyBtldrCommWrite(const uint8 pData[], uint16 size, uint16 * count, uint8 timeOut) CYSMALL
          
 {
     uint16 bufIndex = 0u;
@@ -124,12 +124,12 @@ cystatus RF_Physical_CyBtldrCommWrite(const uint8 pData[], uint16 size, uint16 *
     }
 
     /* Clear receive buffers */
-    RF_Physical_ClearRxBuffer();
+    RF_Connection_ClearRxBuffer();
 
     /* Write TX data using blocking function */
     while(bufIndex < size)
     {
-        RF_Physical_PutChar(pData[bufIndex]);
+        RF_Connection_PutChar(pData[bufIndex]);
         bufIndex++;
     }
 
@@ -141,7 +141,7 @@ cystatus RF_Physical_CyBtldrCommWrite(const uint8 pData[], uint16 size, uint16 *
 
 
 /*******************************************************************************
-* Function Name: RF_Physical_CyBtldrCommRead
+* Function Name: RF_Connection_CyBtldrCommRead
 ********************************************************************************
 *
 * Summary:
@@ -167,7 +167,7 @@ cystatus RF_Physical_CyBtldrCommWrite(const uint8 pData[], uint16 size, uint16 *
 *  host. You have to account for the delay in hardware converters while
 *  calculating this value, if you are using any USB-UART bridges.
 *******************************************************************************/
-cystatus RF_Physical_CyBtldrCommRead(uint8 pData[], uint16 size, uint16 * count, uint8 timeOut) CYSMALL
+cystatus RF_Connection_CyBtldrCommRead(uint8 pData[], uint16 size, uint16 * count, uint8 timeOut) CYSMALL
          
 {
     uint16 iCntr;
@@ -185,7 +185,7 @@ cystatus RF_Physical_CyBtldrCommRead(uint8 pData[], uint16 size, uint16 * count,
         /* If at least one byte is received within the timeout interval
         *  enter the next loop waiting for more data reception
         */
-        if(0u != RF_Physical_GetRxBufferSize())
+        if(0u != RF_Connection_GetRxBufferSize())
         {
             /* Wait for more data until 25ms byte to byte time out interval.
             * If no data is received during the last 25 ms(BYTE2BYTE_TIME_OUT)
@@ -195,20 +195,20 @@ cystatus RF_Physical_CyBtldrCommRead(uint8 pData[], uint16 size, uint16 * count,
             */
             do
             {
-                oldDataCount = RF_Physical_GetRxBufferSize();
-                CyDelay(RF_Physical_BYTE2BYTE_TIME_OUT);
+                oldDataCount = RF_Connection_GetRxBufferSize();
+                CyDelay(RF_Connection_BYTE2BYTE_TIME_OUT);
             }
-            while(RF_Physical_GetRxBufferSize() > oldDataCount);
+            while(RF_Connection_GetRxBufferSize() > oldDataCount);
 
             status = CYRET_SUCCESS;
             break;
         }
         /* If the data is not received, give a delay of 
-        *  RF_Physical_BL_CHK_DELAY_MS and check again until the timeOut specified.
+        *  RF_Connection_BL_CHK_DELAY_MS and check again until the timeOut specified.
         */
         else
         {
-            CyDelay(RF_Physical_BL_CHK_DELAY_MS);
+            CyDelay(RF_Connection_BL_CHK_DELAY_MS);
         }
     }
 
@@ -217,9 +217,9 @@ cystatus RF_Physical_CyBtldrCommRead(uint8 pData[], uint16 size, uint16 * count,
     dataIndexCntr = 0u;
 
     /* If GetRxBufferSize()>0 , move the received data to the pData buffer */
-    while(RF_Physical_GetRxBufferSize() > 0u)
+    while(RF_Connection_GetRxBufferSize() > 0u)
     {
-        tempCount = RF_Physical_GetRxBufferSize();
+        tempCount = RF_Connection_GetRxBufferSize();
         *count  =(*count) + tempCount;
 
         /* Check if buffer overflow will occur before moving the data */
@@ -228,16 +228,16 @@ cystatus RF_Physical_CyBtldrCommRead(uint8 pData[], uint16 size, uint16 * count,
             for (iCntr = 0u; iCntr < tempCount; iCntr++)
             {
                 /* Read the data and move it to the pData buffer */
-                pData[dataIndexCntr] = RF_Physical_ReadRxData();
+                pData[dataIndexCntr] = RF_Connection_ReadRxData();
                 dataIndexCntr++;
             }
 
             /* Check if the last received byte is end of packet defined by bootloader
-            *  If not wait for additional RF_Physical_WAIT_EOP_DELAY ms.
+            *  If not wait for additional RF_Connection_WAIT_EOP_DELAY ms.
             */
-            if(pData[dataIndexCntr - 1u] != RF_Physical_PACKET_EOP)
+            if(pData[dataIndexCntr - 1u] != RF_Connection_PACKET_EOP)
             {
-                CyDelay(RF_Physical_WAIT_EOP_DELAY);
+                CyDelay(RF_Connection_WAIT_EOP_DELAY);
             }
         }
         /* If there is no space to move data, break from the loop */

@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: RF_Physical_PM.c
+* File Name: RF_Connection_PM.c
 * Version 2.50
 *
 * Description:
@@ -14,14 +14,14 @@
 * the software package with which this file was provided.
 *******************************************************************************/
 
-#include "RF_Physical.h"
+#include "RF_Connection.h"
 
 
 /***************************************
 * Local data allocation
 ***************************************/
 
-static RF_Physical_BACKUP_STRUCT  RF_Physical_backup =
+static RF_Connection_BACKUP_STRUCT  RF_Connection_backup =
 {
     /* enableState - disabled */
     0u,
@@ -30,13 +30,13 @@ static RF_Physical_BACKUP_STRUCT  RF_Physical_backup =
 
 
 /*******************************************************************************
-* Function Name: RF_Physical_SaveConfig
+* Function Name: RF_Connection_SaveConfig
 ********************************************************************************
 *
 * Summary:
 *  This function saves the component nonretention control register.
 *  Does not save the FIFO which is a set of nonretention registers.
-*  This function is called by the RF_Physical_Sleep() function.
+*  This function is called by the RF_Connection_Sleep() function.
 *
 * Parameters:
 *  None.
@@ -45,22 +45,22 @@ static RF_Physical_BACKUP_STRUCT  RF_Physical_backup =
 *  None.
 *
 * Global Variables:
-*  RF_Physical_backup - modified when non-retention registers are saved.
+*  RF_Connection_backup - modified when non-retention registers are saved.
 *
 * Reentrant:
 *  No.
 *
 *******************************************************************************/
-void RF_Physical_SaveConfig(void)
+void RF_Connection_SaveConfig(void)
 {
-    #if(RF_Physical_CONTROL_REG_REMOVED == 0u)
-        RF_Physical_backup.cr = RF_Physical_CONTROL_REG;
-    #endif /* End RF_Physical_CONTROL_REG_REMOVED */
+    #if(RF_Connection_CONTROL_REG_REMOVED == 0u)
+        RF_Connection_backup.cr = RF_Connection_CONTROL_REG;
+    #endif /* End RF_Connection_CONTROL_REG_REMOVED */
 }
 
 
 /*******************************************************************************
-* Function Name: RF_Physical_RestoreConfig
+* Function Name: RF_Connection_RestoreConfig
 ********************************************************************************
 *
 * Summary:
@@ -74,34 +74,34 @@ void RF_Physical_SaveConfig(void)
 *  None.
 *
 * Global Variables:
-*  RF_Physical_backup - used when non-retention registers are restored.
+*  RF_Connection_backup - used when non-retention registers are restored.
 *
 * Reentrant:
 *  No.
 *
 * Notes:
-*  If this function is called without calling RF_Physical_SaveConfig() 
+*  If this function is called without calling RF_Connection_SaveConfig() 
 *  first, the data loaded may be incorrect.
 *
 *******************************************************************************/
-void RF_Physical_RestoreConfig(void)
+void RF_Connection_RestoreConfig(void)
 {
-    #if(RF_Physical_CONTROL_REG_REMOVED == 0u)
-        RF_Physical_CONTROL_REG = RF_Physical_backup.cr;
-    #endif /* End RF_Physical_CONTROL_REG_REMOVED */
+    #if(RF_Connection_CONTROL_REG_REMOVED == 0u)
+        RF_Connection_CONTROL_REG = RF_Connection_backup.cr;
+    #endif /* End RF_Connection_CONTROL_REG_REMOVED */
 }
 
 
 /*******************************************************************************
-* Function Name: RF_Physical_Sleep
+* Function Name: RF_Connection_Sleep
 ********************************************************************************
 *
 * Summary:
 *  This is the preferred API to prepare the component for sleep. 
-*  The RF_Physical_Sleep() API saves the current component state. Then it
-*  calls the RF_Physical_Stop() function and calls 
-*  RF_Physical_SaveConfig() to save the hardware configuration.
-*  Call the RF_Physical_Sleep() function before calling the CyPmSleep() 
+*  The RF_Connection_Sleep() API saves the current component state. Then it
+*  calls the RF_Connection_Stop() function and calls 
+*  RF_Connection_SaveConfig() to save the hardware configuration.
+*  Call the RF_Connection_Sleep() function before calling the CyPmSleep() 
 *  or the CyPmHibernate() function. 
 *
 * Parameters:
@@ -111,49 +111,49 @@ void RF_Physical_RestoreConfig(void)
 *  None.
 *
 * Global Variables:
-*  RF_Physical_backup - modified when non-retention registers are saved.
+*  RF_Connection_backup - modified when non-retention registers are saved.
 *
 * Reentrant:
 *  No.
 *
 *******************************************************************************/
-void RF_Physical_Sleep(void)
+void RF_Connection_Sleep(void)
 {
-    #if(RF_Physical_RX_ENABLED || RF_Physical_HD_ENABLED)
-        if((RF_Physical_RXSTATUS_ACTL_REG  & RF_Physical_INT_ENABLE) != 0u)
+    #if(RF_Connection_RX_ENABLED || RF_Connection_HD_ENABLED)
+        if((RF_Connection_RXSTATUS_ACTL_REG  & RF_Connection_INT_ENABLE) != 0u)
         {
-            RF_Physical_backup.enableState = 1u;
+            RF_Connection_backup.enableState = 1u;
         }
         else
         {
-            RF_Physical_backup.enableState = 0u;
+            RF_Connection_backup.enableState = 0u;
         }
     #else
-        if((RF_Physical_TXSTATUS_ACTL_REG  & RF_Physical_INT_ENABLE) !=0u)
+        if((RF_Connection_TXSTATUS_ACTL_REG  & RF_Connection_INT_ENABLE) !=0u)
         {
-            RF_Physical_backup.enableState = 1u;
+            RF_Connection_backup.enableState = 1u;
         }
         else
         {
-            RF_Physical_backup.enableState = 0u;
+            RF_Connection_backup.enableState = 0u;
         }
-    #endif /* End RF_Physical_RX_ENABLED || RF_Physical_HD_ENABLED*/
+    #endif /* End RF_Connection_RX_ENABLED || RF_Connection_HD_ENABLED*/
 
-    RF_Physical_Stop();
-    RF_Physical_SaveConfig();
+    RF_Connection_Stop();
+    RF_Connection_SaveConfig();
 }
 
 
 /*******************************************************************************
-* Function Name: RF_Physical_Wakeup
+* Function Name: RF_Connection_Wakeup
 ********************************************************************************
 *
 * Summary:
 *  This is the preferred API to restore the component to the state when 
-*  RF_Physical_Sleep() was called. The RF_Physical_Wakeup() function
-*  calls the RF_Physical_RestoreConfig() function to restore the 
+*  RF_Connection_Sleep() was called. The RF_Connection_Wakeup() function
+*  calls the RF_Connection_RestoreConfig() function to restore the 
 *  configuration. If the component was enabled before the 
-*  RF_Physical_Sleep() function was called, the RF_Physical_Wakeup()
+*  RF_Connection_Sleep() function was called, the RF_Connection_Wakeup()
 *  function will also re-enable the component.
 *
 * Parameters:
@@ -163,25 +163,25 @@ void RF_Physical_Sleep(void)
 *  None.
 *
 * Global Variables:
-*  RF_Physical_backup - used when non-retention registers are restored.
+*  RF_Connection_backup - used when non-retention registers are restored.
 *
 * Reentrant:
 *  No.
 *
 *******************************************************************************/
-void RF_Physical_Wakeup(void)
+void RF_Connection_Wakeup(void)
 {
-    RF_Physical_RestoreConfig();
-    #if( (RF_Physical_RX_ENABLED) || (RF_Physical_HD_ENABLED) )
-        RF_Physical_ClearRxBuffer();
-    #endif /* End (RF_Physical_RX_ENABLED) || (RF_Physical_HD_ENABLED) */
-    #if(RF_Physical_TX_ENABLED || RF_Physical_HD_ENABLED)
-        RF_Physical_ClearTxBuffer();
-    #endif /* End RF_Physical_TX_ENABLED || RF_Physical_HD_ENABLED */
+    RF_Connection_RestoreConfig();
+    #if( (RF_Connection_RX_ENABLED) || (RF_Connection_HD_ENABLED) )
+        RF_Connection_ClearRxBuffer();
+    #endif /* End (RF_Connection_RX_ENABLED) || (RF_Connection_HD_ENABLED) */
+    #if(RF_Connection_TX_ENABLED || RF_Connection_HD_ENABLED)
+        RF_Connection_ClearTxBuffer();
+    #endif /* End RF_Connection_TX_ENABLED || RF_Connection_HD_ENABLED */
 
-    if(RF_Physical_backup.enableState != 0u)
+    if(RF_Connection_backup.enableState != 0u)
     {
-        RF_Physical_Enable();
+        RF_Connection_Enable();
     }
 }
 

@@ -71,6 +71,7 @@ uint8 PRN_VOLUMEMONTH[13] = "Volumen Mes: ";
 uint8 PRN_MONEYDAY[13]    = "Dinero Dia : ";
 uint8 PRN_MONEYWEEK[13]   = "Dinero Sem : ";
 uint8 PRN_MONEYMONTH[13]  = "Dinero Mes : ";
+uint8 PRN_PRESET[13]      = "Valor Prog.: ";
 uint8 PRN_SIGNATURE[13]   = "Firma      : ";
 uint8 PRN_ID[13]          = "Cedula     : ";
 uint8 PRN_CURRENCY[1]     = "$";
@@ -366,14 +367,7 @@ void imprimir(uint8 val, uint8 pos){ //val, puerto de impresora
 		write_psoc1(val,((timeDownHandle[1]&0x0F)+48));
 		write_psoc1(val,':');
 		write_psoc1(val,(((timeDownHandle[0]&0xF0)>>4)+48));
-		write_psoc1(val,((timeDownHandle[0]&0x0F)+48));
-		if((timeDownHandle[1]&0x20)==0x20){
-			write_psoc1(val,'p');
-		}
-		else{
-			write_psoc1(val,'a');						
-		}			
-		write_psoc1(val,'m');
+		write_psoc1(val,((timeDownHandle[0]&0x0F)+48));		
 	}
     write_psoc1(val,10);
     for(x = 0; x < 30; x++){
@@ -461,6 +455,13 @@ void imprimir(uint8 val, uint8 pos){ //val, puerto de impresora
     			write_psoc1(val,bufferDisplay1.licenceSale[x]);	
     		}
             write_psoc1(val,10);
+            for(x=0;x<13;x++){																		
+    			write_psoc1(val,PRN_PRESET[x]);                          //Preset
+    		} 
+    		for(x=1;x<=bufferDisplay1.presetValue[0][0];x++){
+    			write_psoc1(val,bufferDisplay1.presetValue[0][x]);	
+    		}
+            write_psoc1(val,10);
         }
         
         for(x = 0; x < 30; x++){
@@ -469,7 +470,7 @@ void imprimir(uint8 val, uint8 pos){ //val, puerto de impresora
         write_psoc1(val,10);
         
   	    if(bufferDisplay1.saleType==2){		
-            for(x=0;x<=10;x++){																		
+            for(x = 0;x < 13;x++){																		
 				write_psoc1(val,PRN_MILLEAGE[x]);
 			}	
 			for(x=1;x<=bufferDisplay1.mileageSale[0];x++){
@@ -571,10 +572,11 @@ void imprimir(uint8 val, uint8 pos){ //val, puerto de impresora
 				//write_psoc1(val,bufferDisplay1.identySale[x]);	
 			}
             write_psoc1(val,10);
-            
+            write_psoc1(val,10);
             for(x=0;x < 13;x++){																		
 				write_psoc1(val,PRN_SIGNATURE[x]);
 			} 			
+            write_psoc1(val,10);
             write_psoc1(val,10);
             write_psoc1(val,10);
             
@@ -583,7 +585,7 @@ void imprimir(uint8 val, uint8 pos){ //val, puerto de impresora
 			} 			
             write_psoc1(val,10);
             write_psoc1(val,10);
-            
+            write_psoc1(val,10);
             for(x = 0; x < 30; x++){
                 write_psoc1(val,SEPARATOR[x]);
             }

@@ -219,11 +219,11 @@
     <block name="RXInternalInterrupt" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
     <block name="VirtualMux_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
     <block name="BUART" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-    <register name="RX_Pump_RX_ADDRESS1" address="0x4000642E" bitWidth="8" desc="RX Address1 Register" hidden="false" />
-    <register name="RX_Pump_RX_ADDRESS2" address="0x4000643E" bitWidth="8" desc="RX Address2 Register" hidden="false" />
+    <register name="RX_Pump_RX_ADDRESS1" address="0x40006429" bitWidth="8" desc="RX Address1 Register" hidden="false" />
+    <register name="RX_Pump_RX_ADDRESS2" address="0x40006439" bitWidth="8" desc="RX Address2 Register" hidden="false" />
     <register name="TX_Pump_TX_DATA" address="0x40006442" bitWidth="8" desc="TX Data Register" hidden="false" />
-    <register name="RX_Pump_RX_DATA" address="0x4000644E" bitWidth="8" desc="RX Data Register" hidden="false" />
-    <register name="RX_Pump_RX_STATUS" address="0x40006463" bitWidth="8" desc="RX status register" hidden="false">
+    <register name="RX_Pump_RX_DATA" address="0x40006449" bitWidth="8" desc="RX Data Register" hidden="false" />
+    <register name="RX_Pump_RX_STATUS" address="0x40006464" bitWidth="8" desc="RX status register" hidden="false">
       <field name="Pump_RX_STS_MRKSPC" from="0" to="0" access="R" resetVal="" desc="" />
       <field name="Pump_RX_STS_BREAK" from="1" to="1" access="R" resetVal="" desc="" />
       <field name="Pump_RX_STS_PAR_ERROR" from="2" to="2" access="R" resetVal="" desc="" />
@@ -244,10 +244,11 @@
     <block name="IntClock" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
     <block name="VirtualMux_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
     <block name="BUART" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-    <register name="RX_Printer_RX_ADDRESS1" address="0x4000642B" bitWidth="8" desc="RX Address1 Register" hidden="false" />
-    <register name="RX_Printer_RX_ADDRESS2" address="0x4000643B" bitWidth="8" desc="RX Address2 Register" hidden="false" />
-    <register name="RX_Printer_RX_DATA" address="0x4000644B" bitWidth="8" desc="RX Data Register" hidden="false" />
-    <register name="RX_Printer_RX_STATUS" address="0x4000646A" bitWidth="8" desc="RX status register" hidden="false">
+    <register name="RX_Printer_RX_ADDRESS1" address="0x4000642F" bitWidth="8" desc="RX Address1 Register" hidden="false" />
+    <register name="RX_Printer_RX_ADDRESS2" address="0x4000643F" bitWidth="8" desc="RX Address2 Register" hidden="false" />
+    <register name="TX_Printer_TX_DATA" address="0x40006445" bitWidth="8" desc="TX Data Register" hidden="false" />
+    <register name="RX_Printer_RX_DATA" address="0x4000644F" bitWidth="8" desc="RX Data Register" hidden="false" />
+    <register name="RX_Printer_RX_STATUS" address="0x40006462" bitWidth="8" desc="RX status register" hidden="false">
       <field name="Printer_RX_STS_MRKSPC" from="0" to="0" access="R" resetVal="" desc="" />
       <field name="Printer_RX_STS_BREAK" from="1" to="1" access="R" resetVal="" desc="" />
       <field name="Printer_RX_STS_PAR_ERROR" from="2" to="2" access="R" resetVal="" desc="" />
@@ -256,42 +257,41 @@
       <field name="Printer_RX_STS_FIFO_NOTEMPTY" from="5" to="5" access="R" resetVal="" desc="" />
       <field name="Printer_RX_STS_ADDR_MATCH" from="6" to="6" access="R" resetVal="" desc="" />
     </register>
-    <register name="TX_Printer_TX_DATA" address="0x4000654B" bitWidth="8" desc="TX Data Register" hidden="false" />
-    <register name="TX_Printer_TX_STATUS" address="0x4000656B" bitWidth="8" desc="TX status register" hidden="false">
+    <register name="TX_Printer_TX_STATUS" address="0x40006465" bitWidth="8" desc="TX status register" hidden="false">
       <field name="Printer_TX_STS_COMPLETE" from="0" to="0" access="R" resetVal="" desc="" />
       <field name="Printer_TX_STS_FIFO_EMPTY" from="1" to="1" access="R" resetVal="" desc="" />
       <field name="Printer_TX_STS_FIFO_FULL" from="2" to="2" access="R" resetVal="" desc="" />
       <field name="Printer_TX_STS_FIFO_NOT_FULL" from="3" to="3" access="R" resetVal="" desc="" />
     </register>
   </block>
-  <block name="Rx_RF" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-  <block name="RF_Physical" BASE="0x0" SIZE="0x0" desc="UART" visible="true" hidden="false">
-    <block name="IntClock" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-    <block name="VirtualMux_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="RF_Tx" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="cy_constant_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="RF_Connection" BASE="0x0" SIZE="0x0" desc="UART" visible="true" hidden="false">
     <block name="RXInternalInterrupt" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+    <block name="VirtualMux_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+    <block name="IntClock" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
     <block name="BUART" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-    <register name="RX_RF_Physical_RX_ADDRESS1" address="0x4000642C" bitWidth="8" desc="RX Address1 Register" hidden="false" />
-    <register name="RX_RF_Physical_RX_ADDRESS2" address="0x4000643C" bitWidth="8" desc="RX Address2 Register" hidden="false" />
-    <register name="RX_RF_Physical_RX_DATA" address="0x4000644C" bitWidth="8" desc="RX Data Register" hidden="false" />
-    <register name="RX_RF_Physical_RX_STATUS" address="0x40006462" bitWidth="8" desc="RX status register" hidden="false">
-      <field name="RF_Physical_RX_STS_MRKSPC" from="0" to="0" access="R" resetVal="" desc="" />
-      <field name="RF_Physical_RX_STS_BREAK" from="1" to="1" access="R" resetVal="" desc="" />
-      <field name="RF_Physical_RX_STS_PAR_ERROR" from="2" to="2" access="R" resetVal="" desc="" />
-      <field name="RF_Physical_RX_STS_STOP_ERROR" from="3" to="3" access="R" resetVal="" desc="" />
-      <field name="RF_Physical_RX_STS_OVERRUN" from="4" to="4" access="R" resetVal="" desc="" />
-      <field name="RF_Physical_RX_STS_FIFO_NOTEMPTY" from="5" to="5" access="R" resetVal="" desc="" />
-      <field name="RF_Physical_RX_STS_ADDR_MATCH" from="6" to="6" access="R" resetVal="" desc="" />
+    <register name="RX_RF_Connection_RX_ADDRESS1" address="0x4000642C" bitWidth="8" desc="RX Address1 Register" hidden="false" />
+    <register name="RX_RF_Connection_RX_ADDRESS2" address="0x4000643C" bitWidth="8" desc="RX Address2 Register" hidden="false" />
+    <register name="TX_RF_Connection_TX_DATA" address="0x40006447" bitWidth="8" desc="TX Data Register" hidden="false" />
+    <register name="RX_RF_Connection_RX_DATA" address="0x4000644C" bitWidth="8" desc="RX Data Register" hidden="false" />
+    <register name="RX_RF_Connection_RX_STATUS" address="0x40006463" bitWidth="8" desc="RX status register" hidden="false">
+      <field name="RF_Connection_RX_STS_MRKSPC" from="0" to="0" access="R" resetVal="" desc="" />
+      <field name="RF_Connection_RX_STS_BREAK" from="1" to="1" access="R" resetVal="" desc="" />
+      <field name="RF_Connection_RX_STS_PAR_ERROR" from="2" to="2" access="R" resetVal="" desc="" />
+      <field name="RF_Connection_RX_STS_STOP_ERROR" from="3" to="3" access="R" resetVal="" desc="" />
+      <field name="RF_Connection_RX_STS_OVERRUN" from="4" to="4" access="R" resetVal="" desc="" />
+      <field name="RF_Connection_RX_STS_FIFO_NOTEMPTY" from="5" to="5" access="R" resetVal="" desc="" />
+      <field name="RF_Connection_RX_STS_ADDR_MATCH" from="6" to="6" access="R" resetVal="" desc="" />
     </register>
-    <register name="TX_RF_Physical_TX_DATA" address="0x40006546" bitWidth="8" desc="TX Data Register" hidden="false" />
-    <register name="TX_RF_Physical_TX_STATUS" address="0x40006565" bitWidth="8" desc="TX status register" hidden="false">
-      <field name="RF_Physical_TX_STS_COMPLETE" from="0" to="0" access="R" resetVal="" desc="" />
-      <field name="RF_Physical_TX_STS_FIFO_EMPTY" from="1" to="1" access="R" resetVal="" desc="" />
-      <field name="RF_Physical_TX_STS_FIFO_FULL" from="2" to="2" access="R" resetVal="" desc="" />
-      <field name="RF_Physical_TX_STS_FIFO_NOT_FULL" from="3" to="3" access="R" resetVal="" desc="" />
+    <register name="TX_RF_Connection_TX_STATUS" address="0x40006467" bitWidth="8" desc="TX status register" hidden="false">
+      <field name="RF_Connection_TX_STS_COMPLETE" from="0" to="0" access="R" resetVal="" desc="" />
+      <field name="RF_Connection_TX_STS_FIFO_EMPTY" from="1" to="1" access="R" resetVal="" desc="" />
+      <field name="RF_Connection_TX_STS_FIFO_FULL" from="2" to="2" access="R" resetVal="" desc="" />
+      <field name="RF_Connection_TX_STS_FIFO_NOT_FULL" from="3" to="3" access="R" resetVal="" desc="" />
     </register>
   </block>
-  <block name="cy_constant_2" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-  <block name="Tx_RF" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
+  <block name="RF_Rx" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="Tx_Disp1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="Rx_Disp1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="Display2" BASE="0x0" SIZE="0x0" desc="UART" visible="true" hidden="false">
@@ -299,17 +299,17 @@
     <block name="VirtualMux_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
     <block name="IntClock" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
     <block name="BUART" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-    <register name="RX_Display2_RX_ADDRESS1" address="0x4000652A" bitWidth="8" desc="RX Address1 Register" hidden="false" />
-    <register name="RX_Display2_RX_ADDRESS2" address="0x4000653A" bitWidth="8" desc="RX Address2 Register" hidden="false" />
-    <register name="TX_Display2_TX_DATA" address="0x40006544" bitWidth="8" desc="TX Data Register" hidden="false" />
-    <register name="RX_Display2_RX_DATA" address="0x4000654A" bitWidth="8" desc="RX Data Register" hidden="false" />
-    <register name="TX_Display2_TX_STATUS" address="0x40006564" bitWidth="8" desc="TX status register" hidden="false">
+    <register name="RX_Display2_RX_ADDRESS1" address="0x40006529" bitWidth="8" desc="RX Address1 Register" hidden="false" />
+    <register name="RX_Display2_RX_ADDRESS2" address="0x40006539" bitWidth="8" desc="RX Address2 Register" hidden="false" />
+    <register name="TX_Display2_TX_DATA" address="0x40006545" bitWidth="8" desc="TX Data Register" hidden="false" />
+    <register name="RX_Display2_RX_DATA" address="0x40006549" bitWidth="8" desc="RX Data Register" hidden="false" />
+    <register name="TX_Display2_TX_STATUS" address="0x40006565" bitWidth="8" desc="TX status register" hidden="false">
       <field name="Display2_TX_STS_COMPLETE" from="0" to="0" access="R" resetVal="" desc="" />
       <field name="Display2_TX_STS_FIFO_EMPTY" from="1" to="1" access="R" resetVal="" desc="" />
       <field name="Display2_TX_STS_FIFO_FULL" from="2" to="2" access="R" resetVal="" desc="" />
       <field name="Display2_TX_STS_FIFO_NOT_FULL" from="3" to="3" access="R" resetVal="" desc="" />
     </register>
-    <register name="RX_Display2_RX_STATUS" address="0x4000656A" bitWidth="8" desc="RX status register" hidden="false">
+    <register name="RX_Display2_RX_STATUS" address="0x40006568" bitWidth="8" desc="RX status register" hidden="false">
       <field name="Display2_RX_STS_MRKSPC" from="0" to="0" access="R" resetVal="" desc="" />
       <field name="Display2_RX_STS_BREAK" from="1" to="1" access="R" resetVal="" desc="" />
       <field name="Display2_RX_STS_PAR_ERROR" from="2" to="2" access="R" resetVal="" desc="" />
@@ -325,8 +325,7 @@
     <block name="IntClock" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
     <block name="BUART" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
     <block name="VirtualMux_1" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
-    <register name="TX_Display1_TX_DATA" address="0x40006447" bitWidth="8" desc="TX Data Register" hidden="false" />
-    <register name="RX_Display1_RX_STATUS" address="0x40006464" bitWidth="8" desc="RX status register" hidden="false">
+    <register name="RX_Display1_RX_STATUS" address="0x4000646A" bitWidth="8" desc="RX status register" hidden="false">
       <field name="Display1_RX_STS_MRKSPC" from="0" to="0" access="R" resetVal="" desc="" />
       <field name="Display1_RX_STS_BREAK" from="1" to="1" access="R" resetVal="" desc="" />
       <field name="Display1_RX_STS_PAR_ERROR" from="2" to="2" access="R" resetVal="" desc="" />
@@ -335,15 +334,16 @@
       <field name="Display1_RX_STS_FIFO_NOTEMPTY" from="5" to="5" access="R" resetVal="" desc="" />
       <field name="Display1_RX_STS_ADDR_MATCH" from="6" to="6" access="R" resetVal="" desc="" />
     </register>
-    <register name="TX_Display1_TX_STATUS" address="0x40006467" bitWidth="8" desc="TX status register" hidden="false">
+    <register name="RX_Display1_RX_ADDRESS1" address="0x4000652A" bitWidth="8" desc="RX Address1 Register" hidden="false" />
+    <register name="RX_Display1_RX_ADDRESS2" address="0x4000653A" bitWidth="8" desc="RX Address2 Register" hidden="false" />
+    <register name="TX_Display1_TX_DATA" address="0x40006547" bitWidth="8" desc="TX Data Register" hidden="false" />
+    <register name="RX_Display1_RX_DATA" address="0x4000654A" bitWidth="8" desc="RX Data Register" hidden="false" />
+    <register name="TX_Display1_TX_STATUS" address="0x40006567" bitWidth="8" desc="TX status register" hidden="false">
       <field name="Display1_TX_STS_COMPLETE" from="0" to="0" access="R" resetVal="" desc="" />
       <field name="Display1_TX_STS_FIFO_EMPTY" from="1" to="1" access="R" resetVal="" desc="" />
       <field name="Display1_TX_STS_FIFO_FULL" from="2" to="2" access="R" resetVal="" desc="" />
       <field name="Display1_TX_STS_FIFO_NOT_FULL" from="3" to="3" access="R" resetVal="" desc="" />
     </register>
-    <register name="RX_Display1_RX_ADDRESS1" address="0x40006529" bitWidth="8" desc="RX Address1 Register" hidden="false" />
-    <register name="RX_Display1_RX_ADDRESS2" address="0x40006539" bitWidth="8" desc="RX Address2 Register" hidden="false" />
-    <register name="RX_Display1_RX_DATA" address="0x40006549" bitWidth="8" desc="RX Data Register" hidden="false" />
   </block>
   <block name="Tx_Pump" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />
   <block name="Rx_Pump" BASE="0x0" SIZE="0x0" desc="" visible="true" hidden="false" />

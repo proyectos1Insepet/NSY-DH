@@ -64,8 +64,7 @@
     volatile uint8 date[3];          //Fecha
     volatile uint8 screen[2];        //Pantallas 0:Inhabilitada 1:Habilitada => [0]Tipo de vehiculo [1]Ingrese N° Venta Forma
     volatile uint8 residue[14];      //Residuo de operacion resta 
-    uint8 temporal[30];              //Utilizada para realizar operaciones temporales    
-    volatile uint8 lockTurn;         //Bloquea temporalmente el turno 1=bloqueado o 0=desbloqueado
+    uint8 temporal[30];              //Utilizada para realizar operaciones temporales        
     volatile uint8 idSeller[25];     //Identificacion de vendedor
     volatile uint8 typeIdSeller;     //Tipo de identificacion del vendedor
     volatile uint8 passwordSeller[8];//Contraseña Vendedor
@@ -77,13 +76,17 @@
     uint8 UnitType,ConversionFactor,MoneyDec,VolDec,PPUDec,DDMode; // Variables configuracion del dispensador
     uint8 statePump[4];              //Estado en el que se encuentra el dispensador
     uint8 NumPositions;
-    uint8 digits;           //Version de digitos del surtidor
+    uint8 lockTurn;         //Bloquea temporalmente el turno 1=bloqueado o 0=desbloqueado
+    uint8 digits;                               //Version de digitos del surtidor
+    uint8 hiddenKeys;
     uint8 PrinterType;
-    uint8 turn;             //Habilita si el turno esta 1=abierto o 0=cerrado
     char8 VolUnit[6];
-    uint8 dateDownHandle[3];        //Fecha en la que se baja la manija
-    uint8 timeDownHandle[2];        //Hora en la que se baja la manija
-    uint8 count_protector,count_protector2;
+    uint8 dateDownHandle[3];                 //Fecha en la que se baja la manija
+    uint8 timeDownHandle[2];                 //Hora en la que se baja la manija
+    uint8 count_protector,count_protector2; //
+    uint8 configAccess[5];
+    uint8 controlChar;
+    uint8 idStation[4];
 
     
 /*
@@ -141,7 +144,10 @@ struct buffer{
     uint8 priceConsign[15];         //Precio a consignar
     uint8 printers[2];              //Impresoras seleccionadas para imprimir
     uint8 flagChangePPU;            //Bandera que habilita cambiar PPUs cuando los envie el beagle
-    uint8 flagPrint;
+    uint8 flagPrint;                //Bandera de impresion de recibo
+    uint8 flagActiveSale;           //Bandera de venta activa
+    uint8 shiftId[11];
+    uint8 shiftPassword[11];
 };
 
 struct buffer bufferDisplay1;

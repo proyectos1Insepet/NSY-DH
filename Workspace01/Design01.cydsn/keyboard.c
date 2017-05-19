@@ -64,11 +64,11 @@ uint8 alphanumeric_keyboard(uint8 lcd, uint8 maxNumberKeys, uint8 character){
                     PressedKey =UnmapCode(Display1_rxBuffer[3]);
                     if(PressedKey>=0x20 && PressedKey<=0x2B){ //Comandos ascii sin incluir coma (,)
                         numberKeys1++;  
-                        bufferDisplay1.valueKeys[numberKeys1]=PressedKey;
+                        bufferDisplay1.valueKeys[numberKeys1]=PressedKey;                        
                         if(character==0){
                             WriteLCD(1,bufferDisplay1.valueKeys[numberKeys1],3,numberKeys1+2,1,0x0000,'N');
                         }else{
-                            WriteLCD(1,character,2,numberKeys1+2,1,0x0000,'N');
+                            WriteLCD(1,character,3,numberKeys1+2,1,0x0000,'N');
                         }
                     }else if(PressedKey>=0x2D && PressedKey<=0x7E){ //Comandos ascii sin incluir coma (,)
                         numberKeys1++;  
@@ -76,7 +76,7 @@ uint8 alphanumeric_keyboard(uint8 lcd, uint8 maxNumberKeys, uint8 character){
                         if(character==0){
                             WriteLCD(1,bufferDisplay1.valueKeys[numberKeys1],3,numberKeys1+2,1,0x0000,'N');
                         }else{
-                            WriteLCD(1,character,2,numberKeys1+2,1,0x0000,'N');
+                            WriteLCD(1,character,3,numberKeys1+2,1,0x0000,'N');
                         }
                     }else if(PressedKey==',' && numberKeys1>=1 && flagPoint1==0){  //Coma (,)
                         numberKeys1++;  
@@ -85,7 +85,7 @@ uint8 alphanumeric_keyboard(uint8 lcd, uint8 maxNumberKeys, uint8 character){
                         if(character==0){
                             WriteLCD(1,bufferDisplay1.valueKeys[numberKeys1],3,numberKeys1+2,1,0x0000,'N');
                         }else{
-                            WriteLCD(1,character,2,numberKeys1+2,1,0x0000,'N');
+                            WriteLCD(1,character,3,numberKeys1+2,1,0x0000,'N');
                         }
                     }
                 }  

@@ -1,7 +1,7 @@
 /*******************************************************************************
 * File Name: project.h
 * 
-* PSoC Creator  3.3 SP1
+* PSoC Creator  3.3 CP2
 *
 * Description:
 * It contains references to all generated header files and should not be modified.
@@ -19,7 +19,7 @@
 #include "cydevice_trm.h"
 #include "cyfitter.h"
 #include "cydisabledsheets.h"
-#include "RF_Physical.h"
+#include "RF_Connection.h"
 #include "Printer.h"
 #include "Pump.h"
 #include "Clock_Pump.h"
@@ -43,7 +43,7 @@
 #include "IB1.h"
 #include "IB2_aliases.h"
 #include "IB2.h"
-#include "RF_Physical_IntClock.h"
+#include "RF_Connection_IntClock.h"
 #include "Printer_IntClock.h"
 #include "Display1_IntClock.h"
 #include "Display2_IntClock.h"
