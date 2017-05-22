@@ -1330,11 +1330,9 @@ int main()
     lockTurn = 0;
     loadConfiguration();
     InitPump();      
-    PrinterType = 1;
-    CyWdtStart(CYWDT_1024_TICKS,CYWDT_LPMODE_NOCHANGE); 
+    PrinterType = 1; 
     for(;;)
-    {
-        CyWdtClear();
+    {        
         if(flowDisplay1 == 0){
             PollingPump();
             CyWdtClear();        
@@ -1343,7 +1341,7 @@ int main()
         CyWdtClear();
         PollingDisplay2();
         CyWdtClear();
-        //pollingRF_Rx();
+        pollingRF_Rx();
         CyWdtClear();
     }
 }

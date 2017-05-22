@@ -55,10 +55,7 @@ void pollingRF_Rx(){
     uint16 status1, status2,size,i,x,y,z;
 	uint8 aux[15],programar_ok;
 	if(RF_Connection_GetRxBufferSize()>=7){
-        status1=RF_Connection_GetRxBufferSize();
-		CyDelayUs(100);
-		status2=RF_Connection_GetRxBufferSize();
-		if(status1==status2){
+        
             i=0;
     	    while(RF_Connection_GetRxBufferSize()>0){
     	       buffer_rf[i]=RF_Connection_ReadRxData(); 	
@@ -81,10 +78,55 @@ void pollingRF_Rx(){
                         RF_Connection_PutChar(buffer_tx[x]);
                     }
                    break;
+                   case 0xA6:
+                    buffer_tx[0] = 0xBC;
+                    buffer_tx[1] = 0xCB;
+                    buffer_tx[2] = 0xC8;
+                    buffer_tx[3] = IDCast[0];
+                    buffer_tx[4] = IDCast[1];
+                    buffer_tx[5] = buffer_rf[5];
+                    buffer_tx[6] = 0xA1;
+                    buffer_tx[7] = 0x08;
+                    buffer_tx[8] = verificar_check(buffer_tx,9);
+                    for (x = 0; x < 9; x++){
+                        RF_Connection_PutChar(buffer_tx[x]);
+                    }
+                   break;
+                   case 0xE1:
+                    symbols[1] = buffer_rf[8];
+                    date[0]    = buffer_rf[9];
+                    date[1]    = buffer_rf[10];
+                    date[2]    = buffer_rf[11];
+                    time[0]    = buffer_rf[12];
+                    time[1]    = buffer_rf[13];
+                    for(x = 17; x < 45; x++){
+                        Encabezado1[x-17] = buffer_rf[x];
+                    }
+                    CopiasCredito = buffer_rf[16];
+                   break;
+                   
+                   case 0xE2:                    
+                    for(x = 0; x < 6; x++){
+                        GradesHose[x] = buffer_rf[x+8];
+                    }                    
+                    buffer_tx[0] = 0xBC;
+                    buffer_tx[1] = 0xCB;
+                    buffer_tx[2] = 0xC8;
+                    buffer_tx[3] = IDCast[0];
+                    buffer_tx[4] = IDCast[1];
+                    buffer_tx[5] = buffer_rf[5];
+                    buffer_tx[6] = 0xE2;
+                    buffer_tx[7] = 0x08;
+                    buffer_tx[8] = 0x03;
+                    buffer_tx[9] = verificar_check(buffer_tx,10);
+                    for (x = 0; x < 10; x++){
+                        RF_Connection_PutChar(buffer_tx[x]);
+                    }
+                   break;
                }                       
             }
            RF_Connection_ClearRxBuffer();
-        }
+        
     }
 }
 

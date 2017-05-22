@@ -72,7 +72,7 @@
     volatile uint8 stateBeagleSoft;  //Indica si el Beagle se encuentra en comunicaion con el software
     volatile uint8 PrevStatePump[4]; //Estado anterior en el dispensador [0,pos1,1 pos2...    
     volatile uint8 PlateRequest;
-    volatile uint8 IDCast[4];
+    volatile uint8 IDCast[2];
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     uint8 UnitType,ConversionFactor,MoneyDec,VolDec,PPUDec,DDMode; // Variables configuracion del dispensador
     uint8 statePump[4];              //Estado en el que se encuentra el dispensador
@@ -94,6 +94,9 @@
     uint8 buffer_rf[1500];
     uint8 buffer_tx[1500];
     uint16 intIDStation;
+    uint8 Encabezado1[30];
+    uint8 CopiasCredito;
+    uint8 GradesHose[5];
 
     
 /*
@@ -136,18 +139,9 @@ struct buffer{
     uint8 flagPayment;              //Bandera que habilita que imagen de formas de pago se esta visualizando (1-4) 
     uint8 flagLiftHandle;           //Bandera para indicar el estado de sube manija
     uint8 flagEndSale;              //Bandera que indica que la venta finalizo, se valida en introducir placa
-    uint8 message[65];              //Mensaje a puplicar en la LCD
     uint8 moneyQuota[10];           //Cupo de dinero autorizado para ventas credito
     uint8 volumeQuota[10];          //Cupo de volumen autorizado para ventas credito
     uint8 ppuQuota[10];             //PPU autorizado para ventas credito
-    uint8 serialMarket[3][25];      //Serial de producto digitado en canastilla, para tres productos
-    uint8 productMarket[3][25];     //Nombre de producto digitado en canastilla, para tres productos
-    uint8 quantityMarket[3][5];     //Cantidad de productos digitados en canastilla, para tres productos
-    uint8 quantAvailableMark[3][5]; //Cantidad disponible de productos canastilla, para tres productos
-    uint8 priceTotalMarket[3][10];  //Precio total por producto digitados en canastilla, para tres productos
-    uint8 priceUnitMarket[3][10];   //Precio unitario por producto digitados en canastilla, para tres productos
-    uint8 totalMarket[10];          //Total de dinero para productos digitados en canastilla
-    uint8 flagProductmarket;        //Bandera 
     uint8 priceConsign[15];         //Precio a consignar
     uint8 printers[2];              //Impresoras seleccionadas para imprimir
     uint8 flagChangePPU;            //Bandera que habilita cambiar PPUs cuando los envie el beagle
