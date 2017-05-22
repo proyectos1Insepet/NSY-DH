@@ -128,6 +128,48 @@ uint8 leer_fecha(){
 }
 /*
 *********************************************************************************************************
+*                                         uint8 write_fecha( void )
+*
+* Description : 
+*               
+*
+* Argument(s) : none
+*
+* Return(s)   : none
+*
+* Caller(s)   : 
+*
+* Note(s)     : none.
+*********************************************************************************************************
+*/
+
+uint8 write_fecha( void ){
+	uint8 status, dato[4],i;
+	dato[0]=4;
+	dato[1]=date[0];
+	dato[2]=date[1];
+	dato[3]=date[2];
+	I2C_Bus_MasterClearStatus();
+    status = I2C_Bus_MasterSendStart(0x68, I2C_Bus_WRITE_XFER_MODE);
+    if(I2C_Bus_MSTR_NO_ERROR == status) 
+    {
+        for(i=0; i<4; i++)
+        {
+            status = I2C_Bus_MasterWriteByte(dato[i]);
+            if(status != I2C_Bus_MSTR_NO_ERROR)
+            {
+                return 0;
+            }
+        }
+    }
+    else{
+		return 0;
+    }
+    I2C_Bus_MasterSendStop();	
+	return 1;
+}
+/*
+*********************************************************************************************************
 *                                         uint8 leer_hora( void )
 *
 * Description : 
@@ -173,6 +215,46 @@ uint8 leer_hora(){
 	}
 	return 1;
 }
+/*
+*********************************************************************************************************
+*                                         uint8 write_hora( void )
+*
+* Description : 
+*               
+*
+* Argument(s) : none
+*
+* Return(s)   : none
+*
+* Caller(s)   : 
+*
+* Note(s)     : none.
+*********************************************************************************************************
+*/
 
+uint8 write_hora( void ){
+	uint8 status, dato[3],i;
+	dato[0]=1;
+	dato[1]=time[0];
+	dato[2]=time[1];
+	I2C_Bus_MasterClearStatus();
+    status = I2C_Bus_MasterSendStart(0x68, I2C_Bus_WRITE_XFER_MODE);
+    if(I2C_Bus_MSTR_NO_ERROR == status) 
+    {
+        for(i=0; i<3; i++)
+        {
+            status = I2C_Bus_MasterWriteByte(dato[i]);
+            if(status != I2C_Bus_MSTR_NO_ERROR)
+            {
+                return 0;
+            }
+        }
+    }
+    else{
+		return 0;
+    }
+    I2C_Bus_MasterSendStop();	
+	return 1;
+}
 
 /* [] END OF FILE */

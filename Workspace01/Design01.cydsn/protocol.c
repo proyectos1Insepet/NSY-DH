@@ -357,7 +357,7 @@ uint8 getSale(uint8 pos){
     
 	Pump_ClearRxBuffer();
 	Pump_PutChar(0x40|pos);
-    CyDelay(300);
+    CyDelay(200);
     CyWdtClear();
 	if((digits!=7)&&(Pump_GetRxBufferSize()==33)){
 		if((Pump_rxBuffer[0]==0xFF)&&(Pump_rxBuffer[2]==0xF8)&&(Pump_rxBuffer[32]==0xF0)){

@@ -1013,7 +1013,7 @@
         <register>
           <name>RX_Pump_RX_ADDRESS1</name>
           <description>RX Address1 Register</description>
-          <addressOffset>0x40006429</addressOffset>
+          <addressOffset>0x40006420</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -1022,16 +1022,7 @@
         <register>
           <name>RX_Pump_RX_ADDRESS2</name>
           <description>RX Address2 Register</description>
-          <addressOffset>0x40006439</addressOffset>
-          <size>8</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0</resetMask>
-        </register>
-        <register>
-          <name>TX_Pump_TX_DATA</name>
-          <description>TX Data Register</description>
-          <addressOffset>0x40006442</addressOffset>
+          <addressOffset>0x40006430</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -1040,7 +1031,16 @@
         <register>
           <name>RX_Pump_RX_DATA</name>
           <description>RX Data Register</description>
-          <addressOffset>0x40006449</addressOffset>
+          <addressOffset>0x40006440</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+        </register>
+        <register>
+          <name>TX_Pump_TX_DATA</name>
+          <description>TX Data Register</description>
+          <addressOffset>0x40006444</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -1049,7 +1049,7 @@
         <register>
           <name>RX_Pump_RX_STATUS</name>
           <description>RX status register</description>
-          <addressOffset>0x40006464</addressOffset>
+          <addressOffset>0x40006460</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -1109,7 +1109,7 @@
         <register>
           <name>TX_Pump_TX_STATUS</name>
           <description>TX status register</description>
-          <addressOffset>0x40006466</addressOffset>
+          <addressOffset>0x4000646F</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -1160,7 +1160,7 @@
         <register>
           <name>RX_Printer_RX_ADDRESS1</name>
           <description>RX Address1 Register</description>
-          <addressOffset>0x4000642F</addressOffset>
+          <addressOffset>0x4000642D</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -1169,16 +1169,7 @@
         <register>
           <name>RX_Printer_RX_ADDRESS2</name>
           <description>RX Address2 Register</description>
-          <addressOffset>0x4000643F</addressOffset>
-          <size>8</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0</resetMask>
-        </register>
-        <register>
-          <name>TX_Printer_TX_DATA</name>
-          <description>TX Data Register</description>
-          <addressOffset>0x40006445</addressOffset>
+          <addressOffset>0x4000643D</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -1187,16 +1178,64 @@
         <register>
           <name>RX_Printer_RX_DATA</name>
           <description>RX Data Register</description>
-          <addressOffset>0x4000644F</addressOffset>
+          <addressOffset>0x4000644D</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
           <resetMask>0</resetMask>
         </register>
         <register>
+          <name>TX_Printer_TX_DATA</name>
+          <description>TX Data Register</description>
+          <addressOffset>0x40006544</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+        </register>
+        <register>
+          <name>TX_Printer_TX_STATUS</name>
+          <description>TX status register</description>
+          <addressOffset>0x40006567</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+          <fields>
+            <field>
+              <name>Printer_TX_STS_COMPLETE</name>
+              <description>No description available</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>Printer_TX_STS_FIFO_EMPTY</name>
+              <description>No description available</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>Printer_TX_STS_FIFO_FULL</name>
+              <description>No description available</description>
+              <lsb>2</lsb>
+              <msb>2</msb>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>Printer_TX_STS_FIFO_NOT_FULL</name>
+              <description>No description available</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
           <name>RX_Printer_RX_STATUS</name>
           <description>RX status register</description>
-          <addressOffset>0x40006462</addressOffset>
+          <addressOffset>0x40006569</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -1253,45 +1292,6 @@
             </field>
           </fields>
         </register>
-        <register>
-          <name>TX_Printer_TX_STATUS</name>
-          <description>TX status register</description>
-          <addressOffset>0x40006465</addressOffset>
-          <size>8</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0</resetMask>
-          <fields>
-            <field>
-              <name>Printer_TX_STS_COMPLETE</name>
-              <description>No description available</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>Printer_TX_STS_FIFO_EMPTY</name>
-              <description>No description available</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>Printer_TX_STS_FIFO_FULL</name>
-              <description>No description available</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>Printer_TX_STS_FIFO_NOT_FULL</name>
-              <description>No description available</description>
-              <lsb>3</lsb>
-              <msb>3</msb>
-              <access>read-only</access>
-            </field>
-          </fields>
-        </register>
       </registers>
     </peripheral>
     <peripheral>
@@ -1325,7 +1325,7 @@
         <register>
           <name>TX_RF_Connection_TX_DATA</name>
           <description>TX Data Register</description>
-          <addressOffset>0x40006447</addressOffset>
+          <addressOffset>0x40006442</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -1341,9 +1341,48 @@
           <resetMask>0</resetMask>
         </register>
         <register>
+          <name>TX_RF_Connection_TX_STATUS</name>
+          <description>TX status register</description>
+          <addressOffset>0x40006462</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+          <fields>
+            <field>
+              <name>RF_Connection_TX_STS_COMPLETE</name>
+              <description>No description available</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>RF_Connection_TX_STS_FIFO_EMPTY</name>
+              <description>No description available</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>RF_Connection_TX_STS_FIFO_FULL</name>
+              <description>No description available</description>
+              <lsb>2</lsb>
+              <msb>2</msb>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>RF_Connection_TX_STS_FIFO_NOT_FULL</name>
+              <description>No description available</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+        <register>
           <name>RX_RF_Connection_RX_STATUS</name>
           <description>RX status register</description>
-          <addressOffset>0x40006463</addressOffset>
+          <addressOffset>0x40006467</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -1400,45 +1439,6 @@
             </field>
           </fields>
         </register>
-        <register>
-          <name>TX_RF_Connection_TX_STATUS</name>
-          <description>TX status register</description>
-          <addressOffset>0x40006467</addressOffset>
-          <size>8</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0</resetMask>
-          <fields>
-            <field>
-              <name>RF_Connection_TX_STS_COMPLETE</name>
-              <description>No description available</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>RF_Connection_TX_STS_FIFO_EMPTY</name>
-              <description>No description available</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>RF_Connection_TX_STS_FIFO_FULL</name>
-              <description>No description available</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>RF_Connection_TX_STS_FIFO_NOT_FULL</name>
-              <description>No description available</description>
-              <lsb>3</lsb>
-              <msb>3</msb>
-              <access>read-only</access>
-            </field>
-          </fields>
-        </register>
       </registers>
     </peripheral>
     <peripheral>
@@ -1452,45 +1452,9 @@
       </addressBlock>
       <registers>
         <register>
-          <name>RX_Display2_RX_ADDRESS1</name>
-          <description>RX Address1 Register</description>
-          <addressOffset>0x40006529</addressOffset>
-          <size>8</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0</resetMask>
-        </register>
-        <register>
-          <name>RX_Display2_RX_ADDRESS2</name>
-          <description>RX Address2 Register</description>
-          <addressOffset>0x40006539</addressOffset>
-          <size>8</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0</resetMask>
-        </register>
-        <register>
-          <name>TX_Display2_TX_DATA</name>
-          <description>TX Data Register</description>
-          <addressOffset>0x40006545</addressOffset>
-          <size>8</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0</resetMask>
-        </register>
-        <register>
-          <name>RX_Display2_RX_DATA</name>
-          <description>RX Data Register</description>
-          <addressOffset>0x40006549</addressOffset>
-          <size>8</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0</resetMask>
-        </register>
-        <register>
           <name>TX_Display2_TX_STATUS</name>
           <description>TX status register</description>
-          <addressOffset>0x40006565</addressOffset>
+          <addressOffset>0x4000646D</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -1527,9 +1491,45 @@
           </fields>
         </register>
         <register>
+          <name>RX_Display2_RX_ADDRESS1</name>
+          <description>RX Address1 Register</description>
+          <addressOffset>0x4000652A</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+        </register>
+        <register>
+          <name>RX_Display2_RX_ADDRESS2</name>
+          <description>RX Address2 Register</description>
+          <addressOffset>0x4000653A</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+        </register>
+        <register>
+          <name>TX_Display2_TX_DATA</name>
+          <description>TX Data Register</description>
+          <addressOffset>0x40006549</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+        </register>
+        <register>
+          <name>RX_Display2_RX_DATA</name>
+          <description>RX Data Register</description>
+          <addressOffset>0x4000654A</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+        </register>
+        <register>
           <name>RX_Display2_RX_STATUS</name>
           <description>RX status register</description>
-          <addressOffset>0x40006568</addressOffset>
+          <addressOffset>0x4000656A</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -1601,7 +1601,7 @@
         <register>
           <name>RX_Display1_RX_STATUS</name>
           <description>RX status register</description>
-          <addressOffset>0x4000646A</addressOffset>
+          <addressOffset>0x40006461</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -1659,45 +1659,9 @@
           </fields>
         </register>
         <register>
-          <name>RX_Display1_RX_ADDRESS1</name>
-          <description>RX Address1 Register</description>
-          <addressOffset>0x4000652A</addressOffset>
-          <size>8</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0</resetMask>
-        </register>
-        <register>
-          <name>RX_Display1_RX_ADDRESS2</name>
-          <description>RX Address2 Register</description>
-          <addressOffset>0x4000653A</addressOffset>
-          <size>8</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0</resetMask>
-        </register>
-        <register>
-          <name>TX_Display1_TX_DATA</name>
-          <description>TX Data Register</description>
-          <addressOffset>0x40006547</addressOffset>
-          <size>8</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0</resetMask>
-        </register>
-        <register>
-          <name>RX_Display1_RX_DATA</name>
-          <description>RX Data Register</description>
-          <addressOffset>0x4000654A</addressOffset>
-          <size>8</size>
-          <access>read-write</access>
-          <resetValue>0</resetValue>
-          <resetMask>0</resetMask>
-        </register>
-        <register>
           <name>TX_Display1_TX_STATUS</name>
           <description>TX status register</description>
-          <addressOffset>0x40006567</addressOffset>
+          <addressOffset>0x40006466</addressOffset>
           <size>8</size>
           <access>read-write</access>
           <resetValue>0</resetValue>
@@ -1732,6 +1696,42 @@
               <access>read-only</access>
             </field>
           </fields>
+        </register>
+        <register>
+          <name>RX_Display1_RX_ADDRESS1</name>
+          <description>RX Address1 Register</description>
+          <addressOffset>0x40006527</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+        </register>
+        <register>
+          <name>RX_Display1_RX_ADDRESS2</name>
+          <description>RX Address2 Register</description>
+          <addressOffset>0x40006537</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+        </register>
+        <register>
+          <name>TX_Display1_TX_DATA</name>
+          <description>TX Data Register</description>
+          <addressOffset>0x40006545</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
+        </register>
+        <register>
+          <name>RX_Display1_RX_DATA</name>
+          <description>RX Data Register</description>
+          <addressOffset>0x40006547</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0</resetValue>
+          <resetMask>0</resetMask>
         </register>
       </registers>
     </peripheral>

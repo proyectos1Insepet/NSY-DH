@@ -35,9 +35,9 @@
 #define RF_Connection_TX_INTERRUPT_ENABLED           (0u)
 #define RF_Connection_INTERNAL_CLOCK_USED            (1u)
 #define RF_Connection_RXHW_ADDRESS_ENABLED           (0u)
-#define RF_Connection_OVER_SAMPLE_COUNT              (8u)
+#define RF_Connection_OVER_SAMPLE_COUNT              (16u)
 #define RF_Connection_PARITY_TYPE                    (0u)
-#define RF_Connection_PARITY_TYPE_SW                 (0u)
+#define RF_Connection_PARITY_TYPE_SW                 (1u)
 #define RF_Connection_BREAK_DETECT                   (0u)
 #define RF_Connection_BREAK_BITS_TX                  (13u)
 #define RF_Connection_BREAK_BITS_RX                  (13u)
@@ -46,7 +46,7 @@
 #define RF_Connection_FLOW_CONTROL                   (0u)
 #define RF_Connection_CLK_FREQ                       (0u)
 #define RF_Connection_TX_BUFFER_SIZE                 (4u)
-#define RF_Connection_RX_BUFFER_SIZE                 (256u)
+#define RF_Connection_RX_BUFFER_SIZE                 (1024u)
 
 /* Check to see if required defines such as CY_PSOC5LP are available */
 /* They are defined starting with cy_boot v3.0 */

@@ -93,6 +93,7 @@
     uint8 printPortB;
     uint8 buffer_rf[1500];
     uint8 buffer_tx[1500];
+    uint8 buffer_txDisplay[1500];
     uint16 intIDStation;
     uint8 Encabezado1[30];
     uint8 CopiasCredito;
@@ -176,6 +177,7 @@ struct position{
     uint8 activeHose;
     uint8 hose;
     uint8 hoseNumber;
+    uint8 rfState;
 };
 
 struct pump{
@@ -289,6 +291,19 @@ enum _PUMP_STATES_
     PUMP_PEOT       = 0x0A,
     PUMP_FEOT       = 0x0B,
     PUMP_STOPPED    = 0x0C
+};
+
+enum _RF_STATES_
+{
+    RF_IDLE = 0x08,
+    RF_DELIVERING = 0x01,
+    RF_CASHSALEREPORT = 0x02,
+    RF_CREDITSALEAUTH = 0x03,
+    RF_WORKSHIFTREQ = 0x05,
+    RF_CREDITSALEREPORT = 0x06,
+    RF_ERROR = 0x04,
+    RF_COPY_RECEIPT = 0x0B,
+    RF_ZERO_SALE = 0x0C
 };
 
 #endif

@@ -56,7 +56,7 @@
 */
 
 uint8 alphanumeric_keyboard(uint8 lcd, uint8 maxNumberKeys, uint8 character){
-    char8 PressedKey;
+    char8 PressedKey = 0;
     if(lcd==1){
         if(Display1_GetRxBufferSize()==8){
             if((Display1_rxBuffer[0]==0xAA) && (Display1_rxBuffer[6]==0xC3) && (Display1_rxBuffer[7]==0x3C)){                

@@ -320,9 +320,10 @@ void PollingDisplay1(void){
             Timer_Animacion_Stop();
             count_protector = 0;
             bufferDisplay1.saleType = 0;
-            bufferDisplay1.flagEndSale = false;
+            bufferDisplay1.flagEndSale = false;            
         break;
         case 1: //Menu
+            side.a.rfState = RF_IDLE;
             if(Display1_GetRxBufferSize()==8){
                 if((Display1_rxBuffer[0]==0xAA) && (Display1_rxBuffer[6]==0xC3) && (Display1_rxBuffer[7]==0x3C)){                                             
                     flowDisplay1 = 2;      //Pantalla forma de pago                      
@@ -548,7 +549,7 @@ void PollingDisplay1(void){
                     SetPicture(1,DISPLAY_INICIO0);
                 }
             }else{
-                flowDisplay1 = 7;
+                flowDisplay1 = 7;                
                 if(count_protector>=60){
                     flowDisplay1 = 0;	
         			count_protector=0;
@@ -786,8 +787,9 @@ void PollingDisplay1(void){
                             SetPicture(1,DISPLAY_INGRESE_PASSWORD);                           
                         break;
                         case 0xB5:  //Copia de recibo 
-                            flowDisplay1 = 12;                            
-                            SetPicture(1,DISPLAY_OPERACIONES);                            
+                            flowDisplay1 = 0;   
+                            side.a.rfState = RF_COPY_RECEIPT;
+                            SetPicture(1,DISPLAY_INICIO0);                            
                         break;
                         
                         case 0x3B:  //Pantalla Inicial    
@@ -1112,6 +1114,7 @@ void PollingDisplay2(void){
         case 0:
             InitDisplay2();
             flowDisplay2 =1;
+            side.b.rfState = RF_IDLE;
         break;
         case 1: //Menu
 			ShowRectangle(2,35);        
@@ -1332,11 +1335,14 @@ int main()
     InitPump();      
     PrinterType = 1; 
     for(;;)
-    {        
-        if(flowDisplay1 == 0){
-            PollingPump();
-            CyWdtClear();        
-        }        
+    {    
+//        CyWdtClear();
+//        pollingRF_Rx();
+//        if(flowDisplay1 == 0){
+//            PollingPump();
+//            CyWdtClear();        
+//        }        
+        CyWdtClear();
         PollingDisplay1();
         CyWdtClear();
         PollingDisplay2();
