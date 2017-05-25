@@ -341,11 +341,11 @@ uint8 priceChange(uint8 pos,uint8 handle,uint8 *value){
 		buffer[4]=(0xE0|((handle&0x0f)));
 		if(ppux10==0){
 			for(x=0;x<4;x++){
-				buffer[6+x]=(0xE0|(value[x+1]&0x0F));
+				buffer[6+x]=(0xE0|(value[x]&0x0F));
 			}
 		}else{
             for(x=0;x<3;x++){
-				buffer[6+x]=(0xE0|(value[x+1]&0x0F));
+				buffer[6+x]=(0xE0|(value[x]&0x0F));
 			}	
 		}
 		buffer[10]=0xFB;
@@ -621,7 +621,7 @@ uint8 getSale(uint8 pos){
 	uint8 x;    
 	Pump_ClearRxBuffer();
 	Pump_PutChar(0x40|pos);
-    CyDelay(100);
+    CyDelay(250);
     CyWdtClear();
 	if((digits!=7)&&(Pump_GetRxBufferSize()==33)){
 		if((Pump_rxBuffer[0]==0xFF)&&(Pump_rxBuffer[2]==0xF8)&&(Pump_rxBuffer[32]==0xF0)){

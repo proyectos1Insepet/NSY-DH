@@ -43,8 +43,10 @@
 */
     volatile uint64 countAnimation1; //Contador de animacion para pantalla 1
     volatile uint64 countAnimation2; //Contador de animacion para pantalla 2
-    volatile uint64 countBeagleTX;   //Contador de tiempos de envio de informacion al beagle
+    volatile uint64 countRX;   //Contador de tiempos de envio de informacion al beagle
+    volatile uint64 countTX;   //Contador de tiempos de envio de informacion al beagle
     volatile uint64 countPump;       //Contador de tiempos de pregunta estado a surtidor
+    volatile uint64 countLCD;       //Contador de tiempos de pregunta estado a surtidor
     volatile uint32 flowDisplay1;    //Flujo pantalla 1
     volatile uint32 flowDisplay2;    //Flujo pantalla 2
     volatile uint32 flowDisplay3;    //Flujo pantalla 3
@@ -74,8 +76,8 @@
     volatile uint8 IDCast[2];
     volatile uint8 ActiveRF;
     volatile uint8 counterRF;
-    volatile uint8 PriceChange;
     volatile uint8 temporal[30];
+    volatile uint8 tempPreset[8];
     volatile uint8 CGrade;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     uint8 UnitType,ConversionFactor,MoneyDec,VolDec,PPUDec,DDMode; // Variables configuracion del dispensador
@@ -95,11 +97,14 @@
     uint8 pumpGap[3];
     uint8 printPortA;
     uint8 printPortB;
-    uint8 buffer_rf[1500];
-    uint8 buffer_tx[1500];
-    uint8 buffer_txDisplay[1500];
+    uint8 buffer_rf[512];
+    uint8 buffer_tx[512];
+    uint8 buffer_txDisplay[512];
     uint16 intIDStation;
     uint8 Encabezado1[30];
+    uint8 Encabezado2[30];
+    uint8 Encabezado3[30];
+    uint8 Encabezado4[30];
     uint8 CopiasCredito;
     uint8 GradesHose[5];
     uint8 RFstateReport;
@@ -186,6 +191,7 @@ struct position{
     uint8 hoseNumber;
     uint8 rfState;
     uint8 pumpState;
+    uint8 changePPU;
 };
 
 struct pump{

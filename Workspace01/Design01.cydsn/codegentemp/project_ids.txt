@@ -1,5 +1,5 @@
-C:\Users\Diego\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\Design01.cyprj|4563ac0e-7ee2-4f52-bbe0-bdc5e55c0b46
-C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|d6e1def5-8bf8-4c0b-94d4-6342ef5b2cc2
-C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|963bfc57-997f-4096-9607-b4465b69de55
-C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|b23ed7e8-639a-4afb-9d8c-0a230ebdfd7d
-C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|8c6379de-b9dd-44a5-9c00-41516d83a7f3
+C:\Users\Recepcion\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\Design01.cyprj|18411216-c115-49a9-bdb4-2f5d2615c7cf
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|cacaddf5-4653-4446-b5be-874884b36c41
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|010bab56-a0ab-410b-9cd4-11290f96a18b
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|31351c7f-0b2e-4ead-8897-b51810cccf9c
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|64016347-27cd-4613-90de-8129a1b64947

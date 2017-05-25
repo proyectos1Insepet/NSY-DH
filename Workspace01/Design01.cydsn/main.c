@@ -32,9 +32,8 @@ uint8 passwordPump[5] = "00204";
       
 CY_ISR(animacion2);
 CY_ISR(animacion);
-CY_ISR(timerRFTX);
 CY_ISR(timerPump);
-
+CY_ISR(timerRFRX);
 void GlobalInitializer()
 {
     EEPROM_1_Start();
@@ -44,7 +43,7 @@ void GlobalInitializer()
     Printer_Start();   
     I2C_Bus_Start();
     RF_Connection_Start();
-    isr_1_StartEx(timerRFTX); 
+    isr_1_StartEx(timerRFRX); 
     Waitable_3_Start();
     isr_2_StartEx(timerPump); 
     Waitable_4_Start();
@@ -56,9 +55,19 @@ void StoreConfiguration(){
     EEPROM_1_WriteByte(VolDec,3);
     EEPROM_1_WriteByte(PPUDec,4);
     EEPROM_1_WriteByte(DDMode,5);
-    EEPROM_1_WriteByte(digits,6);    
+    EEPROM_1_WriteByte(digits,6); 
+    EEPROM_1_WriteByte(side.a.dir,12);
+    EEPROM_1_WriteByte(side.b.dir,13);
+    EEPROM_1_WriteByte(side.c.dir,14);
+    EEPROM_1_WriteByte(side.d.dir,15);
 }
 void loadConfiguration(){
+    uint8 x;
+    MoneyDec   = EEPROM_1_ReadByte(2);
+    VolDec     = EEPROM_1_ReadByte(3);
+    PPUDec     = EEPROM_1_ReadByte(4);
+    DDMode     = EEPROM_1_ReadByte(5);
+    digits     = EEPROM_1_ReadByte(6);
     lockTurn   = EEPROM_1_ReadByte(7);  //Fijo turno abierto para pruebas
     printPortA = EEPROM_1_ReadByte(8);  //Puertos de impresion
     printPortB = EEPROM_1_ReadByte(9); //Puertos de impresion
@@ -66,6 +75,22 @@ void loadConfiguration(){
     IDCast[1]  = EEPROM_1_ReadByte(11); //ID Estacion2    
     passwordPump[0] = 0x04;
     configAccess[0] = 0x04; 
+    side.a.dir = EEPROM_1_ReadByte(12);
+    side.b.dir = EEPROM_1_ReadByte(13);
+    side.c.dir = EEPROM_1_ReadByte(14);
+    side.d.dir = EEPROM_1_ReadByte(15);
+//    for(x=0; x<30;x++){
+//        Encabezado1[x]=EEPROM_1_ReadByte(16+x);
+//    }
+//    for(x=30; x<60;x++){
+//        Encabezado2[x]=EEPROM_1_ReadByte(16+x);
+//    }
+//    for(x=60; x<90;x++){
+//        Encabezado3[x]=EEPROM_1_ReadByte(16+x);
+//    }
+//    for(x=90; x<120;x++){
+//        Encabezado4[x]=EEPROM_1_ReadByte(16+x);
+//    }
 }
 
 
@@ -312,16 +337,12 @@ void PollingPump(void){
                 flowDisplay2 = 0;
             }
         }
-        if(ActiveRF == 0){
+        if(ActiveRF == 0 && flowDisplay1 == 0){
             if(get_state(side.a.dir)== PUMP_IDLE)
                 getTotals(side.a.dir);
             if(get_state(side.b.dir)== PUMP_IDLE)
                 getTotals(side.b.dir);
-        }
-        if(PriceChange == 1){
-            if(priceChange(side.a.dir,CGrade,side.a.ppuAuthorized[CGrade]))
-                PriceChange = 0;
-        }
+        }        
         countPump=0;
     }
 }
@@ -335,7 +356,8 @@ void PollingPump(void){
 *********************************************************************************************************
 */
 
-void PollingDisplay1(void){ 
+void PollingDisplay1(void){
+    //if(countLCD >10){
     uint8 x,y;     
     switch(flowDisplay1){
         case 0:
@@ -552,8 +574,8 @@ void PollingDisplay1(void){
                                         
             
         case 7:
-            isr_3_StartEx(animacion);
-            Timer_Animacion_Start();
+            //isr_3_StartEx(animacion);
+            //Timer_Animacion_Start();
             side.a.activeHose = PumpHoseActiveState(side.a.dir);  
             if (side.a.activeHose == side.a.hose){                
                 if(PresetData(side.a.dir,side.a.activeHose,bufferDisplay1.presetValue[0],bufferDisplay1.presetType[0]&0x03)==1){                    
@@ -576,11 +598,11 @@ void PollingDisplay1(void){
                 }
             }else{
                 flowDisplay1 = 7;                
-                if(count_protector>=60){
-                    flowDisplay1 = 0;	
-        			count_protector=0;
-                    SetPicture(1,DISPLAY_INICIO0);
-        		}
+//                if(count_protector>=60){
+//                    flowDisplay1 = 0;	
+//        			count_protector=0;
+//                    SetPicture(1,DISPLAY_INICIO0);
+//        		}
             }
             if(Display1_GetRxBufferSize()==8){
                 if((Display1_rxBuffer[0]==0xAA) && (Display1_rxBuffer[6]==0xC3) && (Display1_rxBuffer[7]==0x3C)){
@@ -604,14 +626,24 @@ void PollingDisplay1(void){
                     bufferDisplay1.flagActiveSale = false;
                     SetPicture(1,DISPLAY_INICIO0);
                 break;
-                case PUMP_BUSY://Surtiendo
-                    side.a.pumpState = PUMP_BUSY;
+                case PUMP_BUSY://Surtiendo                    
                     bufferDisplay1.flagActiveSale = true;
                     bufferDisplay1.flagEndSale = false;
                 break;
                 case PUMP_PEOT: //reporte fin venta
                     RFstateReport = 1;
-                    
+                    if(getSale(side.a.dir)){
+                        if(bufferDisplay1.flagPrint ==1){
+                            imprimir(printPortA,side.a.dir);
+                            flowDisplay1 = 0;
+                            SetPicture(1,DISPLAY_INICIO0); 
+                        }else{
+                            flowDisplay1 = 6;
+                            bufferDisplay1.flagEndSale = true;
+                            SetPicture(1,DISPLAY_DESEA_IMPRIMIR_RECIBO); 
+                        }
+                        bufferDisplay1.flagActiveSale = false; 
+                    }                                         
                 break;
                 case 0x0B://Reporte de venta
                     if(getSale(side.a.dir)){
@@ -960,7 +992,6 @@ void PollingDisplay1(void){
                             numberKeys1 = 0; 
                             controlChar = 0;
                             hiddenKeys  = 5;
-//                            idStation[0]= 4;
                             bufferDisplay1.flagKeyboard = 1;
                             SetPicture(1,DISPLAY_INTRODUZCA_VALOR);                            
                         break;
@@ -1112,11 +1143,9 @@ void PollingDisplay1(void){
                 Display1_ClearRxBuffer();
             }                        
         break;
-            
-            
+    countLCD = 0;       
+    }    
     }
-}
-
 
 
 /*
@@ -1286,8 +1315,6 @@ void PollingDisplay2(void){
 }
 
 
-
-
 /*
 *********************************************************************************************************
 *                                         CY_ISR(animacion)
@@ -1295,13 +1322,6 @@ void PollingDisplay2(void){
 * Description : Interrupcion que temporiza las imagenes informativas que aparecen en la pantalla 1
 *               
 *
-* Argument(s) : none
-*
-* Return(s)   : none
-*
-* Caller(s)   : 
-*
-* Note(s)     : none.
 *********************************************************************************************************
 */
 CY_ISR(animacion){
@@ -1316,13 +1336,6 @@ CY_ISR(animacion){
 * Description : Interrupcion que temporiza las imagenes informativas que aparecen en la pantalla 2
 *               
 *
-* Argument(s) : none
-*
-* Return(s)   : none
-*
-* Caller(s)   : 
-*
-* Note(s)     : none.
 *********************************************************************************************************
 */
 CY_ISR(animacion2){
@@ -1345,10 +1358,12 @@ CY_ISR(animacion2){
 * Note(s)     : none.
 *********************************************************************************************************
 */
-CY_ISR(timerRFTX){
+CY_ISR(timerRFRX){
     Waitable_3_ReadStatusRegister();
-    countBeagleTX++;
+    countRX++;
+    countTX++;
 }
+
 
 /*
 *********************************************************************************************************
@@ -1369,23 +1384,17 @@ CY_ISR(timerRFTX){
 CY_ISR(timerPump){
     Waitable_4_ReadStatusRegister();
     countPump++;
+    countLCD++;
 }
-
-
-
-
-
-/* [] END OF FILE */
-
 
 
 int main()
 {    
     CyGlobalIntEnable; /* Enable global interrupts. */
     GlobalInitializer();
-    /* Place your initialization/startup code here (e.g. MyInst_Start()) */   
-    loadConfiguration();
+    /* Place your initialization/startup code here (e.g. MyInst_Start()) */       
     InitPump(); 
+    loadConfiguration();
     CyWdtStart(CYWDT_1024_TICKS,CYWDT_LPMODE_NOCHANGE);
     for(;;)
     {            

@@ -339,8 +339,26 @@ void imprimir(uint8 val, uint8 pos){ //val, puerto de impresora
         printLogoP(printPortA,0);
     }			
     write_psoc1(val,10);
-
-
+    for(x = 0; x < 30; x++){
+        write_psoc1(val,Encabezado1[x]);
+    }
+    write_psoc1(val,10);
+    
+    for(x = 0; x < 30; x++){
+        write_psoc1(val,Encabezado2[x]);
+    }
+    write_psoc1(val,10);
+    
+    for(x = 0; x < 30; x++){
+        write_psoc1(val,Encabezado3[x]);
+    }
+    write_psoc1(val,10);
+    
+    for(x = 0; x < 30; x++){
+        write_psoc1(val,Encabezado4[x]);
+    }
+    write_psoc1(val,10);
+    
     for(x = 0; x < 30; x++){
         write_psoc1(val,SEPARATOR[x]);
     }
