@@ -132,6 +132,271 @@ uint8 get_position(void){
         }
     }
 }
+
+/*
+*********************************************************************************************************
+*                                    uint8 get_totals(uint8 pos)
+*
+* Description : 
+*               
+*
+* Argument(s) : none
+*
+* Return(s)   : none
+*
+* Caller(s)   : 
+*
+* Note(s)     : none.
+*********************************************************************************************************
+*/
+
+uint8 getTotals(uint8 pos){
+    uint8 x,y,z,w,gradeHandle;
+    Pump_ClearRxBuffer();
+    Pump_PutChar(0x50|pos);
+    CyWdtClear();
+    CyDelay(900);
+    CyWdtClear();
+    x=Pump_GetRxBufferSize();
+    if((x==34)||(x==64)||(x==94)||(x==124)){//Version 5 ó 6 digitos
+        if((Pump_rxBuffer[0]==0xFF)&&(Pump_rxBuffer[1]==0xF6)&&(Pump_rxBuffer[3]==0xF9)){
+            gradeHandle=(x/30)&0x07;//Identificando cantidad de mangueras en el surtidor
+            if(pos==side.a.dir){
+                for(x=0;x<4;x++){
+                    for(y=0;y<3;y++){
+                        for(z=0;z<14;z++){
+                            side.a.totalsHandle[x][y][z]=0;
+                        }
+                    }
+                }
+                w=0;
+                for(x=0;x<gradeHandle;x++){
+                    for(y=0;y<=2;y++){
+                        for(z=1;z<=8;z++){
+                            side.a.totalsHandle[x][y][9-z]=(Pump_rxBuffer[w+4]&0x0F)+0x30;
+                            w++;
+                            if((y==2)&&(z==4)){
+                                break;
+                            }
+                        }
+                        w++;
+                    }
+                    w=w+7;
+                    for(z=4;z>=1;z--){
+                        side.a.totalsHandle[x][2][z]=side.a.totalsHandle[x][2][z+4];
+                    }
+                    side.a.totalsHandle[x][0][0]=8;
+                    side.a.totalsHandle[x][1][0]=8;
+                    side.a.totalsHandle[x][2][0]=4;
+                    if(ppux10==1){
+                        side.a.totalsHandle[x][2][0]=5;
+                        side.a.totalsHandle[x][2][5]='0';
+                    }
+                }
+                Pump_ClearRxBuffer();
+                return gradeHandle;
+            }else{
+                for(x=0;x<4;x++){
+                    for(y=0;y<3;y++){
+                        for(z=0;z<14;z++){
+                            side.b.totalsHandle[x][y][z]=0;
+                        }
+                    }
+                }
+                w=0;
+                for(x=0;x<gradeHandle;x++){
+                    for(y=0;y<=2;y++){
+                        for(z=1;z<=8;z++){
+                            side.b.totalsHandle[x][y][9-z]=(Pump_rxBuffer[w+4]&0x0F)+0x30;
+                            w++;
+                            if((y==2)&&(z==4)){
+                                break;
+                            }
+                        }
+                        w++;
+                    }
+                    w=w+7;
+                    for(z=4;z>=1;z--){
+                        side.b.totalsHandle[x][2][z]=side.b.totalsHandle[x][2][z+4];
+                    }
+                    side.b.totalsHandle[x][0][0]=8;
+                    side.b.totalsHandle[x][1][0]=8;
+                    side.b.totalsHandle[x][2][0]=4;
+                    if(ppux10==1){
+                        side.b.totalsHandle[x][2][0]=5;
+                        side.b.totalsHandle[x][2][5]='0';
+                    }
+                }
+                Pump_ClearRxBuffer();
+                return gradeHandle;
+            }
+        }else{
+            Pump_ClearRxBuffer();
+            return 0;
+        }
+    }else if((x==46)||(x==88)||(x==130)||(x==172)){//Version 7 digitos
+        if((Pump_rxBuffer[0]==0xFF)&&(Pump_rxBuffer[1]==0xF6)&&(Pump_rxBuffer[3]==0xF9)){
+            gradeHandle=(x/40)&0x07;//Identificando cantidad de mangueras en el surtidor
+            if(pos==side.a.dir){
+                for(x=0;x<4;x++){
+                    for(y=0;y<3;y++){
+                        for(z=0;z<14;z++){
+                            side.a.totalsHandle[x][y][z]=0;
+                        }
+                    }
+                }
+                w=0;
+                for(x=0;x<gradeHandle;x++){
+                    for(y=0;y<=2;y++){
+                        for(z=1;z<=12;z++){
+                            side.a.totalsHandle[x][y][13-z]=(Pump_rxBuffer[w+4]&0x0F)+0x30;
+                            w++;
+                            if((y==2)&&(z==6)){
+                                break;
+                            }
+                        }
+                        w++;
+                    }
+                    w=w+9;
+                    for(z=6;z>=1;z--){
+                        side.a.totalsHandle[x][2][z]=side.a.totalsHandle[x][2][z+6];
+                    }
+                    side.a.totalsHandle[x][0][0]=12;
+                    side.a.totalsHandle[x][1][0]=12;
+                    side.a.totalsHandle[x][2][0]=6;
+                }
+                Pump_ClearRxBuffer();
+                return gradeHandle;
+            }else{
+                for(x=0;x<4;x++){
+                    for(y=0;y<3;y++){
+                        for(z=0;z<14;z++){
+                            side.b.totalsHandle[x][y][z]=0;
+                        }
+                    }
+                }
+                w=0;
+                for(x=0;x<gradeHandle;x++){
+                    for(y=0;y<=2;y++){
+                        for(z=1;z<=12;z++){
+                            side.b.totalsHandle[x][y][13-z]=(Pump_rxBuffer[w+4]&0x0F)+0x30;
+                            w++;
+                            if((y==2)&&(z==6)){
+                                break;
+                            }
+                        }
+                        w++;
+                    }
+                    w=w+9;
+                    for(z=6;z>=1;z--){
+                        side.b.totalsHandle[x][2][z]=side.b.totalsHandle[x][2][z+6];
+                    }
+                    side.b.totalsHandle[x][0][0]=12;
+                    side.b.totalsHandle[x][1][0]=12;
+                    side.b.totalsHandle[x][2][0]=6;
+                }
+                Pump_ClearRxBuffer();
+                return gradeHandle;
+            }
+        }else{
+            Pump_ClearRxBuffer();
+            return 0;
+        }
+    }else{
+        Pump_ClearRxBuffer();
+        return 0;
+    }
+    Pump_ClearRxBuffer();
+    return 0;
+}
+/*
+*********************************************************************************************************
+*                                         uint8 price_change(uint8 pos)
+*
+* Description : 
+*               
+*
+* Argument(s) : none
+*
+* Return(s)   : none
+*
+* Caller(s)   : 
+*
+* Note(s)     : none.
+*********************************************************************************************************
+*/
+uint8 priceChange(uint8 pos,uint8 handle,uint8 *value){
+	uint8 buffer[15]={0xFF,0,0xF4,0xF6,0,0xF7,0,0,0,0,0,0,0,0,0},size,x,y;
+    for(x=1;x<=6;x++){
+        if(value[x]==','){
+            for(y=x;y>=2;y--){
+                value[y]=value[y-1];
+            }
+            value[1]='0';
+            break;
+        }
+    }
+	if(digits!=7){
+		buffer[1]=0xE5;
+		buffer[4]=(0xE0|((handle&0x0f)));
+		if(ppux10==0){
+			for(x=0;x<4;x++){
+				buffer[6+x]=(0xE0|(value[x+1]&0x0F));
+			}
+		}else{
+            for(x=0;x<3;x++){
+				buffer[6+x]=(0xE0|(value[x+1]&0x0F));
+			}	
+		}
+		buffer[10]=0xFB;
+		for(x=0;x<=10;x++){
+			buffer[11]+=(buffer[x]&0x0F);	
+		}
+		buffer[11]=(((~buffer[11])+1)&0x0F)|0xE0;
+		buffer[12]=0xF0;
+		size=12;
+	}
+	if(digits==7){
+		buffer[1]=0xE3;
+		buffer[4]=(0xE0|((handle&0x0f)-1));	
+        for(x=0;x<6;x++){
+            buffer[6+x]=(0xE0|(value[6-x]&0x0F));
+        }	
+		buffer[12]=0xFB;
+		for(x=0;x<=12;x++){
+			buffer[13]+=(buffer[x]&0x0F);	
+		}
+		buffer[13]=(((~buffer[13])+1)&0x0F)|0xE0;
+		buffer[14]=0xF0;
+		size=14;
+	}	
+    Pump_ClearRxBuffer();
+	Pump_PutChar(0x20|pos);	
+    CyDelay(100);
+    if(Pump_GetRxBufferSize()>=1){
+		if(Pump_ReadRxData()==(0xD0|pos)){
+            Pump_ClearRxBuffer();
+            for(x=0;x<=size;x++){
+               	Pump_PutChar(buffer[x]); 	
+            }
+            Pump_ClearRxBuffer();
+			CyDelay(50);
+			if(get_state(pos)==0){
+				return 0;
+			}
+			else{
+				return 1;
+			}
+		}
+		else{
+			return 0;
+		}
+	}
+	else{
+		return 0;	
+	}
+}
+
 /*
 *********************************************************************************************************
 *                  uint8 preset_data(uint8 pos, uint8 grade, uint8 *value, uint8 preset)
@@ -353,11 +618,10 @@ uint8 PumpHoseActiveState(uint8 side){
 *********************************************************************************************************
 */
 uint8 getSale(uint8 pos){
-	uint8 x;
-    
+	uint8 x;    
 	Pump_ClearRxBuffer();
 	Pump_PutChar(0x40|pos);
-    CyDelay(200);
+    CyDelay(100);
     CyWdtClear();
 	if((digits!=7)&&(Pump_GetRxBufferSize()==33)){
 		if((Pump_rxBuffer[0]==0xFF)&&(Pump_rxBuffer[2]==0xF8)&&(Pump_rxBuffer[32]==0xF0)){

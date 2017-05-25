@@ -1,17 +1,19 @@
-/* ========================================
- *
- * Copyright YOUR COMPANY, THE YEAR
- * All Rights Reserved
- * UNPUBLISHED, LICENSED SOFTWARE.
- *
- * CONFIDENTIAL AND PROPRIETARY INFORMATION
- * WHICH IS THE PROPERTY OF your company.
- *
- * ========================================
-*/
-#include <device.h>
+#include <project.h>
+#include <protocol.h>
 #include <variables.h>
+#include <keyboard.h>
+#include <ibutton.h>
+#include <RFPoll.h>
+#include <LCD.h>
 #include <I2C.h>
+#include <Print.h>
+#include <device.h>
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+
+
 /*
 *********************************************************************************************************
 *                             uint8 verificar_check(uint8 *datos, uint16 size)
@@ -53,177 +55,214 @@ uint8 verificar_check(uint8 *datos, uint16 size){
 
 
 void pollingRF_Rx(){
-    uint16 i,x;
-   
-    if(side.a.rfState == RF_COPY_RECEIPT){
-        buffer_txDisplay[0] = 0xBC;
-        buffer_txDisplay[1] = 0xCB;
-        buffer_txDisplay[2] = 0xC8;
-        buffer_txDisplay[3] = IDCast[0];
-        buffer_txDisplay[4] = IDCast[1];
-        buffer_txDisplay[5] = side.a.dir;
-        buffer_txDisplay[6] = 0xE6;
-        buffer_txDisplay[7] = RF_COPY_RECEIPT;
-        buffer_txDisplay[8] = verificar_check(buffer_txDisplay,9);
-        for (x = 0; x < 9; x++){
-            RF_Connection_PutChar(buffer_txDisplay[x]);
-        }
-    }
-    i=0;
-    while((RF_Connection_GetRxBufferSize()>0) && (RF_Connection_RX_STS_FIFO_NOTEMPTY) ){//&& (RF_Connection_RX_STS_FIFO_NOTEMPTY)
-       buffer_rf[i]=RF_Connection_ReadRxData(); 	
-	   i++;	
-    }        
-    
-    if((buffer_rf[0]==0xBC)&&(buffer_rf[1]==0xBB)&&(buffer_rf[2]==0xB8)&&(buffer_rf[3]==IDCast[0])&&(buffer_rf[4]==IDCast[1])){    
-       switch(buffer_rf[6]){
-           case 0xA1:               //Peticion de estado
-            buffer_tx[0] = 0xBC;
-            buffer_tx[1] = 0xCB;
-            buffer_tx[2] = 0xC8;
-            buffer_tx[3] = IDCast[0];
-            buffer_tx[4] = IDCast[1];
-            if(buffer_rf[5] == side.a.dir){
-                buffer_tx[5] = side.a.dir;
-                buffer_tx[6] = 0xA1;
-                buffer_tx[7] = side.a.rfState;
-            }  
-            if(buffer_rf[5] == side.b.dir){
-                buffer_tx[5] = side.b.dir;
-                buffer_tx[6] = 0xA1;
-                buffer_tx[7] = side.b.rfState;
-            }
-            if(buffer_rf[5] == side.c.dir){
-                buffer_tx[5] = side.c.dir;
-                buffer_tx[6] = 0xA1;
-                buffer_tx[7] = side.c.rfState;
-            }
-            if(buffer_rf[5] == side.d.dir){
-                buffer_tx[5] = side.d.dir;
-                buffer_tx[6] = 0xA1;
-                buffer_tx[7] = side.d.rfState;
-            }
-            buffer_tx[8] = verificar_check(buffer_tx,9);
-            for (x = 0; x < 9; x++){
-                RF_Connection_PutChar(buffer_tx[x]);
-            }
-           break;
-            
-           case 0xA6:               //Envio de precios
-            buffer_tx[0] = 0xBC;
-            buffer_tx[1] = 0xCB;
-            buffer_tx[2] = 0xC8;
-            buffer_tx[3] = IDCast[0];
-            buffer_tx[4] = IDCast[1];
-            if(buffer_rf[5] == side.a.dir){
-                for(x=13;x > 7; x-- ){
-                    side.a.ppuAuthorized[buffer_rf[8]][13-x] = buffer_rf[x];
+    uint16 i,x,y;    
+    if(RF_Connection_GetRxBufferSize() >= 1){
+        ActiveRF=1;
+        counterRF = 0;
+        i=0;
+        while(RF_Connection_GetRxBufferSize()>0){//&& (RF_Connection_RX_STS_FIFO_NOTEMPTY)
+           buffer_rf[i]=RF_Connection_ReadRxData(); 	
+    	   i++;	
+        } 
+        y=0;
+        buffer_tx[y] = 0xBC; y++;
+        buffer_tx[y] = 0xCB; y++;
+        buffer_tx[y] = 0xC8; y++;
+        buffer_tx[y] = IDCast[0]; y++;
+        buffer_tx[y] = IDCast[1]; y++;
+        if((buffer_rf[0]==0xBC)&&(buffer_rf[1]==0xBB)&&(buffer_rf[2]==0xB8)&&(buffer_rf[3]==IDCast[0])&&(buffer_rf[4]==IDCast[1])){    
+           switch(buffer_rf[6]){
+               case 0xA1:               //Peticion de estado
+                if(buffer_rf[5] == side.a.dir){
+                    buffer_tx[5] = side.a.dir;y++;
+                    buffer_tx[y] = 0xA1;y++;
+                    buffer_tx[y] = side.a.rfState; y++;
+                }  
+                if(buffer_rf[5] == side.b.dir){
+                    buffer_tx[5] = side.b.dir;y++;
+                    buffer_tx[y] = 0xA1;y++;
+                    buffer_tx[y] = side.b.rfState;y++;
                 }
-                buffer_tx[5] = side.a.dir;
-                buffer_tx[6] = 0xA6;
-                buffer_tx[7] = 0x03;
-            } 
-            if(buffer_rf[5] == side.b.dir){
-                for(x=13;x > 7; x-- ){
-                    side.b.ppuAuthorized[buffer_rf[8]][13-x] = buffer_rf[x];
+                if(buffer_rf[5] == side.c.dir){
+                    buffer_tx[5] = side.c.dir; y++;
+                    buffer_tx[y] = 0xA1; y++;
+                    buffer_tx[y] = side.c.rfState; y++;
                 }
-                buffer_tx[5] = side.b.dir;
-                buffer_tx[6] = 0xA6;
-                buffer_tx[7] = 0x03;
-            } 
-            if(buffer_rf[5] == side.c.dir){
-                for(x=13;x > 7; x-- ){
-                    side.c.ppuAuthorized[buffer_rf[8]][13-x] = buffer_rf[x];
+                if(buffer_rf[5] == side.d.dir){
+                    buffer_tx[5] = side.d.dir; y++;
+                    buffer_tx[y] = 0xA1; y++;
+                    buffer_tx[y] = side.d.rfState; y++;
                 }
-                buffer_tx[5] = side.c.dir;
-                buffer_tx[6] = 0xA6;
-                buffer_tx[7] = 0x03;
-            } 
-            if(buffer_rf[5] == side.d.dir){
-                for(x=13;x > 7; x-- ){
-                    side.d.ppuAuthorized[buffer_rf[8]][13-x] = buffer_rf[x];
+                buffer_tx[y] = verificar_check(buffer_tx,y+1);y++;
+                for (x = 0; x < y; x++){
+                    RF_Connection_PutChar(buffer_tx[x]);
                 }
-                buffer_tx[5] = side.d.dir;
-                buffer_tx[6] = 0xA6;
-                buffer_tx[7] = 0x03;
-            }
-            buffer_tx[8] = verificar_check(buffer_tx,9);
-            for (x = 0; x < 9; x++){
-                RF_Connection_PutChar(buffer_tx[x]);
-            }
-           break;
-            
-           case 0xA7:               //Impresion general
-            buffer_tx[0] = 0xBC;
-            buffer_tx[1] = 0xCB;
-            buffer_tx[2] = 0xC8;
-            buffer_tx[3] = IDCast[0];
-            buffer_tx[4] = IDCast[1];
-            if(buffer_rf[5] == side.a.dir){
-                buffer_tx[5] = side.a.dir;
-                buffer_tx[6] = 0xA7;
-                buffer_tx[7] = side.a.rfState;
-            }  
-            if(buffer_rf[5] == side.b.dir){
-                buffer_tx[5] = side.b.dir;
-                buffer_tx[6] = 0xA7;
-                buffer_tx[7] = side.b.rfState;
-            }
-            if(buffer_rf[5] == side.c.dir){
-                buffer_tx[5] = side.c.dir;
-                buffer_tx[6] = 0xA7;
-                buffer_tx[7] = side.c.rfState;
-            }
-            if(buffer_rf[5] == side.d.dir){
-                buffer_tx[5] = side.d.dir;
-                buffer_tx[6] = 0xA7;
-                buffer_tx[7] = side.d.rfState;
-            }
-            buffer_tx[8] = verificar_check(buffer_tx,9);
-            for (x = 0; x < 9; x++){
-                RF_Connection_PutChar(buffer_tx[x]);
-            }
-            
-           break;
-            
-           case 0xE1:               //Configuracion de la estacion
-            symbols[1] = buffer_rf[8];
-            date[0]    = buffer_rf[9];
-            date[1]    = buffer_rf[10];
-            date[2]    = buffer_rf[11];
-            time[1]    = buffer_rf[12];
-            time[0]    = buffer_rf[13];
-            for(x = 17; x < 45; x++){
-                Encabezado1[x-17] = buffer_rf[x];
-            }
-            CopiasCredito = buffer_rf[16];
-            write_hora();
-            write_fecha();
-           break;
-           
-           case 0xE2:               //Configuracion de la posicion                                                 
-            buffer_tx[0] = 0xBC;
-            buffer_tx[1] = 0xCB;
-            buffer_tx[2] = 0xC8;
-            buffer_tx[3] = IDCast[0];
-            buffer_tx[4] = IDCast[1];
-            buffer_tx[5] = buffer_rf[5];
-            buffer_tx[6] = 0xE2;
-            buffer_tx[7] = 0x08;
-            buffer_tx[8] = 0x03;
-            buffer_tx[9] = verificar_check(buffer_tx,10);
-            for (x = 0; x < 10; x++){
-                RF_Connection_PutChar(buffer_tx[x]);
-            }
-            for(x = 8; x < 14; x++){
-                GradesHose[8-x] = buffer_rf[x];
-            }
-           break;
-       }                       
-    }
-   RF_Connection_ClearRxBuffer();            
+               break;
+               
+               case 0xA5:
+                if(buffer_rf[5] == side.a.dir){
+                    buffer_tx[5] = side.a.dir; y++;
+                    buffer_tx[y] = 0xA5; y++;
+                    buffer_tx[y] = side.a.rfState; y++;
+                    buffer_tx[y] = 0x34; y++;
+                    buffer_tx[y] = 0x01; y++;                    
+                    if (digits == 6 || digits == 5){                            
+                        for(x = 8; x > 0; x--){ //Volumen
+                            buffer_tx[y] = side.a.totalsHandle[0][0][x];y++;
+                        }
+                        for(x =0; x < 4; x++){
+                            buffer_tx[y] = 0x30;y++;
+                        }
+                        for(x = 8; x > 0; x--){//Dinero
+                            buffer_tx[y] = side.a.totalsHandle[0][1][x];y++;
+                        }
+                        for(x =0; x < 4; x++){
+                            buffer_tx[y] = 0x30;y++;
+                        }
+                    }                        
+                }
+                if(buffer_rf[5] == side.b.dir){
+                    buffer_tx[5] = side.b.dir; y++;
+                    buffer_tx[y] = 0xA5; y++;
+                    buffer_tx[y] = side.b.rfState; y++;
+                    buffer_tx[y] = 0x34; y++;
+                    buffer_tx[y] = 0x01; y++;
+                    if (digits == 6 || digits == 5){                            
+                        for(x = 8; x > 0; x--){ //Volumen
+                            buffer_tx[y] = side.b.totalsHandle[0][0][x];y++;
+                        }
+                        for(x =0; x < 4; x++){
+                            buffer_tx[y] = 0x30;y++;
+                        }
+                        for(x = 8; x > 0; x--){//Dinero
+                            buffer_tx[y] = side.b.totalsHandle[0][1][x];y++;
+                        }
+                        for(x =0; x < 4; x++){
+                            buffer_tx[y] = 0x30;y++;
+                        }
+                    }                        
+                }
+                buffer_tx[y] = verificar_check(buffer_tx,y+1);y++;
+                for (x = 0; x < y; x++){
+                    RF_Connection_PutChar(buffer_tx[x]);
+                }
+               break;
+                
+               case 0xA6:               //Envio de precios
+                if(buffer_rf[5] == side.a.dir){
+                    for(x=13;x > 7; x-- ){
+                        side.a.ppuAuthorized[buffer_rf[8]][13-x] = buffer_rf[x];
+                    }
+                    PriceChange = 1; //
+                    CGrade = buffer_rf[8];
+                    buffer_tx[5] = side.a.dir;y++;
+                    buffer_tx[y] = 0xA6;y++;
+                    buffer_tx[y] = 0x03;y++;
+                } 
+                if(buffer_rf[5] == side.b.dir){
+                    for(x=13;x > 7; x-- ){
+                        side.b.ppuAuthorized[buffer_rf[8]][13-x] = buffer_rf[x];
+                    }
+                    PriceChange = 2;//
+                    CGrade = buffer_rf[8];
+                    buffer_tx[5] = side.b.dir; y++;
+                    buffer_tx[y] = 0xA6;y++;
+                    buffer_tx[y] = 0x03;y++;
+                } 
+                if(buffer_rf[5] == side.c.dir){
+                    for(x=13;x > 7; x-- ){
+                        side.c.ppuAuthorized[buffer_rf[8]][13-x] = buffer_rf[x];
+                    }
+                    PriceChange = 3;//priceChange(side.c.dir,buffer_rf[8],side.c.ppuAuthorized[buffer_rf[8]]);
+                    CGrade = buffer_rf[8];
+                    buffer_tx[5] = side.c.dir; y++;
+                    buffer_tx[y] = 0xA6;y++;
+                    buffer_tx[y] = 0x03;y++;
+                } 
+                if(buffer_rf[5] == side.d.dir){
+                    for(x=13;x > 7; x-- ){
+                        side.d.ppuAuthorized[buffer_rf[8]][13-x] = buffer_rf[x];
+                    }
+                    PriceChange = 4;//priceChange(side.d.dir,buffer_rf[8],side.d.ppuAuthorized[buffer_rf[8]]);
+                    buffer_tx[5] = side.d.dir; y++;
+                    buffer_tx[y] = 0xA6;y++;
+                    buffer_tx[y] = 0x03;y++;
+                }
+                buffer_tx[y] = verificar_check(buffer_tx,y+1);y++;
+                for (x = 0; x < y; x++){
+                    RF_Connection_PutChar(buffer_tx[x]);
+                }
+               break;
+                
+               case 0xA7:               //Impresion general
+                
+                if(buffer_rf[5] == side.a.dir){
+                    buffer_tx[5] = side.a.dir;
+                    buffer_tx[6] = 0xA7;
+                    buffer_tx[7] = side.a.rfState;
+                }  
+                if(buffer_rf[5] == side.b.dir){
+                    buffer_tx[5] = side.b.dir;
+                    buffer_tx[6] = 0xA7;
+                    buffer_tx[7] = side.b.rfState;
+                }
+                if(buffer_rf[5] == side.c.dir){
+                    buffer_tx[5] = side.c.dir;
+                    buffer_tx[6] = 0xA7;
+                    buffer_tx[7] = side.c.rfState;
+                }
+                if(buffer_rf[5] == side.d.dir){
+                    buffer_tx[5] = side.d.dir;
+                    buffer_tx[6] = 0xA7;
+                    buffer_tx[7] = side.d.rfState;
+                }
+                buffer_tx[8] = verificar_check(buffer_tx,9);
+                for (x = 0; x < 9; x++){
+                    RF_Connection_PutChar(buffer_tx[x]);
+                }
+                
+               break;
+               case 0xAB:
+                buffer_tx[0] = 0xBC;
+               break;
+                
+               case 0xE1:               //Configuracion de la estacion
+                symbols[1] = buffer_rf[8];
+                date[0]    = buffer_rf[9];
+                date[1]    = buffer_rf[10];
+                date[2]    = buffer_rf[11];
+                time[1]    = buffer_rf[12];
+                time[0]    = buffer_rf[13];
+                for(x = 17; x < 45; x++){
+                    Encabezado1[x-17] = buffer_rf[x];
+                }
+                CopiasCredito = buffer_rf[16];
+                write_hora();
+                write_fecha();
+               break;
+               
+               case 0xE2:               //Configuracion de la posicion                                                 
+                buffer_tx[5] = buffer_rf[5];
+                buffer_tx[6] = 0xE2;
+                buffer_tx[7] = 0x08;
+                buffer_tx[8] = 0x03;
+                buffer_tx[9] = verificar_check(buffer_tx,10);
+                for (x = 0; x < 10; x++){
+                    RF_Connection_PutChar(buffer_tx[x]);
+                }
+                for(x = 8; x < 14; x++){
+                    GradesHose[8-x] = buffer_rf[x];
+                }
+               break;
+           }                       
+        }                       
+    }       
+    RF_Connection_ClearRxBuffer();    
 }
 
-
-
-/* [] END OF FILE */
+void pollingRF_Tx(){
+    if(countBeagleTX > 60){
+        
+        countBeagleTX=0;
+    }
+}

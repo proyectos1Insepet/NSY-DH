@@ -1,7 +1,7 @@
 /*******************************************************************************
 * File Name: project.h
 * 
-* PSoC Creator  3.3 SP1
+* PSoC Creator  3.3 CP2
 *
 * Description:
 * It contains references to all generated header files and should not be modified.
@@ -43,6 +43,11 @@
 #include "IB1.h"
 #include "IB2_aliases.h"
 #include "IB2.h"
+#include "Waitable_4.h"
+#include "Waitable_3.h"
+#include "isr_1.h"
+#include "isr_2.h"
+#include "isr_5.h"
 #include "RF_Connection_IntClock.h"
 #include "Printer_IntClock.h"
 #include "Display1_IntClock.h"

@@ -1,6 +1,6 @@
 -- Project:   Design01
--- Generated: 05/22/2017 11:16:49
--- PSoC Creator  3.3 SP1
+-- Generated: 05/24/2017 15:24:48
+-- PSoC Creator  3.3 CP2
 
 ENTITY Design01 IS
     PORT(
@@ -56,7 +56,10 @@ ARCHITECTURE __DEFAULT__ OF Design01 IS
     SIGNAL MODIN16_6 : bit;
     SIGNAL MODIN1_0 : bit;
     SIGNAL MODIN1_1 : bit;
-    SIGNAL MODIN1_1_split : bit;
+    SIGNAL MODIN4_3 : bit;
+    SIGNAL MODIN4_4 : bit;
+    SIGNAL MODIN4_5 : bit;
+    SIGNAL MODIN4_6 : bit;
     SIGNAL MODIN5_0 : bit;
     SIGNAL MODIN5_1 : bit;
     SIGNAL MODIN8_3 : bit;
@@ -81,6 +84,8 @@ ARCHITECTURE __DEFAULT__ OF Design01 IS
     SIGNAL Net_17 : bit;
     SIGNAL Net_173 : bit;
     SIGNAL Net_180 : bit;
+    SIGNAL Net_186 : bit;
+    SIGNAL Net_194 : bit;
     SIGNAL Net_38 : bit;
     SIGNAL Net_42 : bit;
     SIGNAL Net_44 : bit;
@@ -89,6 +94,7 @@ ARCHITECTURE __DEFAULT__ OF Design01 IS
     SIGNAL Net_56 : bit;
     SIGNAL Net_86 : bit;
     SIGNAL Net_87 : bit;
+    SIGNAL Net_91 : bit;
     SIGNAL Net_92 : bit;
     SIGNAL Pin_WP(0)__PA : bit;
     SIGNAL RF_Rx(0)__PA : bit;
@@ -269,15 +275,10 @@ ARCHITECTURE __DEFAULT__ OF Design01 IS
     SIGNAL \RF_Connection:BUART:control_7\ : bit;
     SIGNAL \RF_Connection:BUART:counter_load_not\ : bit;
     SIGNAL \RF_Connection:BUART:rx_bitclk_enable\ : bit;
-    SIGNAL \RF_Connection:BUART:rx_count7_bit8_wire\ : bit;
     SIGNAL \RF_Connection:BUART:rx_count7_tc\ : bit;
     SIGNAL \RF_Connection:BUART:rx_count_0\ : bit;
     SIGNAL \RF_Connection:BUART:rx_count_1\ : bit;
     SIGNAL \RF_Connection:BUART:rx_count_2\ : bit;
-    SIGNAL \RF_Connection:BUART:rx_count_3\ : bit;
-    SIGNAL \RF_Connection:BUART:rx_count_4\ : bit;
-    SIGNAL \RF_Connection:BUART:rx_count_5\ : bit;
-    SIGNAL \RF_Connection:BUART:rx_count_6\ : bit;
     SIGNAL \RF_Connection:BUART:rx_counter_load\ : bit;
     SIGNAL \RF_Connection:BUART:rx_fifofull\ : bit;
     SIGNAL \RF_Connection:BUART:rx_fifonotempty\ : bit;
@@ -321,6 +322,10 @@ ARCHITECTURE __DEFAULT__ OF Design01 IS
     SIGNAL \Timer_Animacion2:Net_51\ : bit;
     SIGNAL \Timer_Animacion:Net_261\ : bit;
     SIGNAL \Timer_Animacion:Net_51\ : bit;
+    SIGNAL \Waitable_3:Net_261\ : bit;
+    SIGNAL \Waitable_3:Net_51\ : bit;
+    SIGNAL \Waitable_4:Net_261\ : bit;
+    SIGNAL \Waitable_4:Net_51\ : bit;
     SIGNAL __ONE__ : bit;
     ATTRIBUTE POWER OF __ONE__ : SIGNAL IS true;
     SIGNAL __ZERO__ : bit;
@@ -440,86 +445,84 @@ ARCHITECTURE __DEFAULT__ OF Design01 IS
     ATTRIBUTE lib_model OF \RF_Connection:BUART:rx_load_fifo\ : LABEL IS "macrocell53";
     ATTRIBUTE lib_model OF \RF_Connection:BUART:rx_state_3\ : LABEL IS "macrocell54";
     ATTRIBUTE lib_model OF \RF_Connection:BUART:rx_state_2\ : LABEL IS "macrocell55";
-    ATTRIBUTE lib_model OF \RF_Connection:BUART:rx_count7_bit8_wire\ : LABEL IS "macrocell56";
-    ATTRIBUTE lib_model OF \RF_Connection:BUART:rx_bitclk_enable\ : LABEL IS "macrocell57";
-    ATTRIBUTE lib_model OF \RF_Connection:BUART:rx_state_stop1_reg\ : LABEL IS "macrocell58";
-    ATTRIBUTE lib_model OF MODIN1_1 : LABEL IS "macrocell59";
-    ATTRIBUTE lib_model OF MODIN1_0 : LABEL IS "macrocell60";
-    ATTRIBUTE lib_model OF \RF_Connection:BUART:rx_status_2\ : LABEL IS "macrocell61";
-    ATTRIBUTE lib_model OF \RF_Connection:BUART:rx_status_3\ : LABEL IS "macrocell62";
-    ATTRIBUTE lib_model OF \RF_Connection:BUART:rx_markspace_pre\ : LABEL IS "macrocell63";
-    ATTRIBUTE lib_model OF \RF_Connection:BUART:rx_parity_error_pre\ : LABEL IS "macrocell64";
-    ATTRIBUTE lib_model OF \RF_Connection:BUART:rx_last\ : LABEL IS "macrocell65";
-    ATTRIBUTE lib_model OF \RF_Connection:BUART:rx_parity_bit\ : LABEL IS "macrocell66";
-    ATTRIBUTE lib_model OF \Printer:BUART:txn\ : LABEL IS "macrocell67";
-    ATTRIBUTE lib_model OF \Printer:BUART:tx_state_1\ : LABEL IS "macrocell68";
-    ATTRIBUTE lib_model OF \Printer:BUART:tx_state_0\ : LABEL IS "macrocell69";
-    ATTRIBUTE lib_model OF \Printer:BUART:tx_state_2\ : LABEL IS "macrocell70";
-    ATTRIBUTE lib_model OF \Printer:BUART:tx_bitclk\ : LABEL IS "macrocell71";
-    ATTRIBUTE lib_model OF \Printer:BUART:tx_ctrl_mark_last\ : LABEL IS "macrocell72";
-    ATTRIBUTE lib_model OF \Printer:BUART:rx_state_0\ : LABEL IS "macrocell73";
-    ATTRIBUTE lib_model OF \Printer:BUART:rx_load_fifo\ : LABEL IS "macrocell74";
-    ATTRIBUTE lib_model OF \Printer:BUART:rx_state_3\ : LABEL IS "macrocell75";
-    ATTRIBUTE lib_model OF \Printer:BUART:rx_state_2\ : LABEL IS "macrocell76";
-    ATTRIBUTE lib_model OF \Printer:BUART:rx_bitclk_enable\ : LABEL IS "macrocell77";
-    ATTRIBUTE lib_model OF \Printer:BUART:rx_state_stop1_reg\ : LABEL IS "macrocell78";
-    ATTRIBUTE lib_model OF MODIN5_1 : LABEL IS "macrocell79";
-    ATTRIBUTE lib_model OF MODIN5_0 : LABEL IS "macrocell80";
-    ATTRIBUTE lib_model OF \Printer:BUART:rx_status_3\ : LABEL IS "macrocell81";
-    ATTRIBUTE lib_model OF \Printer:BUART:rx_last\ : LABEL IS "macrocell82";
-    ATTRIBUTE lib_model OF \Pump:BUART:txn\ : LABEL IS "macrocell83";
-    ATTRIBUTE lib_model OF \Pump:BUART:tx_state_1\ : LABEL IS "macrocell84";
-    ATTRIBUTE lib_model OF \Pump:BUART:tx_state_0\ : LABEL IS "macrocell85";
-    ATTRIBUTE lib_model OF \Pump:BUART:tx_state_2\ : LABEL IS "macrocell86";
-    ATTRIBUTE lib_model OF \Pump:BUART:tx_bitclk\ : LABEL IS "macrocell87";
-    ATTRIBUTE lib_model OF \Pump:BUART:tx_ctrl_mark_last\ : LABEL IS "macrocell88";
-    ATTRIBUTE lib_model OF \Pump:BUART:tx_parity_bit\ : LABEL IS "macrocell89";
-    ATTRIBUTE lib_model OF \Pump:BUART:rx_state_0\ : LABEL IS "macrocell90";
-    ATTRIBUTE lib_model OF \Pump:BUART:rx_load_fifo\ : LABEL IS "macrocell91";
-    ATTRIBUTE lib_model OF \Pump:BUART:rx_state_3\ : LABEL IS "macrocell92";
-    ATTRIBUTE lib_model OF \Pump:BUART:rx_state_2\ : LABEL IS "macrocell93";
-    ATTRIBUTE lib_model OF \Pump:BUART:rx_bitclk_enable\ : LABEL IS "macrocell94";
-    ATTRIBUTE lib_model OF \Pump:BUART:rx_state_stop1_reg\ : LABEL IS "macrocell95";
-    ATTRIBUTE lib_model OF MODIN9_1 : LABEL IS "macrocell96";
-    ATTRIBUTE lib_model OF MODIN9_0 : LABEL IS "macrocell97";
-    ATTRIBUTE lib_model OF \Pump:BUART:rx_status_2\ : LABEL IS "macrocell98";
-    ATTRIBUTE lib_model OF \Pump:BUART:rx_status_3\ : LABEL IS "macrocell99";
-    ATTRIBUTE lib_model OF \Pump:BUART:rx_parity_error_pre\ : LABEL IS "macrocell100";
-    ATTRIBUTE lib_model OF \Pump:BUART:rx_last\ : LABEL IS "macrocell101";
-    ATTRIBUTE lib_model OF \Pump:BUART:rx_parity_bit\ : LABEL IS "macrocell102";
-    ATTRIBUTE lib_model OF \Display1:BUART:txn\ : LABEL IS "macrocell103";
-    ATTRIBUTE lib_model OF \Display1:BUART:tx_state_1\ : LABEL IS "macrocell104";
-    ATTRIBUTE lib_model OF \Display1:BUART:tx_state_0\ : LABEL IS "macrocell105";
-    ATTRIBUTE lib_model OF \Display1:BUART:tx_state_2\ : LABEL IS "macrocell106";
-    ATTRIBUTE lib_model OF \Display1:BUART:tx_bitclk\ : LABEL IS "macrocell107";
-    ATTRIBUTE lib_model OF \Display1:BUART:tx_ctrl_mark_last\ : LABEL IS "macrocell108";
-    ATTRIBUTE lib_model OF \Display1:BUART:rx_state_0\ : LABEL IS "macrocell109";
-    ATTRIBUTE lib_model OF \Display1:BUART:rx_load_fifo\ : LABEL IS "macrocell110";
-    ATTRIBUTE lib_model OF \Display1:BUART:rx_state_3\ : LABEL IS "macrocell111";
-    ATTRIBUTE lib_model OF \Display1:BUART:rx_state_2\ : LABEL IS "macrocell112";
-    ATTRIBUTE lib_model OF \Display1:BUART:rx_bitclk_enable\ : LABEL IS "macrocell113";
-    ATTRIBUTE lib_model OF \Display1:BUART:rx_state_stop1_reg\ : LABEL IS "macrocell114";
-    ATTRIBUTE lib_model OF MODIN13_1 : LABEL IS "macrocell115";
-    ATTRIBUTE lib_model OF MODIN13_0 : LABEL IS "macrocell116";
-    ATTRIBUTE lib_model OF \Display1:BUART:rx_status_3\ : LABEL IS "macrocell117";
-    ATTRIBUTE lib_model OF \Display1:BUART:rx_last\ : LABEL IS "macrocell118";
-    ATTRIBUTE lib_model OF \Display2:BUART:txn\ : LABEL IS "macrocell119";
-    ATTRIBUTE lib_model OF \Display2:BUART:tx_state_1\ : LABEL IS "macrocell120";
-    ATTRIBUTE lib_model OF \Display2:BUART:tx_state_0\ : LABEL IS "macrocell121";
-    ATTRIBUTE lib_model OF \Display2:BUART:tx_state_2\ : LABEL IS "macrocell122";
-    ATTRIBUTE lib_model OF \Display2:BUART:tx_bitclk\ : LABEL IS "macrocell123";
-    ATTRIBUTE lib_model OF \Display2:BUART:tx_ctrl_mark_last\ : LABEL IS "macrocell124";
-    ATTRIBUTE lib_model OF \Display2:BUART:rx_state_0\ : LABEL IS "macrocell125";
-    ATTRIBUTE lib_model OF \Display2:BUART:rx_load_fifo\ : LABEL IS "macrocell126";
-    ATTRIBUTE lib_model OF \Display2:BUART:rx_state_3\ : LABEL IS "macrocell127";
-    ATTRIBUTE lib_model OF \Display2:BUART:rx_state_2\ : LABEL IS "macrocell128";
-    ATTRIBUTE lib_model OF \Display2:BUART:rx_bitclk_enable\ : LABEL IS "macrocell129";
-    ATTRIBUTE lib_model OF \Display2:BUART:rx_state_stop1_reg\ : LABEL IS "macrocell130";
-    ATTRIBUTE lib_model OF \Display2:BUART:pollcount_1\ : LABEL IS "macrocell131";
-    ATTRIBUTE lib_model OF \Display2:BUART:pollcount_0\ : LABEL IS "macrocell132";
-    ATTRIBUTE lib_model OF MODIN1_1_split : LABEL IS "macrocell133";
-    ATTRIBUTE lib_model OF \Display2:BUART:rx_status_3\ : LABEL IS "macrocell134";
-    ATTRIBUTE lib_model OF \Display2:BUART:rx_last\ : LABEL IS "macrocell135";
+    ATTRIBUTE lib_model OF \RF_Connection:BUART:rx_bitclk_enable\ : LABEL IS "macrocell56";
+    ATTRIBUTE lib_model OF \RF_Connection:BUART:rx_state_stop1_reg\ : LABEL IS "macrocell57";
+    ATTRIBUTE lib_model OF MODIN1_1 : LABEL IS "macrocell58";
+    ATTRIBUTE lib_model OF MODIN1_0 : LABEL IS "macrocell59";
+    ATTRIBUTE lib_model OF \RF_Connection:BUART:rx_status_2\ : LABEL IS "macrocell60";
+    ATTRIBUTE lib_model OF \RF_Connection:BUART:rx_status_3\ : LABEL IS "macrocell61";
+    ATTRIBUTE lib_model OF \RF_Connection:BUART:rx_markspace_pre\ : LABEL IS "macrocell62";
+    ATTRIBUTE lib_model OF \RF_Connection:BUART:rx_parity_error_pre\ : LABEL IS "macrocell63";
+    ATTRIBUTE lib_model OF \RF_Connection:BUART:rx_last\ : LABEL IS "macrocell64";
+    ATTRIBUTE lib_model OF \RF_Connection:BUART:rx_parity_bit\ : LABEL IS "macrocell65";
+    ATTRIBUTE lib_model OF \Printer:BUART:txn\ : LABEL IS "macrocell66";
+    ATTRIBUTE lib_model OF \Printer:BUART:tx_state_1\ : LABEL IS "macrocell67";
+    ATTRIBUTE lib_model OF \Printer:BUART:tx_state_0\ : LABEL IS "macrocell68";
+    ATTRIBUTE lib_model OF \Printer:BUART:tx_state_2\ : LABEL IS "macrocell69";
+    ATTRIBUTE lib_model OF \Printer:BUART:tx_bitclk\ : LABEL IS "macrocell70";
+    ATTRIBUTE lib_model OF \Printer:BUART:tx_ctrl_mark_last\ : LABEL IS "macrocell71";
+    ATTRIBUTE lib_model OF \Printer:BUART:rx_state_0\ : LABEL IS "macrocell72";
+    ATTRIBUTE lib_model OF \Printer:BUART:rx_load_fifo\ : LABEL IS "macrocell73";
+    ATTRIBUTE lib_model OF \Printer:BUART:rx_state_3\ : LABEL IS "macrocell74";
+    ATTRIBUTE lib_model OF \Printer:BUART:rx_state_2\ : LABEL IS "macrocell75";
+    ATTRIBUTE lib_model OF \Printer:BUART:rx_bitclk_enable\ : LABEL IS "macrocell76";
+    ATTRIBUTE lib_model OF \Printer:BUART:rx_state_stop1_reg\ : LABEL IS "macrocell77";
+    ATTRIBUTE lib_model OF MODIN5_1 : LABEL IS "macrocell78";
+    ATTRIBUTE lib_model OF MODIN5_0 : LABEL IS "macrocell79";
+    ATTRIBUTE lib_model OF \Printer:BUART:rx_status_3\ : LABEL IS "macrocell80";
+    ATTRIBUTE lib_model OF \Printer:BUART:rx_last\ : LABEL IS "macrocell81";
+    ATTRIBUTE lib_model OF \Pump:BUART:txn\ : LABEL IS "macrocell82";
+    ATTRIBUTE lib_model OF \Pump:BUART:tx_state_1\ : LABEL IS "macrocell83";
+    ATTRIBUTE lib_model OF \Pump:BUART:tx_state_0\ : LABEL IS "macrocell84";
+    ATTRIBUTE lib_model OF \Pump:BUART:tx_state_2\ : LABEL IS "macrocell85";
+    ATTRIBUTE lib_model OF \Pump:BUART:tx_bitclk\ : LABEL IS "macrocell86";
+    ATTRIBUTE lib_model OF \Pump:BUART:tx_ctrl_mark_last\ : LABEL IS "macrocell87";
+    ATTRIBUTE lib_model OF \Pump:BUART:tx_parity_bit\ : LABEL IS "macrocell88";
+    ATTRIBUTE lib_model OF \Pump:BUART:rx_state_0\ : LABEL IS "macrocell89";
+    ATTRIBUTE lib_model OF \Pump:BUART:rx_load_fifo\ : LABEL IS "macrocell90";
+    ATTRIBUTE lib_model OF \Pump:BUART:rx_state_3\ : LABEL IS "macrocell91";
+    ATTRIBUTE lib_model OF \Pump:BUART:rx_state_2\ : LABEL IS "macrocell92";
+    ATTRIBUTE lib_model OF \Pump:BUART:rx_bitclk_enable\ : LABEL IS "macrocell93";
+    ATTRIBUTE lib_model OF \Pump:BUART:rx_state_stop1_reg\ : LABEL IS "macrocell94";
+    ATTRIBUTE lib_model OF MODIN9_1 : LABEL IS "macrocell95";
+    ATTRIBUTE lib_model OF MODIN9_0 : LABEL IS "macrocell96";
+    ATTRIBUTE lib_model OF \Pump:BUART:rx_status_2\ : LABEL IS "macrocell97";
+    ATTRIBUTE lib_model OF \Pump:BUART:rx_status_3\ : LABEL IS "macrocell98";
+    ATTRIBUTE lib_model OF \Pump:BUART:rx_parity_error_pre\ : LABEL IS "macrocell99";
+    ATTRIBUTE lib_model OF \Pump:BUART:rx_last\ : LABEL IS "macrocell100";
+    ATTRIBUTE lib_model OF \Pump:BUART:rx_parity_bit\ : LABEL IS "macrocell101";
+    ATTRIBUTE lib_model OF \Display1:BUART:txn\ : LABEL IS "macrocell102";
+    ATTRIBUTE lib_model OF \Display1:BUART:tx_state_1\ : LABEL IS "macrocell103";
+    ATTRIBUTE lib_model OF \Display1:BUART:tx_state_0\ : LABEL IS "macrocell104";
+    ATTRIBUTE lib_model OF \Display1:BUART:tx_state_2\ : LABEL IS "macrocell105";
+    ATTRIBUTE lib_model OF \Display1:BUART:tx_bitclk\ : LABEL IS "macrocell106";
+    ATTRIBUTE lib_model OF \Display1:BUART:tx_ctrl_mark_last\ : LABEL IS "macrocell107";
+    ATTRIBUTE lib_model OF \Display1:BUART:rx_state_0\ : LABEL IS "macrocell108";
+    ATTRIBUTE lib_model OF \Display1:BUART:rx_load_fifo\ : LABEL IS "macrocell109";
+    ATTRIBUTE lib_model OF \Display1:BUART:rx_state_3\ : LABEL IS "macrocell110";
+    ATTRIBUTE lib_model OF \Display1:BUART:rx_state_2\ : LABEL IS "macrocell111";
+    ATTRIBUTE lib_model OF \Display1:BUART:rx_bitclk_enable\ : LABEL IS "macrocell112";
+    ATTRIBUTE lib_model OF \Display1:BUART:rx_state_stop1_reg\ : LABEL IS "macrocell113";
+    ATTRIBUTE lib_model OF MODIN13_1 : LABEL IS "macrocell114";
+    ATTRIBUTE lib_model OF MODIN13_0 : LABEL IS "macrocell115";
+    ATTRIBUTE lib_model OF \Display1:BUART:rx_status_3\ : LABEL IS "macrocell116";
+    ATTRIBUTE lib_model OF \Display1:BUART:rx_last\ : LABEL IS "macrocell117";
+    ATTRIBUTE lib_model OF \Display2:BUART:txn\ : LABEL IS "macrocell118";
+    ATTRIBUTE lib_model OF \Display2:BUART:tx_state_1\ : LABEL IS "macrocell119";
+    ATTRIBUTE lib_model OF \Display2:BUART:tx_state_0\ : LABEL IS "macrocell120";
+    ATTRIBUTE lib_model OF \Display2:BUART:tx_state_2\ : LABEL IS "macrocell121";
+    ATTRIBUTE lib_model OF \Display2:BUART:tx_bitclk\ : LABEL IS "macrocell122";
+    ATTRIBUTE lib_model OF \Display2:BUART:tx_ctrl_mark_last\ : LABEL IS "macrocell123";
+    ATTRIBUTE lib_model OF \Display2:BUART:rx_state_0\ : LABEL IS "macrocell124";
+    ATTRIBUTE lib_model OF \Display2:BUART:rx_load_fifo\ : LABEL IS "macrocell125";
+    ATTRIBUTE lib_model OF \Display2:BUART:rx_state_3\ : LABEL IS "macrocell126";
+    ATTRIBUTE lib_model OF \Display2:BUART:rx_state_2\ : LABEL IS "macrocell127";
+    ATTRIBUTE lib_model OF \Display2:BUART:rx_bitclk_enable\ : LABEL IS "macrocell128";
+    ATTRIBUTE lib_model OF \Display2:BUART:rx_state_stop1_reg\ : LABEL IS "macrocell129";
+    ATTRIBUTE lib_model OF \Display2:BUART:pollcount_1\ : LABEL IS "macrocell130";
+    ATTRIBUTE lib_model OF \Display2:BUART:pollcount_0\ : LABEL IS "macrocell131";
+    ATTRIBUTE lib_model OF \Display2:BUART:rx_status_3\ : LABEL IS "macrocell132";
+    ATTRIBUTE lib_model OF \Display2:BUART:rx_last\ : LABEL IS "macrocell133";
     COMPONENT clockblockcell
         PORT (
             dclk_0 : OUT std_ulogic;
@@ -903,10 +906,10 @@ BEGIN
             dclk_0 => \Display2:Net_9_local\,
             dclk_glb_1 => \Display1:Net_9\,
             dclk_1 => \Display1:Net_9_local\,
-            dclk_glb_2 => \RF_Connection:Net_9\,
-            dclk_2 => \RF_Connection:Net_9_local\,
-            dclk_glb_3 => \Printer:Net_9\,
-            dclk_3 => \Printer:Net_9_local\,
+            dclk_glb_2 => \Printer:Net_9\,
+            dclk_2 => \Printer:Net_9_local\,
+            dclk_glb_3 => \RF_Connection:Net_9\,
+            dclk_3 => \RF_Connection:Net_9_local\,
             dclk_glb_4 => Net_1067,
             dclk_4 => Net_1067_local,
             dclk_glb_5 => Net_1129,
@@ -2762,7 +2765,7 @@ BEGIN
             cl1_sync => 1,
             cmsb_sync => 1,
             co_msb_sync => 1,
-            cy_dpconfig => "1010100001000000001000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111000000001111111100001111001000000100000000000101111100000000000000001000",
+            cy_dpconfig => "1010100001000000001000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111000000001111111100000111001000000100000000000101111100000000000000001000",
             d0_init => "00000000",
             d1_init => "00000000",
             f0_blk_sync => 1,
@@ -2848,7 +2851,7 @@ BEGIN
         GENERIC MAP(
             cy_alt_mode => 0,
             cy_init_value => "0000000",
-            cy_period => "1110110",
+            cy_period => "1110010",
             cy_route_en => 1,
             cy_route_ld => 1,
             clk_inv => '0',
@@ -2858,10 +2861,10 @@ BEGIN
             reset => open,
             load => \RF_Connection:BUART:rx_counter_load\,
             enable => open,
-            count_6 => \RF_Connection:BUART:rx_count_6\,
-            count_5 => \RF_Connection:BUART:rx_count_5\,
-            count_4 => \RF_Connection:BUART:rx_count_4\,
-            count_3 => \RF_Connection:BUART:rx_count_3\,
+            count_6 => MODIN4_6,
+            count_5 => MODIN4_5,
+            count_4 => MODIN4_4,
+            count_3 => MODIN4_3,
             count_2 => \RF_Connection:BUART:rx_count_2\,
             count_1 => \RF_Connection:BUART:rx_count_1\,
             count_0 => \RF_Connection:BUART:rx_count_0\,
@@ -3153,7 +3156,8 @@ BEGIN
             status_3 => \Pump:BUART:tx_fifo_notfull\,
             status_2 => \Pump:BUART:tx_status_2\,
             status_1 => \Pump:BUART:tx_fifo_empty\,
-            status_0 => \Pump:BUART:tx_status_0\);
+            status_0 => \Pump:BUART:tx_status_0\,
+            interrupt => Net_91);
 
     \Pump:BUART:sRX:RxShifter:u0\:datapathcell
         GENERIC MAP(
@@ -3660,6 +3664,53 @@ BEGIN
             interrupt => Net_124,
             clock => ClockBlock_BUS_CLK);
 
+    \Waitable_4:TimerHW\:timercell
+        GENERIC MAP(
+            cy_registers => "")
+        PORT MAP(
+            clock => \ClockBlock.dclk_glb_ff_5__sig\,
+            kill => open,
+            enable => __ONE__,
+            capture => open,
+            timer_reset => open,
+            tc => \Waitable_4:Net_51\,
+            cmp => \Waitable_4:Net_261\,
+            irq => Net_186);
+
+    \Waitable_3:TimerHW\:timercell
+        GENERIC MAP(
+            cy_registers => "")
+        PORT MAP(
+            clock => \ClockBlock.dclk_glb_ff_5__sig\,
+            kill => open,
+            enable => __ONE__,
+            capture => open,
+            timer_reset => open,
+            tc => \Waitable_3:Net_51\,
+            cmp => \Waitable_3:Net_261\,
+            irq => Net_194);
+
+    isr_1:interrupt
+        GENERIC MAP(
+            int_type => "10")
+        PORT MAP(
+            interrupt => Net_194,
+            clock => ClockBlock_BUS_CLK);
+
+    isr_2:interrupt
+        GENERIC MAP(
+            int_type => "10")
+        PORT MAP(
+            interrupt => Net_186,
+            clock => ClockBlock_BUS_CLK);
+
+    isr_5:interrupt
+        GENERIC MAP(
+            int_type => "10")
+        PORT MAP(
+            interrupt => Net_91,
+            clock => ClockBlock_BUS_CLK);
+
     \RF_Connection:BUART:txn\:macrocell
         GENERIC MAP(
             eqn_main => "(main_0 * main_1 * !main_3) + (main_0 * main_2) + (main_4)",
@@ -3799,7 +3850,7 @@ BEGIN
 
     \RF_Connection:BUART:rx_state_0\:macrocell
         GENERIC MAP(
-            eqn_main => "(!main_0 * !main_1 * main_2 * !main_3 * !main_4 * main_5) + (!main_0 * main_1 * !main_4 * !main_5 * !main_6 * main_8) + (!main_0 * main_1 * !main_4 * !main_5 * !main_7 * main_8)",
+            eqn_main => "(!main_0 * !main_1 * main_2 * !main_3 * !main_4 * main_5) + (!main_0 * main_1 * !main_4 * !main_5 * !main_6 * !main_7) + (!main_0 * main_1 * !main_4 * !main_5 * !main_6 * !main_8)",
             clk_inv => '0',
             clken_mode => 1)
         PORT MAP(
@@ -3811,13 +3862,13 @@ BEGIN
             main_3 => \RF_Connection:BUART:rx_postpoll\,
             main_4 => \RF_Connection:BUART:rx_state_3\,
             main_5 => \RF_Connection:BUART:rx_state_2\,
-            main_6 => \RF_Connection:BUART:rx_count_6\,
-            main_7 => \RF_Connection:BUART:rx_count_5\,
-            main_8 => \RF_Connection:BUART:rx_count7_bit8_wire\);
+            main_6 => MODIN4_6,
+            main_7 => MODIN4_5,
+            main_8 => MODIN4_4);
 
     \RF_Connection:BUART:rx_load_fifo\:macrocell
         GENERIC MAP(
-            eqn_main => "(!main_0 * !main_1 * !main_2 * main_3 * !main_5 * !main_6 * !main_7 * main_9) + (!main_0 * !main_1 * !main_2 * main_3 * !main_5 * !main_6 * !main_8 * main_9) + (!main_2 * !main_3 * main_4 * main_5 * !main_6)",
+            eqn_main => "(!main_0 * !main_1 * !main_2 * main_3 * !main_5 * !main_6 * !main_7 * !main_8) + (!main_0 * !main_1 * !main_2 * main_3 * !main_5 * !main_6 * !main_7 * !main_9) + (!main_2 * !main_3 * main_4 * main_5 * !main_6)",
             clk_inv => '0',
             clken_mode => 1)
         PORT MAP(
@@ -3830,13 +3881,13 @@ BEGIN
             main_4 => \RF_Connection:BUART:rx_bitclk_enable\,
             main_5 => \RF_Connection:BUART:rx_state_3\,
             main_6 => \RF_Connection:BUART:rx_state_2\,
-            main_7 => \RF_Connection:BUART:rx_count_6\,
-            main_8 => \RF_Connection:BUART:rx_count_5\,
-            main_9 => \RF_Connection:BUART:rx_count7_bit8_wire\);
+            main_7 => MODIN4_6,
+            main_8 => MODIN4_5,
+            main_9 => MODIN4_4);
 
     \RF_Connection:BUART:rx_state_3\:macrocell
         GENERIC MAP(
-            eqn_main => "(!main_0 * !main_1 * main_2 * main_3 * main_4) + (!main_0 * main_1 * !main_3 * !main_4 * !main_5 * main_7) + (!main_0 * main_1 * !main_3 * !main_4 * !main_6 * main_7)",
+            eqn_main => "(!main_0 * !main_1 * main_2 * main_3 * main_4) + (!main_0 * main_1 * !main_3 * !main_4 * !main_5 * !main_6) + (!main_0 * main_1 * !main_3 * !main_4 * !main_5 * !main_7)",
             clk_inv => '0',
             clken_mode => 1)
         PORT MAP(
@@ -3847,13 +3898,13 @@ BEGIN
             main_2 => \RF_Connection:BUART:rx_bitclk_enable\,
             main_3 => \RF_Connection:BUART:rx_state_3\,
             main_4 => \RF_Connection:BUART:rx_state_2\,
-            main_5 => \RF_Connection:BUART:rx_count_6\,
-            main_6 => \RF_Connection:BUART:rx_count_5\,
-            main_7 => \RF_Connection:BUART:rx_count7_bit8_wire\);
+            main_5 => MODIN4_6,
+            main_6 => MODIN4_5,
+            main_7 => MODIN4_4);
 
     \RF_Connection:BUART:rx_state_2\:macrocell
         GENERIC MAP(
-            eqn_main => "(!main_0 * !main_3 * !main_4 * !main_6 * !main_7 * main_11) + (!main_1 * !main_2 * !main_3 * main_4 * !main_6 * !main_7 * !main_8 * main_10) + (!main_1 * !main_2 * !main_3 * main_4 * !main_6 * !main_7 * !main_9 * main_10) + (!main_3 * !main_4 * main_5 * main_6) + (!main_3 * !main_4 * main_5 * main_7)",
+            eqn_main => "(!main_0 * !main_3 * !main_4 * !main_6 * !main_7 * main_8) + (!main_1 * !main_2 * !main_3 * main_4 * !main_6 * !main_7 * !main_9 * !main_10) + (!main_1 * !main_2 * !main_3 * main_4 * !main_6 * !main_7 * !main_9 * !main_11) + (!main_3 * !main_4 * main_5 * main_6) + (!main_3 * !main_4 * main_5 * main_7)",
             clk_inv => '0',
             clken_mode => 1)
         PORT MAP(
@@ -3867,39 +3918,22 @@ BEGIN
             main_5 => \RF_Connection:BUART:rx_bitclk_enable\,
             main_6 => \RF_Connection:BUART:rx_state_3\,
             main_7 => \RF_Connection:BUART:rx_state_2\,
-            main_8 => \RF_Connection:BUART:rx_count_6\,
-            main_9 => \RF_Connection:BUART:rx_count_5\,
-            main_10 => \RF_Connection:BUART:rx_count7_bit8_wire\,
-            main_11 => \RF_Connection:BUART:rx_last\);
-
-    \RF_Connection:BUART:rx_count7_bit8_wire\:macrocell
-        GENERIC MAP(
-            eqn_main => "(!main_0 * !main_1 * !main_2 * !main_3) + (!main_4 * !main_5)",
-            clk_inv => '0',
-            clken_mode => 1)
-        PORT MAP(
-            q => \RF_Connection:BUART:rx_count7_bit8_wire\,
-            clock_0 => \RF_Connection:Net_9\,
-            main_0 => \RF_Connection:BUART:rx_state_1\,
-            main_1 => \RF_Connection:BUART:rx_state_0\,
-            main_2 => \RF_Connection:BUART:rx_state_3\,
-            main_3 => \RF_Connection:BUART:rx_state_2\,
-            main_4 => \RF_Connection:BUART:rx_count7_tc\,
-            main_5 => \RF_Connection:BUART:rx_count7_bit8_wire\);
+            main_8 => \RF_Connection:BUART:rx_last\,
+            main_9 => MODIN4_6,
+            main_10 => MODIN4_5,
+            main_11 => MODIN4_4);
 
     \RF_Connection:BUART:rx_bitclk_enable\:macrocell
         GENERIC MAP(
-            eqn_main => "(!main_0 * !main_1 * !main_2 * !main_3 * !main_4) + (!main_0 * main_1 * main_2 * main_3 * main_4)",
+            eqn_main => "(!main_0 * !main_1 * !main_2)",
             clk_inv => '0',
             clken_mode => 1)
         PORT MAP(
             q => \RF_Connection:BUART:rx_bitclk_enable\,
             clock_0 => \RF_Connection:Net_9\,
-            main_0 => \RF_Connection:BUART:rx_count_3\,
-            main_1 => \RF_Connection:BUART:rx_count_2\,
-            main_2 => \RF_Connection:BUART:rx_count_1\,
-            main_3 => \RF_Connection:BUART:rx_count_0\,
-            main_4 => \RF_Connection:BUART:rx_count7_bit8_wire\);
+            main_0 => \RF_Connection:BUART:rx_count_2\,
+            main_1 => \RF_Connection:BUART:rx_count_1\,
+            main_2 => \RF_Connection:BUART:rx_count_0\);
 
     \RF_Connection:BUART:rx_state_stop1_reg\:macrocell
         GENERIC MAP(
@@ -3916,35 +3950,30 @@ BEGIN
 
     MODIN1_1:macrocell
         GENERIC MAP(
-            eqn_main => "(!main_0 * !main_1 * !main_2 * !main_3 * !main_4 * main_5) + (main_6)",
+            eqn_main => "(!main_0 * !main_1 * !main_2 * main_3) + (main_0 * !main_1 * !main_2 * !main_3 * main_4) + (!main_1 * !main_2 * main_3 * !main_4)",
             clk_inv => '0',
             clken_mode => 1)
         PORT MAP(
             q => MODIN1_1,
             clock_0 => \RF_Connection:Net_9\,
             main_0 => Net_165,
-            main_1 => \RF_Connection:BUART:rx_count_3\,
-            main_2 => \RF_Connection:BUART:rx_count_2\,
-            main_3 => \RF_Connection:BUART:rx_count_1\,
-            main_4 => \RF_Connection:BUART:rx_count7_bit8_wire\,
-            main_5 => MODIN1_1,
-            main_6 => MODIN1_1_split);
+            main_1 => \RF_Connection:BUART:rx_count_2\,
+            main_2 => \RF_Connection:BUART:rx_count_1\,
+            main_3 => MODIN1_1,
+            main_4 => MODIN1_0);
 
     MODIN1_0:macrocell
         GENERIC MAP(
-            eqn_main => "(!main_0 * !main_1 * !main_2 * !main_3 * !main_5 * main_6) + (!main_0 * !main_1 * main_2 * main_3 * main_4 * main_5 * main_6) + (!main_0 * main_1 * !main_2 * !main_3 * !main_4 * main_5 * main_6) + (main_0 * !main_1 * !main_2 * !main_3 * !main_5 * !main_6) + (main_0 * !main_1 * main_2 * main_3 * main_4 * main_5 * !main_6) + (main_0 * main_1 * !main_2 * !main_3 * !main_4 * main_5 * !main_6)",
+            eqn_main => "(!main_0 * !main_1 * !main_2 * main_3) + (main_0 * !main_1 * !main_2 * !main_3)",
             clk_inv => '0',
             clken_mode => 1)
         PORT MAP(
             q => MODIN1_0,
             clock_0 => \RF_Connection:Net_9\,
             main_0 => Net_165,
-            main_1 => \RF_Connection:BUART:rx_count_3\,
-            main_2 => \RF_Connection:BUART:rx_count_2\,
-            main_3 => \RF_Connection:BUART:rx_count_1\,
-            main_4 => \RF_Connection:BUART:rx_count_0\,
-            main_5 => \RF_Connection:BUART:rx_count7_bit8_wire\,
-            main_6 => MODIN1_0);
+            main_1 => \RF_Connection:BUART:rx_count_2\,
+            main_2 => \RF_Connection:BUART:rx_count_1\,
+            main_3 => MODIN1_0);
 
     \RF_Connection:BUART:rx_status_2\:macrocell
         GENERIC MAP(
@@ -5008,21 +5037,6 @@ BEGIN
             main_1 => \Display2:BUART:rx_count_1\,
             main_2 => Net_54,
             main_3 => \Display2:BUART:pollcount_0\);
-
-    MODIN1_1_split:macrocell
-        GENERIC MAP(
-            eqn_main => "(!main_0 * !main_1 * main_2 * main_3 * main_4 * main_5 * main_6) + (!main_0 * main_1 * !main_2 * !main_3 * !main_4 * main_5 * main_6) + (main_0 * !main_1 * !main_2 * !main_3 * !main_5 * !main_6 * main_7) + (main_0 * !main_1 * main_2 * main_3 * main_4 * main_5 * !main_6 * main_7) + (main_0 * main_1 * !main_2 * !main_3 * !main_4 * main_5 * !main_6 * main_7) + (!main_1 * !main_2 * !main_3 * !main_5 * main_6 * !main_7) + (!main_1 * main_2 * main_3 * main_4 * main_5 * main_6 * !main_7) + (main_1 * !main_2 * !main_3 * !main_4 * main_5 * main_6 * !main_7)",
-            clken_mode => 1)
-        PORT MAP(
-            q => MODIN1_1_split,
-            main_0 => Net_165,
-            main_1 => \RF_Connection:BUART:rx_count_3\,
-            main_2 => \RF_Connection:BUART:rx_count_2\,
-            main_3 => \RF_Connection:BUART:rx_count_1\,
-            main_4 => \RF_Connection:BUART:rx_count_0\,
-            main_5 => \RF_Connection:BUART:rx_count7_bit8_wire\,
-            main_6 => MODIN1_1,
-            main_7 => MODIN1_0);
 
     \Display2:BUART:rx_status_3\:macrocell
         GENERIC MAP(

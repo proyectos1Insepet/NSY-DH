@@ -2,7 +2,7 @@
 --	Conversion of Design01.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Mon May 22 11:16:47 2017
+--	Wed May 24 15:24:45 2017
 --
 
 USE cypress.cypress.all;
@@ -210,7 +210,6 @@ SIGNAL \RF_Connection:BUART:rx_counter_load\ : bit;
 SIGNAL \RF_Connection:BUART:rx_state_3\ : bit;
 SIGNAL \RF_Connection:BUART:rx_state_2\ : bit;
 SIGNAL \RF_Connection:BUART:rx_bitclk_pre\ : bit;
-SIGNAL \RF_Connection:BUART:rx_count_3\ : bit;
 SIGNAL \RF_Connection:BUART:rx_count_2\ : bit;
 SIGNAL \RF_Connection:BUART:rx_count_1\ : bit;
 SIGNAL \RF_Connection:BUART:rx_count_0\ : bit;
@@ -218,9 +217,9 @@ SIGNAL \RF_Connection:BUART:rx_bitclk_pre16x\ : bit;
 SIGNAL \RF_Connection:BUART:rx_count_6\ : bit;
 SIGNAL \RF_Connection:BUART:rx_count_5\ : bit;
 SIGNAL \RF_Connection:BUART:rx_count_4\ : bit;
+SIGNAL \RF_Connection:BUART:rx_count_3\ : bit;
 SIGNAL \RF_Connection:BUART:rx_count7_tc\ : bit;
 SIGNAL \RF_Connection:BUART:rx_count7_bit8_wire\ : bit;
-SIGNAL \RF_Connection:BUART:rx_count7_bit8\ : bit;
 SIGNAL \RF_Connection:BUART:rx_bitclk\ : bit;
 SIGNAL \RF_Connection:BUART:rx_state_stop1_reg\ : bit;
 SIGNAL \RF_Connection:BUART:rx_poll_bit1\ : bit;
@@ -295,12 +294,13 @@ SIGNAL \RF_Connection:BUART:sRX:MODULE_4:g2:a0:newa_6\ : bit;
 SIGNAL \RF_Connection:BUART:sRX:MODULE_4:g2:a0:newa_5\ : bit;
 SIGNAL \RF_Connection:BUART:sRX:MODULE_4:g2:a0:newa_4\ : bit;
 SIGNAL \RF_Connection:BUART:sRX:MODULE_4:g2:a0:newa_3\ : bit;
-SIGNAL \RF_Connection:BUART:sRX:MODULE_4:g2:a0:newa_2\ : bit;
 SIGNAL MODIN4_6 : bit;
-SIGNAL \RF_Connection:BUART:sRX:MODULE_4:g2:a0:newa_1\ : bit;
+SIGNAL \RF_Connection:BUART:sRX:MODULE_4:g2:a0:newa_2\ : bit;
 SIGNAL MODIN4_5 : bit;
-SIGNAL \RF_Connection:BUART:sRX:MODULE_4:g2:a0:newa_0\ : bit;
+SIGNAL \RF_Connection:BUART:sRX:MODULE_4:g2:a0:newa_1\ : bit;
 SIGNAL MODIN4_4 : bit;
+SIGNAL \RF_Connection:BUART:sRX:MODULE_4:g2:a0:newa_0\ : bit;
+SIGNAL MODIN4_3 : bit;
 SIGNAL \RF_Connection:BUART:sRX:MODULE_4:g2:a0:newb_6\ : bit;
 SIGNAL \RF_Connection:BUART:sRX:MODULE_4:g2:a0:newb_5\ : bit;
 SIGNAL \RF_Connection:BUART:sRX:MODULE_4:g2:a0:newb_4\ : bit;
@@ -1821,7 +1821,7 @@ SIGNAL \Timer_Animacion2:Net_51\ : bit;
 SIGNAL \Timer_Animacion2:Net_261\ : bit;
 SIGNAL \Timer_Animacion2:Net_57\ : bit;
 SIGNAL Net_124 : bit;
-SIGNAL Net_129 : bit;
+SIGNAL Net_219 : bit;
 SIGNAL \Timer_Animacion2:Net_102\ : bit;
 SIGNAL tmpOE__IB1_net_0 : bit;
 SIGNAL tmpFB_0__IB1_net_0 : bit;
@@ -1833,6 +1833,24 @@ SIGNAL tmpFB_0__IB2_net_0 : bit;
 SIGNAL tmpIO_0__IB2_net_0 : bit;
 TERMINAL tmpSIOVREF__IB2_net_0 : bit;
 SIGNAL tmpINTERRUPT_0__IB2_net_0 : bit;
+SIGNAL \Waitable_4:Net_260\ : bit;
+SIGNAL \Waitable_4:Net_266\ : bit;
+SIGNAL Net_185 : bit;
+SIGNAL \Waitable_4:Net_51\ : bit;
+SIGNAL \Waitable_4:Net_261\ : bit;
+SIGNAL \Waitable_4:Net_57\ : bit;
+SIGNAL Net_186 : bit;
+SIGNAL Net_191 : bit;
+SIGNAL \Waitable_4:Net_102\ : bit;
+SIGNAL \Waitable_3:Net_260\ : bit;
+SIGNAL \Waitable_3:Net_266\ : bit;
+SIGNAL Net_193 : bit;
+SIGNAL \Waitable_3:Net_51\ : bit;
+SIGNAL \Waitable_3:Net_261\ : bit;
+SIGNAL \Waitable_3:Net_57\ : bit;
+SIGNAL Net_194 : bit;
+SIGNAL Net_199 : bit;
+SIGNAL \Waitable_3:Net_102\ : bit;
 SIGNAL \RF_Connection:BUART:reset_reg\\D\ : bit;
 SIGNAL \RF_Connection:BUART:txn\\D\ : bit;
 SIGNAL \RF_Connection:BUART:tx_state_1\\D\ : bit;
@@ -1848,7 +1866,6 @@ SIGNAL \RF_Connection:BUART:rx_state_0\\D\ : bit;
 SIGNAL \RF_Connection:BUART:rx_load_fifo\\D\ : bit;
 SIGNAL \RF_Connection:BUART:rx_state_3\\D\ : bit;
 SIGNAL \RF_Connection:BUART:rx_state_2\\D\ : bit;
-SIGNAL \RF_Connection:BUART:rx_count7_bit8\\D\ : bit;
 SIGNAL \RF_Connection:BUART:rx_bitclk\\D\ : bit;
 SIGNAL \RF_Connection:BUART:rx_state_stop1_reg\\D\ : bit;
 SIGNAL \RF_Connection:BUART:pollcount_1\\D\ : bit;
@@ -2060,30 +2077,19 @@ Net_173 <= (not \RF_Connection:BUART:txn\);
 
 \RF_Connection:BUART:rx_counter_load\ <= ((not \RF_Connection:BUART:rx_state_1\ and not \RF_Connection:BUART:rx_state_0\ and not \RF_Connection:BUART:rx_state_3\ and not \RF_Connection:BUART:rx_state_2\));
 
-\RF_Connection:BUART:rx_bitclk\\D\ <= ((not \RF_Connection:BUART:rx_count_3\ and not \RF_Connection:BUART:rx_count_2\ and not \RF_Connection:BUART:rx_count_1\ and not \RF_Connection:BUART:rx_count_0\ and not \RF_Connection:BUART:rx_count7_bit8_wire\)
-	OR (not \RF_Connection:BUART:rx_count_3\ and \RF_Connection:BUART:rx_count_2\ and \RF_Connection:BUART:rx_count_1\ and \RF_Connection:BUART:rx_count_0\ and \RF_Connection:BUART:rx_count7_bit8_wire\));
+\RF_Connection:BUART:rx_bitclk_pre\ <= ((not \RF_Connection:BUART:rx_count_2\ and not \RF_Connection:BUART:rx_count_1\ and not \RF_Connection:BUART:rx_count_0\));
 
 \RF_Connection:BUART:rx_state_stop1_reg\\D\ <= (not \RF_Connection:BUART:rx_state_2\
 	OR not \RF_Connection:BUART:rx_state_3\
 	OR \RF_Connection:BUART:rx_state_0\
 	OR \RF_Connection:BUART:rx_state_1\);
 
-\RF_Connection:BUART:pollcount_1\\D\ <= ((not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_count_3\ and not MODIN1_1 and Net_165 and \RF_Connection:BUART:rx_count_2\ and \RF_Connection:BUART:rx_count_1\ and \RF_Connection:BUART:rx_count_0\ and \RF_Connection:BUART:rx_count7_bit8_wire\ and MODIN1_0)
-	OR (not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_count_2\ and not \RF_Connection:BUART:rx_count_1\ and not \RF_Connection:BUART:rx_count_0\ and not MODIN1_1 and Net_165 and \RF_Connection:BUART:rx_count_3\ and \RF_Connection:BUART:rx_count7_bit8_wire\ and MODIN1_0)
-	OR (not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_count_3\ and not MODIN1_0 and \RF_Connection:BUART:rx_count_2\ and \RF_Connection:BUART:rx_count_1\ and \RF_Connection:BUART:rx_count_0\ and \RF_Connection:BUART:rx_count7_bit8_wire\ and MODIN1_1)
-	OR (not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_count_3\ and not \RF_Connection:BUART:rx_count_2\ and not \RF_Connection:BUART:rx_count_1\ and not \RF_Connection:BUART:rx_count7_bit8_wire\ and not MODIN1_1 and Net_165 and MODIN1_0)
-	OR (not Net_165 and not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_count_3\ and \RF_Connection:BUART:rx_count_2\ and \RF_Connection:BUART:rx_count_1\ and \RF_Connection:BUART:rx_count_0\ and \RF_Connection:BUART:rx_count7_bit8_wire\ and MODIN1_1)
-	OR (not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_count_2\ and not \RF_Connection:BUART:rx_count_1\ and not \RF_Connection:BUART:rx_count_0\ and not MODIN1_0 and \RF_Connection:BUART:rx_count_3\ and \RF_Connection:BUART:rx_count7_bit8_wire\ and MODIN1_1)
-	OR (not Net_165 and not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_count_2\ and not \RF_Connection:BUART:rx_count_1\ and not \RF_Connection:BUART:rx_count_0\ and \RF_Connection:BUART:rx_count_3\ and \RF_Connection:BUART:rx_count7_bit8_wire\ and MODIN1_1)
-	OR (not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_count_3\ and not \RF_Connection:BUART:rx_count_2\ and not \RF_Connection:BUART:rx_count_1\ and not \RF_Connection:BUART:rx_count7_bit8_wire\ and not MODIN1_0 and MODIN1_1)
-	OR (not Net_165 and not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_count_3\ and not \RF_Connection:BUART:rx_count_2\ and not \RF_Connection:BUART:rx_count_1\ and not \RF_Connection:BUART:rx_count7_bit8_wire\ and MODIN1_1));
+\RF_Connection:BUART:pollcount_1\\D\ <= ((not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_count_2\ and not \RF_Connection:BUART:rx_count_1\ and not MODIN1_1 and Net_165 and MODIN1_0)
+	OR (not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_count_2\ and not \RF_Connection:BUART:rx_count_1\ and not MODIN1_0 and MODIN1_1)
+	OR (not Net_165 and not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_count_2\ and not \RF_Connection:BUART:rx_count_1\ and MODIN1_1));
 
-\RF_Connection:BUART:pollcount_0\\D\ <= ((not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_count_3\ and not MODIN1_0 and Net_165 and \RF_Connection:BUART:rx_count_2\ and \RF_Connection:BUART:rx_count_1\ and \RF_Connection:BUART:rx_count_0\ and \RF_Connection:BUART:rx_count7_bit8_wire\)
-	OR (not Net_165 and not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_count_3\ and \RF_Connection:BUART:rx_count_2\ and \RF_Connection:BUART:rx_count_1\ and \RF_Connection:BUART:rx_count_0\ and \RF_Connection:BUART:rx_count7_bit8_wire\ and MODIN1_0)
-	OR (not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_count_2\ and not \RF_Connection:BUART:rx_count_1\ and not \RF_Connection:BUART:rx_count_0\ and not MODIN1_0 and Net_165 and \RF_Connection:BUART:rx_count_3\ and \RF_Connection:BUART:rx_count7_bit8_wire\)
-	OR (not Net_165 and not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_count_2\ and not \RF_Connection:BUART:rx_count_1\ and not \RF_Connection:BUART:rx_count_0\ and \RF_Connection:BUART:rx_count_3\ and \RF_Connection:BUART:rx_count7_bit8_wire\ and MODIN1_0)
-	OR (not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_count_3\ and not \RF_Connection:BUART:rx_count_2\ and not \RF_Connection:BUART:rx_count_1\ and not \RF_Connection:BUART:rx_count7_bit8_wire\ and not MODIN1_0 and Net_165)
-	OR (not Net_165 and not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_count_3\ and not \RF_Connection:BUART:rx_count_2\ and not \RF_Connection:BUART:rx_count_1\ and not \RF_Connection:BUART:rx_count7_bit8_wire\ and MODIN1_0));
+\RF_Connection:BUART:pollcount_0\\D\ <= ((not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_count_2\ and not \RF_Connection:BUART:rx_count_1\ and not MODIN1_0 and Net_165)
+	OR (not Net_165 and not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_count_2\ and not \RF_Connection:BUART:rx_count_1\ and MODIN1_0));
 
 \RF_Connection:BUART:rx_postpoll\ <= ((Net_165 and MODIN1_0)
 	OR MODIN1_1);
@@ -2099,20 +2105,20 @@ Net_173 <= (not \RF_Connection:BUART:txn\);
 \RF_Connection:BUART:rx_parity_error_status\\D\ <= ((not \RF_Connection:BUART:control_3\ and not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_state_1\ and not \RF_Connection:BUART:rx_state_0\ and \RF_Connection:BUART:control_4\ and \RF_Connection:BUART:rx_bitclk_enable\ and \RF_Connection:BUART:rx_state_3\ and \RF_Connection:BUART:rx_state_2\ and \RF_Connection:BUART:rx_parity_error_pre\)
 	OR (not \RF_Connection:BUART:control_4\ and not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_state_1\ and not \RF_Connection:BUART:rx_state_0\ and \RF_Connection:BUART:control_3\ and \RF_Connection:BUART:rx_bitclk_enable\ and \RF_Connection:BUART:rx_state_3\ and \RF_Connection:BUART:rx_state_2\ and \RF_Connection:BUART:rx_parity_error_pre\));
 
-\RF_Connection:BUART:rx_load_fifo\\D\ <= ((not \RF_Connection:BUART:control_4\ and not \RF_Connection:BUART:control_3\ and not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_state_1\ and not \RF_Connection:BUART:rx_state_3\ and not \RF_Connection:BUART:rx_state_2\ and not \RF_Connection:BUART:rx_count_5\ and \RF_Connection:BUART:rx_state_0\ and \RF_Connection:BUART:rx_count7_bit8_wire\)
-	OR (not \RF_Connection:BUART:control_4\ and not \RF_Connection:BUART:control_3\ and not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_state_1\ and not \RF_Connection:BUART:rx_state_3\ and not \RF_Connection:BUART:rx_state_2\ and not \RF_Connection:BUART:rx_count_6\ and \RF_Connection:BUART:rx_state_0\ and \RF_Connection:BUART:rx_count7_bit8_wire\)
+\RF_Connection:BUART:rx_load_fifo\\D\ <= ((not \RF_Connection:BUART:control_4\ and not \RF_Connection:BUART:control_3\ and not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_state_1\ and not \RF_Connection:BUART:rx_state_3\ and not \RF_Connection:BUART:rx_state_2\ and not MODIN4_6 and not MODIN4_4 and \RF_Connection:BUART:rx_state_0\)
+	OR (not \RF_Connection:BUART:control_4\ and not \RF_Connection:BUART:control_3\ and not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_state_1\ and not \RF_Connection:BUART:rx_state_3\ and not \RF_Connection:BUART:rx_state_2\ and not MODIN4_6 and not MODIN4_5 and \RF_Connection:BUART:rx_state_0\)
 	OR (not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_state_1\ and not \RF_Connection:BUART:rx_state_0\ and not \RF_Connection:BUART:rx_state_2\ and \RF_Connection:BUART:rx_bitclk_enable\ and \RF_Connection:BUART:rx_state_3\));
 
-\RF_Connection:BUART:rx_state_3\\D\ <= ((not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_state_1\ and not \RF_Connection:BUART:rx_state_2\ and not \RF_Connection:BUART:rx_count_5\ and \RF_Connection:BUART:rx_state_0\ and \RF_Connection:BUART:rx_count7_bit8_wire\)
-	OR (not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_state_1\ and not \RF_Connection:BUART:rx_state_2\ and not \RF_Connection:BUART:rx_count_6\ and \RF_Connection:BUART:rx_state_0\ and \RF_Connection:BUART:rx_count7_bit8_wire\)
+\RF_Connection:BUART:rx_state_3\\D\ <= ((not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_state_1\ and not \RF_Connection:BUART:rx_state_2\ and not MODIN4_6 and not MODIN4_4 and \RF_Connection:BUART:rx_state_0\)
+	OR (not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_state_1\ and not \RF_Connection:BUART:rx_state_2\ and not MODIN4_6 and not MODIN4_5 and \RF_Connection:BUART:rx_state_0\)
 	OR (not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_bitclk_enable\ and \RF_Connection:BUART:rx_state_3\)
 	OR (not \RF_Connection:BUART:reset_reg\ and \RF_Connection:BUART:rx_state_1\ and \RF_Connection:BUART:rx_state_3\)
 	OR (not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_state_2\ and \RF_Connection:BUART:rx_state_3\)
 	OR (not \RF_Connection:BUART:reset_reg\ and \RF_Connection:BUART:rx_state_0\ and \RF_Connection:BUART:rx_state_3\));
 
 \RF_Connection:BUART:rx_state_2\\D\ <= ((not Net_165 and not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_state_1\ and not \RF_Connection:BUART:rx_state_0\ and not \RF_Connection:BUART:rx_state_3\ and not \RF_Connection:BUART:rx_state_2\ and \RF_Connection:BUART:rx_last\)
-	OR (not \RF_Connection:BUART:control_4\ and not \RF_Connection:BUART:control_3\ and not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_state_1\ and not \RF_Connection:BUART:rx_state_3\ and not \RF_Connection:BUART:rx_count_5\ and \RF_Connection:BUART:rx_state_0\ and \RF_Connection:BUART:rx_count7_bit8_wire\)
-	OR (not \RF_Connection:BUART:control_4\ and not \RF_Connection:BUART:control_3\ and not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_state_1\ and not \RF_Connection:BUART:rx_state_3\ and not \RF_Connection:BUART:rx_count_6\ and \RF_Connection:BUART:rx_state_0\ and \RF_Connection:BUART:rx_count7_bit8_wire\)
+	OR (not \RF_Connection:BUART:control_4\ and not \RF_Connection:BUART:control_3\ and not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_state_1\ and not \RF_Connection:BUART:rx_state_3\ and not MODIN4_6 and not MODIN4_4 and \RF_Connection:BUART:rx_state_0\)
+	OR (not \RF_Connection:BUART:control_4\ and not \RF_Connection:BUART:control_3\ and not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_state_1\ and not \RF_Connection:BUART:rx_state_3\ and not MODIN4_6 and not MODIN4_5 and \RF_Connection:BUART:rx_state_0\)
 	OR (not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_state_1\ and not \RF_Connection:BUART:rx_state_0\ and not \RF_Connection:BUART:rx_state_2\ and \RF_Connection:BUART:rx_bitclk_enable\ and \RF_Connection:BUART:rx_state_3\)
 	OR (not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_bitclk_enable\ and \RF_Connection:BUART:rx_state_2\)
 	OR (not \RF_Connection:BUART:reset_reg\ and \RF_Connection:BUART:rx_state_1\ and \RF_Connection:BUART:rx_state_2\)
@@ -2121,8 +2127,8 @@ Net_173 <= (not \RF_Connection:BUART:txn\);
 \RF_Connection:BUART:rx_state_1\\D\ <= ((not \RF_Connection:BUART:reset_reg\ and \RF_Connection:BUART:rx_state_1\));
 
 \RF_Connection:BUART:rx_state_0\\D\ <= ((not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_state_1\ and not \RF_Connection:BUART:rx_postpoll\ and not \RF_Connection:BUART:rx_state_3\ and \RF_Connection:BUART:rx_bitclk_enable\ and \RF_Connection:BUART:rx_state_2\)
-	OR (not \RF_Connection:BUART:reset_reg\ and \RF_Connection:BUART:rx_state_0\ and \RF_Connection:BUART:rx_count_6\ and \RF_Connection:BUART:rx_count_5\)
-	OR (not \RF_Connection:BUART:reset_reg\ and not \RF_Connection:BUART:rx_count7_bit8_wire\ and \RF_Connection:BUART:rx_state_0\)
+	OR (not \RF_Connection:BUART:reset_reg\ and \RF_Connection:BUART:rx_state_0\ and MODIN4_5 and MODIN4_4)
+	OR (not \RF_Connection:BUART:reset_reg\ and \RF_Connection:BUART:rx_state_0\ and MODIN4_6)
 	OR (not \RF_Connection:BUART:reset_reg\ and \RF_Connection:BUART:rx_state_0\ and \RF_Connection:BUART:rx_state_3\)
 	OR (not \RF_Connection:BUART:reset_reg\ and \RF_Connection:BUART:rx_state_1\ and \RF_Connection:BUART:rx_state_0\)
 	OR (not \RF_Connection:BUART:reset_reg\ and \RF_Connection:BUART:rx_state_0\ and \RF_Connection:BUART:rx_state_2\));
@@ -2130,15 +2136,6 @@ Net_173 <= (not \RF_Connection:BUART:txn\);
 \RF_Connection:BUART:rx_last\\D\ <= ((not \RF_Connection:BUART:reset_reg\ and Net_165));
 
 \RF_Connection:BUART:rx_address_detected\\D\ <= ((not \RF_Connection:BUART:reset_reg\ and \RF_Connection:BUART:rx_address_detected\));
-
-\RF_Connection:BUART:rx_count7_bit8\\D\ <= ((not \RF_Connection:BUART:reset_reg\ and \RF_Connection:BUART:rx_state_2\ and \RF_Connection:BUART:rx_count7_bit8_wire\)
-	OR (not \RF_Connection:BUART:reset_reg\ and \RF_Connection:BUART:rx_state_3\ and \RF_Connection:BUART:rx_count7_bit8_wire\)
-	OR (not \RF_Connection:BUART:reset_reg\ and \RF_Connection:BUART:rx_state_0\ and \RF_Connection:BUART:rx_count7_bit8_wire\)
-	OR (not \RF_Connection:BUART:reset_reg\ and \RF_Connection:BUART:rx_state_1\ and \RF_Connection:BUART:rx_count7_bit8_wire\)
-	OR (not \RF_Connection:BUART:reset_reg\ and \RF_Connection:BUART:rx_state_2\ and \RF_Connection:BUART:rx_count7_tc\)
-	OR (not \RF_Connection:BUART:reset_reg\ and \RF_Connection:BUART:rx_state_3\ and \RF_Connection:BUART:rx_count7_tc\)
-	OR (not \RF_Connection:BUART:reset_reg\ and \RF_Connection:BUART:rx_state_0\ and \RF_Connection:BUART:rx_count7_tc\)
-	OR (not \RF_Connection:BUART:reset_reg\ and \RF_Connection:BUART:rx_state_1\ and \RF_Connection:BUART:rx_count7_tc\));
 
 \RF_Connection:BUART:rx_parity_bit\\D\ <= ((not \RF_Connection:BUART:rx_state_0\ and not \RF_Connection:BUART:rx_state_2\ and \RF_Connection:BUART:rx_parity_bit\)
 	OR (\RF_Connection:BUART:rx_postpoll\ and \RF_Connection:BUART:rx_state_2\ and \RF_Connection:BUART:rx_parity_bit\)
@@ -2759,7 +2756,7 @@ RF_Rx:cy_psoc3_pins_v1_10
 		id=>"6b69f897-afda-42a2-a482-de66fa1e4197/be0a0e37-ad17-42ca-b5a1-1a654d736358",
 		source_clock_id=>"",
 		divisor=>0,
-		period=>"6510416666.66667",
+		period=>"13020833333.3333",
 		is_direct=>'0',
 		is_digital=>'1')
 	PORT MAP(clock_out=>\RF_Connection:Net_9\,
@@ -2869,7 +2866,7 @@ RF_Rx:cy_psoc3_pins_v1_10
 			Net_164, Net_164, Net_164, Net_164),
 		po=>open);
 \RF_Connection:BUART:sTX:sCLOCK:TxBitClkGen\:cy_psoc3_dp
-	GENERIC MAP(cy_dpconfig=>"1010100001000000001000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111000000001111111100001111001000000100000000000101111100000000000000001000",
+	GENERIC MAP(cy_dpconfig=>"1010100001000000001000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111000000001111111100000111001000000100000000000101111100000000000000001000",
 		d0_init=>"00000000",
 		d1_init=>"00000000",
 		a0_init=>"00000000",
@@ -3051,7 +3048,7 @@ RF_Rx:cy_psoc3_pins_v1_10
 			Net_164, Net_164, Net_164, Net_164),
 		po=>open);
 \RF_Connection:BUART:sRX:RxBitCounter\:cy_psoc3_count7
-	GENERIC MAP(cy_period=>"1110110",
+	GENERIC MAP(cy_period=>"1110010",
 		cy_init_value=>"0000000",
 		cy_route_ld=>'1',
 		cy_route_en=>'1',
@@ -3060,7 +3057,7 @@ RF_Rx:cy_psoc3_pins_v1_10
 		reset=>\RF_Connection:BUART:reset_reg\,
 		load=>\RF_Connection:BUART:rx_counter_load\,
 		enable=>tmpOE__RF_Tx_net_0,
-		count=>(\RF_Connection:BUART:rx_count_6\, \RF_Connection:BUART:rx_count_5\, \RF_Connection:BUART:rx_count_4\, \RF_Connection:BUART:rx_count_3\,
+		count=>(MODIN4_6, MODIN4_5, MODIN4_4, MODIN4_3,
 			\RF_Connection:BUART:rx_count_2\, \RF_Connection:BUART:rx_count_1\, \RF_Connection:BUART:rx_count_0\),
 		tc=>\RF_Connection:BUART:rx_count7_tc\);
 \RF_Connection:BUART:sRX:RxSts\:cy_psoc3_statusi
@@ -3706,7 +3703,7 @@ Tx_Print:cy_psoc3_pins_v1_10
 		clock=>\Pump:BUART:clock_op\,
 		status=>(Net_164, Net_164, Net_164, \Pump:BUART:tx_fifo_notfull\,
 			\Pump:BUART:tx_status_2\, \Pump:BUART:tx_fifo_empty\, \Pump:BUART:tx_status_0\),
-		interrupt=>\Pump:BUART:tx_interrupt_out\);
+		interrupt=>Net_91);
 \Pump:BUART:sRX:RxShifter:u0\:cy_psoc3_dp
 	GENERIC MAP(cy_dpconfig=>"0000000000000000000000000000000000000000000000000000001001000000000100000000000000010000001100000001000000000000000100100001000011111111000000001111111111111111101000000110001001000001111100000000000000001100",
 		d0_init=>"00000000",
@@ -5279,6 +5276,35 @@ IB2:cy_psoc3_pins_v1_10
 		out_clock_en=>tmpOE__RF_Tx_net_0,
 		out_reset=>Net_164,
 		interrupt=>tmpINTERRUPT_0__IB2_net_0);
+\Waitable_4:TimerHW\:cy_psoc3_timer_v1_0
+	GENERIC MAP(cy_registers=>"")
+	PORT MAP(clock=>Net_1129,
+		kill=>Net_164,
+		enable=>tmpOE__RF_Tx_net_0,
+		capture=>Net_164,
+		timer_reset=>Net_164,
+		tc=>\Waitable_4:Net_51\,
+		compare=>\Waitable_4:Net_261\,
+		interrupt=>Net_186);
+\Waitable_3:TimerHW\:cy_psoc3_timer_v1_0
+	GENERIC MAP(cy_registers=>"")
+	PORT MAP(clock=>Net_1129,
+		kill=>Net_164,
+		enable=>tmpOE__RF_Tx_net_0,
+		capture=>Net_164,
+		timer_reset=>Net_164,
+		tc=>\Waitable_3:Net_51\,
+		compare=>\Waitable_3:Net_261\,
+		interrupt=>Net_194);
+isr_1:cy_isr_v1_0
+	GENERIC MAP(int_type=>"10")
+	PORT MAP(int_signal=>Net_194);
+isr_2:cy_isr_v1_0
+	GENERIC MAP(int_type=>"10")
+	PORT MAP(int_signal=>Net_186);
+isr_5:cy_isr_v1_0
+	GENERIC MAP(int_type=>"10")
+	PORT MAP(int_signal=>Net_91);
 \RF_Connection:BUART:reset_reg\:cy_dff
 	PORT MAP(d=>Net_164,
 		clk=>\RF_Connection:BUART:clock_op\,
@@ -5339,12 +5365,8 @@ Net_177:cy_dff
 	PORT MAP(d=>\RF_Connection:BUART:rx_state_2\\D\,
 		clk=>\RF_Connection:BUART:clock_op\,
 		q=>\RF_Connection:BUART:rx_state_2\);
-\RF_Connection:BUART:rx_count7_bit8\:cy_dff
-	PORT MAP(d=>\RF_Connection:BUART:rx_count7_bit8\\D\,
-		clk=>\RF_Connection:BUART:clock_op\,
-		q=>\RF_Connection:BUART:rx_count7_bit8_wire\);
 \RF_Connection:BUART:rx_bitclk\:cy_dff
-	PORT MAP(d=>\RF_Connection:BUART:rx_bitclk\\D\,
+	PORT MAP(d=>\RF_Connection:BUART:rx_bitclk_pre\,
 		clk=>\RF_Connection:BUART:clock_op\,
 		q=>\RF_Connection:BUART:rx_bitclk_enable\);
 \RF_Connection:BUART:rx_state_stop1_reg\:cy_dff

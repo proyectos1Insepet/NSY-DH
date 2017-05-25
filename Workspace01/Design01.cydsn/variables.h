@@ -63,8 +63,7 @@
     volatile uint8 time[3];          //Hora 
     volatile uint8 date[3];          //Fecha
     volatile uint8 screen[2];        //Pantallas 0:Inhabilitada 1:Habilitada => [0]Tipo de vehiculo [1]Ingrese N° Venta Forma
-    volatile uint8 residue[14];      //Residuo de operacion resta 
-    uint8 temporal[30];              //Utilizada para realizar operaciones temporales        
+    volatile uint8 residue[14];      //Residuo de operacion resta         
     volatile uint8 idSeller[25];     //Identificacion de vendedor
     volatile uint8 typeIdSeller;     //Tipo de identificacion del vendedor
     volatile uint8 passwordSeller[8];//Contraseña Vendedor
@@ -73,6 +72,11 @@
     volatile uint8 PrevStatePump[4]; //Estado anterior en el dispensador [0,pos1,1 pos2...    
     volatile uint8 PlateRequest;
     volatile uint8 IDCast[2];
+    volatile uint8 ActiveRF;
+    volatile uint8 counterRF;
+    volatile uint8 PriceChange;
+    volatile uint8 temporal[30];
+    volatile uint8 CGrade;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     uint8 UnitType,ConversionFactor,MoneyDec,VolDec,PPUDec,DDMode; // Variables configuracion del dispensador
     uint8 statePump[4];              //Estado en el que se encuentra el dispensador
@@ -98,6 +102,9 @@
     uint8 Encabezado1[30];
     uint8 CopiasCredito;
     uint8 GradesHose[5];
+    uint8 RFstateReport;
+
+    
 
     
 /*
@@ -178,6 +185,7 @@ struct position{
     uint8 hose;
     uint8 hoseNumber;
     uint8 rfState;
+    uint8 pumpState;
 };
 
 struct pump{

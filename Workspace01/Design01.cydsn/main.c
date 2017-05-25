@@ -28,9 +28,12 @@
 uint8 MuxVersion [10] = "MUX V. 1.0";
 uint8 passwordPump[5] = "00204";  
 
+
       
 CY_ISR(animacion2);
 CY_ISR(animacion);
+CY_ISR(timerRFTX);
+CY_ISR(timerPump);
 
 void GlobalInitializer()
 {
@@ -41,6 +44,10 @@ void GlobalInitializer()
     Printer_Start();   
     I2C_Bus_Start();
     RF_Connection_Start();
+    isr_1_StartEx(timerRFTX); 
+    Waitable_3_Start();
+    isr_2_StartEx(timerPump); 
+    Waitable_4_Start();
 }
 void StoreConfiguration(){
     EEPROM_1_WriteByte(UnitType,0);
@@ -57,6 +64,8 @@ void loadConfiguration(){
     printPortB = EEPROM_1_ReadByte(9); //Puertos de impresion
     IDCast[0]  = EEPROM_1_ReadByte(10); //ID Estacion1
     IDCast[1]  = EEPROM_1_ReadByte(11); //ID Estacion2    
+    passwordPump[0] = 0x04;
+    configAccess[0] = 0x04; 
 }
 
 
@@ -233,10 +242,11 @@ void InitPump(){
 *********************************************************************************************************
 */
 void PrintTest(){
-    uint8 dato[17]="Test de Impresion";
+    uint8 datoA[26]="Test de Impresion Puerto 1";
+    uint8 datoB[26]="Test de Impresion Puerto 2";
     uint8 x;
-    for(x = 0; x<17;x++){
-        write_psoc1(1,dato[x]);
+    for(x = 0; x<26;x++){
+        write_psoc1(1,datoA[x]);
     }
     write_psoc1(1,10);
     write_psoc1(1,10);
@@ -244,8 +254,8 @@ void PrintTest(){
     write_psoc1(1,10);
     write_psoc1(1,10);
     write_psoc1(1,10);
-    for(x = 0; x<17;x++){
-        write_psoc1(2,dato[x]);
+    for(x = 0; x<26;x++){
+        write_psoc1(2,datoB[x]);
     }
     write_psoc1(2,10);
     write_psoc1(2,10);
@@ -267,37 +277,52 @@ void PrintTest(){
 
 void PollingPump(void){
     uint8 x;
-    if(PumpIsInValidState(get_state(side.a.dir)) && PumpIsInValidState(get_state(side.b.dir)) ){
-        for(x= 0; x < 4; x++){
-            PrevStatePump[x] = statePump[x];
+    if(countPump>8){
+        if(flowDisplay1 == 0){
+            if(PumpIsInValidState(get_state(side.a.dir)) && PumpIsInValidState(get_state(side.b.dir)) ){
+                for(x= 0; x < 4; x++){
+                    PrevStatePump[x] = statePump[x];
+                }
+            }
+            if (NumPositions == 2){
+                statePump[0] = get_state(side.a.dir);                 
+                statePump[1] = get_state(side.b.dir);          
+            }
+            if (NumPositions == 4 ){
+                statePump[0] = get_state(side.a.dir);               
+                statePump[1] = get_state(side.b.dir);          
+                statePump[2] = get_state(side.c.dir);        
+                statePump[3] = get_state(side.d.dir);        
+            }
+            if (NumPositions == 0){
+                InitPump();
+            }
+            if(!PumpIsInValidState(get_state(side.a.dir))){
+                SetPicture(1,DISPLAY_ERROR);
+                SetPicture(2,DISPLAY_ERROR);
+                NumPositions = 0;
+                flowDisplay1 = 0;
+                flowDisplay2 = 0;
+            }
+            if(!PumpIsInValidState(get_state(side.b.dir))){
+                SetPicture(1,DISPLAY_ERROR);
+                SetPicture(2,DISPLAY_ERROR);
+                NumPositions = 0;
+                flowDisplay1 = 0;
+                flowDisplay2 = 0;
+            }
         }
-    }
-    if (NumPositions == 2){
-        statePump[0] = get_state(side.a.dir);                 
-        statePump[1] = get_state(side.b.dir);          
-    }
-    if (NumPositions == 4 ){
-        statePump[0] = get_state(side.a.dir);               
-        statePump[1] = get_state(side.b.dir);          
-        statePump[2] = get_state(side.c.dir);        
-        statePump[3] = get_state(side.d.dir);        
-    }
-    if (NumPositions == 0){
-        InitPump();
-    }
-    if(!PumpIsInValidState(get_state(side.a.dir))){
-        SetPicture(1,DISPLAY_ERROR);
-        SetPicture(2,DISPLAY_ERROR);
-        NumPositions = 0;
-        flowDisplay1 = 0;
-        flowDisplay2 = 0;
-    }
-    if(!PumpIsInValidState(get_state(side.b.dir))){
-        SetPicture(1,DISPLAY_ERROR);
-        SetPicture(2,DISPLAY_ERROR);
-        NumPositions = 0;
-        flowDisplay1 = 0;
-        flowDisplay2 = 0;
+        if(ActiveRF == 0){
+            if(get_state(side.a.dir)== PUMP_IDLE)
+                getTotals(side.a.dir);
+            if(get_state(side.b.dir)== PUMP_IDLE)
+                getTotals(side.b.dir);
+        }
+        if(PriceChange == 1){
+            if(priceChange(side.a.dir,CGrade,side.a.ppuAuthorized[CGrade]))
+                PriceChange = 0;
+        }
+        countPump=0;
     }
 }
 /*
@@ -311,7 +336,7 @@ void PollingPump(void){
 */
 
 void PollingDisplay1(void){ 
-    uint8 x,y,localStatePump;     
+    uint8 x,y;     
     switch(flowDisplay1){
         case 0:
             InitDisplay1();
@@ -539,7 +564,8 @@ void PollingDisplay1(void){
                     flowDisplay1 = 8;
                     isr_3_Stop(); 
                     Timer_Animacion_Stop();
-                    count_protector = 0;                    
+                    count_protector = 0;                        
+                    RFstateReport = 1;
                     SetPicture(1,DISPLAY_DESPACHANDO);   
                     ShowMessage(1,(bufferDisplay1.presetValue[0]),18);
                 }else{
@@ -571,42 +597,35 @@ void PollingDisplay1(void){
         break;
             
         case 8:            
-            localStatePump = get_state(side.a.dir);
-            switch (localStatePump){
-                case 0x06://Espera - venta cero
+            side.a.pumpState = get_state(side.a.dir);
+            switch (side.a.pumpState){
+                case PUMP_IDLE://Espera - venta cero
                     flowDisplay1 = 0;
                     bufferDisplay1.flagActiveSale = false;
                     SetPicture(1,DISPLAY_INICIO0);
                 break;
-                case 0x09://Espera
+                case PUMP_BUSY://Surtiendo
+                    side.a.pumpState = PUMP_BUSY;
                     bufferDisplay1.flagActiveSale = true;
                     bufferDisplay1.flagEndSale = false;
                 break;
-                case 0x0A: //reporte fin venta
-                    getSale(side.a.dir);                    
-                    if(bufferDisplay1.flagPrint ==1){
-                        imprimir(printPortA,side.a.dir);
-                        flowDisplay1 = 0;
-                        SetPicture(1,DISPLAY_INICIO0); 
-                    }else{
-                        flowDisplay1 = 6;
-                        bufferDisplay1.flagEndSale = true;
-                        SetPicture(1,DISPLAY_DESEA_IMPRIMIR_RECIBO); 
-                    }
-                    bufferDisplay1.flagActiveSale = false;                                               
+                case PUMP_PEOT: //reporte fin venta
+                    RFstateReport = 1;
+                    
                 break;
                 case 0x0B://Reporte de venta
-                    getSale(side.a.dir);
-                    if(bufferDisplay1.flagPrint ==1){
-                        imprimir(printPortA,side.a.dir);
-                        flowDisplay1 = 0;
-                        SetPicture(1,DISPLAY_INICIO0); 
-                    }else{
-                        flowDisplay1 = 6;
-                        bufferDisplay1.flagEndSale = true;
-                        SetPicture(1,DISPLAY_DESEA_IMPRIMIR_RECIBO); 
+                    if(getSale(side.a.dir)){
+                        if(bufferDisplay1.flagPrint ==1){
+                            imprimir(printPortA,side.a.dir);
+                            flowDisplay1 = 0;
+                            SetPicture(1,DISPLAY_INICIO0); 
+                        }else{
+                            flowDisplay1 = 6;
+                            bufferDisplay1.flagEndSale = true;
+                            SetPicture(1,DISPLAY_DESEA_IMPRIMIR_RECIBO); 
+                        }
+                        bufferDisplay1.flagActiveSale = false; 
                     }
-                    bufferDisplay1.flagActiveSale = false; 
                 break;
                 
             }
@@ -1266,11 +1285,6 @@ void PollingDisplay2(void){
     }
 }
 
-void RFConsulting(void){
-    
-}
-
-
 
 
 
@@ -1315,40 +1329,78 @@ CY_ISR(animacion2){
     Timer_Animacion2_ReadStatusRegister();
     count_protector2++;
 }
+/*
+*********************************************************************************************************
+*                                         CY_ISR(timerBeagleTX1)
+*
+* Description : Interrupcion que temporiza tiempos de espera
+*               
+*
+* Argument(s) : none
+*
+* Return(s)   : none
+*
+* Caller(s)   : 
+*
+* Note(s)     : none.
+*********************************************************************************************************
+*/
+CY_ISR(timerRFTX){
+    Waitable_3_ReadStatusRegister();
+    countBeagleTX++;
+}
+
+/*
+*********************************************************************************************************
+*                                         CY_ISR(timerPump)
+*
+* Description : Interrupcion que temporiza tiempos de espera para preguntar al surtidor
+*               
+*
+* Argument(s) : none
+*
+* Return(s)   : none
+*
+* Caller(s)   : 
+*
+* Note(s)     : none.
+*********************************************************************************************************
+*/
+CY_ISR(timerPump){
+    Waitable_4_ReadStatusRegister();
+    countPump++;
+}
+
+
+
+
+
+/* [] END OF FILE */
+
 
 
 int main()
-{
-    uint8 x;
+{    
     CyGlobalIntEnable; /* Enable global interrupts. */
     GlobalInitializer();
-    /* Place your initialization/startup code here (e.g. MyInst_Start()) */
-    for(x= 0; x < 4; x++){
-        statePump[x]=0;
-    }
-    passwordPump[0] = 0x04;
-    configAccess[0] = 0x04;
-    lockTurn = 0;
-    EEPROM_1_WriteByte(lockTurn,7); //Carga turno para pruebas 
-    lockTurn = 0;
+    /* Place your initialization/startup code here (e.g. MyInst_Start()) */   
     loadConfiguration();
-    InitPump();      
-    PrinterType = 1; 
+    InitPump(); 
+    CyWdtStart(CYWDT_1024_TICKS,CYWDT_LPMODE_NOCHANGE);
     for(;;)
-    {    
-//        CyWdtClear();
-//        pollingRF_Rx();
-//        if(flowDisplay1 == 0){
-//            PollingPump();
-//            CyWdtClear();        
-//        }        
+    {            
         CyWdtClear();
-        PollingDisplay1();
+        pollingRF_Rx();
+        PollingDisplay1(); 
         CyWdtClear();
         PollingDisplay2();
         CyWdtClear();
-        pollingRF_Rx();
-        CyWdtClear();
+        PollingPump();
+        CyWdtClear();                                
+        pollingRF_Tx(); 
+        counterRF++;
+        if(counterRF >10)
+            ActiveRF =0;          
     }
 }
 
