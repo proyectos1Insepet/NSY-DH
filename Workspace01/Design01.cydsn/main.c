@@ -62,7 +62,7 @@ void StoreConfiguration(){
     EEPROM_1_WriteByte(side.d.dir,15);
 }
 void loadConfiguration(){
-    uint8 x;
+    //uint8 x;
     MoneyDec   = EEPROM_1_ReadByte(2);
     VolDec     = EEPROM_1_ReadByte(3);
     PPUDec     = EEPROM_1_ReadByte(4);
@@ -579,15 +579,15 @@ void PollingDisplay1(void){
             side.a.activeHose = PumpHoseActiveState(side.a.dir);  
             if (side.a.activeHose == side.a.hose){                
                 if(PresetData(side.a.dir,side.a.activeHose,bufferDisplay1.presetValue[0],bufferDisplay1.presetType[0]&0x03)==1){                    
-                    get_state(side.a.dir);
-                    CyDelay(50);
-                    Pump_PutChar(0x10|side.a.dir);//Autoriza el surtidor
-                    CyDelay(50);
-                    flowDisplay1 = 8;
                     isr_3_Stop(); 
                     Timer_Animacion_Stop();
-                    count_protector = 0;                        
+                    get_state(side.a.dir);
+                    //CyDelay(20);
+                    Pump_PutChar(0x10|side.a.dir);//Autoriza el surtidor
+                    //CyDelay(50);
                     RFstateReport = 1;
+                    flowDisplay1 = 8;                    
+                    count_protector = 0;                                            
                     SetPicture(1,DISPLAY_DESPACHANDO);   
                     ShowMessage(1,(bufferDisplay1.presetValue[0]),18);
                 }else{
@@ -623,6 +623,7 @@ void PollingDisplay1(void){
             switch (side.a.pumpState){
                 case PUMP_IDLE://Espera - venta cero
                     flowDisplay1 = 0;
+                    side.a.rfState = RF_ZERO_SALE;
                     bufferDisplay1.flagActiveSale = false;
                     SetPicture(1,DISPLAY_INICIO0);
                 break;
@@ -630,8 +631,7 @@ void PollingDisplay1(void){
                     bufferDisplay1.flagActiveSale = true;
                     bufferDisplay1.flagEndSale = false;
                 break;
-                case PUMP_PEOT: //reporte fin venta
-                    RFstateReport = 1;
+                case PUMP_PEOT: //reporte fin venta                    
                     if(getSale(side.a.dir)){
                         if(bufferDisplay1.flagPrint ==1){
                             imprimir(printPortA,side.a.dir);
@@ -642,7 +642,8 @@ void PollingDisplay1(void){
                             bufferDisplay1.flagEndSale = true;
                             SetPicture(1,DISPLAY_DESEA_IMPRIMIR_RECIBO); 
                         }
-                        bufferDisplay1.flagActiveSale = false; 
+                        bufferDisplay1.flagActiveSale = false;
+                        RFstateReport = 1;
                     }                                         
                 break;
                 case 0x0B://Reporte de venta
@@ -657,6 +658,7 @@ void PollingDisplay1(void){
                             SetPicture(1,DISPLAY_DESEA_IMPRIMIR_RECIBO); 
                         }
                         bufferDisplay1.flagActiveSale = false; 
+                        RFstateReport = 1;
                     }
                 break;
                 
@@ -730,9 +732,9 @@ void PollingDisplay1(void){
                             }
                             flowDisplay1 = 14;//Pide clave                            
                             numberKeys1 = 0;
-                            hiddenKeys = 5;
+                            hiddenKeys = 10;
                             controlChar ='*';
-                            bufferDisplay1.flagKeyboard = 5;
+                            bufferDisplay1.flagKeyboard = 3;
                             SetPicture(1,DISPLAY_INGRESE_PASSWORD);
                         break;
                     }                    
@@ -756,6 +758,10 @@ void PollingDisplay1(void){
                             flowDisplay1 = 7;//Esperando estado del dispensador  
                             count_protector=0;
                             SetPicture(1,DISPLAY_SUBA_MANIJA);                            
+                        break;
+                        case 0x94:  //Pantalla Inicial    
+                            flowDisplay1 = 0;
+                            SetPicture(1,DISPLAY_INICIO0);                            
                         break;
                         case 0x7E:  //Pantalla Inicial                                                        
                             SetPicture(1,DISPLAY_INICIO0);
@@ -838,7 +844,8 @@ void PollingDisplay1(void){
                             SetPicture(1,DISPLAY_INGRESE_PASSWORD);                           
                         break;
                         case 0xB5:  //Copia de recibo 
-                            flowDisplay1 = 0;   
+                            flowDisplay1  = 0;
+                            RFstateReport = 1;
                             side.a.rfState = RF_COPY_RECEIPT;
                             SetPicture(1,DISPLAY_INICIO0);                            
                         break;
@@ -913,6 +920,13 @@ void PollingDisplay1(void){
                             flowDisplay1 = 0;
                             SetPicture(1,DISPLAY_INICIO0);
                         break;
+                        case 3://Pass turno
+                            for(x=0;x< hiddenKeys;x++){
+                                bufferDisplay1.shiftPassword[x]=0;
+                            }
+                            flowDisplay1 = 0;
+                            SetPicture(1,DISPLAY_INICIO0);
+                        break;
                         case 5://Pass
                             for(x=0;x< hiddenKeys;x++){
                                 bufferDisplay1.shiftPassword[x]=0;
@@ -953,6 +967,13 @@ void PollingDisplay1(void){
                             }
                             flowDisplay1 = 15;
                             SetPicture(1,DISPLAY_CONFIGURACIONES);
+                        break;
+                        case 3://Pass turno
+                            for(x=0;x < hiddenKeys;x++){
+                                bufferDisplay1.shiftPassword[x] =bufferDisplay1.valueKeys[x];
+                            }
+                            flowDisplay1 = 19;
+                            SetPicture(1,DISPLAY_POR_FAVOR_ESPERE);
                         break;
                         case 5://Pass
                             for(x=0;x < hiddenKeys;x++){
@@ -1143,6 +1164,11 @@ void PollingDisplay1(void){
                 Display1_ClearRxBuffer();
             }                        
         break;
+            
+        case 19:            
+            RFstateReport = 1;
+            ShiftState =1;
+        break;
     countLCD = 0;       
     }    
     }
@@ -1157,7 +1183,7 @@ void PollingDisplay1(void){
 *
 *********************************************************************************************************
 */
-void PollingDisplay2(void){     
+void PollingDisplay2(void){  
     switch(flowDisplay2){
         case 0:
             InitDisplay2();
@@ -1179,134 +1205,6 @@ void PollingDisplay2(void){
                         break;
                     }
                 }  
-                CyDelay(10);         
-                Display2_ClearRxBuffer();
-            }
-        break;
-        case 2:
-            if(Display2_GetRxBufferSize()==8){
-                if((Display2_rxBuffer[0]==0xAA) && (Display2_rxBuffer[6]==0xC3) && (Display2_rxBuffer[7]==0x3C)){
-                    switch(Display2_rxBuffer[3]){
-                        case 0x0D:  //Pantalla efectivo              
-                            flowDisplay2 = 3;                            
-                            SetPicture(2,DISPLAY_FORMA_PROGRAMACION);                            
-                        break;
-                        case 0x0E:  //Pantalla credito   
-                            flowDisplay2 = 4;                                                     
-                            SetPicture(2,DISPLAY_ID_DIGITAL);                            
-                        break;
-                        case 0x45:  //Pantalla otras opciones 
-                            flowDisplay2 = 5;                            
-                            SetPicture(2,DISPLAY_OPERACIONES);                            
-                        break;
-                            
-                        case 0x94:  //Pantalla Inicial    
-                            flowDisplay2 = 0;
-                            SetPicture(2,DISPLAY_INICIO0);                            
-                        break;
-                        
-                        case 0x7E:  //Pantalla Inicial    
-                            flowDisplay2 = 0;
-                            SetPicture(2,DISPLAY_INICIO0);                            
-                        break;
-                    }
-                }  
-                CyDelay(10);         
-                Display2_ClearRxBuffer();
-            }
-        break;
-            
-        case 3: 
-            if(Display2_GetRxBufferSize()==8){
-                if((Display2_rxBuffer[0]==0xAA) && (Display2_rxBuffer[6]==0xC3) && (Display2_rxBuffer[7]==0x3C)){
-                    switch(Display2_rxBuffer[3]){
-                        case 0x0F:  //Preset dinero                
-                            flowDisplay2 = 4;
-                            SetPicture(2,DISPLAY_INTRODUZCA_VALOR);                            
-                        break; 
-                        case 0x10:  //Preset volumen                 
-                            flowDisplay2 = 5;
-                            SetPicture(2,DISPLAY_INTRODUZCA_VOLUMEN);                            
-                        break;
-                        case 0x43:  //Preset full                       
-                            flowDisplay2 = 6;
-                            SetPicture(2,DISPLAY_DESEA_IMPRIMIR_RECIBO);                            
-                        break;
-                        case 0x94:  //Retroceso 
-                            flowDisplay2 = 0;
-                            SetPicture(2,DISPLAY_INICIO0);                                                        
-                        break;
-                        case 0x3B:  //Pantalla Inicial    
-                            flowDisplay2 = 0;
-                            SetPicture(2,DISPLAY_INICIO0);                            
-                        break;
-                        case 0x7E:  //Pantalla Inicial    
-                            flowDisplay2 = 0;
-                            SetPicture(2,DISPLAY_INICIO0);                            
-                        break;
-                    }
-                }  
-                CyDelay(10);         
-                Display2_ClearRxBuffer();
-            }
-        break;
-        
-        case 4:
-            if(Display2_GetRxBufferSize()==8){
-                if((Display2_rxBuffer[0]==0xAA) && (Display2_rxBuffer[6]==0xC3) && (Display2_rxBuffer[7]==0x3C)){
-                    switch(Display2_rxBuffer[3]){
-                        case 0x94:  //Retroceso 
-                            flowDisplay2 = 0;   
-                            SetPicture(2,DISPLAY_INICIO0);                                                     
-                        break;
-                        case 0x7E:  //Pantalla Inicial    
-                            flowDisplay2 = 0;
-                            SetPicture(2,DISPLAY_INICIO0);                            
-                        break;
-                    }
-                }
-                CyDelay(10);         
-                Display2_ClearRxBuffer();
-            }
-        break;
-            
-        case 5: //Preset por volumen
-            if(Display2_GetRxBufferSize()==8){
-                if((Display2_rxBuffer[0]==0xAA) && (Display2_rxBuffer[6]==0xC3) && (Display2_rxBuffer[7]==0x3C)){
-                    switch(Display2_rxBuffer[3]){
-                        case 0x94:  //Retroceso 
-                            flowDisplay2 = 0;   
-                            SetPicture(2,DISPLAY_INICIO0);                                                     
-                        break;
-                        case 0x7E:  //Pantalla Inicial    
-                            flowDisplay2 = 0;
-                            SetPicture(2,DISPLAY_INICIO0);                            
-                        break;
-                    }
-                }
-                CyDelay(10);         
-                Display2_ClearRxBuffer();
-            }
-        break;
-        
-        case 6:
-            if(Display2_GetRxBufferSize()==8){
-                if((Display2_rxBuffer[0]==0xAA) && (Display2_rxBuffer[6]==0xC3) && (Display2_rxBuffer[7]==0x3C)){
-                    switch(Display2_rxBuffer[3]){
-                        case 0x39:  //Si copia                                                        
-                            SetPicture(2,DISPLAY_DIGITE_PLACA);
-                            flowDisplay2 = 7;
-                        break; 
-                        case 0x38:  //No copia                                                       
-                            SetPicture(2,DISPLAY_SELECCIONE_PRODUCTO4);
-                            flowDisplay2 = 8;//caso para seleccion de producto
-                        break;
-                        case 0x7E:  //Pantalla Inicial                                                        
-                            SetPicture(2,DISPLAY_INICIO0);
-                            flowDisplay2 = 0;
-                        break;
-                    }                    
-                }
                 CyDelay(10);         
                 Display2_ClearRxBuffer();
             }
@@ -1404,9 +1302,10 @@ int main()
         CyWdtClear();
         PollingDisplay2();
         CyWdtClear();
-        PollingPump();
-        CyWdtClear();                                
+        //PollingPump();
+        //CyWdtClear();                                
         pollingRF_Tx(); 
+        CyWdtClear();                                
         counterRF++;
         if(counterRF >10)
             ActiveRF =0;          

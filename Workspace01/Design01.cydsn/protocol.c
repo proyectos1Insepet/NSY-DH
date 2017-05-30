@@ -581,9 +581,9 @@ uint8 PumpHoseActiveState(uint8 side){
             Pump_PutChar(SendComand[x]);
         } 
         if(UnitType > 0){
-            CyDelay(700);
+            CyDelay(500);
         }else{
-            CyDelay(200);
+            CyDelay(150);
         }
     }    
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////

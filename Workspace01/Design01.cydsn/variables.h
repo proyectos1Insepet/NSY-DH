@@ -78,7 +78,9 @@
     volatile uint8 counterRF;
     volatile uint8 temporal[30];
     volatile uint8 tempPreset[8];
+    volatile uint8 tempPPU[5];
     volatile uint8 CGrade;
+    volatile uint8 ShiftState;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     uint8 UnitType,ConversionFactor,MoneyDec,VolDec,PPUDec,DDMode; // Variables configuracion del dispensador
     uint8 statePump[4];              //Estado en el que se encuentra el dispensador
@@ -303,7 +305,7 @@ enum _PUMP_STATES_
     PUMP_AUTHORIZED = 0x08,
     PUMP_BUSY       = 0x09,
     PUMP_PEOT       = 0x0A,
-    PUMP_FEOT       = 0x0B,
+    PUMP_FEOT       = 0x0B,    
     PUMP_STOPPED    = 0x0C
 };
 
