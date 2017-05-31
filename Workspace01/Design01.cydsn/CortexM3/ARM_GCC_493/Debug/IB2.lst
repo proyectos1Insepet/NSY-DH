@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Diego\AppData\Local\Temp\ccCtkjLW.s 			page 1
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccliWtsH.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Diego\AppData\Local\Temp\ccCtkjLW.s 			page 1
   29:.\Generated_Source\PSoC5/IB2.c **** * Summary:
   30:.\Generated_Source\PSoC5/IB2.c **** *  Assign a new value to the digital port's data output register.  
   31:.\Generated_Source\PSoC5/IB2.c **** *
-ARM GAS  C:\Users\Diego\AppData\Local\Temp\ccCtkjLW.s 			page 2
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccliWtsH.s 			page 2
 
 
   32:.\Generated_Source\PSoC5/IB2.c **** * Parameters:  
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Diego\AppData\Local\Temp\ccCtkjLW.s 			page 1
   52:.\Generated_Source\PSoC5/IB2.c **** * 
   53:.\Generated_Source\PSoC5/IB2.c **** * Parameters:  
   54:.\Generated_Source\PSoC5/IB2.c **** *  mode:  Change the pins to one of the following drive modes.
-ARM GAS  C:\Users\Diego\AppData\Local\Temp\ccCtkjLW.s 			page 3
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccliWtsH.s 			page 3
 
 
   55:.\Generated_Source\PSoC5/IB2.c **** *
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Diego\AppData\Local\Temp\ccCtkjLW.s 			page 1
   79:.\Generated_Source\PSoC5/IB2.c **** * Summary:
   80:.\Generated_Source\PSoC5/IB2.c **** *  Read the current value on the pins of the Digital Port in right justified 
   81:.\Generated_Source\PSoC5/IB2.c **** *  form.
-ARM GAS  C:\Users\Diego\AppData\Local\Temp\ccCtkjLW.s 			page 4
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccliWtsH.s 			page 4
 
 
   82:.\Generated_Source\PSoC5/IB2.c **** *
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Diego\AppData\Local\Temp\ccCtkjLW.s 			page 1
  110:.\Generated_Source\PSoC5/IB2.c **** *  Returns the current value assigned to the Digital Port's data output register
  111:.\Generated_Source\PSoC5/IB2.c **** *  
  112:.\Generated_Source\PSoC5/IB2.c **** *******************************************************************************/
-ARM GAS  C:\Users\Diego\AppData\Local\Temp\ccCtkjLW.s 			page 5
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccliWtsH.s 			page 5
 
 
  113:.\Generated_Source\PSoC5/IB2.c **** uint8 IB2_ReadDataReg(void) 
@@ -273,48 +273,48 @@ ARM GAS  C:\Users\Diego\AppData\Local\Temp\ccCtkjLW.s 			page 1
  142 0006 00000000 		.4byte	.Ldebug_abbrev0
  143 000a 04       		.byte	0x4
  144 000b 01       		.uleb128 0x1
- 145 000c 70000000 		.4byte	.LASF20
+ 145 000c B6000000 		.4byte	.LASF20
  146 0010 01       		.byte	0x1
- 147 0011 4A010000 		.4byte	.LASF21
- 148 0015 82010000 		.4byte	.LASF22
+ 147 0011 90010000 		.4byte	.LASF21
+ 148 0015 0F000000 		.4byte	.LASF22
  149 0019 00000000 		.4byte	.Ldebug_ranges0+0
  150 001d 00000000 		.4byte	0
  151 0021 00000000 		.4byte	.Ldebug_line0
  152 0025 02       		.uleb128 0x2
  153 0026 01       		.byte	0x1
  154 0027 06       		.byte	0x6
- 155 0028 C4010000 		.4byte	.LASF0
+ 155 0028 C8010000 		.4byte	.LASF0
  156 002c 02       		.uleb128 0x2
  157 002d 01       		.byte	0x1
  158 002e 08       		.byte	0x8
- 159 002f 20000000 		.4byte	.LASF1
+ 159 002f 5B000000 		.4byte	.LASF1
  160 0033 02       		.uleb128 0x2
  161 0034 02       		.byte	0x2
  162 0035 05       		.byte	0x5
- 163 0036 69010000 		.4byte	.LASF2
+ 163 0036 AF010000 		.4byte	.LASF2
  164 003a 02       		.uleb128 0x2
  165 003b 02       		.byte	0x2
  166 003c 07       		.byte	0x7
- 167 003d 45000000 		.4byte	.LASF3
+ 167 003d 8B000000 		.4byte	.LASF3
  168 0041 02       		.uleb128 0x2
  169 0042 04       		.byte	0x4
-ARM GAS  C:\Users\Diego\AppData\Local\Temp\ccCtkjLW.s 			page 6
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccliWtsH.s 			page 6
 
 
  170 0043 05       		.byte	0x5
- 171 0044 79010000 		.4byte	.LASF4
+ 171 0044 BF010000 		.4byte	.LASF4
  172 0048 02       		.uleb128 0x2
  173 0049 04       		.byte	0x4
  174 004a 07       		.byte	0x7
- 175 004b 33000000 		.4byte	.LASF5
+ 175 004b 79000000 		.4byte	.LASF5
  176 004f 02       		.uleb128 0x2
  177 0050 08       		.byte	0x8
  178 0051 05       		.byte	0x5
- 179 0052 27010000 		.4byte	.LASF6
+ 179 0052 6D010000 		.4byte	.LASF6
  180 0056 02       		.uleb128 0x2
  181 0057 08       		.byte	0x8
  182 0058 07       		.byte	0x7
- 183 0059 0B010000 		.4byte	.LASF7
+ 183 0059 51010000 		.4byte	.LASF7
  184 005d 03       		.uleb128 0x3
  185 005e 04       		.byte	0x4
  186 005f 05       		.byte	0x5
@@ -322,33 +322,33 @@ ARM GAS  C:\Users\Diego\AppData\Local\Temp\ccCtkjLW.s 			page 1
  188 0064 02       		.uleb128 0x2
  189 0065 04       		.byte	0x4
  190 0066 07       		.byte	0x7
- 191 0067 FE000000 		.4byte	.LASF8
+ 191 0067 44010000 		.4byte	.LASF8
  192 006b 04       		.uleb128 0x4
- 193 006c 73010000 		.4byte	.LASF12
+ 193 006c B9010000 		.4byte	.LASF12
  194 0070 02       		.byte	0x2
  195 0071 3801     		.2byte	0x138
  196 0073 2C000000 		.4byte	0x2c
  197 0077 02       		.uleb128 0x2
  198 0078 04       		.byte	0x4
  199 0079 04       		.byte	0x4
- 200 007a 1A000000 		.4byte	.LASF9
+ 200 007a 55000000 		.4byte	.LASF9
  201 007e 02       		.uleb128 0x2
  202 007f 08       		.byte	0x8
  203 0080 04       		.byte	0x4
- 204 0081 58000000 		.4byte	.LASF10
+ 204 0081 9E000000 		.4byte	.LASF10
  205 0085 02       		.uleb128 0x2
  206 0086 01       		.byte	0x1
  207 0087 08       		.byte	0x8
- 208 0088 45010000 		.4byte	.LASF11
+ 208 0088 8B010000 		.4byte	.LASF11
  209 008c 04       		.uleb128 0x4
- 210 008d 2E000000 		.4byte	.LASF13
+ 210 008d 74000000 		.4byte	.LASF13
  211 0091 02       		.byte	0x2
  212 0092 E201     		.2byte	0x1e2
  213 0094 98000000 		.4byte	0x98
  214 0098 05       		.uleb128 0x5
  215 0099 6B000000 		.4byte	0x6b
  216 009d 06       		.uleb128 0x6
- 217 009e D0010000 		.4byte	.LASF14
+ 217 009e D4010000 		.4byte	.LASF14
  218 00a2 01       		.byte	0x1
  219 00a3 27       		.byte	0x27
  220 00a4 00000000 		.4byte	.LFB0
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Diego\AppData\Local\Temp\ccCtkjLW.s 			page 1
  224 00ae D1000000 		.4byte	0xd1
  225 00b2 07       		.uleb128 0x7
  226 00b3 09000000 		.4byte	.LASF16
-ARM GAS  C:\Users\Diego\AppData\Local\Temp\ccCtkjLW.s 			page 7
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccliWtsH.s 			page 7
 
 
  227 00b7 01       		.byte	0x1
@@ -366,14 +366,14 @@ ARM GAS  C:\Users\Diego\AppData\Local\Temp\ccCtkjLW.s 			page 1
  229 00b9 6B000000 		.4byte	0x6b
  230 00bd 00000000 		.4byte	.LLST0
  231 00c1 08       		.uleb128 0x8
- 232 00c2 0F000000 		.4byte	.LASF23
+ 232 00c2 69000000 		.4byte	.LASF23
  233 00c6 01       		.byte	0x1
  234 00c7 29       		.byte	0x29
  235 00c8 6B000000 		.4byte	0x6b
  236 00cc 21000000 		.4byte	.LLST1
  237 00d0 00       		.byte	0
  238 00d1 06       		.uleb128 0x6
- 239 00d2 5F000000 		.4byte	.LASF15
+ 239 00d2 A5000000 		.4byte	.LASF15
  240 00d6 01       		.byte	0x1
  241 00d7 45       		.byte	0x45
  242 00d8 00000000 		.4byte	.LFB1
@@ -382,7 +382,7 @@ ARM GAS  C:\Users\Diego\AppData\Local\Temp\ccCtkjLW.s 			page 1
  245 00e1 9C       		.byte	0x9c
  246 00e2 F6000000 		.4byte	0xf6
  247 00e6 07       		.uleb128 0x7
- 248 00e7 22010000 		.4byte	.LASF17
+ 248 00e7 68010000 		.4byte	.LASF17
  249 00eb 01       		.byte	0x1
  250 00ec 45       		.byte	0x45
  251 00ed 6B000000 		.4byte	0x6b
@@ -398,7 +398,7 @@ ARM GAS  C:\Users\Diego\AppData\Local\Temp\ccCtkjLW.s 			page 1
  261 0109 01       		.uleb128 0x1
  262 010a 9C       		.byte	0x9c
  263 010b 09       		.uleb128 0x9
- 264 010c 35010000 		.4byte	.LASF19
+ 264 010c 7B010000 		.4byte	.LASF19
  265 0110 01       		.byte	0x1
  266 0111 71       		.byte	0x71
  267 0112 6B000000 		.4byte	0x6b
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Diego\AppData\Local\Temp\ccCtkjLW.s 			page 1
  281 0006 0B       		.uleb128 0xb
  282 0007 03       		.uleb128 0x3
  283 0008 0E       		.uleb128 0xe
-ARM GAS  C:\Users\Diego\AppData\Local\Temp\ccCtkjLW.s 			page 8
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccliWtsH.s 			page 8
 
 
  284 0009 1B       		.uleb128 0x1b
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\Diego\AppData\Local\Temp\ccCtkjLW.s 			page 1
  338 003f 01       		.byte	0x1
  339 0040 3F       		.uleb128 0x3f
  340 0041 19       		.uleb128 0x19
-ARM GAS  C:\Users\Diego\AppData\Local\Temp\ccCtkjLW.s 			page 9
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccliWtsH.s 			page 9
 
 
  341 0042 03       		.uleb128 0x3
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Diego\AppData\Local\Temp\ccCtkjLW.s 			page 1
  395 0079 19       		.uleb128 0x19
  396 007a 03       		.uleb128 0x3
  397 007b 0E       		.uleb128 0xe
-ARM GAS  C:\Users\Diego\AppData\Local\Temp\ccCtkjLW.s 			page 10
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccliWtsH.s 			page 10
 
 
  398 007c 3A       		.uleb128 0x3a
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Diego\AppData\Local\Temp\ccCtkjLW.s 			page 1
  452 004d 00000000 		.4byte	0
  453 0051 00000000 		.4byte	0
  454              		.section	.debug_aranges,"",%progbits
-ARM GAS  C:\Users\Diego\AppData\Local\Temp\ccCtkjLW.s 			page 11
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccliWtsH.s 			page 11
 
 
  455 0000 34000000 		.4byte	0x34
@@ -644,125 +644,125 @@ ARM GAS  C:\Users\Diego\AppData\Local\Temp\ccCtkjLW.s 			page 1
  489              	.LASF16:
  490 0009 76616C75 		.ascii	"value\000"
  490      6500
- 491              	.LASF23:
- 492 000f 73746174 		.ascii	"staticBits\000"
- 492      69634269 
- 492      747300
- 493              	.LASF9:
- 494 001a 666C6F61 		.ascii	"float\000"
- 494      7400
- 495              	.LASF1:
- 496 0020 756E7369 		.ascii	"unsigned char\000"
- 496      676E6564 
- 496      20636861 
- 496      7200
- 497              	.LASF13:
- 498 002e 72656738 		.ascii	"reg8\000"
-ARM GAS  C:\Users\Diego\AppData\Local\Temp\ccCtkjLW.s 			page 12
+ 491              	.LASF22:
+ 492 000f 433A5C55 		.ascii	"C:\\Users\\Recepcion\\Documents\\GitHub\\NSY-DH\\Wo"
+ 492      73657273 
+ 492      5C526563 
+ 492      65706369 
+ 492      6F6E5C44 
+ 493 003c 726B7370 		.ascii	"rkspace01\\Design01.cydsn\000"
+ 493      61636530 
+ 493      315C4465 
+ 493      7369676E 
+ 493      30312E63 
+ 494              	.LASF9:
+ 495 0055 666C6F61 		.ascii	"float\000"
+ 495      7400
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccliWtsH.s 			page 12
 
 
- 498      00
- 499              	.LASF5:
- 500 0033 6C6F6E67 		.ascii	"long unsigned int\000"
- 500      20756E73 
- 500      69676E65 
- 500      6420696E 
- 500      7400
- 501              	.LASF3:
- 502 0045 73686F72 		.ascii	"short unsigned int\000"
- 502      7420756E 
- 502      7369676E 
- 502      65642069 
- 502      6E7400
- 503              	.LASF10:
- 504 0058 646F7562 		.ascii	"double\000"
- 504      6C6500
- 505              	.LASF15:
- 506 005f 4942325F 		.ascii	"IB2_SetDriveMode\000"
- 506      53657444 
- 506      72697665 
- 506      4D6F6465 
- 506      00
- 507              	.LASF20:
- 508 0070 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
- 508      4320342E 
- 508      392E3320 
- 508      32303135 
- 508      30333033 
- 509 00a3 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
- 509      20726576 
- 509      6973696F 
- 509      6E203232 
- 509      31323230 
- 510 00d6 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
- 510      66756E63 
- 510      74696F6E 
- 510      2D736563 
- 510      74696F6E 
- 511              	.LASF8:
- 512 00fe 756E7369 		.ascii	"unsigned int\000"
- 512      676E6564 
- 512      20696E74 
- 512      00
- 513              	.LASF7:
- 514 010b 6C6F6E67 		.ascii	"long long unsigned int\000"
- 514      206C6F6E 
- 514      6720756E 
- 514      7369676E 
- 514      65642069 
- 515              	.LASF17:
- 516 0122 6D6F6465 		.ascii	"mode\000"
- 516      00
- 517              	.LASF6:
- 518 0127 6C6F6E67 		.ascii	"long long int\000"
- 518      206C6F6E 
- 518      6720696E 
- 518      7400
-ARM GAS  C:\Users\Diego\AppData\Local\Temp\ccCtkjLW.s 			page 13
+ 496              	.LASF1:
+ 497 005b 756E7369 		.ascii	"unsigned char\000"
+ 497      676E6564 
+ 497      20636861 
+ 497      7200
+ 498              	.LASF23:
+ 499 0069 73746174 		.ascii	"staticBits\000"
+ 499      69634269 
+ 499      747300
+ 500              	.LASF13:
+ 501 0074 72656738 		.ascii	"reg8\000"
+ 501      00
+ 502              	.LASF5:
+ 503 0079 6C6F6E67 		.ascii	"long unsigned int\000"
+ 503      20756E73 
+ 503      69676E65 
+ 503      6420696E 
+ 503      7400
+ 504              	.LASF3:
+ 505 008b 73686F72 		.ascii	"short unsigned int\000"
+ 505      7420756E 
+ 505      7369676E 
+ 505      65642069 
+ 505      6E7400
+ 506              	.LASF10:
+ 507 009e 646F7562 		.ascii	"double\000"
+ 507      6C6500
+ 508              	.LASF15:
+ 509 00a5 4942325F 		.ascii	"IB2_SetDriveMode\000"
+ 509      53657444 
+ 509      72697665 
+ 509      4D6F6465 
+ 509      00
+ 510              	.LASF20:
+ 511 00b6 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 511      4320342E 
+ 511      392E3320 
+ 511      32303135 
+ 511      30333033 
+ 512 00e9 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 512      20726576 
+ 512      6973696F 
+ 512      6E203232 
+ 512      31323230 
+ 513 011c 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 513      66756E63 
+ 513      74696F6E 
+ 513      2D736563 
+ 513      74696F6E 
+ 514              	.LASF8:
+ 515 0144 756E7369 		.ascii	"unsigned int\000"
+ 515      676E6564 
+ 515      20696E74 
+ 515      00
+ 516              	.LASF7:
+ 517 0151 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 517      206C6F6E 
+ARM GAS  C:\Users\RECEPC~1\AppData\Local\Temp\ccliWtsH.s 			page 13
 
 
- 519              	.LASF19:
- 520 0135 4942325F 		.ascii	"IB2_ReadDataReg\000"
- 520      52656164 
- 520      44617461 
- 520      52656700 
- 521              	.LASF11:
- 522 0145 63686172 		.ascii	"char\000"
- 522      00
- 523              	.LASF21:
- 524 014a 2E5C4765 		.ascii	".\\Generated_Source\\PSoC5\\IB2.c\000"
- 524      6E657261 
- 524      7465645F 
- 524      536F7572 
- 524      63655C50 
- 525              	.LASF2:
- 526 0169 73686F72 		.ascii	"short int\000"
- 526      7420696E 
- 526      7400
- 527              	.LASF12:
- 528 0173 75696E74 		.ascii	"uint8\000"
- 528      3800
- 529              	.LASF4:
- 530 0179 6C6F6E67 		.ascii	"long int\000"
- 530      20696E74 
- 530      00
- 531              	.LASF22:
- 532 0182 433A5C55 		.ascii	"C:\\Users\\Diego\\Documents\\GitHub\\NSY-DH\\Worksp"
- 532      73657273 
- 532      5C446965 
- 532      676F5C44 
- 532      6F63756D 
- 533 01af 61636530 		.ascii	"ace01\\Design01.cydsn\000"
- 533      315C4465 
- 533      7369676E 
- 533      30312E63 
- 533      7964736E 
+ 517      6720756E 
+ 517      7369676E 
+ 517      65642069 
+ 518              	.LASF17:
+ 519 0168 6D6F6465 		.ascii	"mode\000"
+ 519      00
+ 520              	.LASF6:
+ 521 016d 6C6F6E67 		.ascii	"long long int\000"
+ 521      206C6F6E 
+ 521      6720696E 
+ 521      7400
+ 522              	.LASF19:
+ 523 017b 4942325F 		.ascii	"IB2_ReadDataReg\000"
+ 523      52656164 
+ 523      44617461 
+ 523      52656700 
+ 524              	.LASF11:
+ 525 018b 63686172 		.ascii	"char\000"
+ 525      00
+ 526              	.LASF21:
+ 527 0190 2E5C4765 		.ascii	".\\Generated_Source\\PSoC5\\IB2.c\000"
+ 527      6E657261 
+ 527      7465645F 
+ 527      536F7572 
+ 527      63655C50 
+ 528              	.LASF2:
+ 529 01af 73686F72 		.ascii	"short int\000"
+ 529      7420696E 
+ 529      7400
+ 530              	.LASF12:
+ 531 01b9 75696E74 		.ascii	"uint8\000"
+ 531      3800
+ 532              	.LASF4:
+ 533 01bf 6C6F6E67 		.ascii	"long int\000"
+ 533      20696E74 
+ 533      00
  534              	.LASF0:
- 535 01c4 7369676E 		.ascii	"signed char\000"
+ 535 01c8 7369676E 		.ascii	"signed char\000"
  535      65642063 
  535      68617200 
  536              	.LASF14:
- 537 01d0 4942325F 		.ascii	"IB2_Write\000"
+ 537 01d4 4942325F 		.ascii	"IB2_Write\000"
  537      57726974 
  537      6500
  538              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br

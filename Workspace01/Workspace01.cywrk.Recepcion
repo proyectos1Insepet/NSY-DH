@@ -13,7 +13,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Workspace01\Design01\Source Files\I2C.c">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Workspace01\Design01\Generated_Source\PSoC5">
 <ExpandedNodeIds>
 <v>Workspace01</v>
 <v>Workspace01\Design01</v>
@@ -38,7 +38,7 @@
 <v>Workspace01\Design01\Source Files\Print.c</v>
 <v>Workspace01\Design01\Source Files\protocol.c</v>
 <v>Workspace01\Design01\Source Files\RFPoll.c</v>
-<v>Workspace01\Design01\Generated_Source\PSoC5</v>
+<v>Workspace01\Design01\Generated_Source</v>
 <v>Workspace01\Design01\Generated_Source\PSoC5\Clock_Pump</v>
 <v>Workspace01\Design01\Generated_Source\PSoC5\Clock_Pump\Clock_Pump.c</v>
 <v>Workspace01\Design01\Generated_Source\PSoC5\Clock_Pump\Clock_Pump.h</v>
@@ -172,6 +172,7 @@
 <v>Workspace01\Design01\Source Files\protocol.c</v>
 <v>Workspace01\Design01\Source Files\RFPoll.c</v>
 <v>Workspace01\Design01\Generated_Source</v>
+<v>Workspace01\Design01\Generated_Source\PSoC5</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -350,8 +351,8 @@
 <name v=".\Design01.cydsn\protocol.c" />
 <name v=".\Design01.cydsn\keyboard.c" />
 <name v=".\Design01.cydsn\RFPoll.h" />
-<name v=".\Design01.cydsn\I2C.c" />
-<name v=".\Design01.cydsn\Generated_Source\PSoC5\RF_Connection_INT.c" />
+<name v=".\Design01.cydsn\Print.c" />
+<name v=".\Design01.cydsn\LCD.c" />
 </OpenDocs>
 <config v="" />
 <AutoUpdate v="true" />

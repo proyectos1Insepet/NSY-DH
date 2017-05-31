@@ -358,9 +358,9 @@ uint8 priceChange(uint8 pos,uint8 handle,uint8 *value){
 	}
 	if(digits==7){
 		buffer[1]=0xE3;
-		buffer[4]=(0xE0|((handle&0x0f)-1));	
+		buffer[4]=(0xE0|((handle&0x0f)));	
         for(x=0;x<6;x++){
-            buffer[6+x]=(0xE0|(value[6-x]&0x0F));
+            buffer[6+x]=(0xE0|(value[x]&0x0F));
         }	
 		buffer[12]=0xFB;
 		for(x=0;x<=12;x++){
@@ -413,25 +413,25 @@ uint8 priceChange(uint8 pos,uint8 handle,uint8 *value){
 * Note(s)     : none.
 *********************************************************************************************************
 */
-uint8 PresetData(uint8 side, char8 grade, uint8 *value, uint8 preset){
+uint8 PresetData(uint8 sideR, char8 grade, uint8 *value, uint8 preset){
     char8 SendComand[18]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-    uint8 state,x,y,z;
-    char8 PumpDataReceive =0;    
+    uint8 state,x,y,z;    
+    char8 PumpDataReceive =0;
     x = 0;
     z = 0;
     preset = 0;
-    state = get_state(side);
+    state = get_state(sideR);
     if(state == 0x06 || state == 0x07){
-        Pump_PutChar(0x20|side);
+        Pump_PutChar(0x20|sideR);
         CyDelay(50);
         PumpDataReceive = Pump_ReadRxData();
     }
     Pump_ClearRxBuffer();
     Pump_ClearRxBuffer();
-    if(PumpDataReceive == (0xd0|side)){
+    if(PumpDataReceive == (0xd0|sideR)){
         SendComand[x] = SOM; x++;
         SendComand[x] = 0xE1; x++;
-        if(side == 1){
+        if(sideR == side.a.dir){
             SendComand[x] = 0xF0 | (bufferDisplay1.presetType[0]&0x0F); x++;
             SendComand[x] = 0xF6; x++;
             SendComand[x] = 0xE0 | ((grade-1)&0x0F); x++;
@@ -458,6 +458,52 @@ uint8 PresetData(uint8 side, char8 grade, uint8 *value, uint8 preset){
                 }                
             }
             if(bufferDisplay1.presetType[1] == 'V'){
+                z = value[0];
+                for(y = x; y < value[0]+x; y ++ ){
+                    SendComand[y] = 0xE0|(value[z]&0x0F); z--;                    
+                }                
+                x = y;
+                for(y = x; y < 14; y ++ ){
+                    SendComand[y] = 0xE0;
+                    x++;
+                }                
+            }
+            SendComand[x] = 0xFB;  x++;
+            SendComand[x] = GetLRC(SendComand);  x++;
+            SendComand[x] = (EOM);
+            for(y=0; y<=x;y++){
+                Pump_PutChar(SendComand[y]);
+            } 
+            CyDelay(50);
+            return 1;
+        }
+        if(sideR == side.b.dir){
+            SendComand[x] = 0xF0 | (bufferDisplay2.presetType[0]&0x0F); x++;
+            SendComand[x] = 0xF6; x++;
+            SendComand[x] = 0xE0 | ((grade-1)&0x0F); x++;
+            SendComand[x] = PRDn; x++;
+            if(bufferDisplay2.presetType[1] == 'F'){
+                for(y = x; y < digits+x; y ++ ){
+                    SendComand[y] = 0xE9;                    
+                }                
+                x = y;
+                for(y = x; y < 14; y ++ ){
+                    SendComand[y] = 0xE0;
+                    x++;
+                }                
+            }
+            if(bufferDisplay2.presetType[1] == 'D'){
+                z = value[0];
+                for(y = x; y < value[0]+x; y ++ ){
+                    SendComand[y] = 0xE0|(value[z]&0x0F); z--;                    
+                }                
+                x = y;
+                for(y = x; y < 14; y ++ ){
+                    SendComand[y] = 0xE0;
+                    x++;
+                }                
+            }
+            if(bufferDisplay2.presetType[1] == 'V'){
                 z = value[0];
                 for(y = x; y < value[0]+x; y ++ ){
                     SendComand[y] = 0xE0|(value[z]&0x0F); z--;                    

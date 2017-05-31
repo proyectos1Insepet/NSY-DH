@@ -369,7 +369,7 @@ extern uint8 RF_Connection_initVar;
 
 #define RF_Connection_INIT_TX_INTERRUPTS_MASK \
                                   (uint8)((0 << RF_Connection_TX_STS_COMPLETE_SHIFT) \
-                                        | (0 << RF_Connection_TX_STS_FIFO_EMPTY_SHIFT) \
+                                        | (1 << RF_Connection_TX_STS_FIFO_EMPTY_SHIFT) \
                                         | (0 << RF_Connection_TX_STS_FIFO_FULL_SHIFT) \
                                         | (0 << RF_Connection_TX_STS_FIFO_NOT_FULL_SHIFT))
 

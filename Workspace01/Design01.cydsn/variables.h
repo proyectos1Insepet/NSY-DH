@@ -108,8 +108,7 @@
     uint8 Encabezado3[30];
     uint8 Encabezado4[30];
     uint8 CopiasCredito;
-    uint8 GradesHose[5];
-    uint8 RFstateReport;
+    uint8 GradesHose[5];    
 
     
 
@@ -194,6 +193,8 @@ struct position{
     uint8 rfState;
     uint8 pumpState;
     uint8 changePPU;
+    uint8 grade;
+    uint8 RFstateReport;
 };
 
 struct pump{
