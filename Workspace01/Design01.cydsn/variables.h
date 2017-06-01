@@ -81,6 +81,8 @@
     volatile uint8 tempPPU[5];
     volatile uint8 CGrade;
     volatile uint8 ShiftState;
+    volatile uint8 sizeSendA;
+    volatile uint8 sizeSendB;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     uint8 UnitType,ConversionFactor,MoneyDec,VolDec,PPUDec,DDMode; // Variables configuracion del dispensador
     uint8 statePump[4];              //Estado en el que se encuentra el dispensador
@@ -101,7 +103,8 @@
     uint8 printPortB;
     uint8 buffer_rf[512];
     uint8 buffer_tx[512];
-    uint8 buffer_txDisplay[512];
+    uint8 buffer_txPreset[60];
+    uint8 buffer_txEOT[60];
     uint16 intIDStation;
     uint8 Encabezado1[30];
     uint8 Encabezado2[30];

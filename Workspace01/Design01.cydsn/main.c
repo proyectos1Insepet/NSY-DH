@@ -32,8 +32,9 @@ uint8 passwordPump[5] = "00204";
       
 CY_ISR(animacion2);
 CY_ISR(animacion);
-CY_ISR(timerPump);
-CY_ISR(timerRFRX);
+//CY_ISR(timerPump);
+//CY_ISR(timerRFRX);
+//CY_ISR(pollingRF_Tx);
 void GlobalInitializer()
 {
     EEPROM_1_Start();
@@ -43,10 +44,11 @@ void GlobalInitializer()
     Printer_Start();   
     I2C_Bus_Start();
     RF_Connection_Start();
-    isr_1_StartEx(timerRFRX); 
+    //isr_1_StartEx(timerRFRX); 
     Waitable_3_Start();
-    isr_2_StartEx(timerPump); 
+    //isr_2_StartEx(timerPump); 
     Waitable_4_Start();
+    //isr_6_StartEx(pollingRF_Tx);
 }
 void StoreConfiguration(){
     EEPROM_1_WriteByte(UnitType,0);
@@ -367,7 +369,8 @@ void PollingDisplay1(void){
             Timer_Animacion_Stop();
             count_protector = 0;
             bufferDisplay1.saleType = 0;
-            bufferDisplay1.flagEndSale = false;            
+            bufferDisplay1.flagEndSale = false;  
+            side.a.RFstateReport = 0;
         break;
         case 1: //Menu
             side.a.rfState = RF_IDLE;
@@ -585,9 +588,10 @@ void PollingDisplay1(void){
                     //CyDelay(20);
                     Pump_PutChar(0x10|side.a.dir);//Autoriza el surtidor
                     //CyDelay(50);
-                    RFstateReport = 1;
+                    side.a.RFstateReport = 1;
                     flowDisplay1 = 8;                    
-                    count_protector = 0;                                            
+                    count_protector = 0;                    
+                    bufferDisplay1.flagActiveSale = true;
                     SetPicture(1,DISPLAY_DESPACHANDO);   
                     ShowMessage(1,(bufferDisplay1.presetValue[0]),18);
                 }else{
@@ -630,8 +634,24 @@ void PollingDisplay1(void){
                 case PUMP_BUSY://Surtiendo                    
                     bufferDisplay1.flagActiveSale = true;
                     bufferDisplay1.flagEndSale = false;
+                    //side.a.rfState = RF_DELIVERING;
                 break;
                 case PUMP_PEOT: //reporte fin venta                    
+                    if(getSale(side.a.dir)){
+                        if(bufferDisplay1.flagPrint ==1){
+                            imprimir(printPortA,side.a.dir);
+                            flowDisplay1 = 0;                            
+                            SetPicture(1,DISPLAY_INICIO0); 
+                        }else{
+                            flowDisplay1 = 6;
+                            bufferDisplay1.flagEndSale = true;
+                            SetPicture(1,DISPLAY_DESEA_IMPRIMIR_RECIBO); 
+                        }
+                        bufferDisplay1.flagActiveSale = false;
+                        side.a.RFstateReport = 1;
+                    }                                         
+                break;
+                case PUMP_FEOT://Reporte de venta
                     if(getSale(side.a.dir)){
                         if(bufferDisplay1.flagPrint ==1){
                             imprimir(printPortA,side.a.dir);
@@ -643,22 +663,7 @@ void PollingDisplay1(void){
                             SetPicture(1,DISPLAY_DESEA_IMPRIMIR_RECIBO); 
                         }
                         bufferDisplay1.flagActiveSale = false;
-                        RFstateReport = 1;
-                    }                                         
-                break;
-                case 0x0B://Reporte de venta
-                    if(getSale(side.a.dir)){
-                        if(bufferDisplay1.flagPrint ==1){
-                            imprimir(printPortA,side.a.dir);
-                            flowDisplay1 = 0;
-                            SetPicture(1,DISPLAY_INICIO0); 
-                        }else{
-                            flowDisplay1 = 6;
-                            bufferDisplay1.flagEndSale = true;
-                            SetPicture(1,DISPLAY_DESEA_IMPRIMIR_RECIBO); 
-                        }
-                        bufferDisplay1.flagActiveSale = false; 
-                        RFstateReport = 1;
+                        side.a.RFstateReport = 1;
                     }
                 break;
                 
@@ -845,7 +850,7 @@ void PollingDisplay1(void){
                         break;
                         case 0xB5:  //Copia de recibo 
                             flowDisplay1  = 0;
-                            RFstateReport = 1;
+                            side.a.RFstateReport = 1;
                             side.a.rfState = RF_COPY_RECEIPT;
                             SetPicture(1,DISPLAY_INICIO0);                            
                         break;
@@ -1166,7 +1171,7 @@ void PollingDisplay1(void){
         break;
             
         case 19:            
-            RFstateReport = 1;
+            side.a.RFstateReport = 1;
             ShiftState =1;
         break;
     countLCD = 0;       
@@ -1183,25 +1188,60 @@ void PollingDisplay1(void){
 *
 *********************************************************************************************************
 */
-void PollingDisplay2(void){  
+void PollingDisplay2(void){
+    //if(countLCD >10){
+    uint8 x,y;     
     switch(flowDisplay2){
         case 0:
-            InitDisplay2();
+			InitDisplay2();
             flowDisplay2 =1;
             side.b.rfState = RF_IDLE;
+            isr_4_Stop(); 
+            Timer_Animacion2_Stop();
+            count_protector2 = 0;
+            bufferDisplay2.saleType = 0;
+            bufferDisplay2.flagEndSale = false;            
         break;
         case 1: //Menu
-			ShowRectangle(2,35);        
+            ShowRectangle(2,35);
+            side.b.rfState = RF_IDLE;
+            if(Display2_GetRxBufferSize()==8){
+                if((Display2_rxBuffer[0]==0xAA) && (Display2_rxBuffer[6]==0xC3) && (Display2_rxBuffer[7]==0x3C)){                                             
+                    flowDisplay2 = 2;      //Pantalla forma de pago                      
+                    SetPicture(2,DISPLAY_FORMA_PAGO_DESEADA);                                                                                                  
+                }  
+                CyDelay(10);         
+                Display2_ClearRxBuffer();
+            }
+        break;
+        case 2:
             if(Display2_GetRxBufferSize()==8){
                 if((Display2_rxBuffer[0]==0xAA) && (Display2_rxBuffer[6]==0xC3) && (Display2_rxBuffer[7]==0x3C)){
                     switch(Display2_rxBuffer[3]){
-                        case 0x3A:  //Pantalla forma de pago
-                            flowDisplay2 = 2;                            
-                            SetPicture(2,DISPLAY_FORMA_PAGO_DESEADA);                            
-                        break;   
-                        case 0x7E:  //Pantalla Inicial                                                        
-                            SetPicture(2,DISPLAY_INICIO0);
+                        case 0x0D:  //Pantalla efectivo              
+                            flowDisplay2 = 3; 
+                            bufferDisplay2.saleType = 1;
+                            SetPicture(2,DISPLAY_FORMA_PROGRAMACION);                            
+                        break;
+                        case 0x0E:  //Pantalla credito  
+                            flowDisplay2 = 10;
+                            bufferDisplay2.saleType = 2;
+                            count_protector = 0;
+                            SetPicture(2,DISPLAY_ID_DIGITAL);                            
+                        break;
+                        case 0x45:  //Pantalla otras opciones 
+                            flowDisplay2 = 12;                            
+                            SetPicture(2,DISPLAY_OPERACIONES);                            
+                        break;
+                            
+                        case 0x94:  //Pantalla Inicial    
                             flowDisplay2 = 0;
+                            SetPicture(2,DISPLAY_INICIO0);                            
+                        break;
+                        
+                        case 0x7E:  //Pantalla Inicial    
+                            flowDisplay2 = 0;
+                            SetPicture(2,DISPLAY_INICIO0);                            
                         break;
                     }
                 }  
@@ -1209,8 +1249,764 @@ void PollingDisplay2(void){
                 Display2_ClearRxBuffer();
             }
         break;
+            
+        case 3: 
+            if(Display2_GetRxBufferSize()==8){
+                if((Display2_rxBuffer[0]==0xAA) && (Display2_rxBuffer[6]==0xC3) && (Display2_rxBuffer[7]==0x3C)){
+                    switch(Display2_rxBuffer[3]){
+                        case 0x0F:  //Preset dinero                
+                            flowDisplay2 = 4;                              
+                            bufferDisplay2.presetType[0]=2;
+                            bufferDisplay2.presetType[1]='D';
+                            numberKeys1=0;
+                            SetPicture(2,DISPLAY_INTRODUZCA_VALOR);   
+                            WriteLCD(2,'$',3,2,1,0x0000,'N');
+                        break; 
+                        case 0x10:  //Preset volumen                 
+                            flowDisplay2 = 4;                            
+                            bufferDisplay2.presetType[0]=1;
+                            bufferDisplay2.presetType[1]='V';
+                            numberKeys1=0;                            
+                            SetPicture(2,DISPLAY_INTRODUZCA_VOLUMEN);                            
+                            WriteLCD(2,'V',3,2,1,0x0000,'N');                            
+                        break;
+                        case 0x43:  //Preset full 
+                            bufferDisplay2.presetType[0]=2;
+                            bufferDisplay2.presetType[1]='F';
+                            for(x=1;x<(digits-1);x++){
+                                bufferDisplay2.presetValue[0][x]='9';
+                            }
+                            bufferDisplay2.presetValue[0][x]='0';
+                            bufferDisplay2.presetValue[0][x+1]='0';
+                            bufferDisplay2.presetValue[0][0]=digits;
+                            for(x=0;x<=bufferDisplay2.presetValue[0][0];x++){
+                                bufferDisplay2.presetValue[1][x]=bufferDisplay2.presetValue[0][x];
+                            }
+                            flowDisplay2 = 5;
+                            SetPicture(2,DISPLAY_SELECCIONE_PRODUCTO4);                          
+                        break;
+                        case 0x94:  //Retroceso 
+                            flowDisplay2 = 0;
+                            SetPicture(2,DISPLAY_INICIO0);                                                        
+                        break;
+                        case 0x3B:  //Pantalla Inicial    
+                            flowDisplay2 = 0;
+                            SetPicture(2,DISPLAY_INICIO0);                            
+                        break;
+                        case 0x7E:  //Pantalla Inicial    
+                            flowDisplay2 = 0;
+                            SetPicture(2,DISPLAY_INICIO0);                            
+                        break;
+                    }
+                }  
+                CyDelay(10);         
+                Display2_ClearRxBuffer();
+            }
+        break;
+        
+        case 4:            
+            switch (alphanumeric_keyboard(2,digits,0)){
+                case 0:  //Pantalla Inicial    
+                    flowDisplay2 = 0;
+                    SetPicture(2,DISPLAY_INICIO0);                            
+                break;
+                    
+                case 1: //Enter
+                    for(x=0;x<=bufferDisplay2.valueKeys[0];x++){
+                        bufferDisplay2.presetValue[0][x]=bufferDisplay2.valueKeys[x];
+                        bufferDisplay2.presetValue[1][x]=bufferDisplay2.valueKeys[x];
+                    }  
+                    flowDisplay2 = 5;//caso para seleccion de producto
+                    SetPicture(2,DISPLAY_SELECCIONE_PRODUCTO4);
+                break;
+            }
+        break;
+            
+        case 5:
+            if(Display2_GetRxBufferSize()==8){
+                if((Display2_rxBuffer[0]==0xAA) && (Display2_rxBuffer[6]==0xC3) && (Display2_rxBuffer[7]==0x3C)){
+                    switch(Display2_rxBuffer[3]){
+                        case 0x80:  //Grado 1 
+                            flowDisplay2 = 6;
+                            side.b.hose = 1;
+                            SetPicture(2,DISPLAY_DESEA_IMPRIMIR_RECIBO);                                                        
+                        break;
+                            
+                        case 0x81:  //Grado 2 
+                            flowDisplay2 = 6;
+                            side.b.hose = 2;
+                            SetPicture(2,DISPLAY_DESEA_IMPRIMIR_RECIBO);                                                        
+                        break;
+                            
+                        case 0x7F:  //Grado 3
+                            flowDisplay2 = 6;
+                            side.b.hose = 3;
+                            SetPicture(2,DISPLAY_DESEA_IMPRIMIR_RECIBO);                                                        
+                        break;   
+                        
+                        case 0xB8:  //Grado 4 
+                            flowDisplay2 = 6;
+                            side.b.hose = 4;
+                            SetPicture(2,DISPLAY_DESEA_IMPRIMIR_RECIBO);                                                        
+                        break;
+                            
+                        case 0x94:  //Retroceso 
+                            flowDisplay2 = 0;
+                            SetPicture(2,DISPLAY_INICIO0);                                                        
+                        break;
+                            
+                        case 0x7E:  //Pantalla Inicial                                                        
+                            SetPicture(2,DISPLAY_INICIO0);
+                            flowDisplay2 = 0;
+                        break;
+                    }                    
+                }
+                CyDelay(10);         
+                Display2_ClearRxBuffer();
+            }
+        break;
+                    
+        case 6:
+            isr_3_StartEx(animacion);
+            Timer_Animacion_Start();
+            if(Display2_GetRxBufferSize()==8){
+                if((Display2_rxBuffer[0]==0xAA) && (Display2_rxBuffer[6]==0xC3) && (Display2_rxBuffer[7]==0x3C)){
+                    switch(Display2_rxBuffer[3]){
+                        case 0x39:  //Si imprimir  
+                            flowDisplay2 = 9;
+                            numberKeys1 = 0;
+                            bufferDisplay2.flagKeyboard = 1;
+                            bufferDisplay2.flagPrint =  1;
+                            SetPicture(2,DISPLAY_DIGITE_PLACA);                            
+                        break; 
+                        case 0x38:  //No imprimir 
+                            if(bufferDisplay2.flagEndSale){
+                                flowDisplay2 = 0;
+                                SetPicture(2,DISPLAY_INICIO0);
+                            }else{
+                                flowDisplay2 = 7;//Esperando estado del dispensador 
+                                bufferDisplay2.flagPrint =  0;
+                                count_protector=0;
+                                SetPicture(2,DISPLAY_SUBA_MANIJA);
+                            }
+                        break;
+                        case 0x7E:  //Pantalla Inicial                                                                                    
+                            flowDisplay2 = 0;
+                            SetPicture(2,DISPLAY_INICIO0);
+                        break;
+                    }                    
+                }
+                CyDelay(10);         
+                Display2_ClearRxBuffer();
+            }
+            if(count_protector>=30){
+                flowDisplay2 = 0;	
+    			count_protector=0;
+                SetPicture(2,DISPLAY_INICIO0);
+    		}
+        break;
+                                        
+            
+        case 7:
+            //isr_3_StartEx(animacion);
+            //Timer_Animacion_Start();
+            side.b.activeHose = PumpHoseActiveState(side.b.dir);  
+            if (side.b.activeHose == side.b.hose){                
+                if(PresetData(side.b.dir,side.b.activeHose,bufferDisplay2.presetValue[0],bufferDisplay2.presetType[0]&0x03)==1){                    
+                    isr_4_Stop(); 
+                    Timer_Animacion2_Stop();
+                    get_state(side.b.dir);
+                    //CyDelay(20);
+                    Pump_PutChar(0x10|side.b.dir);//Autoriza el surtidor
+                    //CyDelay(50);
+                    side.b.RFstateReport = 1;                    
+                    flowDisplay2 = 8;                    
+                    count_protector2 = 0;                                            
+                    SetPicture(2,DISPLAY_DESPACHANDO);   
+                    ShowMessage(2,(bufferDisplay2.presetValue[0]),18);
+                }else{
+                    flowDisplay2 = 0;
+                    SetPicture(2,DISPLAY_ERROR);
+                    CyDelay(200);
+                    SetPicture(2,DISPLAY_INICIO0);
+                }
+            }else{
+                flowDisplay2 = 7;                
+//                if(count_protector>=60){
+//                    flowDisplay2 = 0;	
+//        			count_protector=0;
+//                    SetPicture(2,DISPLAY_INICIO0);
+//        		}
+            }
+            if(Display2_GetRxBufferSize()==8){
+                if((Display2_rxBuffer[0]==0xAA) && (Display2_rxBuffer[6]==0xC3) && (Display2_rxBuffer[7]==0x3C)){
+                    switch(Display2_rxBuffer[3]){                        
+                        case 0x7E:  //Pantalla Inicial                                                        
+                            SetPicture(2,DISPLAY_INICIO0);
+                            flowDisplay2 = 0;
+                        break;
+                    }                    
+                }
+                CyDelay(10);                         
+            }
+            Display2_ClearRxBuffer();
+        break;
+            
+        case 8:            
+            side.b.pumpState = get_state(side.b.dir);
+            switch (side.b.pumpState){
+                case PUMP_IDLE: //Espera - venta cero
+                    flowDisplay2 = 0;
+                    side.b.rfState = RF_ZERO_SALE;
+                    bufferDisplay2.flagActiveSale = false;
+                    SetPicture(2,DISPLAY_INICIO0);
+                break;
+                case PUMP_BUSY: //Surtiendo                    
+                    bufferDisplay2.flagActiveSale = true;
+                    bufferDisplay2.flagEndSale = false;
+                    //side.a.rfState = RF_DELIVERING;
+                break;
+                case PUMP_PEOT: //reporte fin venta                    
+                    if(getSale(side.b.dir)){
+                        if(bufferDisplay2.flagPrint ==1){
+                            imprimir(printPortB,side.b.dir);
+                            flowDisplay2 = 0;
+                            SetPicture(2,DISPLAY_INICIO0); 
+                        }else{
+                            flowDisplay2 = 6;
+                            bufferDisplay2.flagEndSale = true;
+                            SetPicture(2,DISPLAY_DESEA_IMPRIMIR_RECIBO); 
+                        }
+                        bufferDisplay2.flagActiveSale = false;
+                        side.b.RFstateReport = 1;
+                    }                                         
+                break;
+                case PUMP_FEOT: //Reporte de venta
+                    if(getSale(side.b.dir)){
+                        if(bufferDisplay2.flagPrint ==1){
+                            imprimir(printPortB,side.b.dir);
+                            flowDisplay2 = 0;
+                            SetPicture(2,DISPLAY_INICIO0); 
+                        }else{
+                            flowDisplay2 = 6;
+                            bufferDisplay2.flagEndSale = true;
+                            SetPicture(2,DISPLAY_DESEA_IMPRIMIR_RECIBO); 
+                        }
+                        bufferDisplay2.flagActiveSale = false;
+                        side.b.RFstateReport = 1;
+                    }
+                break;
+                
+            }
+            
+        break;
+            
+        case 9: //Teclado           
+            switch (alphanumeric_keyboard(2,10,0)){
+                case 0: //Cancelar
+                    switch(bufferDisplay2.flagKeyboard){
+                        case 1://Placa
+                            for(x=0;x<=10;x++){
+                                bufferDisplay2.licenceSale[x]=0;
+                            }
+                            flowDisplay2 = 0;//Inicio
+                            SetPicture(2,DISPLAY_INICIO0);
+                        break;
+                        
+                        case 2://Kilometraje
+                            for(x=0;x<=10;x++){
+                                bufferDisplay2.mileageSale[x]=0;
+                            }
+                        break;
+                        
+                        case 3://CC/NIT
+                            for(x=0;x<=10;x++){
+                                bufferDisplay2.identySale[x]=0;
+                            }
+                        break;
+                        case 4://ID
+                            for(x=0;x<=10;x++){
+                                bufferDisplay2.shiftId[x]=0;
+                            }
+                        break;
+                    }                    
+                    Display2_ClearRxBuffer();
+                break;
+                    
+                case 1: //Enter
+                    switch(bufferDisplay2.flagKeyboard){
+                        case 1://Placa
+                            for(x=0;x<=bufferDisplay2.valueKeys[0];x++){
+                                bufferDisplay2.licenceSale[x]=bufferDisplay2.valueKeys[x];
+                            }
+                            if(bufferDisplay2.flagEndSale){
+                                imprimir(printPortB,side.b.dir);
+                                flowDisplay2 = 0;
+                                SetPicture(2,DISPLAY_INICIO0); 
+                            }else{
+                                flowDisplay2 = 7;//Suba manija
+                                SetPicture(2,DISPLAY_SUBA_MANIJA);
+                            }
+                        break;
+                        
+                        case 2://Kilometraje
+                            for(x=0;x<=bufferDisplay2.valueKeys[0];x++){
+                                bufferDisplay2.mileageSale[x]=bufferDisplay2.valueKeys[x];
+                            }
+                            flowDisplay2 = 7;//Suba manija
+                            SetPicture(2,DISPLAY_SUBA_MANIJA);
+                        break;
+                        
+                        case 3://CC/NIT
+                            for(x=0;x<=bufferDisplay2.valueKeys[0];x++){
+                                bufferDisplay2.identySale[x]=bufferDisplay2.valueKeys[x];
+                            }
+                        case 4://ID
+                            for(x=0;x<=10;x++){
+                                bufferDisplay2.shiftId[x] =bufferDisplay2.valueKeys[x];
+                            }
+                            flowDisplay2 = 14;//Pide clave                            
+                            numberKeys1 = 0;
+                            hiddenKeys = 10;
+                            controlChar ='*';
+                            bufferDisplay2.flagKeyboard = 3;
+                            SetPicture(2,DISPLAY_INGRESE_PASSWORD);
+                        break;
+                    }                    
+                    Display2_ClearRxBuffer();
+                break;
+            }            
+        break;    
+    ////////////////// CASOS PARA CRÉDITO  /////////////////////
+        case 10:
+            if(Display2_GetRxBufferSize()==8){
+                if((Display2_rxBuffer[0]==0xAA) && (Display2_rxBuffer[6]==0xC3) && (Display2_rxBuffer[7]==0x3C)){
+                    switch(Display2_rxBuffer[3]){
+                        case 0xB6:  //Solicitud ibutton  
+                            flowDisplay2 = 11;
+                            numberKeys1 = 0;                            
+                            bufferDisplay2.flagPrint =  1;
+                            SetPicture(2,DISPLAY_ESPERANDO_ID);                            
+                        break; 
+                        case 0xB7:  //ID por número
+                            bufferDisplay2.flagKeyboard = 0;
+                            flowDisplay2 = 7;//Esperando estado del dispensador  
+                            count_protector=0;
+                            SetPicture(2,DISPLAY_SUBA_MANIJA);                            
+                        break;
+                        case 0x94:  //Pantalla Inicial    
+                            flowDisplay2 = 0;
+                            SetPicture(2,DISPLAY_INICIO0);                            
+                        break;
+                        case 0x7E:  //Pantalla Inicial                                                        
+                            SetPicture(2,DISPLAY_INICIO0);
+                            flowDisplay2 = 0;
+                        break;
+                    }                    
+                }
+                CyDelay(10);         
+                Display2_ClearRxBuffer();
+            }                        
+        break;
+        
+        case 11:
+            isr_3_StartEx(animacion);
+            Timer_Animacion_Start();
+            if(touch_present(2)==1){
+				if(touch_write(1,0x33)){
+					for(x=1;x<=8;x++){
+						temporal[x]=touch_read_byte(2);
+					}
+					y=0;
+					for(x=1;x<8;x++){
+                        y=crc_check(y,temporal[x]);
+                    }
+					if(y==temporal[8]){
+						bufferDisplay2.idSerial[0]=16;
+						y=16;
+						for(x=1;x<=8;x++){
+							if((temporal[x]&0x0F)>=10){
+								bufferDisplay2.idSerial[y]=(temporal[x]&0x0F)+55;
+							}else{
+								bufferDisplay2.idSerial[y]=(temporal[x]&0x0F)+48;				
+							}
+                            y--;
+							if(((temporal[x]>>4)&0x0F)>=10){
+								bufferDisplay2.idSerial[y]=((temporal[x]>>4)&0x0F)+55;
+							}else{
+								bufferDisplay2.idSerial[y]=((temporal[x]>>4)&0x0F)+48;				
+							}
+                            y--;
+						}                        
+                        SetPicture(2,DISPLAY_ID_RECONOCIDO);                                           
+                        Display2_ClearRxBuffer();
+                        CyDelay(700);
+                        bufferDisplay2.flagKeyboard = 2;
+                        flowDisplay2 = 9;
+                        SetPicture(2,DISPLAY_INTRODUZCA_KILOMETRAJE);
+                        
+					}
+				}
+			}
+            if(count_protector>=60){
+                flowDisplay2 = 0;	
+    			count_protector=0;
+                SetPicture(2,DISPLAY_INICIO0);
+    		}
+                                    
+        break;    
+    ///////////////FIN CASOS PARA CRÉDITO  /////////////////////  
+    
+    //////////// CASOS PARA CONFIGURACIONES  ///////////////////
+        case 12:
+            if(Display2_GetRxBufferSize()==8){
+                if((Display2_rxBuffer[0]==0xAA) && (Display2_rxBuffer[6]==0xC3) && (Display2_rxBuffer[7]==0x3C)){
+                    switch(Display2_rxBuffer[3]){
+                        case 0x46:  //Turnos              
+                            flowDisplay2 = 13; 
+                            if(lockTurn ==1){
+                                SetPicture(2,DISPLAY_CERRAR_TURNO);
+                            }else{
+                                SetPicture(2,DISPLAY_ABRIR_TURNO);
+                            }                            
+                        break;
+                        case 0x55:  //Configurar módulo 
+                            flowDisplay2 = 14;
+                            bufferDisplay2.flagKeyboard = 6;
+                            numberKeys1 = 0;
+                            hiddenKeys = 5;
+                            controlChar ='*';
+                            SetPicture(2,DISPLAY_INGRESE_PASSWORD);                           
+                        break;
+                        case 0xB5:  //Copia de recibo 
+                            flowDisplay2  = 0;
+                            side.b.RFstateReport = 1;
+                            side.b.rfState = RF_COPY_RECEIPT;
+                            SetPicture(2,DISPLAY_INICIO0);                            
+                        break;
+                        
+                        case 0x3B:  //Pantalla Inicial    
+                            flowDisplay2 = 0;
+                            SetPicture(2,DISPLAY_INICIO0);                            
+                        break;
+                            
+                        case 0x94:  //Pantalla Inicial    
+                            flowDisplay2 = 0;
+                            SetPicture(2,DISPLAY_INICIO0);                            
+                        break;
+                        
+                        case 0x7E:  //Pantalla Inicial    
+                            flowDisplay2 = 0;
+                            SetPicture(2,DISPLAY_INICIO0);                            
+                        break;
+                    }
+                }  
+                CyDelay(10);         
+                Display2_ClearRxBuffer();
+            }
+        break;
+
+        case 13:
+            if(Display2_GetRxBufferSize()==8){
+                if((Display2_rxBuffer[0]==0xAA) && (Display2_rxBuffer[6]==0xC3) && (Display2_rxBuffer[7]==0x3C)){
+                    switch(Display2_rxBuffer[3]){
+                        case 0x47:  //Cambio de turno: Abrir  
+                            flowDisplay2 = 9;
+                            numberKeys1 = 0;    
+                            bufferDisplay2.flagKeyboard = 4;
+                            SetPicture(2,DISPLAY_INTRODUZCA_CEDULA);                            
+                        break;
+                        case 0x48:  //Cambio de turno: Cerrar 
+                            flowDisplay2 = 9;
+                            numberKeys1 = 0;   
+                            bufferDisplay2.flagKeyboard = 4;
+                            SetPicture(2,DISPLAY_INTRODUZCA_CEDULA);                           
+                        break;                         
+                        case 0x7E:  //Pantalla Inicial                                                        
+                            SetPicture(2,DISPLAY_INICIO0);
+                            flowDisplay2 = 0;
+                        break;
+                        case 0x94:  //Pantalla Inicial                                                        
+                            SetPicture(2,DISPLAY_INICIO0);
+                            flowDisplay2 = 0;
+                        break;
+                    }                    
+                }
+                CyDelay(10);         
+                Display2_ClearRxBuffer();
+            }                        
+        break; 
+            
+        case 14: //Teclado general      
+            switch (alphanumeric_keyboard(2,hiddenKeys,controlChar)){
+                case 0: //Cancelar
+                    switch(bufferDisplay2.flagKeyboard){
+                        case 1://ID Estacion
+                            for(x=0;x<=4;x++){
+                                idStation[x]=0;
+                            }
+                            flowDisplay2 = 0;
+                            SetPicture(2,DISPLAY_INICIO0);
+                        break;
+                        case 2://Umbral
+                            for(x=0;x< hiddenKeys;x++){
+                                pumpGap[x]=0;
+                            }
+                            flowDisplay2 = 0;
+                            SetPicture(2,DISPLAY_INICIO0);
+                        break;
+                        case 3://Pass turno
+                            for(x=0;x< hiddenKeys;x++){
+                                bufferDisplay2.shiftPassword[x]=0;
+                            }
+                            flowDisplay2 = 0;
+                            SetPicture(2,DISPLAY_INICIO0);
+                        break;
+                        case 5://Pass
+                            for(x=0;x< hiddenKeys;x++){
+                                bufferDisplay2.shiftPassword[x]=0;
+                            }
+                            flowDisplay2 = 0;
+                            SetPicture(2,DISPLAY_INICIO0);
+                        break;
+                            
+                        case 6://Pass
+                            for(x=1;x<=configAccess[0];x++){
+                                configAccess[x]=0;
+                            }
+                            flowDisplay2 = 0;
+                            SetPicture(2,DISPLAY_INICIO0);
+                        break;
+                    }                    
+                    Display2_ClearRxBuffer();
+                break;
+                    
+                case 1: //Enter
+                    switch(bufferDisplay2.flagKeyboard){   
+                        case 1://ID Estacion
+                            for(x=0;x <=4;x++){
+                                idStation[x] =bufferDisplay2.valueKeys[x+1];                                
+                            }
+                            idStation[4] = 0x00;
+                            intIDStation = atoi(idStation);
+                            IDCast[0] = intIDStation;
+                            IDCast[1] = intIDStation>>8;
+                            EEPROM_1_WriteByte(IDCast[0],10);
+                            EEPROM_1_WriteByte(IDCast[1],11);
+                            flowDisplay2 = 15;
+                            SetPicture(2,DISPLAY_CONFIGURACIONES);
+                        break;
+                        case 2://Pass
+                            for(x=0;x < hiddenKeys;x++){
+                                pumpGap[x] =bufferDisplay2.valueKeys[x];
+                            }
+                            flowDisplay2 = 15;
+                            SetPicture(2,DISPLAY_CONFIGURACIONES);
+                        break;
+                        case 3://Pass turno
+                            for(x=0;x < hiddenKeys;x++){
+                                bufferDisplay2.shiftPassword[x] =bufferDisplay2.valueKeys[x];
+                            }
+                            flowDisplay2 = 19;
+                            SetPicture(2,DISPLAY_POR_FAVOR_ESPERE);
+                        break;
+                        case 5://Pass
+                            for(x=0;x < hiddenKeys;x++){
+                                bufferDisplay2.shiftPassword[x] =bufferDisplay2.valueKeys[x];
+                            }
+                            flowDisplay2 = 15;
+                            SetPicture(2,DISPLAY_CONFIGURACIONES);
+                        break; 
+                        case 6://Pass
+                            for(x=1;x<=configAccess[0];x++){
+                                configAccess[x] =bufferDisplay2.valueKeys[x];
+                            }
+                            if(configAccess[1] == passwordPump[1] && configAccess[2] == passwordPump[2] && configAccess[3] == passwordPump[3] && configAccess[4] == passwordPump[4]){                                
+                                SetPicture(2,DISPLAY_PASSWORD_VALIDO);
+                                CyDelay(700);
+                                flowDisplay2 = 15;
+                                SetPicture(2,DISPLAY_CONFIGURACIONES);
+                            }else{
+                                SetPicture(2,DISPLAY_PASSWORD_INVALIDO);
+                                CyDelay(700);
+                                flowDisplay2 = 0;
+                                SetPicture(2,DISPLAY_INICIO0);
+                            }
+                        break;
+                    }                    
+                    Display2_ClearRxBuffer();
+                break;
+            }            
+        break;
+            
+        case 15:
+            if(Display2_GetRxBufferSize()==8){
+                if((Display2_rxBuffer[0]==0xAA) && (Display2_rxBuffer[6]==0xC3) && (Display2_rxBuffer[7]==0x3C)){
+                    switch(Display2_rxBuffer[3]){
+                        case 0x82:  //ID Estacion  
+                            flowDisplay2 = 14;
+                            numberKeys1 = 0; 
+                            controlChar = 0;
+                            hiddenKeys  = 5;
+                            bufferDisplay2.flagKeyboard = 1;
+                            SetPicture(2,DISPLAY_INTRODUZCA_VALOR);                            
+                        break;
+                        case 0x65:  //Test Impresoras 
+                            flowDisplay2 = 16; 
+                            PrintTest();
+                            SetPicture(2,DISPLAY_AMBAS_IMPRESORAS_FUNCIONANDO);                           
+                        break;
+                        
+                        case 0x5A:  //Umbral 
+                            flowDisplay2 = 14;
+                            numberKeys1 = 0;
+                            controlChar = 0;
+                            hiddenKeys  = 3;
+                            pumpGap[0]  = 2;
+                            bufferDisplay2.flagKeyboard = 2;
+                            SetPicture(2,DISPLAY_INTRODUZCA_VALOR);                            
+                        break;
+                        case 0x58:  //Hora y Fecha
+                            flowDisplay2 = 18;
+                            numberKeys1 = 0;   
+                            bufferDisplay2.flagKeyboard = 4;
+                            SetPicture(2,DISPLAY_CONFIGURAR_FECHA_HORA);                           
+                        break;
+                        case 0x7E:  //Pantalla Inicial                                                        
+                            SetPicture(2,DISPLAY_INICIO0);
+                            flowDisplay2 = 0;
+                        break;
+                        case 0x94:  //Pantalla Inicial                                                        
+                            SetPicture(2,DISPLAY_INICIO0);
+                            flowDisplay2 = 0;
+                        break;
+                    }                    
+                }
+                CyDelay(10);         
+                Display2_ClearRxBuffer();
+            }                        
+        break; 
+            
+        case 16:
+            if(Display2_GetRxBufferSize()==8){
+                if((Display2_rxBuffer[0]==0xAA) && (Display2_rxBuffer[6]==0xC3) && (Display2_rxBuffer[7]==0x3C)){
+                    switch(Display2_rxBuffer[3]){
+                        case 0x38:  //No funcionan  
+                            flowDisplay2 = 17;
+                            SetPicture(2,DISPLAY_IMPRESORA_NO_FUNCIONANDO);                            
+                        break;
+                        case 0x39:  //Si funcionan
+                            flowDisplay2 = 15; 
+                            printPortA = 1;
+                            printPortB = 2;
+                            EEPROM_1_WriteByte(printPortA,8);
+                            EEPROM_1_WriteByte(printPortB,9);
+                            SetPicture(2,DISPLAY_CONFIGURACIONES);
+                        break;
+                                               
+                        case 0x7E:  //Pantalla Inicial                                                        
+                            SetPicture(2,DISPLAY_INICIO0);
+                            flowDisplay2 = 0;
+                        break;
+                        case 0x94:  //Pantalla Inicial                                                        
+                            SetPicture(2,DISPLAY_INICIO0);
+                            flowDisplay2 = 0;
+                        break;
+                    }                    
+                }
+                CyDelay(10);         
+                Display2_ClearRxBuffer();
+            }                        
+        break;
+            
+        case 17:
+            if(Display2_GetRxBufferSize()==8){
+                if((Display2_rxBuffer[0]==0xAA) && (Display2_rxBuffer[6]==0xC3) && (Display2_rxBuffer[7]==0x3C)){
+                    switch(Display2_rxBuffer[3]){
+                        case 0x8C:  //1 no funciona  
+                            flowDisplay2 = 15; 
+                            printPortA = 2;
+                            printPortB = 2;
+                            EEPROM_1_WriteByte(printPortA,8);
+                            EEPROM_1_WriteByte(printPortB,9);
+                            SetPicture(2,DISPLAY_CONFIGURACIONES);                            
+                        break;
+                        case 0x8D:  //2 no funciona
+                            flowDisplay2 = 15; 
+                            printPortA = 1;
+                            printPortB = 1;
+                            EEPROM_1_WriteByte(printPortA,8);
+                            EEPROM_1_WriteByte(printPortB,9);
+                            SetPicture(2,DISPLAY_CONFIGURACIONES); 
+                        break;
+                            
+                        case 0x8E:  //ninguna funciona
+                            flowDisplay2 = 15; 
+                            printPortA = 0;
+                            printPortB = 0;
+                            EEPROM_1_WriteByte(printPortA,8);
+                            EEPROM_1_WriteByte(printPortB,9);
+                            SetPicture(2,DISPLAY_CONFIGURACIONES); 
+                        break;
+                                               
+                        case 0x7E:  //Pantalla Inicial                                                        
+                            SetPicture(2,DISPLAY_INICIO0);
+                            flowDisplay2 = 0;
+                        break;
+                        case 0x94:  //Pantalla Inicial                                                        
+                            SetPicture(2,DISPLAY_INICIO0);
+                            flowDisplay2 = 0;
+                        break;
+                    }                    
+                }
+                CyDelay(10);         
+                Display2_ClearRxBuffer();
+            }                        
+        break;
+            
+        case 18:
+            if(leer_hora()==1){
+                WriteLCD(2,(((timeDownHandle[1]&0x10)>>4)+48),13,8,1,0x0000,'N');
+                WriteLCD(2,((timeDownHandle[1]&0x0F)+48),13,9,1,0x0000,'N');
+                WriteLCD(2,':',13,10,1,0x0000,'N');
+                WriteLCD(2,(((timeDownHandle[0]&0xF0)>>4)+48),13,11,1,0x0000,'N');
+                WriteLCD(2,((timeDownHandle[0]&0x0F)+48),13,12,1,0x0000,'N');               
+            }
+            if(leer_fecha()==1){                
+                WriteLCD(2,(((dateDownHandle[0]&0x30)>>4)+48),21,8,1,0x0000,'N');
+                WriteLCD(2,((dateDownHandle[0]&0x0F)+48),21,9,1,0x0000,'N');
+                WriteLCD(2,'/',21,10,1,0x0000,'N');
+                WriteLCD(2,(((dateDownHandle[1]&0x10)>>4)+48),21,11,1,0x0000,'N');
+                WriteLCD(2,((dateDownHandle[1]&0x0F)+48),21,12,1,0x0000,'N');
+                WriteLCD(2,'/',21,13,1,0x0000,'N');
+                WriteLCD(2,(((dateDownHandle[2]&0xF0)>>4)+48),21,14,1,0x0000,'N');
+                WriteLCD(2,((dateDownHandle[2]&0x0F)+48),21,15,1,0x0000,'N');
+            }
+            if(Display2_GetRxBufferSize()==8){
+                if((Display2_rxBuffer[0]==0xAA) && (Display2_rxBuffer[6]==0xC3) && (Display2_rxBuffer[7]==0x3C)){
+                    switch(Display2_rxBuffer[3]){                                                                       
+                        case 0x7E:  //Pantalla Inicial  
+                            flowDisplay2 = 0;
+                            SetPicture(2,DISPLAY_INICIO0);                            
+                        break;
+                        case 0x94:  //Pantalla Inicial    
+                            flowDisplay2 = 0;
+                            SetPicture(2,DISPLAY_INICIO0);                            
+                        break;
+                    }                    
+                }
+                CyDelay(10);         
+                Display2_ClearRxBuffer();
+            }                        
+        break;
+            
+        case 19:            
+            side.b.RFstateReport = 1;
+            ShiftState =1;
+        break;
+    countLCD = 0;       
+    }    
     }
-}
 
 
 /*
@@ -1256,11 +2052,11 @@ CY_ISR(animacion2){
 * Note(s)     : none.
 *********************************************************************************************************
 */
-CY_ISR(timerRFRX){
-    Waitable_3_ReadStatusRegister();
-    countRX++;
-    countTX++;
-}
+//CY_ISR(timerRFRX){
+//    Waitable_3_ReadStatusRegister();
+//    countRX++;
+//    countTX++;
+//}
 
 
 /*
@@ -1279,11 +2075,11 @@ CY_ISR(timerRFRX){
 * Note(s)     : none.
 *********************************************************************************************************
 */
-CY_ISR(timerPump){
-    Waitable_4_ReadStatusRegister();
-    countPump++;
-    countLCD++;
-}
+//CY_ISR(timerPump){
+//    Waitable_4_ReadStatusRegister();
+//    countPump++;
+//    countLCD++;
+//}
 
 
 int main()
@@ -1301,10 +2097,6 @@ int main()
         PollingDisplay1(); 
         CyWdtClear();
         PollingDisplay2();
-        CyWdtClear();
-        //PollingPump();
-        //CyWdtClear();                                
-        pollingRF_Tx(); 
         CyWdtClear();                                
         counterRF++;
         if(counterRF >10)

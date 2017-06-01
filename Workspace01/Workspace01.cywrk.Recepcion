@@ -13,7 +13,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Workspace01\Design01\Generated_Source\PSoC5">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Workspace01\Design01\Source Files\protocol.c">
 <ExpandedNodeIds>
 <v>Workspace01</v>
 <v>Workspace01\Design01</v>
@@ -348,11 +348,10 @@
 <name v=".\Design01.cydsn\main.c" />
 <name v=".\Design01.cydsn\variables.h" />
 <name v=".\Design01.cydsn\RFPoll.c" />
-<name v=".\Design01.cydsn\protocol.c" />
-<name v=".\Design01.cydsn\keyboard.c" />
 <name v=".\Design01.cydsn\RFPoll.h" />
 <name v=".\Design01.cydsn\Print.c" />
 <name v=".\Design01.cydsn\LCD.c" />
+<name v=".\Design01.cydsn\protocol.c" />
 </OpenDocs>
 <config v="" />
 <AutoUpdate v="true" />
