@@ -53,7 +53,7 @@ uint8 verificar_check(uint8 *datos, uint16 size){
 
 void pollingRF_Rx(){
     uint16 i,x,y,z;       
-    CyDelay(30);
+    CyDelay(40);
     if(RF_Connection_GetRxBufferSize() >= 1){
         ActiveRF=1;
         counterRF = 0;
@@ -119,73 +119,27 @@ void pollingRF_Rx(){
                
                
                case 0xA5:
-                if(buffer_rf[5] == side.a.dir){
-                    getTotals(side.a.dir);
-                    buffer_tx[5] = side.a.dir; y++;
-                    buffer_tx[y] = 0xE8; y++;
+                if(buffer_rf[5] == side.a.dir){                      
+                    pollTotals = 1;
+                    buffer_tx[5] = side.a.dir;y++;
+                    buffer_tx[y] = 0xA1;y++;
                     buffer_tx[y] = side.a.rfState; y++;
-                    buffer_tx[y] = 0x00; y++;
-                    for(z=1;z <= side.a.hoseNumber; z++){
-                        buffer_tx[y] = z; y++;                    
-                        if (digits == 6 || digits == 5){                            
-                            for(x = 8; x > 0; x--){ //Volumen
-                                buffer_tx[y] = side.a.totalsHandle[0][0][x];y++;
-                            }
-                            for(x =0; x < 4; x++){
-                                buffer_tx[y] = 0x30;y++;
-                            }
-                            for(x = 8; x > 0; x--){//Dinero
-                                buffer_tx[y] = side.a.totalsHandle[0][1][x];y++;
-                            }
-                            for(x =0; x < 4; x++){
-                                buffer_tx[y] = 0x30;y++;
-                            }
-                        }else{
-                            for(x = 12; x > 0; x--){ //Volumen
-                                buffer_tx[y] = side.a.totalsHandle[0][0][x];y++;
-                            }                        
-                            for(x = 12; x > 0; x--){//Dinero
-                                buffer_tx[y] = side.a.totalsHandle[0][1][x];y++;
-                            }                        
-                        } 
-                    }
+                    buffer_tx[y] = verificar_check(buffer_tx,y+1);y++;
+                    for (x = 0; x < y; x++){
+                        RF_Connection_PutChar(buffer_tx[x]);
+                    }                    
                 }                
-                if(buffer_rf[5] == side.b.dir){                
-                    getTotals(side.b.dir);
-                    buffer_tx[5] = side.b.dir; y++;
-                    buffer_tx[y] = 0xE8; y++;
+                if(buffer_rf[5] == side.b.dir){                      
+                    pollTotals = 2;
+                    buffer_tx[5] = side.b.dir;y++;
+                    buffer_tx[y] = 0xA1;y++;
                     buffer_tx[y] = side.b.rfState; y++;
-                    buffer_tx[y] = 0x00; y++;
-                    for(z=1;z <= side.b.hoseNumber; z++){
-                        buffer_tx[y] = z; y++;
-                        if (digits == 6 || digits == 5){                            
-                            for(x = 8; x > 0; x--){ //Volumen
-                                buffer_tx[y] = side.b.totalsHandle[0][0][x];y++;
-                            }
-                            for(x =0; x < 4; x++){
-                                buffer_tx[y] = 0x30;y++;
-                            }
-                            for(x = 8; x > 0; x--){//Dinero
-                                buffer_tx[y] = side.b.totalsHandle[0][1][x];y++;
-                            }
-                            for(x =0; x < 4; x++){
-                                buffer_tx[y] = 0x30;y++;
-                            }
-                        }else{
-                            for(x = 12; x > 0; x--){ //Volumen
-                                buffer_tx[y] = side.b.totalsHandle[0][0][x];y++;
-                            }                        
-                            for(x = 12; x > 0; x--){//Dinero
-                                buffer_tx[y] = side.b.totalsHandle[0][1][x];y++;
-                            }                        
-                        }
-                    }
-                }
-                buffer_tx[8] = y-9;
-                buffer_tx[y] = verificar_check(buffer_tx,y+1);y++;                 
-                for (x = 0; x < y; x++){
-                    RF_Connection_PutChar(buffer_tx[x]);
-                }
+                    buffer_tx[y] = verificar_check(buffer_tx,y+1);y++;
+                    for (x = 0; x < y; x++){
+                        RF_Connection_PutChar(buffer_tx[x]);
+                    }                    
+                }                 
+                
                break;
                 
                case 0xA6:               //Envio de precios
@@ -236,32 +190,71 @@ void pollingRF_Rx(){
                break;
                 
                case 0xA7:               //Impresion general
-                
+                for(x = 9; x <= buffer_rf[8];x++){
+                    //buffer_print[x-9] = buffer_rf[x];
+                    write_psoc1(printPortA,buffer_rf[x]);
+                }
                 if(buffer_rf[5] == side.a.dir){
                     buffer_tx[5] = side.a.dir;
                     buffer_tx[6] = 0xA7;
                     buffer_tx[7] = side.a.rfState;
+                    buffer_tx[8] = 0x03;
                 }  
                 if(buffer_rf[5] == side.b.dir){
                     buffer_tx[5] = side.b.dir;
                     buffer_tx[6] = 0xA7;
                     buffer_tx[7] = side.b.rfState;
+                    buffer_tx[8] = 0x03;
                 }
                 if(buffer_rf[5] == side.c.dir){
                     buffer_tx[5] = side.c.dir;
                     buffer_tx[6] = 0xA7;
                     buffer_tx[7] = side.c.rfState;
+                    buffer_tx[8] = 0x03;
                 }
                 if(buffer_rf[5] == side.d.dir){
                     buffer_tx[5] = side.d.dir;
                     buffer_tx[6] = 0xA7;
                     buffer_tx[7] = side.d.rfState;
+                    buffer_tx[8] = 0x03;
                 }
                 buffer_tx[8] = verificar_check(buffer_tx,9);
                 for (x = 0; x < 9; x++){
                     RF_Connection_PutChar(buffer_tx[x]);
                 }
                 
+                
+               break;
+                
+               case 0xA9:
+                if(buffer_rf[5] == side.a.dir){
+                    for(x = 0; x < 10; x++){
+                        side.a.saleNumber[x] = buffer_rf[x+8];
+                    }
+                    if(bufferDisplay1.flagPrint)
+                        imprimir(printPortA,side.a.dir); 
+                }
+                if(buffer_rf[5] == side.b.dir){
+                    for(x = 0; x < 10; x++){
+                        side.b.saleNumber[x] = buffer_rf[x+8];
+                    }
+                    if(bufferDisplay2.flagPrint)
+                        imprimir(printPortB,side.b.dir); 
+                }
+                if(buffer_rf[5] == side.c.dir){
+                    for(x = 0; x < 10; x++){
+                        side.c.saleNumber[x] = buffer_rf[x+8];
+                    }
+                    if(bufferDisplay3.flagPrint)
+                        imprimir(printPortA,side.c.dir); 
+                }
+                if(buffer_rf[5] == side.d.dir){
+                    for(x = 0; x < 10; x++){
+                        side.d.saleNumber[x] = buffer_rf[x+8];
+                    }
+                    if(bufferDisplay4.flagPrint)
+                        imprimir(printPortB,side.d.dir); 
+                }
                break;
                case 0xAB:
                 buffer_tx[0] = 0xBC;
@@ -323,6 +316,24 @@ void pollingRF_Rx(){
                 lockTurn = buffer_rf[12];
                 EEPROM_1_WriteByte(lockTurn,7);
                break;
+                
+               case 0xE4:               //Turno                                                 
+                if(buffer_rf[7]== 0x02){
+                    flowDisplay1 = 0;
+                    ShiftState = 0;
+                    side.a.rfState = RF_IDLE;
+                    side.a.RFstateReport = 0;
+                    SetPicture(1,DISPLAY_ERROR);
+                }else{
+                    ShiftState = 0;
+                    lockTurn = buffer_rf[7];
+                    flowDisplay1 = 0;
+                    side.a.RFstateReport = 0;
+                    CyDelay(200);
+                    SetPicture(1,DISPLAY_ID_RECONOCIDO);
+                }
+                    
+               break;
            }                       
         } 
         RF_Connection_ClearRxBuffer(); 
@@ -332,8 +343,7 @@ void pollingRF_Rx(){
 
 
 void pollingRFA_Tx(){   
-    uint16 x;  
-    
+    uint16 x,y,z;      
     /////////////// COPIA DE RECIBO //////////////////
 //    if(side.a.rfState == RF_COPY_RECEIPT && side.a.RFstateReport == 1){        
 //        buffer_txDisplay[5] = side.a.dir;
@@ -388,7 +398,7 @@ void pollingRFA_Tx(){
         side.a.RFstateReport = 0;
     }      
     ////////////// FIN VENTA ////////////////////////////////////
-    if(bufferDisplay1.flagEndSale == true && side.a.RFstateReport == 1){
+    if((side.a.pumpState == PUMP_PEOT || side.a.pumpState == PUMP_FEOT) && side.a.RFstateReport == 1){  //bufferDisplay1.flagEndSale == true
         buffer_txEOT[0] = 0xBC;
         buffer_txEOT[1] = 0xCB;
         buffer_txEOT[2] = 0xC8;
@@ -397,7 +407,7 @@ void pollingRFA_Tx(){
         buffer_txEOT[5]  = side.a.dir;
         buffer_txEOT[6]  = 0xA4;
         buffer_txEOT[7]  = RF_CASHSALEREPORT;
-        buffer_txEOT[8]  = side.a.activeHose;
+        buffer_txEOT[8]  = side.a.activeHose-1;
         for(x=side.a.ppuSale[0];x > 0 ;x--){						   							
     		tempPPU[side.a.ppuSale[0]-x]= side.a.ppuSale[x];
     	}
@@ -435,49 +445,99 @@ void pollingRFA_Tx(){
         buffer_txEOT[30] = verificar_check(buffer_txEOT,31);                
         for (x = 0; x < 31; x++){
             RF_Connection_PutChar(buffer_txEOT[x]);
-        }        
+        }   
+        side.a.pumpState = PUMP_IDLE;
         side.a.rfState = RF_IDLE;
         bufferDisplay1.flagActiveSale = false;
         side.a.RFstateReport = 0;
+        pollTotals = 1;
+        
     }                                               
     ////////////// TURNOS ////////////////////////////////////
-//    if(ShiftState ==1  && side.a.RFstateReport == 1){                                    
-//        buffer_txDisplay[5]  = side.a.dir;
-//        buffer_txDisplay[6]  = 0xE3;
-//        buffer_txDisplay[7]  = RF_WORKSHIFTREQ;
-//        for(x=1;x <= bufferDisplay1.shiftId[0] ;x++){						   							
-//    		buffer_txDisplay[x+7]= bufferDisplay1.shiftId[(bufferDisplay1.shiftId[0]+1)-x];            
-//    	}
+    if(ShiftState ==1  && side.a.RFstateReport == 1){   
+        buffer_txDisplay[0] = 0xBC;
+        buffer_txDisplay[1] = 0xCB;
+        buffer_txDisplay[2] = 0xC8;
+        buffer_txDisplay[3] = IDCast[0];
+        buffer_txDisplay[4] = IDCast[1];
+        buffer_txDisplay[5]  = side.a.dir;
+        buffer_txDisplay[6]  = 0xE3;
+        buffer_txDisplay[7]  = RF_WORKSHIFTREQ;
+        for(x=bufferDisplay1.shiftId[0];x >=1  ;x--){						   							
+    		buffer_txDisplay[x+7]= bufferDisplay1.shiftId[x];            
+    	}
 //        for(x=8; x<19; x++){
 //            if(buffer_txDisplay[x] ==0x00)
 //                buffer_txDisplay[x]=0x30;
 //        }
-//        for(x=1;x <= bufferDisplay1.shiftPassword[0] ;x++){						   							
-//    		buffer_txDisplay[x+18]= bufferDisplay1.shiftPassword[(bufferDisplay1.shiftPassword[0]+1)-x];            
-//    	}
+        for(x=1;x <= bufferDisplay1.shiftPassword[0] ;x++){						   							
+    		buffer_txDisplay[x+18]= bufferDisplay1.shiftPassword[(bufferDisplay1.shiftPassword[0]+1)-x];            
+    	}
 //        for(x=19; x<31; x++){
 //            if(buffer_txDisplay[x] ==0x00)
 //                buffer_txDisplay[x]=0x30;
 //        }
-//        buffer_txDisplay[32] = verificar_check(buffer_txDisplay,33);
-//        for (x = 0; x < 33; x++){
-//            RF_Connection_PutChar(buffer_txDisplay[x]);
-//        }
-//        side.a.rfState = RF_WORKSHIFTREQ;
-//        side.a.RFstateReport = 0;
-//    }
+        buffer_txDisplay[32] = verificar_check(buffer_txDisplay,33);
+        for (x = 0; x < 33; x++){
+            RF_Connection_PutChar(buffer_txDisplay[x]);
+        }
+        side.a.rfState = RF_IDLE;
+        side.a.RFstateReport = 0;
+    }
     ////////////// CAMBIO PPU ////////////////////////////////////
     if(side.a.changePPU){
         if(priceChange(side.a.dir,side.a.grade,side.a.ppuAuthorized[side.a.grade]))
             side.a.changePPU = false;          
     }    
     ////////////// TOTALES ////////////////////////////////////
-         
+    
+    if(side.a.RFstateReport == 1 && pollTotals ==1){
+        pollTotals = 0;
+        y=0;
+        buffer_txTotals[y] = 0xBC; y++;
+        buffer_txTotals[y] = 0xCB; y++;
+        buffer_txTotals[y] = 0xC8; y++;
+        buffer_txTotals[y] = IDCast[0]; y++;
+        buffer_txTotals[y] = IDCast[1]; y++;
+        buffer_txTotals[5] = side.a.dir; y++;
+        buffer_txTotals[y] = 0xE8; y++;
+        buffer_txTotals[y] = side.a.rfState; y++;
+        buffer_txTotals[y] = 0x00; y++;
+        for(z=1;z <= side.a.hoseNumber; z++){
+            buffer_txTotals[y] = z; y++;                    
+            if (digits == 6 || digits == 5){                            
+                for(x = 8; x > 0; x--){ //Volumen
+                    buffer_txTotals[y] = (side.a.totalsHandle[z-1][0][x])-48;y++;
+                }
+                for(x =0; x < 4; x++){
+                    buffer_txTotals[y] = 0x30;y++;
+                }
+                for(x = 8; x > 0; x--){//Dinero
+                    buffer_txTotals[y] = (side.a.totalsHandle[z-1][1][x])-48;y++;
+                }
+                for(x =0; x < 4; x++){
+                    buffer_txTotals[y] = 0x30;y++;
+                }
+            }else{
+                for(x = 12; x > 0; x--){ //Volumen
+                    buffer_txTotals[y] = (side.a.totalsHandle[z-1][0][x])-48;y++;
+                }                        
+                for(x = 12; x > 0; x--){//Dinero
+                    buffer_txTotals[y] = (side.a.totalsHandle[z-1][1][x])-48;y++;
+                }                        
+            } 
+        }
+        buffer_txTotals[8] = y-9;
+        buffer_txTotals[y] = verificar_check(buffer_txTotals,y+1);y++;                 
+        for (x = 0; x < y; x++){
+            RF_Connection_PutChar(buffer_txTotals[x]);
+        }        
+        side.a.RFstateReport = 0;        
+    }    
  }
 
 void pollingRFB_Tx(){   
-    uint16 x;  
-    
+    uint16 x,y,z;      
     /////////////// COPIA DE RECIBO //////////////////
 //    if(side.b.rfState == RF_COPY_RECEIPT && side.b.RFstateReport == 1){        
 //        buffer_txDisplay[5] = side.b.dir;
@@ -576,15 +636,15 @@ void pollingRFB_Tx(){
             buffer_txEOT[28] = 0x30;
             buffer_txEOT[29] = 0x30;
         }
-        buffer_txEOT[30] = verificar_check(buffer_txEOT,31);
-        CyDelay(10);
+        buffer_txEOT[30] = verificar_check(buffer_txEOT,31);        
         for (x = 0; x < 31; x++){
             RF_Connection_PutChar(buffer_txEOT[x]);
-        }
-        CyDelay(10);
+        }  
+        side.a.pumpState = PUMP_IDLE;
         side.b.rfState = RF_IDLE;
         bufferDisplay2.flagActiveSale = false;
         side.b.RFstateReport = 0;
+        pollTotals = 2;
     }                                               
     ////////////// TURNOS ////////////////////////////////////
 //    if(ShiftState ==1  && side.b.RFstateReport == 1){                                    
@@ -616,6 +676,50 @@ void pollingRFB_Tx(){
     if(side.b.changePPU){
         if(priceChange(side.b.dir,side.b.grade,side.b.ppuAuthorized[side.b.grade]))
             side.b.changePPU = false;          
+    }
+    ////////////// TOTALES ////////////////////////////////////
+    
+    if(side.b.RFstateReport == 1 && pollTotals == 2){
+        pollTotals = 0;
+        y=0;
+        buffer_txTotals[y] = 0xBC; y++;
+        buffer_txTotals[y] = 0xCB; y++;
+        buffer_txTotals[y] = 0xC8; y++;
+        buffer_txTotals[y] = IDCast[0]; y++;
+        buffer_txTotals[y] = IDCast[1]; y++;
+        buffer_txTotals[5] = side.b.dir; y++;
+        buffer_txTotals[y] = 0xE8; y++;
+        buffer_txTotals[y] = side.b.rfState; y++;
+        buffer_txTotals[y] = 0x00; y++;
+        for(z=1;z <= side.b.hoseNumber; z++){
+            buffer_txTotals[y] = z; y++;                    
+            if (digits == 6 || digits == 5){                            
+                for(x = 8; x > 0; x--){ //Volumen
+                    buffer_txTotals[y] = (side.b.totalsHandle[z-1][0][x])-48;y++;
+                }
+                for(x =0; x < 4; x++){
+                    buffer_txTotals[y] = 0x30;y++;
+                }
+                for(x = 8; x > 0; x--){//Dinero
+                    buffer_txTotals[y] = (side.b.totalsHandle[z-1][1][x])-48;y++;
+                }
+                for(x =0; x < 4; x++){
+                    buffer_txTotals[y] = 0x30;y++;
+                }
+            }else{
+                for(x = 12; x > 0; x--){ //Volumen
+                    buffer_txTotals[y] = (side.b.totalsHandle[z-1][0][x])-48;y++;
+                }                        
+                for(x = 12; x > 0; x--){//Dinero
+                    buffer_txTotals[y] = (side.b.totalsHandle[z-1][1][x])-48;y++;
+                }                        
+            } 
+        }
+        buffer_txTotals[8] = y-9;
+        buffer_txTotals[y] = verificar_check(buffer_txTotals,y+1);y++;                 
+        for (x = 0; x < y; x++){
+            RF_Connection_PutChar(buffer_txTotals[x]);
+        }        
+        side.b.RFstateReport = 0;        
     }    
-         
  }
