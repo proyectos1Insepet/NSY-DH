@@ -33,7 +33,7 @@ uint8 passwordPump[5] = "00204";
 CY_ISR(animacion2);
 CY_ISR(animacion);
 //CY_ISR(timerPump);
-//CY_ISR(timerRFRX);
+CY_ISR(timerRFRX);
 //CY_ISR(pollingRF_Tx);
 void GlobalInitializer()
 {
@@ -44,7 +44,7 @@ void GlobalInitializer()
     Printer_Start();   
     I2C_Bus_Start();
     RF_Connection_Start();
-    //isr_1_StartEx(timerRFRX); 
+    isr_1_StartEx(timerRFRX); 
     Waitable_3_Start();
     //isr_2_StartEx(timerPump); 
     Waitable_4_Start();
@@ -370,9 +370,14 @@ void PollingDisplay1(void){
             count_protector = 0;
             bufferDisplay1.saleType = 0;
             bufferDisplay1.flagEndSale = false;  
-            side.a.RFstateReport = 0;
+            side.a.RFstateReport = 0;            
         break;
         case 1: //Menu
+            if(countRX >700){
+                if(bufferDisplay1.flagPrint)
+                    imprimir(printPortA,side.a.dir);
+                countRX = 0;
+            }
             side.a.rfState = RF_IDLE;
             if(Display1_GetRxBufferSize()==8){
                 if((Display1_rxBuffer[0]==0xAA) && (Display1_rxBuffer[6]==0xC3) && (Display1_rxBuffer[7]==0x3C)){                                             
@@ -638,23 +643,24 @@ void PollingDisplay1(void){
                 break;
                 case PUMP_PEOT: //reporte fin venta                    
                     if(getSale(side.a.dir)){
-                        if(bufferDisplay1.flagPrint ==1){
-                            imprimir(printPortA,side.a.dir);
+                        if(bufferDisplay1.flagPrint ==1){ 
+                            countRX = 0;
+                            bufferDisplay1.flagEndSale = true;
                             flowDisplay1 = 0;                            
                             SetPicture(1,DISPLAY_INICIO0); 
                         }else{
                             flowDisplay1 = 6;
                             bufferDisplay1.flagEndSale = true;
                             SetPicture(1,DISPLAY_DESEA_IMPRIMIR_RECIBO); 
-                        }
+                        }                        
                         bufferDisplay1.flagActiveSale = false;
                         side.a.RFstateReport = 1;
                     }                                         
                 break;
                 case PUMP_FEOT://Reporte de venta
                     if(getSale(side.a.dir)){
-                        if(bufferDisplay1.flagPrint ==1){
-                            imprimir(printPortA,side.a.dir);
+                        if(bufferDisplay1.flagPrint ==1){  
+                            countRX = 0;
                             flowDisplay1 = 0;
                             SetPicture(1,DISPLAY_INICIO0); 
                         }else{
@@ -2052,11 +2058,11 @@ CY_ISR(animacion2){
 * Note(s)     : none.
 *********************************************************************************************************
 */
-//CY_ISR(timerRFRX){
-//    Waitable_3_ReadStatusRegister();
-//    countRX++;
-//    countTX++;
-//}
+CY_ISR(timerRFRX){
+    Waitable_3_ReadStatusRegister();
+    countRX++;
+    countTX++;
+}
 
 
 /*
@@ -2097,10 +2103,25 @@ int main()
         PollingDisplay1(); 
         CyWdtClear();
         PollingDisplay2();
-        CyWdtClear();                                
+        CyWdtClear();
+        if(pollTotals ==1){
+            if(getTotals(side.a.dir)!=0){
+                side.a.RFstateReport = 1;
+                side.b.RFstateReport = 0;
+            }
+        CyWdtClear();
+        }
+        if(pollTotals ==2){
+            if(getTotals(side.b.dir)!=0){
+                side.b.RFstateReport = 1;
+                side.a.RFstateReport = 0;
+            }
+        CyWdtClear();
+        }
         counterRF++;
         if(counterRF >10)
-            ActiveRF =0;          
+            ActiveRF =0; 
+        
     }
 }
 

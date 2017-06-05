@@ -404,8 +404,29 @@ void imprimir(uint8 val, uint8 pos){ //val, puerto de impresora
     for(x=0;x < 13;x++){										    //NUMERO DE VENTA							
 		write_psoc1(val,msn_numero[x]);
 	}    	
+    if(pos == side.a.dir){
+        for(x=0;x < 10;x++){										    //NUMERO DE VENTA							
+    		write_psoc1(val,side.a.saleNumber[x]);
+    	}
+    }
+    if(pos == side.b.dir){
+        for(x=0;x < 10;x++){										    //NUMERO DE VENTA							
+    		write_psoc1(val,side.b.saleNumber[x]);
+    	}
+    }
+    if(pos == side.c.dir){
+        for(x=0;x < 10;x++){										    //NUMERO DE VENTA							
+    		write_psoc1(val,side.c.saleNumber[x]);
+    	}
+    }
+    if(pos == side.d.dir){
+        for(x=0;x < 10;x++){										    //NUMERO DE VENTA							
+    		write_psoc1(val,side.d.saleNumber[x]);
+    	}
+    }
     write_psoc1(val,10);
 	if(pos==side.a.dir){
+        bufferDisplay1.flagPrint = 0;
         for(x=0;x < 13;x++){										//Producto							
     		write_psoc1(val,PRN_PRODUCT[x]);
     	}    	
@@ -833,6 +854,7 @@ void imprimir(uint8 val, uint8 pos){ //val, puerto de impresora
 	write_psoc1(val,0x1D);
 	write_psoc1(val,0x56);
 	write_psoc1(val,0x31);	
+    
 }
 
 

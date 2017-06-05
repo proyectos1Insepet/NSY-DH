@@ -626,11 +626,11 @@ uint8 PumpHoseActiveState(uint8 side){
         for(x=0; x<=8;x++){
             Pump_PutChar(SendComand[x]);
         } 
-        if(UnitType > 0){
-            CyDelay(500);
-        }else{
+        //if(UnitType > 0){
+          //  CyDelay(300);
+        //}else{
             CyDelay(150);
-        }
+        //}
     }    
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     BufferSize =Pump_GetRxBufferSize();

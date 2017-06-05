@@ -81,7 +81,7 @@
     volatile uint8 tempPPU[5];
     volatile uint8 CGrade;
     volatile uint8 ShiftState;
-    volatile uint8 sizeSendA;
+    volatile uint8 pollTotals;
     volatile uint8 sizeSendB;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     uint8 UnitType,ConversionFactor,MoneyDec,VolDec,PPUDec,DDMode; // Variables configuracion del dispensador
@@ -103,8 +103,11 @@
     uint8 printPortB;
     uint8 buffer_rf[512];
     uint8 buffer_tx[512];
+    uint8 buffer_txTotals[512];
+    char8 buffer_print[250];
     uint8 buffer_txPreset[60];
     uint8 buffer_txEOT[60];
+    uint8 buffer_txDisplay[60];
     uint16 intIDStation;
     uint8 Encabezado1[30];
     uint8 Encabezado2[30];
@@ -198,6 +201,7 @@ struct position{
     uint8 changePPU;
     uint8 grade;
     uint8 RFstateReport;
+    uint8 saleNumber[10];
 };
 
 struct pump{
