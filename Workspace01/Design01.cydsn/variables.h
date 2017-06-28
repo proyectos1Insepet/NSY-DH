@@ -59,8 +59,6 @@
     volatile uint32 delayPicture1;    //Tiempo que demora una imagen informativa en el caso 0 del polling_Display1
     volatile uint32 delayPicture2;    //Tiempo que demora una imagen informativa en el caso 0 del polling_Display2
     volatile uint8 ppux10;           //ppu por 10, 1=Habilitado 0=Inhabilitado
-    volatile uint8 decimalMoney;     //Decimales de Dinero
-    volatile uint8 decimalVolume;    //Decimales de Volumen 
     volatile uint8 symbols[2];       //Simbolos visualizados en Teclado Numerico [0]=Dinero[1]=Volumen
     volatile uint8 time[3];          //Hora 
     volatile uint8 date[3];          //Fecha
@@ -83,6 +81,7 @@
     volatile uint8 ShiftState;
     volatile uint8 pollTotals;
     volatile uint8 sizeSendB;
+    volatile uint8 bufferAready;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     uint8 UnitType,ConversionFactor,MoneyDec,VolDec,PPUDec,DDMode; // Variables configuracion del dispensador
     uint8 statePump[4];              //Estado en el que se encuentra el dispensador
@@ -104,6 +103,7 @@
     uint8 buffer_rf[512];
     uint8 buffer_tx[512];
     uint8 buffer_txTotals[512];
+    uint8 buffer_A[255];
     char8 buffer_print[250];
     uint8 buffer_txPreset[60];
     uint8 buffer_txEOT[60];

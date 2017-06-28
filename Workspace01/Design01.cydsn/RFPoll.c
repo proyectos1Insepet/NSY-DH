@@ -52,8 +52,8 @@ uint8 verificar_check(uint8 *datos, uint16 size){
 
 
 void pollingRF_Rx(){
-    uint16 i,x,y,z;       
-    CyDelay(40);
+    uint16 i,x,y;       
+    CyDelay(50);
     if(RF_Connection_GetRxBufferSize() >= 1){
         ActiveRF=1;
         counterRF = 0;
@@ -72,7 +72,7 @@ void pollingRF_Rx(){
             switch(buffer_rf[6]){
                case 0xA1:               //Peticion de estado
                 if(buffer_rf[5] == side.a.dir){
-                    if(side.a.RFstateReport == 0){                        
+                    if(bufferAready == 0){                        
                         buffer_tx[5] = side.a.dir;y++;
                         buffer_tx[y] = 0xA1;y++;
                         buffer_tx[y] = side.a.rfState; y++;
@@ -81,7 +81,10 @@ void pollingRF_Rx(){
                             RF_Connection_PutChar(buffer_tx[x]);
                         }
                     }else{
-                        pollingRFA_Tx();
+                        for (x = 1; x < buffer_A[0]; x++){
+                            RF_Connection_PutChar(buffer_A[x]);
+                        }
+                        bufferAready = 0;
                     } 
                 }
                 if(buffer_rf[5] == side.b.dir){
@@ -343,7 +346,8 @@ void pollingRF_Rx(){
 
 
 void pollingRFA_Tx(){   
-    uint16 x,y,z;      
+    uint16 x,y,z;     
+    if(countTX >15){
     /////////////// COPIA DE RECIBO //////////////////
 //    if(side.a.rfState == RF_COPY_RECEIPT && side.a.RFstateReport == 1){        
 //        buffer_txDisplay[5] = side.a.dir;
@@ -357,101 +361,98 @@ void pollingRFA_Tx(){
 //    }    
     ////////////// PRESET - DISPENSANDO ////////////////////////////////////
     if(side.a.pumpState == PUMP_BUSY && side.a.RFstateReport == 1){
-        buffer_txPreset[0] = 0xBC;
-        buffer_txPreset[1] = 0xCB;
-        buffer_txPreset[2] = 0xC8;
-        buffer_txPreset[3] = IDCast[0];
-        buffer_txPreset[4] = IDCast[1];
-        buffer_txPreset[5]  = side.a.dir;
-        buffer_txPreset[6]  = 0xAA;
-        buffer_txPreset[7]  = RF_DELIVERING;
-        buffer_txPreset[8]  = side.a.activeHose;
-        buffer_txPreset[9]  = bufferDisplay1.presetType[0]&0x03;
+        buffer_A[0] = 40;
+		buffer_A[1] = 0xBC;
+        buffer_A[2] = 0xCB;
+        buffer_A[3] = 0xC8;
+        buffer_A[4] = IDCast[0];
+        buffer_A[5] = IDCast[1];
+        buffer_A[6]  = side.a.dir;
+        buffer_A[7]  = 0xAA;
+        buffer_A[8]  = RF_DELIVERING;
+        buffer_A[9]  = side.a.activeHose;
+        buffer_A[10]  = bufferDisplay1.presetType[0]&0x03;
         for(x = bufferDisplay1.presetValue[0][0] ; x > 0; x--){
             tempPreset[bufferDisplay1.presetValue[0][0]-x] = (bufferDisplay1.presetValue[0][x]); 
         }
-        for(x = 10; x<=17; x++){
-            buffer_txPreset[x] = tempPreset[x-10]; 
-            if(buffer_txPreset[x]== 0x00)
-                buffer_txPreset[x] = 0x30;
+        for(x = 11; x<=18; x++){
+            buffer_A[x] = tempPreset[x-11]; 
+            if(buffer_A[x]== 0x00)
+                buffer_A[x] = 0x30;
         }        
-        buffer_txPreset[18]  = 0x00;
+        buffer_A[19]  = 0x00;
         if(bufferDisplay1.flagPrint == 0){
             for(x = 0; x <8 ; x++){
-                buffer_txPreset[19+x]=0x20;
+                buffer_A[20+x]=0x20;
                 tempPreset[x] = 0x00;
             }
         }else{
             for(x = 0; x <8 ; x++){
-                buffer_txPreset[19+x]=bufferDisplay1.licenceSale[x+1];
+                buffer_A[20+x]=bufferDisplay1.licenceSale[x+1];
                 tempPreset[x] = 0x00;
             }
         }
-        for(x=27; x<=37;x++){
-            buffer_txPreset[x]= 0x30;
+        for(x=28; x<=38;x++){
+            buffer_A[x]= 0x30;
         }
-        buffer_txPreset[38] = verificar_check(buffer_txPreset,39);            
-        for (x = 0; x < 39; x++){
-            RF_Connection_PutChar(buffer_txPreset[x]);
-        }            
+        buffer_A[39] = verificar_check(buffer_A,40);                                
         side.a.rfState = RF_DELIVERING;
         side.a.RFstateReport = 0;
-    }      
+        bufferAready =1;
+    }          
     ////////////// FIN VENTA ////////////////////////////////////
-    if((side.a.pumpState == PUMP_PEOT || side.a.pumpState == PUMP_FEOT) && side.a.RFstateReport == 1){  //bufferDisplay1.flagEndSale == true
-        buffer_txEOT[0] = 0xBC;
-        buffer_txEOT[1] = 0xCB;
-        buffer_txEOT[2] = 0xC8;
-        buffer_txEOT[3] = IDCast[0];
-        buffer_txEOT[4] = IDCast[1];
-        buffer_txEOT[5]  = side.a.dir;
-        buffer_txEOT[6]  = 0xA4;
-        buffer_txEOT[7]  = RF_CASHSALEREPORT;
-        buffer_txEOT[8]  = side.a.activeHose-1;
+    if((side.a.pumpState == PUMP_PEOT || side.a.pumpState == PUMP_FEOT) && side.a.RFstateReport == 1){  //bufferDisplay1.flagEndSale == true        
+        buffer_A[0] = 32;
+		buffer_A[1] = 0xBC;
+        buffer_A[2] = 0xCB;
+        buffer_A[3] = 0xC8;
+        buffer_A[4] = IDCast[0];
+        buffer_A[5] = IDCast[1];
+        buffer_A[6]  = side.a.dir;
+        buffer_A[7]  = 0xA4;
+        buffer_A[8]  = RF_CASHSALEREPORT;
+        buffer_A[9]  = side.a.activeHose-1;
         for(x=side.a.ppuSale[0];x > 0 ;x--){						   							
     		tempPPU[side.a.ppuSale[0]-x]= side.a.ppuSale[x];
     	}
-        for(x = 9; x<=13; x++){
-            buffer_txEOT[x] = tempPPU[x-9]; 
-            if(buffer_txEOT[x]== 0x00)
-                buffer_txEOT[x] = 0x30;
+        for(x = 10; x<=14; x++){
+            buffer_A[x] = tempPPU[x-10]; 
+            if(buffer_A[x]== 0x00)
+                buffer_A[x] = 0x30;
         } 
         if(digits ==5 || digits ==6){
             for(x=1;x <= side.a.volumeSale[0];x++){						   							
-                buffer_txEOT[x+13]=side.a.volumeSale[7-x];                
+                buffer_A[x+14]=side.a.volumeSale[7-x];                
         	}
         }else{
             for(x=1;x <= side.a.volumeSale[0];x++){						   							
-                buffer_txEOT[x+13]=side.a.volumeSale[9-x];                
+                buffer_A[x+14]=side.a.volumeSale[9-x];                
         	}
         }        
-        if(buffer_txEOT[20]==0x00){
-            buffer_txEOT[20] = 0x30;
-            buffer_txEOT[21] = 0x30;
+        if(buffer_A[21]==0x00){
+            buffer_A[21] = 0x30;
+            buffer_A[22] = 0x30;
         }
         if(digits ==5 || digits ==6){
             for(x=1;x <= side.a.moneySale[0];x++){						   							
-        		buffer_txEOT[x+21]=side.a.moneySale[7-x];                
+        		buffer_A[x+22]=side.a.moneySale[7-x];                
         	} 
         }else{
             for(x=1;x <= side.a.moneySale[0];x++){						   							
-        		buffer_txEOT[x+21]=side.a.moneySale[9-x];                
+        		buffer_A[x+22]=side.a.moneySale[9-x];                
         	}            
         }
-        if(buffer_txEOT[28]==0x00){
-            buffer_txEOT[28] = 0x30;
-            buffer_txEOT[29] = 0x30;
+        if(buffer_A[29]==0x00){
+            buffer_A[29] = 0x30;
+            buffer_A[30] = 0x30;
         }
-        buffer_txEOT[30] = verificar_check(buffer_txEOT,31);                
-        for (x = 0; x < 31; x++){
-            RF_Connection_PutChar(buffer_txEOT[x]);
-        }   
+        buffer_A[31] = verificar_check(buffer_A,32);                          
         side.a.pumpState = PUMP_IDLE;
         side.a.rfState = RF_IDLE;
         bufferDisplay1.flagActiveSale = false;
         side.a.RFstateReport = 0;
         pollTotals = 1;
-        
+        bufferAready = 1;        
     }                                               
     ////////////// TURNOS ////////////////////////////////////
     if(ShiftState ==1  && side.a.RFstateReport == 1){   
@@ -534,7 +535,10 @@ void pollingRFA_Tx(){
         }        
         side.a.RFstateReport = 0;        
     }    
- }
+    countTX = 0; 
+    }
+    
+}
 
 void pollingRFB_Tx(){   
     uint16 x,y,z;      

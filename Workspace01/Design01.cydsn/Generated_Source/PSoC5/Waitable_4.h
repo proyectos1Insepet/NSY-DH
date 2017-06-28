@@ -168,7 +168,7 @@ void Waitable_4_Wakeup(void)        ;
 *    Initialial Parameter Constants
 ***************************************/
 
-#define Waitable_4_INIT_PERIOD             249u
+#define Waitable_4_INIT_PERIOD             19u
 #define Waitable_4_INIT_CAPTURE_MODE       ((uint8)((uint8)0u << Waitable_4_CTRL_CAP_MODE_SHIFT))
 #define Waitable_4_INIT_TRIGGER_MODE       ((uint8)((uint8)0u << Waitable_4_CTRL_TRIG_MODE_SHIFT))
 #if (Waitable_4_UsingFixedFunction)

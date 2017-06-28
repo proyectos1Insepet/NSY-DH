@@ -399,7 +399,7 @@ uint8 priceChange(uint8 pos,uint8 handle,uint8 *value){
 
 /*
 *********************************************************************************************************
-*                  uint8 preset_data(uint8 pos, uint8 grade, uint8 *value, uint8 preset)
+*                  uint8 PresetData(uint8 pos, uint8 grade, uint8 *value, uint8 preset)
 *
 * Description : 
 *               
@@ -415,11 +415,34 @@ uint8 priceChange(uint8 pos,uint8 handle,uint8 *value){
 */
 uint8 PresetData(uint8 sideR, char8 grade, uint8 *value, uint8 preset){
     char8 SendComand[18]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-    uint8 state,x,y,z;    
+    uint8 state,x,y,z,decimal,w,v;    
     char8 PumpDataReceive =0;
     x = 0;
     z = 0;
-    preset = 0;
+    preset  = 0;
+    decimal = 0;
+    decimal=0;
+    for(x=1;x<=value[0];x++){
+        if(value[x]==','){
+            if((decimal=value[0]-x)>3){
+                return 0;
+            }
+            for(y=x;y>=2;y--){
+                value[y]=value[y-1];
+            }
+            value[1]='0';
+            break;
+        }
+    }
+    if(digits!=value[0]){
+        for(x=0;x<value[0];x++){
+            value[digits-x]=value[value[0]-x];
+        }
+        for(x=(digits-value[0]);x>0;x--){
+            value[x]='0';
+        }
+        value[0]=digits;
+    }
     state = get_state(sideR);
     if(state == 0x06 || state == 0x07){
         Pump_PutChar(0x20|sideR);
@@ -428,6 +451,7 @@ uint8 PresetData(uint8 sideR, char8 grade, uint8 *value, uint8 preset){
     }
     Pump_ClearRxBuffer();
     Pump_ClearRxBuffer();
+    x = 0;    
     if(PumpDataReceive == (0xd0|sideR)){
         SendComand[x] = SOM; x++;
         SendComand[x] = 0xE1; x++;
@@ -458,6 +482,49 @@ uint8 PresetData(uint8 sideR, char8 grade, uint8 *value, uint8 preset){
                 }                
             }
             if(bufferDisplay1.presetType[1] == 'V'){
+                if(digits!=7){
+                    if(decimal>(VolDec-1)){
+                        for(w=value[0];w>1;w--){
+                            value[w]=value[w-1];
+                        }
+                        value[1]='0';
+                    }else if(decimal<(VolDec-1)){
+                        v=(VolDec-1)-(decimal);
+                        for(w=1;w<=value[0];w++){
+                            value[w]=value[v+w];
+                            if((w+v)==value[0]){
+                                for(v=1;v<=(value[0]-w);v++){
+                                    value[w+v]='0';
+                                }
+                                break;
+                            }
+                        }
+                    }
+                }else{
+                    if(decimal>1){
+                        v=VolDec-decimal;
+                        for(w=1;w<=value[0];w++){
+                            value[w]=value[v+w];
+                            if((w+v)==value[0]){
+                                for(v=1;v<=(value[0]-w);v++){
+                                    value[w+v]='0';
+                                }
+                                break;
+                            }
+                        }
+                    }else{
+                        v=VolDec-decimal;
+                        for(w=1;w<=value[0];w++){
+                            value[w]=value[v+w];
+                            if((w+v)==value[0]){
+                                for(v=1;v<=(value[0]-w);v++){
+                                    value[w+v]='0';
+                                }
+                                break;
+                            }
+                        }
+                    }
+                }                    
                 z = value[0];
                 for(y = x; y < value[0]+x; y ++ ){
                     SendComand[y] = 0xE0|(value[z]&0x0F); z--;                    

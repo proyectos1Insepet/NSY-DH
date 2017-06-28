@@ -32,9 +32,9 @@ uint8 passwordPump[5] = "00204";
       
 CY_ISR(animacion2);
 CY_ISR(animacion);
-//CY_ISR(timerPump);
 CY_ISR(timerRFRX);
-//CY_ISR(pollingRF_Tx);
+CY_ISR(timerLCD);
+
 void GlobalInitializer()
 {
     EEPROM_1_Start();
@@ -44,11 +44,13 @@ void GlobalInitializer()
     Printer_Start();   
     I2C_Bus_Start();
     RF_Connection_Start();
-    isr_1_StartEx(timerRFRX); 
-    Waitable_3_Start();
-    //isr_2_StartEx(timerPump); 
+    isr_1_StartEx(timerRFRX);
+    isr_2_StartEx(timerLCD);
+    isr_3_StartEx(animacion);
+    isr_4_StartEx(animacion2);
+    Waitable_3_Start();     
     Waitable_4_Start();
-    //isr_6_StartEx(pollingRF_Tx);
+    
 }
 void StoreConfiguration(){
     EEPROM_1_WriteByte(UnitType,0);
@@ -358,8 +360,7 @@ void PollingPump(void){
 *********************************************************************************************************
 */
 
-void PollingDisplay1(void){
-    //if(countLCD >10){
+void PollingDisplay1(void){    
     uint8 x,y;     
     switch(flowDisplay1){
         case 0:
@@ -435,6 +436,11 @@ void PollingDisplay1(void){
                             numberKeys1=0;
                             SetPicture(1,DISPLAY_INTRODUZCA_VALOR);   
                             WriteLCD(1,'$',3,2,1,0x0000,'N');
+                            if(MoneyDec>0){
+                                flagPoint1=0;
+                            }else{
+                                flagPoint1=1;
+                            }
                         break; 
                         case 0x10:  //Preset volumen                 
                             flowDisplay1 = 4;                            
@@ -442,7 +448,12 @@ void PollingDisplay1(void){
                             bufferDisplay1.presetType[1]='V';
                             numberKeys1=0;                            
                             SetPicture(1,DISPLAY_INTRODUZCA_VOLUMEN);                            
-                            WriteLCD(1,'V',3,2,1,0x0000,'N');                            
+                            WriteLCD(1,'V',3,2,1,0x0000,'N');     
+                            if(VolDec>0){
+                                flagPoint1=0;
+                            }else{
+                                flagPoint1=1;
+                            }
                         break;
                         case 0x43:  //Preset full 
                             bufferDisplay1.presetType[0]=2;
@@ -598,7 +609,7 @@ void PollingDisplay1(void){
                     count_protector = 0;                    
                     bufferDisplay1.flagActiveSale = true;
                     SetPicture(1,DISPLAY_DESPACHANDO);   
-                    ShowMessage(1,(bufferDisplay1.presetValue[0]),18);
+                    ShowMessage(1,(bufferDisplay1.presetValue[1]),18);
                 }else{
                     flowDisplay1 = 0;
                     SetPicture(1,DISPLAY_ERROR);
@@ -643,8 +654,7 @@ void PollingDisplay1(void){
                 break;
                 case PUMP_PEOT: //reporte fin venta                    
                     if(getSale(side.a.dir)){
-                        if(bufferDisplay1.flagPrint ==1){ 
-                            countRX = 0;
+                        if(bufferDisplay1.flagPrint ==1){                             
                             bufferDisplay1.flagEndSale = true;
                             flowDisplay1 = 0;                            
                             SetPicture(1,DISPLAY_INICIO0); 
@@ -659,8 +669,8 @@ void PollingDisplay1(void){
                 break;
                 case PUMP_FEOT://Reporte de venta
                     if(getSale(side.a.dir)){
-                        if(bufferDisplay1.flagPrint ==1){  
-                            countRX = 0;
+                        if(bufferDisplay1.flagPrint ==1){   
+                            bufferDisplay1.flagEndSale = true;
                             flowDisplay1 = 0;
                             SetPicture(1,DISPLAY_INICIO0); 
                         }else{
@@ -1194,8 +1204,7 @@ void PollingDisplay1(void){
 *
 *********************************************************************************************************
 */
-void PollingDisplay2(void){
-    //if(countLCD >10){
+void PollingDisplay2(void){    
     uint8 x,y;     
     switch(flowDisplay2){
         case 0:
@@ -1206,10 +1215,16 @@ void PollingDisplay2(void){
             Timer_Animacion2_Stop();
             count_protector2 = 0;
             bufferDisplay2.saleType = 0;
-            bufferDisplay2.flagEndSale = false;            
+            bufferDisplay2.flagEndSale = false;  
+			side.b.RFstateReport = 0;
         break;
         case 1: //Menu
             ShowRectangle(2,35);
+			if(countRX >700){
+                if(bufferDisplay2.flagPrint)
+                    imprimir(printPortB,side.b.dir);
+                countRX = 0;
+            }
             side.b.rfState = RF_IDLE;
             if(Display2_GetRxBufferSize()==8){
                 if((Display2_rxBuffer[0]==0xAA) && (Display2_rxBuffer[6]==0xC3) && (Display2_rxBuffer[7]==0x3C)){                                             
@@ -1427,7 +1442,8 @@ void PollingDisplay2(void){
                     //CyDelay(50);
                     side.b.RFstateReport = 1;                    
                     flowDisplay2 = 8;                    
-                    count_protector2 = 0;                                            
+                    count_protector2 = 0;   
+					bufferDisplay2.flagActiveSale = true;					
                     SetPicture(2,DISPLAY_DESPACHANDO);   
                     ShowMessage(2,(bufferDisplay2.presetValue[0]),18);
                 }else{
@@ -1475,7 +1491,7 @@ void PollingDisplay2(void){
                 case PUMP_PEOT: //reporte fin venta                    
                     if(getSale(side.b.dir)){
                         if(bufferDisplay2.flagPrint ==1){
-                            imprimir(printPortB,side.b.dir);
+                            bufferDisplay2.flagEndSale = true;
                             flowDisplay2 = 0;
                             SetPicture(2,DISPLAY_INICIO0); 
                         }else{
@@ -1490,7 +1506,7 @@ void PollingDisplay2(void){
                 case PUMP_FEOT: //Reporte de venta
                     if(getSale(side.b.dir)){
                         if(bufferDisplay2.flagPrint ==1){
-                            imprimir(printPortB,side.b.dir);
+                            bufferDisplay1.flagEndSale = true;
                             flowDisplay2 = 0;
                             SetPicture(2,DISPLAY_INICIO0); 
                         }else{
@@ -2010,7 +2026,7 @@ void PollingDisplay2(void){
             side.b.RFstateReport = 1;
             ShiftState =1;
         break;
-    countLCD = 0;       
+         
     }    
     }
 
@@ -2060,16 +2076,13 @@ CY_ISR(animacion2){
 */
 CY_ISR(timerRFRX){
     Waitable_3_ReadStatusRegister();
-    countRX++;
-    countTX++;
+    countRX++;    
 }
-
-
 /*
 *********************************************************************************************************
-*                                         CY_ISR(timerPump)
+*                                         CY_ISR(timerBeagleTX1)
 *
-* Description : Interrupcion que temporiza tiempos de espera para preguntar al surtidor
+* Description : Interrupcion que temporiza tiempos de espera
 *               
 *
 * Argument(s) : none
@@ -2081,11 +2094,11 @@ CY_ISR(timerRFRX){
 * Note(s)     : none.
 *********************************************************************************************************
 */
-//CY_ISR(timerPump){
-//    Waitable_4_ReadStatusRegister();
-//    countPump++;
-//    countLCD++;
-//}
+CY_ISR(timerLCD){
+    Waitable_4_ReadStatusRegister();
+   // if(ActiveRF)
+        //
+}
 
 
 int main()
@@ -2097,31 +2110,29 @@ int main()
     loadConfiguration();
     CyWdtStart(CYWDT_1024_TICKS,CYWDT_LPMODE_NOCHANGE);
     for(;;)
-    {            
+    {  
+        PollingDisplay1();
         CyWdtClear();
+        PollingDisplay2();         
+        CyWdtClear();        
         pollingRF_Rx();
-        PollingDisplay1(); 
+//        CyWdtClear();
+//        if(pollTotals ==1){
+//            if(getTotals(side.a.dir)!=0){
+//                side.a.RFstateReport = 1;
+//                side.b.RFstateReport = 0;
+//            }
+//        CyWdtClear();
+//        }
+//        if(pollTotals ==2){
+//            if(getTotals(side.b.dir)!=0){
+//                side.b.RFstateReport = 1;
+//                side.a.RFstateReport = 0;
+//            }
+//        CyWdtClear();
+//        }
         CyWdtClear();
-        PollingDisplay2();
-        CyWdtClear();
-        if(pollTotals ==1){
-            if(getTotals(side.a.dir)!=0){
-                side.a.RFstateReport = 1;
-                side.b.RFstateReport = 0;
-            }
-        CyWdtClear();
-        }
-        if(pollTotals ==2){
-            if(getTotals(side.b.dir)!=0){
-                side.b.RFstateReport = 1;
-                side.a.RFstateReport = 0;
-            }
-        CyWdtClear();
-        }
-        counterRF++;
-        if(counterRF >10)
-            ActiveRF =0; 
-        
+        pollingRFA_Tx();                        
     }
 }
 

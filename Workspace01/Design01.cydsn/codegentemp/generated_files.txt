@@ -94,8 +94,6 @@
   <file name="C:\Users\Recepcion\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\codegentemp\isr_1.h" value="NONE;isr_1" />
   <file name="C:\Users\Recepcion\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\codegentemp\isr_2.c" value="ARM_C_FILE;isr_2" />
   <file name="C:\Users\Recepcion\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\codegentemp\isr_2.h" value="NONE;isr_2" />
-  <file name="C:\Users\Recepcion\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\codegentemp\isr_5.c" value="ARM_C_FILE;isr_5" />
-  <file name="C:\Users\Recepcion\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\codegentemp\isr_5.h" value="NONE;isr_5" />
   <file name="C:\Users\Recepcion\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\codegentemp\RF_Connection_IntClock.c" value="ARM_C_FILE;RF_Connection_IntClock" />
   <file name="C:\Users\Recepcion\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\codegentemp\RF_Connection_IntClock.h" value="NONE;RF_Connection_IntClock" />
   <file name="C:\Users\Recepcion\Documents\GitHub\NSY-DH\Workspace01\Design01.cydsn\codegentemp\Printer_IntClock.c" value="ARM_C_FILE;Printer_IntClock" />

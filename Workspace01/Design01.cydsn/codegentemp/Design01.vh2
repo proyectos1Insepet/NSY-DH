@@ -2,7 +2,7 @@
 --	Conversion of Design01.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Tue May 30 13:10:43 2017
+--	Thu Jun 22 12:13:21 2017
 --
 
 USE cypress.cypress.all;
@@ -3703,7 +3703,7 @@ Tx_Print:cy_psoc3_pins_v1_10
 		clock=>\Pump:BUART:clock_op\,
 		status=>(Net_164, Net_164, Net_164, \Pump:BUART:tx_fifo_notfull\,
 			\Pump:BUART:tx_status_2\, \Pump:BUART:tx_fifo_empty\, \Pump:BUART:tx_status_0\),
-		interrupt=>Net_91);
+		interrupt=>\Pump:BUART:tx_interrupt_out\);
 \Pump:BUART:sRX:RxShifter:u0\:cy_psoc3_dp
 	GENERIC MAP(cy_dpconfig=>"0000000000000000000000000000000000000000000000000000001001000000000100000000000000010000001100000001000000000000000100100001000011111111000000001111111111111111101000000110001001000001111100000000000000001100",
 		d0_init=>"00000000",
@@ -5302,9 +5302,6 @@ isr_1:cy_isr_v1_0
 isr_2:cy_isr_v1_0
 	GENERIC MAP(int_type=>"10")
 	PORT MAP(int_signal=>Net_186);
-isr_5:cy_isr_v1_0
-	GENERIC MAP(int_type=>"10")
-	PORT MAP(int_signal=>Net_91);
 \RF_Connection:BUART:reset_reg\:cy_dff
 	PORT MAP(d=>Net_164,
 		clk=>\RF_Connection:BUART:clock_op\,
