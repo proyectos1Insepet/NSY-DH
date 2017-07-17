@@ -2116,21 +2116,21 @@ int main()
         PollingDisplay2();         
         CyWdtClear();        
         pollingRF_Rx();
-//        CyWdtClear();
-//        if(pollTotals ==1){
-//            if(getTotals(side.a.dir)!=0){
-//                side.a.RFstateReport = 1;
-//                side.b.RFstateReport = 0;
-//            }
-//        CyWdtClear();
-//        }
-//        if(pollTotals ==2){
-//            if(getTotals(side.b.dir)!=0){
-//                side.b.RFstateReport = 1;
-//                side.a.RFstateReport = 0;
-//            }
-//        CyWdtClear();
-//        }
+        CyWdtClear();
+        if(pollTotals ==1){
+            if(getTotals(side.a.dir)!=0){
+                side.a.RFstateReport = 1;
+                side.b.RFstateReport = 0;
+            }
+        CyWdtClear();
+        }
+        if(pollTotals ==2){
+            if(getTotals(side.b.dir)!=0){
+                side.b.RFstateReport = 1;
+                side.a.RFstateReport = 0;
+            }
+        CyWdtClear();
+        }
         CyWdtClear();
         pollingRFA_Tx();                        
     }
